@@ -1,0 +1,1070 @@
+/* ===================================================
+   Bangladesh Government Portal - Auth Pages Styles
+   Vibrant, Animated & Unique Design
+   Colors: Bangladesh Green (#006a4e) & Red (#f42a41)
+=================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bd-green: #006a4e;
+    --bd-green-light: #00a676;
+    --bd-green-dark: #004d38;
+    --bd-red: #f42a41;
+    --bd-red-light: #ff6b6b;
+    --bd-gold: #ffd700;
+    --bd-orange: #ff9500;
+    --gradient-1: linear-gradient(135deg, #006a4e 0%, #00a676 50%, #004d38 100%);
+    --gradient-2: linear-gradient(135deg, #f42a41 0%, #ff6b6b 50%, #f42a41 100%);
+    --gradient-3: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* ===== Animated Background ===== */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Floating Particles */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatParticle 15s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+.particle:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    background: var(--bd-green);
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    width: 60px;
+    height: 60px;
+    background: var(--bd-red);
+    top: 20%;
+    right: 15%;
+    animation-delay: -2s;
+}
+
+.particle:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    background: var(--bd-green-light);
+    bottom: 20%;
+    left: 5%;
+    animation-delay: -4s;
+}
+
+.particle:nth-child(4) {
+    width: 50px;
+    height: 50px;
+    background: var(--bd-red-light);
+    bottom: 30%;
+    right: 10%;
+    animation-delay: -6s;
+}
+
+.particle:nth-child(5) {
+    width: 70px;
+    height: 70px;
+    background: var(--bd-gold);
+    top: 50%;
+    left: 50%;
+    animation-delay: -8s;
+}
+
+.particle:nth-child(6) {
+    width: 40px;
+    height: 40px;
+    background: var(--bd-green);
+    top: 70%;
+    right: 30%;
+    animation-delay: -10s;
+}
+
+@keyframes floatParticle {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        filter: blur(40px);
+    }
+
+    25% {
+        transform: translate(50px, -50px) rotate(90deg) scale(1.1);
+        filter: blur(50px);
+    }
+
+    50% {
+        transform: translate(-30px, 30px) rotate(180deg) scale(0.9);
+        filter: blur(60px);
+    }
+
+    75% {
+        transform: translate(20px, 50px) rotate(270deg) scale(1.05);
+        filter: blur(45px);
+    }
+}
+
+/* Animated Wave Background */
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23006a4e' fill-opacity='0.3' d='M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,197.3C960,213,1056,203,1152,176C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+    animation: waveMove 10s linear infinite;
+}
+
+.wave:nth-child(2) {
+    bottom: 10px;
+    opacity: 0.5;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f42a41' fill-opacity='0.2' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,234.7C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+    animation: waveMove 15s linear infinite reverse;
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ===== Main Container ===== */
+.auth-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 500px;
+    perspective: 1000px;
+}
+
+/* ===== Auth Card ===== */
+.auth-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow:
+        0 25px 45px rgba(0, 0, 0, 0.2),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
+    animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    animation: cardShine 3s infinite;
+}
+
+@keyframes cardEntry {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(10deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+@keyframes cardShine {
+    0% {
+        left: -100%;
+    }
+
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+/* ===== Header Section ===== */
+.auth-header {
+    text-align: center;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+/* Bangladesh Flag Circle */
+.flag-emblem {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    position: relative;
+    animation: emblemPulse 2s ease-in-out infinite;
+}
+
+.flag-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bd-green) 0%, var(--bd-green-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 10px 30px rgba(0, 106, 78, 0.4),
+        inset 0 -5px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.flag-circle::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: var(--bd-red);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(244, 42, 65, 0.6);
+    animation: redCirclePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes emblemPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes redCirclePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(244, 42, 65, 0.6);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px rgba(244, 42, 65, 0.8);
+    }
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #fff 0%, #a8edea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.auth-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.govt-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--bd-green) 0%, var(--bd-green-light) 100%);
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 106, 78, 0.3);
+    animation: badgeFloat 3s ease-in-out infinite;
+}
+
+@keyframes badgeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ===== Form Styles ===== */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.form-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 18px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.form-control {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--bd-green);
+    box-shadow:
+        0 0 0 4px rgba(0, 106, 78, 0.2),
+        0 10px 30px rgba(0, 106, 78, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-control:focus+.input-icon,
+.form-group:focus-within .input-icon {
+    color: var(--bd-green-light);
+    transform: scale(1.1);
+}
+
+/* Select Dropdown */
+select.form-control {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+}
+
+/* Textarea */
+textarea.form-control {
+    min-height: 80px;
+    resize: vertical;
+    padding-top: 15px;
+}
+
+/* ===== Submit Button ===== */
+.btn-submit {
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--bd-green) 0%, var(--bd-green-light) 50%, var(--bd-green) 100%);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow:
+        0 10px 30px rgba(0, 106, 78, 0.4),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+    animation: gradientMove 3s ease infinite;
+    margin-top: 10px;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 15px 40px rgba(0, 106, 78, 0.5),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:hover::before {
+    left: 100%;
+}
+
+.btn-submit:active {
+    transform: translateY(-1px);
+}
+
+.btn-submit i {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.btn-submit:hover i {
+    transform: translateX(5px);
+}
+
+/* ===== Auth Links ===== */
+.auth-links {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-links span {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.auth-links a {
+    color: var(--bd-gold);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.auth-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--bd-gold);
+    transition: width 0.3s ease;
+}
+
+.auth-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.auth-links a:hover::after {
+    width: 100%;
+}
+
+/* Forgot Password Link */
+.forgot-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-link a {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot-link a:hover {
+    color: var(--bd-red-light);
+}
+
+/* ===== Security Badge ===== */
+.security-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+    padding: 12px;
+    background: rgba(0, 106, 78, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 106, 78, 0.2);
+}
+
+.security-badge i {
+    color: var(--bd-green-light);
+    font-size: 14px;
+}
+
+.security-badge span {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+/* ===== Decorative Elements ===== */
+.corner-decoration {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+}
+
+.corner-decoration.top-left {
+    top: -20px;
+    left: -20px;
+    border-top: 3px solid var(--bd-green);
+    border-left: 3px solid var(--bd-green);
+    border-radius: 20px 0 0 0;
+    animation: cornerPulse 2s ease-in-out infinite;
+}
+
+.corner-decoration.bottom-right {
+    bottom: -20px;
+    right: -20px;
+    border-bottom: 3px solid var(--bd-red);
+    border-right: 3px solid var(--bd-red);
+    border-radius: 0 0 20px 0;
+    animation: cornerPulse 2s ease-in-out infinite 1s;
+}
+
+@keyframes cornerPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ===== Floating Icons ===== */
+.floating-icons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.floating-icon {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.1;
+    animation: iconFloat 20s linear infinite;
+}
+
+.floating-icon:nth-child(1) {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+    color: var(--bd-green);
+}
+
+.floating-icon:nth-child(2) {
+    top: 30%;
+    right: 10%;
+    animation-delay: -5s;
+    color: var(--bd-red);
+}
+
+.floating-icon:nth-child(3) {
+    bottom: 20%;
+    left: 15%;
+    animation-delay: -10s;
+    color: var(--bd-gold);
+}
+
+.floating-icon:nth-child(4) {
+    bottom: 40%;
+    right: 5%;
+    animation-delay: -15s;
+    color: var(--bd-green-light);
+}
+
+@keyframes iconFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.15;
+    }
+
+    90% {
+        opacity: 0.15;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== Alert Styles ===== */
+.alert {
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: none;
+    animation: alertSlide 0.4s ease;
+}
+
+.alert-error {
+    background: rgba(244, 42, 65, 0.2);
+    border: 1px solid var(--bd-red);
+    color: #ff6b6b;
+}
+
+.alert-success {
+    background: rgba(0, 106, 78, 0.2);
+    border: 1px solid var(--bd-green);
+    color: var(--bd-green-light);
+}
+
+@keyframes alertSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Password Strength Indicator ===== */
+.password-strength {
+    margin-top: 8px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.password-strength-bar.weak {
+    width: 33%;
+    background: var(--bd-red);
+}
+
+.password-strength-bar.medium {
+    width: 66%;
+    background: var(--bd-orange);
+}
+
+.password-strength-bar.strong {
+    width: 100%;
+    background: var(--bd-green);
+}
+
+/* ===== Form Row for Side-by-Side Inputs ===== */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bd-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bd-green-light);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 600px) {
+    .auth-card {
+        padding: 30px 25px;
+        border-radius: 25px;
+    }
+
+    .auth-header h1 {
+        font-size: 24px;
+    }
+
+    .flag-emblem {
+        width: 80px;
+        height: 80px;
+    }
+
+    .flag-circle::before {
+        width: 40px;
+        height: 40px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-control {
+        padding: 14px 18px 14px 45px;
+    }
+
+    .btn-submit {
+        padding: 16px;
+    }
+
+    .corner-decoration {
+        width: 60px;
+        height: 60px;
+    }
+
+    .role-tab {
+        padding: 10px 12px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .role-tab i {
+        font-size: 14px;
+    }
+
+    .admin-toggle {
+        font-size: 12px;
+    }
+}
+
+/* ===== Role Tab Switcher ===== */
+.role-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 30px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.role-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.role-tab:hover {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.role-tab.active {
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.role-tab[data-tab="citizen"].active {
+    background: linear-gradient(135deg, var(--bd-green) 0%, var(--bd-green-light) 100%);
+    box-shadow: 0 4px 20px rgba(0, 106, 78, 0.4);
+}
+
+.role-tab[data-tab="admin"].active {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+
+.role-tab i {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.role-tab:hover i {
+    transform: scale(1.15);
+}
+
+/* ===== Login Sections ===== */
+.login-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.login-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: sectionFadeIn 0.4s ease forwards;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Admin-Specific Styles ===== */
+.admin-btn {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #6366f1 100%) !important;
+    background-size: 200% 200% !important;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.admin-btn:hover {
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.admin-toggle {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-toggle span {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+}
+
+.admin-toggle a {
+    color: #a78bfa;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    margin-left: 5px;
+    transition: all 0.3s ease;
+}
+
+.admin-toggle a:hover {
+    color: #c4b5fd;
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+.admin-login-visible {
+    display: block;
+}
+
+.admin-register-hidden {
+    display: none;
+}
+
+.admin-pending-notice {
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: none;
+    animation: sectionFadeIn 0.4s ease;
+}
+
+.admin-pending-notice i {
+    color: #fbbf24;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.admin-pending-notice p {
+    color: #fbbf24;
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* ===== Loading State ===== */
+.btn-submit.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-submit.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* ===== Success Animation ===== */
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: none;
+    position: relative;
+}
+
+.success-checkmark.show {
+    display: block;
+    animation: checkmarkPop 0.6s ease;
+}
+
+@keyframes checkmarkPop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ===== Container wrapper for old HTML compatibility ===== */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Hide old bg shapes */
+.bg-shape {
+    display: none;
+}

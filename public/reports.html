@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/reports.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 style="color: #60a5fa;">Admin Panel</h3>
+                <p style="color: #94a3b8; font-size: 0.8rem;">Analytics & Insights</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" class="active" onclick="showTab('overview')"><i class="fas fa-chart-pie"></i> Overview</a>
+                <a href="#" onclick="showTab('users')"><i class="fas fa-users"></i> User Analytics</a>
+                <a href="#" onclick="showTab('services')"><i class="fas fa-tasks"></i> Service Reports</a>
+                <a href="#" onclick="showTab('land')"><i class="fas fa-map"></i> Land Reports</a>
+                <a href="#" onclick="showTab('community')"><i class="fas fa-comments"></i> Community</a>
+                <a href="#" onclick="showTab('shop')"><i class="fas fa-chart-line"></i> Market Management</a>
+                <a href="#" onclick="showTab('education')"><i class="fas fa-graduation-cap"></i> Education</a>
+                <a href="#" onclick="showTab('admissions')"><i class="fas fa-university"></i> Admissions</a>
+                <a href="#" onclick="showTab('audit')"><i class="fas fa-history"></i> Audit Log</a>
+                <a href="#" onclick="showTab('stipends')"><i class="fas fa-hand-holding-usd"></i> Stipends</a>
+                <a href="#" onclick="showTab('notices')"><i class="fas fa-bullhorn"></i> Notices</a>
+                <a href="#" onclick="showTab('agriculture')" style="border-top: 1px solid rgba(45,106,79,0.3);"><i
+                        class="fas fa-leaf" style="color: #6ee7b7;"></i> Agriculture</a>
+                <a href="#" onclick="showTab('tax')" style="border-top: 1px solid rgba(16,185,129,0.3);"><i
+                        class="fas fa-landmark" style="color: #34d399;"></i> Tax / NBR</a>
+                <a href="admin-passport.html" style="border-top: 1px solid rgba(26,82,118,0.3);"><i
+                        class="fas fa-passport" style="color: #5dade2;"></i> Passport</a>
+                <a href="admin-nid.html" style="border-top: 1px solid rgba(22,163,74,0.3);"><i
+                        class="fas fa-id-card" style="color: #22c55e;"></i> NID Wing</a>
+                <a href="admin-health.html" style="border-top: 1px solid rgba(220,38,38,0.3);"><i
+                        class="fas fa-heartbeat" style="color: #f87171;"></i> Health</a>
+                <a href="admin-water.html" style="border-top: 1px solid rgba(14,165,233,0.3);"><i
+                        class="fas fa-water" style="color: #0ea5e9;"></i> Water Resources</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Tab -->
+            <div id="overview-section">
+                <h1 style="color: white; margin-bottom: 0.5rem;">System Overview</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Real-time analytics and insights</p>
+
+                <div class="report-grid" id="summaryStats">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                </div>
+
+                <!-- Service Pivot Table -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-table"></i> Monthly Service Breakdown</h3>
+                    <div id="servicePivotTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- Division Performance -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-chart-bar"></i> Regional Performance Overview</h3>
+                    <div id="divisionPerformance">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">User Analytics</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">User engagement scores and activity analysis</p>
+
+                <!-- User Engagement Scores -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-trophy"></i> Top Engaged Users</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Leaderboard based on login frequency, posts, comments, and group activity.
+                    </p>
+                    <div id="userEngagementTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- User Tier Distribution -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-layer-group"></i> User Tier Distribution</h3>
+                    <div id="userTierDistribution">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Tab -->
+            <div id="services-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Service Reports</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Service request analytics with running totals</p>
+
+                <!-- Running Totals -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-chart-line"></i> Service Request Trends</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Cumulative count of service requests over time.
+                    </p>
+                    <div id="runningTotalsTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- Service Dashboard from View -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-tachometer-alt"></i> Service Metrics Dashboard</h3>
+                    <div id="serviceDashboardTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Land Tab -->
+            <div id="land-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Land Reports</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Land mutation analytics by location</p>
+
+                <!-- Land Rollup -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-layer-group"></i> Land Mutation Statistics</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Breakdown of mutations by Division, District, and Upazila
+                    </p>
+                    <div id="landRollupTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- Land by Location View -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-map-marked-alt"></i> Detailed Location Report</h3>
+                    <div id="landByLocationTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- User Land Ownership Summary -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-user-tag"></i> Land Ownership by User</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Summary of land holdings for each registered user
+                    </p>
+                    <div id="userLandDetailsTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Tab -->
+            <div id="community-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Community Analytics</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Group engagement and top performers</p>
+
+                <!-- Community Analytics View -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-users"></i> Community Group Insights</h3>
+                    <div id="communityAnalyticsTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- Top Performers -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-medal"></i> Top Contributors</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Active members with high engagement across groups
+                    </p>
+                    <div id="topPerformersTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Tab -->
+            <div id="audit-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Audit Log</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Track all database changes (Trigger-generated)</p>
+
+                <div class="report-table-container">
+                    <h3><i class="fas fa-clipboard-list"></i> Recent Audit Entries</h3>
+                    <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.9rem;">
+                        Log of recent system activities and changes.
+                    </p>
+                    <div id="auditLogTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Management Tab -->
+            <div id="shop-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Market Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Manage shop products, market prices, and citizen
+                    complaints</p>
+
+                <!-- Sub-tabs for Market Management -->
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <button class="filter-btn active" id="marketSubTab-products"
+                        onclick="showMarketSubTab('products')"><i class="fas fa-box"></i> Store Products</button>
+                    <button class="filter-btn" id="marketSubTab-prices" onclick="showMarketSubTab('prices')"><i
+                            class="fas fa-tags"></i> Market Prices</button>
+                    <button class="filter-btn" id="marketSubTab-complaints" onclick="showMarketSubTab('complaints')"><i
+                            class="fas fa-flag"></i> Price Complaints</button>
+                </div>
+
+                <!-- Sub-tab: Store Products -->
+                <div id="marketPanel-products">
+                    <!-- Add Product Form -->
+                    <div class="report-table-container" style="margin-bottom: 2rem;">
+                        <h3><i class="fas fa-plus-circle"></i> Add New Product</h3>
+                        <form id="addProductForm"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;"
+                            enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" id="productName" class="form-control" required
+                                    placeholder="Enter product name">
+                            </div>
+                            <div class="form-group">
+                                <label>Price (৳)</label>
+                                <input type="number" id="productPrice" class="form-control" required placeholder="0.00"
+                                    step="0.01">
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>Description</label>
+                                <textarea id="productDescription" class="form-control" rows="2"
+                                    placeholder="Product description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Product Image</label>
+                                <input type="file" id="productImage" class="form-control" accept="image/*">
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: flex-end;">
+                                <button type="submit" class="btn-primary" style="width: 100%;">
+                                    <i class="fas fa-plus"></i> Add Product
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Products List -->
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-box"></i> Current Products</h3>
+                        <div id="shopItemsTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Orders List -->
+                    <div class="report-table-container" style="margin-top: 2rem;">
+                        <h3><i class="fas fa-shopping-bag"></i> Recent Orders</h3>
+                        <div id="ordersTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-tab: Market Prices -->
+                <div id="marketPanel-prices" style="display: none;">
+                    <div class="report-table-container" style="margin-bottom: 2rem;">
+                        <h3><i class="fas fa-plus-circle"></i> Add Market Price Item</h3>
+                        <form id="addMarketPriceForm"
+                            style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                            <div class="form-group">
+                                <label>Item Name (English) *</label>
+                                <input type="text" id="mpItemName" class="form-control" required
+                                    placeholder="e.g. Onion">
+                            </div>
+                            <div class="form-group">
+                                <label>Item Name (Bangla)</label>
+                                <input type="text" id="mpItemNameBn" class="form-control" placeholder="e.g. পেঁয়াজ">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="mpCategory" class="form-control">
+                                    <option value="Rice">Rice</option>
+                                    <option value="Vegetables">Vegetables</option>
+                                    <option value="Fish">Fish</option>
+                                    <option value="Meat">Meat</option>
+                                    <option value="Oil">Oil</option>
+                                    <option value="Spices">Spices</option>
+                                    <option value="Dairy">Dairy</option>
+                                    <option value="Fruits">Fruits</option>
+                                    <option value="Grains">Grains</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Unit *</label>
+                                <select id="mpUnit" class="form-control">
+                                    <option value="kg">kg</option>
+                                    <option value="litre">litre</option>
+                                    <option value="piece">piece</option>
+                                    <option value="dozen">dozen</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Price (৳) *</label>
+                                <input type="number" id="mpPrice" class="form-control" required placeholder="0.00"
+                                    step="0.01">
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: flex-end;">
+                                <button type="submit" class="btn-primary" style="width: 100%;">
+                                    <i class="fas fa-plus"></i> Add Price
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-tags"></i> Current Market Prices</h3>
+                        <div id="marketPricesTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-tab: Price Complaints -->
+                <div id="marketPanel-complaints" style="display: none;">
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-flag"></i> Citizen Price Complaints</h3>
+                        <div style="display: flex; gap: 0.5rem; margin: 1rem 0; flex-wrap: wrap;">
+                            <button class="filter-btn active" onclick="filterComplaints('all')">All</button>
+                            <button class="filter-btn" onclick="filterComplaints('pending')">Pending</button>
+                            <button class="filter-btn"
+                                onclick="filterComplaints('investigating')">Investigating</button>
+                            <button class="filter-btn" onclick="filterComplaints('resolved')">Resolved</button>
+                            <button class="filter-btn" onclick="filterComplaints('dismissed')">Dismissed</button>
+                        </div>
+                        <div id="complaintsTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Management Tab -->
+            <div id="education-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Education Results Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Manage JSC, SSC, and HSC exam results</p>
+
+                <!-- Exam Type Tabs -->
+                <div class="report-table-container" style="margin-bottom: 2rem;">
+                    <div class="modal-filter-bar" style="margin-bottom: 1rem;">
+                        <button class="filter-btn active" onclick="selectExamType('jsc')">JSC Results</button>
+                        <button class="filter-btn" onclick="selectExamType('ssc')">SSC Results</button>
+                        <button class="filter-btn" onclick="selectExamType('hsc')">HSC Results</button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div id="educationStats" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div
+                            style="background: rgba(253, 224, 71, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #fde047;" id="jscCount">0</div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">JSC Results</div>
+                        </div>
+                        <div
+                            style="background: rgba(74, 222, 128, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #4ade80;" id="sscCount">0</div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">SSC Results</div>
+                        </div>
+                        <div
+                            style="background: rgba(96, 165, 250, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa;" id="hscCount">0</div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">HSC Results</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Result Form -->
+                <div class="report-table-container" style="margin-bottom: 2rem;">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Result <span id="currentExamTypeLabel"
+                            style="color: #fde047;">(JSC)</span></h3>
+                    <form id="addResultForm"
+                        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem;">
+                        <!-- Student Info -->
+                        <div class="form-group">
+                            <label>Roll Number *</label>
+                            <input type="text" id="resultRoll" class="form-control" required placeholder="123456">
+                        </div>
+                        <div class="form-group">
+                            <label>Registration No.</label>
+                            <input type="text" id="resultReg" class="form-control" placeholder="REG2024001">
+                        </div>
+                        <div class="form-group">
+                            <label>Exam Year *</label>
+                            <select id="resultYear" class="form-control" required>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Board *</label>
+                            <select id="resultBoard" class="form-control" required>
+                                <option value="">Select Board</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Student Name *</label>
+                            <input type="text" id="resultName" class="form-control" required placeholder="Student Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Name</label>
+                            <input type="text" id="resultFather" class="form-control" placeholder="Father's Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Mother's Name</label>
+                            <input type="text" id="resultMother" class="form-control" placeholder="Mother's Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Institution *</label>
+                            <select id="resultInstitution" class="form-control" required>
+                                <option value="">Select Board First</option>
+                            </select>
+                        </div>
+
+                        <!-- Subject Grades - Dynamic based on exam type -->
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <h4 style="color: #fde047; margin-bottom: 0.5rem;">Subject Grades</h4>
+                            <div id="subjectGradesContainer"
+                                style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                                <!-- Filled dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- GPA and Status -->
+                        <div class="form-group">
+                            <label>GPA *</label>
+                            <input type="number" id="resultGPA" class="form-control" required step="0.01" min="0"
+                                max="5" placeholder="5.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Result Status *</label>
+                            <select id="resultStatus" class="form-control" required>
+                                <option value="Passed">Passed</option>
+                                <option value="Failed">Failed</option>
+                                <option value="Withheld">Withheld</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: 3 / -1; display: flex; align-items: flex-end;">
+                            <button type="submit" class="btn-primary" style="width: 100%;">
+                                <i class="fas fa-plus"></i> Add Result
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Results Table -->
+                <div class="report-table-container">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3><i class="fas fa-list"></i> Results List</h3>
+                        <input type="text" id="educationSearch" class="form-control"
+                            placeholder="Search by roll or name..." style="max-width: 300px;">
+                    </div>
+                    <div id="educationResultsTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admissions Management Tab -->
+            <div id="admissions-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">University Admissions Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Manage universities, admission posts, and applications
+                </p>
+
+                <!-- Admissions Sub-Tabs -->
+                <div class="report-table-container" style="margin-bottom: 2rem;">
+                    <div class="modal-filter-bar" style="margin-bottom: 1rem;">
+                        <button class="filter-btn active"
+                            onclick="selectAdmissionsTab('universities')">Universities</button>
+                        <button class="filter-btn" onclick="selectAdmissionsTab('posts')">Admission Posts</button>
+                        <button class="filter-btn" onclick="selectAdmissionsTab('applications')">Applications</button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div id="admissionsStats" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div
+                            style="background: rgba(253, 224, 71, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #fde047;" id="universitiesCount">0
+                            </div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Universities</div>
+                        </div>
+                        <div
+                            style="background: rgba(74, 222, 128, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #4ade80;" id="admissionPostsCount">0
+                            </div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Admission Posts</div>
+                        </div>
+                        <div
+                            style="background: rgba(96, 165, 250, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa;" id="applicationsCount">0
+                            </div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Applications</div>
+                        </div>
+                        <div
+                            style="background: rgba(251, 146, 60, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #fb923c;"
+                                id="pendingApplicationsCount">0</div>
+                            <div style="font-size: 0.8rem; color: #94a3b8;">Pending Review</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Universities Section -->
+                <div id="universities-tab" class="admissions-tab-content">
+                    <!-- Add University Form -->
+                    <div class="report-table-container" style="margin-bottom: 2rem;">
+                        <h3><i class="fas fa-plus-circle"></i> Add New University</h3>
+                        <form id="addUniversityForm"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                            <div class="form-group">
+                                <label>University Name *</label>
+                                <input type="text" id="universityName" class="form-control" required
+                                    placeholder="e.g. University of Dhaka">
+                            </div>
+                            <div class="form-group">
+                                <label>Short Code *</label>
+                                <input type="text" id="universityCode" class="form-control" required
+                                    placeholder="e.g. DU">
+                            </div>
+                            <div class="form-group">
+                                <label>Type *</label>
+                                <select id="universityType" class="form-control" required>
+                                    <option value="General">General</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Agricultural">Agricultural</option>
+                                    <option value="Science & Technology">Science & Technology</option>
+                                    <option value="Public">Public</option>
+                                    <option value="Private">Private</option>
+                                    <option value="National">National</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Location *</label>
+                                <input type="text" id="universityLocation" class="form-control" required
+                                    placeholder="e.g. Dhaka">
+                            </div>
+                            <div class="form-group">
+                                <label>University Name (Bangla)</label>
+                                <input type="text" id="universityNameBn" class="form-control"
+                                    placeholder="e.g. ঢাকা বিশ্ববিদ্যালয়">
+                            </div>
+                            <div class="form-group">
+                                <label>Website</label>
+                                <input type="url" id="universityWebsite" class="form-control" placeholder="https://...">
+                            </div>
+                            <div class="form-group">
+                                <label>Logo URL</label>
+                                <input type="url" id="universityLogo" class="form-control"
+                                    placeholder="https://example.com/logo.png">
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>Description</label>
+                                <textarea id="universityDescription" class="form-control" rows="3"
+                                    placeholder="Brief description of the university..."></textarea>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <button type="submit" class="btn-primary" style="width: 100%;">
+                                    <i class="fas fa-plus"></i> Add University
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Universities List -->
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-university"></i> Universities List</h3>
+                        <div id="universitiesTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admission Posts Section -->
+                <div id="posts-tab" class="admissions-tab-content" style="display: none;">
+                    <!-- Add Admission Post Form -->
+                    <div class="report-table-container" style="margin-bottom: 2rem;">
+                        <h3><i class="fas fa-plus-circle"></i> Create Admission Post</h3>
+                        <form id="addAdmissionPostForm"
+                            style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                            <div class="form-group">
+                                <label>University *</label>
+                                <select id="postUniversity" class="form-control" required>
+                                    <option value="">Select University</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Session *</label>
+                                <input type="text" id="postSession" class="form-control" required
+                                    placeholder="e.g. 2026-2027">
+                            </div>
+                            <div class="form-group">
+                                <label>Unit *</label>
+                                <select id="postUnit" class="form-control" required>
+                                    <option value="A">A - Science</option>
+                                    <option value="B">B - Arts/Humanities</option>
+                                    <option value="C">C - Commerce</option>
+                                    <option value="D">D - Combined</option>
+                                    <option value="ENG">ENG - Engineering</option>
+                                    <option value="MED">MED - Medical</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Required Group *</label>
+                                <select id="postRequiredGroup" class="form-control" required>
+                                    <option value="">Any Group</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Arts">Arts</option>
+                                    <option value="Commerce">Commerce</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum GPA *</label>
+                                <input type="number" id="postMinGPA" class="form-control" required step="0.01" min="0"
+                                    max="5" placeholder="4.00">
+                            </div>
+                            <div class="form-group">
+                                <label>Application Fee (৳) *</label>
+                                <input type="number" id="postFee" class="form-control" required placeholder="1000">
+                            </div>
+                            <div class="form-group">
+                                <label>Application Start Date *</label>
+                                <input type="date" id="postStartDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Application End Date *</label>
+                                <input type="date" id="postEndDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Exam Date</label>
+                                <input type="date" id="postExamDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Total Seats</label>
+                                <input type="number" id="postSeats" class="form-control" placeholder="500">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select id="postStatus" class="form-control">
+                                    <option value="Active">Active</option>
+                                    <option value="Upcoming">Upcoming</option>
+                                    <option value="Closed">Closed</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>Requirements/Notes</label>
+                                <textarea id="postRequirements" class="form-control" rows="2"
+                                    placeholder="Additional requirements or notes..."></textarea>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <button type="submit" class="btn-primary" style="width: 100%;">
+                                    <i class="fas fa-plus"></i> Create Admission Post
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Admission Posts List -->
+                    <div class="report-table-container">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3><i class="fas fa-clipboard-list"></i> Admission Posts</h3>
+                            <select id="filterPostStatus" class="form-control" style="width: auto;"
+                                onchange="filterAdmissionPosts()">
+                                <option value="">All Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Upcoming">Upcoming</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                        <div id="admissionPostsTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Section -->
+                <div id="applications-tab" class="admissions-tab-content" style="display: none;">
+                    <div class="report-table-container">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <h3><i class="fas fa-file-alt"></i> Student Applications</h3>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <select id="filterAppStatus" class="form-control" style="width: auto;"
+                                    onchange="filterApplications()">
+                                    <option value="">All Status</option>
+                                    <option value="Submitted">Submitted</option>
+                                    <option value="Verified">Verified</option>
+                                    <option value="Rejected">Rejected</option>
+                                    <option value="Draft">Draft</option>
+                                </select>
+                                <select id="filterAppUniversity" class="form-control" style="width: auto;"
+                                    onchange="filterApplications()">
+                                    <option value="">All Universities</option>
+                                </select>
+                                <input type="text" id="searchApplications" class="form-control"
+                                    placeholder="Search by roll or name..." style="width: 200px;"
+                                    oninput="filterApplications()">
+                            </div>
+                        </div>
+                        <div id="applicationsTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Stipend Management Tab -->
+            <div id="stipends-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Stipend Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Manage educational grants and student applications</p>
+
+                <!-- Sub-Tabs -->
+                <div class="report-table-container" style="margin-bottom: 2rem;">
+                    <div class="modal-filter-bar" style="margin-bottom: 1rem;">
+                        <button class="filter-btn active" onclick="selectStipendTab('grants')">Manage Grants</button>
+                        <button class="filter-btn" onclick="selectStipendTab('applications')">Student
+                            Applications</button>
+                    </div>
+                </div>
+
+                <!-- Grants Tab -->
+                <div id="stipend-grants-tab" class="stipend-tab-content">
+                    <!-- Add Grant Form -->
+                    <div class="report-table-container" style="margin-bottom: 2rem;">
+                        <h3><i class="fas fa-plus-circle"></i> Create New Grant</h3>
+                        <form id="addStipendForm"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                            <div class="form-group">
+                                <label>Title *</label>
+                                <input type="text" id="grantTitle" class="form-control" required
+                                    placeholder="Ex: Merit Scholarship 2026">
+                            </div>
+                            <div class="form-group">
+                                <label>Amount (BDT) *</label>
+                                <input type="number" id="grantAmount" class="form-control" required placeholder="5000">
+                            </div>
+                            <div class="form-group">
+                                <label>Type *</label>
+                                <select id="grantType" class="form-control" required>
+                                    <option value="Merit">Merit</option>
+                                    <option value="Need">Need-based</option>
+                                    <option value="Research">Research</option>
+                                    <option value="Disability">Disability</option>
+                                    <option value="General">General</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum GPA</label>
+                                <input type="number" id="grantGPA" class="form-control" step="0.01"
+                                    placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label>Max Family Income (Monthly)</label>
+                                <input type="number" id="grantIncome" class="form-control" placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label>Deadline *</label>
+                                <input type="date" id="grantDeadline" class="form-control" required>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label>Description *</label>
+                                <textarea id="grantDescription" class="form-control" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <button type="submit" class="btn-primary" style="width: 100%;">Create Grant</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Grants List -->
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-list"></i> Active Grants</h3>
+                        <div id="stipendGrantsTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Tab -->
+                <div id="stipend-applications-tab" class="stipend-tab-content" style="display: none;">
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-users"></i> Received Applications</h3>
+                        <div id="stipendApplicationsTable">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notices Management Tab -->
+            <div id="notices-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;">Government Notices Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Create and manage public notices, circulars, and tenders
+                </p>
+
+                <!-- Stats -->
+                <div id="noticesAdminStats" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                    <div
+                        style="background: rgba(52, 211, 153, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #34d399;" id="adminNoticesTotal">0</div>
+                        <div style="font-size: 0.8rem; color: #94a3b8;">Total Notices</div>
+                    </div>
+                    <div
+                        style="background: rgba(248, 113, 113, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #f87171;" id="adminNoticesUrgent">0
+                        </div>
+                        <div style="font-size: 0.8rem; color: #94a3b8;">Urgent</div>
+                    </div>
+                    <div
+                        style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #fbbf24;" id="adminNoticesTenders">0
+                        </div>
+                        <div style="font-size: 0.8rem; color: #94a3b8;">Tenders</div>
+                    </div>
+                    <div
+                        style="background: rgba(96, 165, 250, 0.1); padding: 1rem; border-radius: 8px; flex: 1; text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #60a5fa;" id="adminNoticesRecruitment">0
+                        </div>
+                        <div style="font-size: 0.8rem; color: #94a3b8;">Recruitment</div>
+                    </div>
+                </div>
+
+                <!-- Add Notice Form -->
+                <div class="report-table-container" style="margin-bottom: 2rem;">
+                    <h3><i class="fas fa-plus-circle"></i> Publish New Notice</h3>
+                    <form id="addNoticeForm"
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div class="form-group">
+                            <label>Title (English) *</label>
+                            <input type="text" id="noticeTitle" class="form-control" required
+                                placeholder="Notice title in English">
+                        </div>
+                        <div class="form-group">
+                            <label>Title (Bangla)</label>
+                            <input type="text" id="noticeTitleBn" class="form-control" placeholder="বিজ্ঞপ্তির শিরোনাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="noticeDepartment" class="form-control" required>
+                                <option value="">Select Department</option>
+                                <option value="Ministry of Finance">Ministry of Finance</option>
+                                <option value="Ministry of Education">Ministry of Education</option>
+                                <option value="Ministry of Health">Ministry of Health</option>
+                                <option value="Ministry of Land">Ministry of Land</option>
+                                <option value="Ministry of Public Administration">Ministry of Public Administration
+                                </option>
+                                <option value="Ministry of Disaster Management">Ministry of Disaster Management</option>
+                                <option value="Ministry of Home Affairs">Ministry of Home Affairs</option>
+                                <option value="Ministry of Agriculture">Ministry of Agriculture</option>
+                                <option value="Ministry of Commerce">Ministry of Commerce</option>
+                                <option value="Ministry of Defense">Ministry of Defense</option>
+                                <option value="ICT Division">ICT Division</option>
+                                <option value="Bangladesh Public Service Commission">Bangladesh Public Service
+                                    Commission</option>
+                                <option value="Cabinet Division">Cabinet Division</option>
+                                <option value="Prime Minister's Office">Prime Minister's Office</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="noticeCategory" class="form-control" required>
+                                <option value="General">General</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="Circular">Circular</option>
+                                <option value="Tender">Tender</option>
+                                <option value="Recruitment">Recruitment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Priority *</label>
+                            <select id="noticePriority" class="form-control" required>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Reference No.</label>
+                            <input type="text" id="noticeRefNo" class="form-control"
+                                placeholder="e.g. MOF/BUD/2026/001">
+                        </div>
+                        <div class="form-group">
+                            <label>Publish Date *</label>
+                            <input type="date" id="noticePublishDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="date" id="noticeExpiryDate" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Attachment URL</label>
+                            <input type="url" id="noticeAttachment" class="form-control" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="noticeStatus" class="form-control">
+                                <option value="Published">Published</option>
+                                <option value="Draft">Draft</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Content *</label>
+                            <textarea id="noticeContent" class="form-control" rows="4" required
+                                placeholder="Full notice content..."></textarea>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <button type="submit" class="btn-primary" style="width: 100%;">
+                                <i class="fas fa-bullhorn"></i> Publish Notice
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Notices List -->
+                <div class="report-table-container">
+                    <h3><i class="fas fa-list"></i> All Notices</h3>
+                    <div id="adminNoticesTable">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agriculture Admin Section -->
+            <div id="agriculture-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;"><i class="fas fa-seedling" style="color: #34d399;"></i>
+                    Agriculture Ministry Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Manage subsidies, expert queries, crop reports, farmer
+                    marketplace, and training programs</p>
+
+                <!-- Stats Grid -->
+                <div class="report-grid" id="agriAdminStatsGrid">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-file-invoice-dollar"></i></div>
+                        <div class="stat-value" id="admin-agri-subsidies">0</div>
+                        <div class="stat-label">Subsidy Applications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+                        <div class="stat-value" id="admin-agri-sub-pending">0</div>
+                        <div class="stat-label">Pending Subsidies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-comments"></i></div>
+                        <div class="stat-value" id="admin-agri-queries">0</div>
+                        <div class="stat-label">Expert Queries</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon cyan"><i class="fas fa-wheat-awn"></i></div>
+                        <div class="stat-value" id="admin-agri-reports">0</div>
+                        <div class="stat-label">Crop Reports</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fas fa-store"></i></div>
+                        <div class="stat-value" id="admin-agri-market">0</div>
+                        <div class="stat-label">Market Listings</div>
+                    </div>
+                </div>
+
+                <!-- Sub-tabs -->
+                <div class="report-tabs">
+                    <button class="report-tab active" id="agriSubTab-queries" onclick="switchAgriAdminTab('queries')"><i
+                            class="fas fa-comments"></i> Expert Q&A</button>
+                    <button class="report-tab" id="agriSubTab-subsidies" onclick="switchAgriAdminTab('subsidies')"><i
+                            class="fas fa-hand-holding-usd"></i> Subsidies</button>
+                    <button class="report-tab" id="agriSubTab-crops" onclick="switchAgriAdminTab('crops')"><i
+                            class="fas fa-chart-bar"></i> Crop Analytics</button>
+                    <button class="report-tab" id="agriSubTab-market" onclick="switchAgriAdminTab('market')"><i
+                            class="fas fa-store"></i> Farmer Market</button>
+                    <button class="report-tab" id="agriSubTab-training" onclick="switchAgriAdminTab('training')"><i
+                            class="fas fa-chalkboard-teacher"></i> Training</button>
+                    <button class="report-tab" id="agriSubTab-views" onclick="switchAgriAdminTab('views')"><i
+                            class="fas fa-database"></i> DB Views</button>
+                </div>
+
+                <!-- Expert Q&A Panel -->
+                <div id="agriPanel-queries">
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-comments" style="color: #60a5fa;"></i> Pending Expert Questions</h3>
+                        <div id="adminQueriesList">
+                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subsidies Panel -->
+                <div id="agriPanel-subsidies" style="display:none;">
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-hand-holding-usd" style="color: #34d399;"></i> All Subsidy Applications
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="report-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Farmer</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminSubsidiesBody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crop Analytics Panel -->
+                <div id="agriPanel-crops" style="display:none;">
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-chart-bar" style="color: #22d3ee;"></i> Crop Production Summary</h3>
+                        <div class="table-responsive">
+                            <table class="report-table">
+                                <thead>
+                                    <tr>
+                                        <th>Division</th>
+                                        <th>District</th>
+                                        <th>Crop</th>
+                                        <th>Season</th>
+                                        <th>Reports</th>
+                                        <th>Total Yield (MT)</th>
+                                        <th>Land (Acres)</th>
+                                        <th>Avg Price (৳/MT)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminCropSummaryBody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Panel -->
+                <div id="agriPanel-market" style="display:none;">
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-store" style="color: #a78bfa;"></i> Farmer Market Listings</h3>
+                        <div class="table-responsive">
+                            <table class="report-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Farmer</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Price</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminMarketBody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Panel -->
+                <div id="agriPanel-training" style="display:none;">
+                    <div class="report-table-container">
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="margin-bottom: 0;"><i class="fas fa-chalkboard-teacher"
+                                    style="color: #fbbf24;"></i>
+                                Training Programs</h3>
+                            <button class="action-btn approve" onclick="showCreateTrainingForm()"
+                                style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">
+                                <i class="fas fa-plus"></i> Create Program
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="report-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Dates</th>
+                                        <th>Capacity</th>
+                                        <th>Registered</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminTrainingBody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DB Views Panel -->
+                <div id="agriPanel-views" style="display:none;">
+
+                    <!-- District Agriculture Summary View -->
+                    <div class="report-table-container" style="margin-bottom: 1.5rem;">
+                        <h3><i class="fas fa-map-marked-alt" style="color: #34d399;"></i> District Agriculture Summary
+                            <span
+                                style="font-size: 0.75rem; color: #64748b; font-weight: 400; margin-left: 0.5rem;">v_agri_district_summary</span>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="report-table">
+                                <thead>
+                                    <tr>
+                                        <th>District</th>
+                                        <th>Division</th>
+                                        <th>Crop Name</th>
+                                        <th>Season</th>
+                                        <th>Reports</th>
+                                        <th>Total Yield (MT)</th>
+                                        <th>Land (Acres)</th>
+                                        <th>Avg Price (৳/MT)</th>
+                                        <th>Crop Value (৳)</th>
+                                        <th>Irrigation</th>
+                                        <th>Subsidies</th>
+                                        <th>Requested (৳)</th>
+                                        <th>Approved (৳)</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="viewDistrictBody">
+                                    <tr>
+                                        <td colspan="14">
+                                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Training Summary View -->
+                    <div class="report-table-container">
+                        <h3><i class="fas fa-graduation-cap" style="color: #fbbf24;"></i> Training Program Summary
+                            <span
+                                style="font-size: 0.75rem; color: #64748b; font-weight: 400; margin-left: 0.5rem;">v_agri_training_summary</span>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="report-table">
+                                <thead>
+                                    <tr>
+                                        <th>Program</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Dates</th>
+                                        <th>Trainer</th>
+                                        <th>Registered</th>
+                                        <th>Fill Rate</th>
+                                        <th>Demand</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="viewTrainingBody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Tax / NBR Admin Section -->
+            <div id="tax-section" style="display: none;">
+                <h1 style="color: white; margin-bottom: 0.5rem;"><i class="fas fa-landmark" style="color: #34d399;"></i>
+                    Tax / NBR Management</h1>
+                <p style="color: #94a3b8; margin-bottom: 2rem;">Manage tax returns, TIN applications, payments, and
+                    notices</p>
+
+                <!-- Stats Grid -->
+                <div class="report-grid" id="taxAdminStatsGrid">
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-id-card"></i></div>
+                        <div class="stat-value" id="admin-tax-tin-total">0</div>
+                        <div class="stat-label">Total TIN Registrations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+                        <div class="stat-value" id="admin-tax-tin-pending">0</div>
+                        <div class="stat-label">Pending TIN Applications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-file-invoice"></i></div>
+                        <div class="stat-value" id="admin-tax-returns-total">0</div>
+                        <div class="stat-label">Total Returns</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="stat-value" id="admin-tax-revenue">৳0</div>
+                        <div class="stat-label">Total Revenue</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fas fa-tasks"></i></div>
+                        <div class="stat-value" id="admin-tax-returns-pending">0</div>
+                        <div class="stat-label">Pending Returns</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-percent"></i></div>
+                        <div class="stat-value" id="admin-tax-vat-active">0</div>
+                        <div class="stat-label">Active VAT Registrations</div>
+                    </div>
+                </div>
+
+                <!-- Sub Tabs -->
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="loadTaxAdminTab('returns')" id="taxTab-returns"
+                        style="font-size: 0.8rem;">
+                        <i class="fas fa-file-invoice"></i> Tax Returns
+                    </button>
+                    <button class="btn-primary" onclick="loadTaxAdminTab('tin')" id="taxTab-tin"
+                        style="font-size: 0.8rem; background: #334155;">
+                        <i class="fas fa-id-card"></i> TIN Applications
+                    </button>
+                    <button class="btn-primary" onclick="loadTaxAdminTab('payments')" id="taxTab-payments"
+                        style="font-size: 0.8rem; background: #334155;">
+                        <i class="fas fa-money-bill-wave"></i> Payments
+                    </button>
+                    <button class="btn-primary" onclick="loadTaxAdminTab('notices')" id="taxTab-notices"
+                        style="font-size: 0.8rem; background: #334155;">
+                        <i class="fas fa-bell"></i> Notices
+                    </button>
+                </div>
+
+                <!-- Tax Admin Content -->
+                <div class="data-card">
+                    <div id="taxAdminContent">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+
+        <!-- Edit Notice Modal -->
+        <div class="admin-modal" id="editNoticeModal">
+            <div class="modal-content" style="max-width: 750px;">
+                <div class="modal-header">
+                    <h2><i class="fas fa-edit"></i> Edit Notice</h2>
+                    <button class="modal-close" onclick="closeModal('editNoticeModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="editNoticeForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <input type="hidden" id="editNoticeId">
+                        <div class="form-group">
+                            <label>Title (English) *</label>
+                            <input type="text" id="editNoticeTitle" class="form-control" required
+                                placeholder="Notice title in English">
+                        </div>
+                        <div class="form-group">
+                            <label>Title (Bangla)</label>
+                            <input type="text" id="editNoticeTitleBn" class="form-control"
+                                placeholder="বিজ্ঞপ্তির শিরোনাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="editNoticeDepartment" class="form-control" required>
+                                <option value="">Select Department</option>
+                                <option value="Ministry of Finance">Ministry of Finance</option>
+                                <option value="Ministry of Education">Ministry of Education</option>
+                                <option value="Ministry of Health">Ministry of Health</option>
+                                <option value="Ministry of Land">Ministry of Land</option>
+                                <option value="Ministry of Public Administration">Ministry of Public Administration
+                                </option>
+                                <option value="Ministry of Disaster Management">Ministry of Disaster Management
+                                </option>
+                                <option value="Ministry of Home Affairs">Ministry of Home Affairs</option>
+                                <option value="Ministry of Agriculture">Ministry of Agriculture</option>
+                                <option value="Ministry of Commerce">Ministry of Commerce</option>
+                                <option value="Ministry of Defense">Ministry of Defense</option>
+                                <option value="ICT Division">ICT Division</option>
+                                <option value="Bangladesh Public Service Commission">Bangladesh Public Service
+                                    Commission</option>
+                                <option value="Cabinet Division">Cabinet Division</option>
+                                <option value="Prime Minister's Office">Prime Minister's Office</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select id="editNoticeCategory" class="form-control" required>
+                                <option value="General">General</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="Circular">Circular</option>
+                                <option value="Tender">Tender</option>
+                                <option value="Recruitment">Recruitment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Priority *</label>
+                            <select id="editNoticePriority" class="form-control" required>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Reference No.</label>
+                            <input type="text" id="editNoticeRefNo" class="form-control"
+                                placeholder="e.g. MOF/BUD/2026/001">
+                        </div>
+                        <div class="form-group">
+                            <label>Publish Date *</label>
+                            <input type="date" id="editNoticePublishDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="date" id="editNoticeExpiryDate" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Attachment URL</label>
+                            <input type="url" id="editNoticeAttachment" class="form-control" placeholder="https://...">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="editNoticeStatus" class="form-control">
+                                <option value="Published">Published</option>
+                                <option value="Draft">Draft</option>
+                                <option value="Expired">Expired</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Content *</label>
+                            <textarea id="editNoticeContent" class="form-control" rows="5" required
+                                placeholder="Full notice content..."></textarea>
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <button type="submit" class="btn-primary" style="width: 100%;">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Modals -->
+    <!-- Users Modal -->
+    <div class="admin-modal" id="usersModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-users"></i> All Users <span class="item-count" id="usersCount">0</span></h2>
+                <button class="modal-close" onclick="closeModal('usersModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="usersModalBody">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Requests Modal -->
+    <div class="admin-modal" id="serviceRequestsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-tasks"></i> Service Requests <span class="item-count"
+                        id="serviceRequestsCount">0</span></h2>
+                <button class="modal-close" onclick="closeModal('serviceRequestsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-filter-bar">
+                    <button class="filter-btn active" onclick="filterServiceRequests('all')">All</button>
+                    <button class="filter-btn" onclick="filterServiceRequests('pending')">Pending</button>
+                    <button class="filter-btn" onclick="filterServiceRequests('approved')">Approved</button>
+                    <button class="filter-btn" onclick="filterServiceRequests('rejected')">Rejected</button>
+                </div>
+                <div id="serviceRequestsModalBody">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Land Mutations Modal -->
+    <div class="admin-modal" id="landMutationsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-map"></i> Land Mutations <span class="item-count" id="landMutationsCount">0</span>
+                </h2>
+                <button class="modal-close" onclick="closeModal('landMutationsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-filter-bar">
+                    <button class="filter-btn active" onclick="filterLandMutations('all')">All</button>
+                    <button class="filter-btn" onclick="filterLandMutations('Pending')">Pending</button>
+                    <button class="filter-btn" onclick="filterLandMutations('Approved')">Approved</button>
+                    <button class="filter-btn" onclick="filterLandMutations('Rejected')">Rejected</button>
+                </div>
+                <div id="landMutationsModalBody">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Groups Modal -->
+    <div class="admin-modal" id="communityGroupsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-users-cog"></i> Community Groups <span class="item-count"
+                        id="communityGroupsCount">0</span></h2>
+                <button class="modal-close" onclick="closeModal('communityGroupsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-filter-bar">
+                    <button class="filter-btn active" onclick="filterCommunityGroups('all')">All</button>
+                    <button class="filter-btn" onclick="filterCommunityGroups('pending')">Pending</button>
+                    <button class="filter-btn" onclick="filterCommunityGroups('approved')">Approved</button>
+                    <button class="filter-btn" onclick="filterCommunityGroups('rejected')">Rejected</button>
+                </div>
+                <div id="communityGroupsModalBody">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Posts Modal -->
+    <div class="admin-modal" id="communityPostsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-comment"></i> Community Posts <span class="item-count"
+                        id="communityPostsCount">0</span></h2>
+                <button class="modal-close" onclick="closeModal('communityPostsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-filter-bar">
+                    <button class="filter-btn active" onclick="filterCommunityPosts('all')">All</button>
+                    <button class="filter-btn" onclick="filterCommunityPosts('pending')">Pending</button>
+                    <button class="filter-btn" onclick="filterCommunityPosts('approved')">Approved</button>
+                    <button class="filter-btn" onclick="filterCommunityPosts('rejected')">Rejected</button>
+                </div>
+                <div id="communityPostsModalBody">
+                    <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Users Modal -->
+    <div class="admin-modal" id="newUsersModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> New Users (Last 7 Days) <span class="item-count"
+                        id="newUsersCount">0</span></h2>
+                <button class="modal-close" onclick="closeModal('newUsersModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="newUsersModalBody">
+                <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div class="admin-modal" id="editProductModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit"></i> Edit Product</h2>
+                <button class="modal-close" onclick="closeModal('editProductModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"
+                    enctype="multipart/form-data">
+                    <input type="hidden" id="editProductId">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="editProductName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (৳)</label>
+                        <input type="number" id="editProductPrice" class="form-control" required step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock</label>
+                        <input type="number" id="editProductStock" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Description</label>
+                        <textarea id="editProductDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Change Image (Optional)</label>
+                        <input type="file" id="editProductImage" class="form-control" accept="image/*">
+                        <small style="color: #94a3b8;">Leave empty to keep current image</small>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1; margin-top: 1rem;">
+                        <button type="submit" class="btn-primary" style="width: 100%;">
+                            <i class="fas fa-save"></i> Update Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+
+</html>

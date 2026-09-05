@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কৃষি মন্ত্রণালয় | Ministry of Agriculture | Govt of Bangladesh</title>
+    <meta name="description"
+        content="Bangladesh Ministry of Agriculture - Subsidies, Crop Reports, Farmer Market, Expert Advice, Training Programs">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/agriculture.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #2d6a4f, #40916c);">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 style="color: #95d5b2;">কৃষি মন্ত্রণালয়</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Ministry of Agriculture</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" onclick="showSection('overview')" class="active"><i class="fas fa-home"></i> Overview</a>
+                <a href="#" onclick="showSection('subsidies')"><i class="fas fa-hand-holding-usd"></i> Subsidies</a>
+                <a href="#" onclick="showSection('crop-reports')"><i class="fas fa-wheat-awn"></i> Crop Reports</a>
+                <a href="#" onclick="showSection('expert')"><i class="fas fa-user-tie"></i> Expert Q&A</a>
+                <a href="#" onclick="showSection('market')"><i class="fas fa-store"></i> Farmer Market</a>
+                <a href="#" onclick="showSection('training')"><i class="fas fa-chalkboard-teacher"></i> Training</a>
+
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ==================== OVERVIEW ==================== -->
+            <div id="overview" class="content-section">
+                <!-- Banner -->
+                <div class="agri-banner">
+                    <h1><i class="fas fa-leaf"></i> Ministry of Agriculture</h1>
+                    <p class="bangla-text">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — কৃষি মন্ত্রণালয়</p>
+                    <p class="subtitle">Empowering Farmers, Feeding the Nation 🌾</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="agri-stats-grid" id="overviewStats">
+                    <div class="agri-stat-card">
+                        <span class="stat-icon">🌿</span>
+                        <span class="stat-value" id="stat-subsidies">0</span>
+                        <span class="stat-label">My Subsidies</span>
+                    </div>
+                    <div class="agri-stat-card">
+                        <span class="stat-icon">📊</span>
+                        <span class="stat-value" id="stat-reports">0</span>
+                        <span class="stat-label">Crop Reports</span>
+                    </div>
+                    <div class="agri-stat-card">
+                        <span class="stat-icon">💬</span>
+                        <span class="stat-value" id="stat-queries">0</span>
+                        <span class="stat-label">Expert Queries</span>
+                    </div>
+                    <div class="agri-stat-card">
+                        <span class="stat-icon">🏪</span>
+                        <span class="stat-value" id="stat-listings">0</span>
+                        <span class="stat-label">Market Listings</span>
+                    </div>
+                    <div class="agri-stat-card">
+                        <span class="stat-icon">📚</span>
+                        <span class="stat-value" id="stat-trainings">0</span>
+                        <span class="stat-label">Training Enrolled</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="agri-action-grid">
+                    <div class="agri-action-card" onclick="showSection('subsidies')">
+                        <span class="action-icon">🌱</span>
+                        <h4>Apply for Subsidy</h4>
+                        <p>Get financial support for fertilizers, seeds, machinery & irrigation</p>
+                        <button class="btn-agri"><i class="fas fa-arrow-right"></i> Apply Now</button>
+                    </div>
+                    <div class="agri-action-card" onclick="showSection('crop-reports')">
+                        <span class="action-icon">🌾</span>
+                        <h4>Submit Crop Report</h4>
+                        <p>Report your harvest data with Division/District/Upazila details</p>
+                        <button class="btn-agri-gold"><i class="fas fa-arrow-right"></i> Submit</button>
+                    </div>
+                    <div class="agri-action-card" onclick="showSection('expert')">
+                        <span class="action-icon">👨‍🌾</span>
+                        <h4>Ask an Expert</h4>
+                        <p>Get advice from certified agricultural officers</p>
+                        <button class="btn-agri"><i class="fas fa-arrow-right"></i> Ask Now</button>
+                    </div>
+                    <div class="agri-action-card" onclick="showSection('market')">
+                        <span class="action-icon">🛒</span>
+                        <h4>Farmer Marketplace</h4>
+                        <p>Sell your crops directly — connect with buyers</p>
+                        <button class="btn-agri-gold"><i class="fas fa-arrow-right"></i> Browse</button>
+                    </div>
+                </div>
+
+                <!-- Weather -->
+                <div class="agri-card">
+                    <h3><i class="fas fa-cloud-sun"></i> 7-Day Weather Forecast</h3>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">Based on your current location —
+                        important for farming decisions</p>
+                    <div id="weather-forecast-container"></div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="agri-card">
+                    <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                    <div id="recentActivityList">
+                        <div class="agri-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SUBSIDIES ==================== -->
+            <div id="subsidies" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-hand-holding-usd"></i> Subsidy Application</h2>
+                </div>
+
+                <div class="agri-card">
+                    <h3><i class="fas fa-file-alt"></i> Apply for Agricultural Subsidy</h3>
+                    <form id="subsidyForm" class="agri-form">
+                        <div class="form-group">
+                            <label>Farmer Name <span class="required">*</span></label>
+                            <input type="text" id="sub-farmer-name" required placeholder="Full name of the farmer">
+                        </div>
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="sub-nid" required placeholder="National ID Number">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="sub-phone" required placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Subsidy Type <span class="required">*</span></label>
+                            <select id="sub-type" required>
+                                <option value="">Select Type</option>
+                                <option value="Fertilizer">সার (Fertilizer Support)</option>
+                                <option value="Seeds">বীজ (High Yield Seeds)</option>
+                                <option value="Machinery">কৃষি যন্ত্রপাতি (Farm Machinery)</option>
+                                <option value="Irrigation">সেচ (Irrigation Pump)</option>
+                                <option value="Pesticide">কীটনাশক (Pesticide)</option>
+                                <option value="Livestock">গবাদিপশু (Livestock)</option>
+                                <option value="Fishery">মৎস্য (Fishery)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Crop Type</label>
+                            <input type="text" id="sub-crop" placeholder="e.g. Rice, Wheat, Jute">
+                        </div>
+                        <div class="form-group">
+                            <label>Amount Requested (BDT) <span class="required">*</span></label>
+                            <input type="number" id="sub-amount" required placeholder="Amount in Taka (৳)">
+                        </div>
+                        <div class="form-group">
+                            <label>Land Size (Acres)</label>
+                            <input type="number" id="sub-land" step="0.01" placeholder="Total farming land">
+                        </div>
+                        <div class="form-group">
+                            <label>Land Ownership</label>
+                            <select id="sub-ownership">
+                                <option value="Own">নিজস্ব (Own)</option>
+                                <option value="Leased">ইজারা (Leased)</option>
+                                <option value="Shared">ভাগ (Shared)</option>
+                                <option value="Government">সরকারি (Government)</option>
+                            </select>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="form-group">
+                            <label>Division <span class="required">*</span></label>
+                            <select id="sub-division" required onchange="AgriApp.loadDistricts('sub')">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District <span class="required">*</span></label>
+                            <select id="sub-district" required onchange="AgriApp.loadUpazilas('sub')">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upazila <span class="required">*</span></label>
+                            <select id="sub-upazila" required>
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Village / Area</label>
+                            <input type="text" id="sub-village" placeholder="Village or area name">
+                        </div>
+
+                        <!-- Bank -->
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input type="text" id="sub-bank" placeholder="e.g. Sonali Bank, Krishi Bank">
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Branch</label>
+                            <input type="text" id="sub-branch" placeholder="Branch name">
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Account Number</label>
+                            <input type="text" id="sub-account" placeholder="Account number for disbursement">
+                        </div>
+
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-agri"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Subsidy Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="agri-card">
+                    <h3><i class="fas fa-history"></i> My Subsidy Applications</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="agri-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subsidyHistoryBody">
+                                <tr>
+                                    <td colspan="6" class="agri-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CROP REPORTS ==================== -->
+            <div id="crop-reports" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-wheat-awn"></i> Crop Report Submission</h2>
+                </div>
+
+                <div class="agri-card">
+                    <h3><i class="fas fa-file-lines"></i> Submit Detailed Crop Report</h3>
+                    <form id="cropReportForm" class="agri-form">
+                        <div class="form-group">
+                            <label>Farmer Name <span class="required">*</span></label>
+                            <input type="text" id="cr-farmer-name" required placeholder="Full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Crop Name <span class="required">*</span></label>
+                            <select id="cr-crop" required>
+                                <option value="">Select Crop</option>
+                                <option value="Rice (Aman)">ধান — আমন (Rice - Aman)</option>
+                                <option value="Rice (Boro)">ধান — বোরো (Rice - Boro)</option>
+                                <option value="Rice (Aus)">ধান — আউশ (Rice - Aus)</option>
+                                <option value="Wheat">গম (Wheat)</option>
+                                <option value="Jute">পাট (Jute)</option>
+                                <option value="Potato">আলু (Potato)</option>
+                                <option value="Onion">পেঁয়াজ (Onion)</option>
+                                <option value="Garlic">রসুন (Garlic)</option>
+                                <option value="Mustard">সরিষা (Mustard)</option>
+                                <option value="Sugarcane">আখ (Sugarcane)</option>
+                                <option value="Tea">চা (Tea)</option>
+                                <option value="Maize">ভুট্টা (Maize)</option>
+                                <option value="Vegetables">শাকসবজি (Vegetables)</option>
+                                <option value="Fruits">ফলফলাদি (Fruits)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Crop Variety</label>
+                            <input type="text" id="cr-variety" placeholder="e.g. BRRI Dhan-28, BR-11">
+                        </div>
+                        <div class="form-group">
+                            <label>Season <span class="required">*</span></label>
+                            <select id="cr-season" required>
+                                <option value="Rabi">রবি (Rabi — Winter)</option>
+                                <option value="Kharif-1">খরিফ-১ (Kharif-1 — Summer)</option>
+                                <option value="Kharif-2">খরিফ-২ (Kharif-2 — Autumn)</option>
+                                <option value="Aus">আউশ (Aus)</option>
+                                <option value="Aman">আমন (Aman)</option>
+                                <option value="Boro">বোরো (Boro)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Yield (Metric Ton) <span class="required">*</span></label>
+                            <input type="number" id="cr-yield" required step="0.01" placeholder="Total production">
+                        </div>
+                        <div class="form-group">
+                            <label>Land Area (Acres)</label>
+                            <input type="number" id="cr-area" step="0.01" placeholder="Cultivated area">
+                        </div>
+                        <div class="form-group">
+                            <label>Fertilizer Used</label>
+                            <input type="text" id="cr-fertilizer" placeholder="e.g. Urea, TSP, MOP">
+                        </div>
+                        <div class="form-group">
+                            <label>Irrigation Method</label>
+                            <select id="cr-irrigation">
+                                <option value="Rainfed">বৃষ্টিনির্ভর (Rainfed)</option>
+                                <option value="Canal">খাল (Canal)</option>
+                                <option value="Tubewell">নলকূপ (Tubewell)</option>
+                                <option value="Pond">পুকুর (Pond)</option>
+                                <option value="Drip">ড্রিপ (Drip)</option>
+                                <option value="Sprinkler">স্প্রিংকলার (Sprinkler)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Harvest Date</label>
+                            <input type="date" id="cr-harvest-date">
+                        </div>
+                        <div class="form-group">
+                            <label>Market Price per Ton (BDT)</label>
+                            <input type="number" id="cr-price" step="0.01" placeholder="Current selling price">
+                        </div>
+
+                        <!-- Location -->
+                        <div class="form-group">
+                            <label>Division <span class="required">*</span></label>
+                            <select id="cr-division" required onchange="AgriApp.loadDistricts('cr')">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District <span class="required">*</span></label>
+                            <select id="cr-district" required onchange="AgriApp.loadUpazilas('cr')">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upazila <span class="required">*</span></label>
+                            <select id="cr-upazila" required>
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Remarks</label>
+                            <textarea id="cr-remarks" rows="2"
+                                placeholder="Any additional notes about the harvest..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-agri-gold"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Crop Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="agri-card">
+                    <h3><i class="fas fa-history"></i> My Crop Reports</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="agri-table">
+                            <thead>
+                                <tr>
+                                    <th>Crop</th>
+                                    <th>Variety</th>
+                                    <th>Season</th>
+                                    <th>Yield (MT)</th>
+                                    <th>District</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cropReportHistoryBody">
+                                <tr>
+                                    <td colspan="6" class="agri-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== EXPERT Q&A ==================== -->
+            <div id="expert" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-tie"></i> Expert Q&A</h2>
+                    <button class="btn-agri" onclick="AgriApp.showAskExpertForm()">
+                        <i class="fas fa-comment-medical"></i> Ask a Question
+                    </button>
+                </div>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">
+                    Get advice from certified agricultural officers of Bangladesh Government. Your questions will be
+                    reviewed and answered by experts.
+                </p>
+
+                <div id="expertQueriesList">
+                    <div class="agri-loader"><i class="fas fa-spinner fa-spin"></i> Loading queries...</div>
+                </div>
+            </div>
+
+            <!-- ==================== FARMER MARKET ==================== -->
+            <div id="market" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-store"></i> Farmer Marketplace</h2>
+                    <button class="btn-agri-gold" onclick="AgriApp.showPostListingForm()">
+                        <i class="fas fa-plus"></i> Post a Listing
+                    </button>
+                </div>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">
+                    Connect directly with buyers — post your produce for sale. All listings are reviewed by the
+                    Agriculture Ministry before being published.
+                </p>
+
+                <!-- Sub-tabs -->
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                    <button class="btn-agri-outline active" id="marketTab-browse"
+                        onclick="AgriApp.switchMarketTab('browse')">
+                        <i class="fas fa-th-large"></i> Browse Market
+                    </button>
+                    <button class="btn-agri-outline" id="marketTab-my" onclick="AgriApp.switchMarketTab('my')">
+                        <i class="fas fa-user"></i> My Listings
+                    </button>
+                </div>
+
+                <div id="marketBrowsePanel">
+                    <div class="market-grid" id="marketListingsGrid">
+                        <div class="agri-loader" style="grid-column: 1/-1;"><i class="fas fa-spinner fa-spin"></i>
+                            Loading market...</div>
+                    </div>
+                </div>
+
+                <div id="marketMyPanel" style="display: none;">
+                    <div style="overflow-x: auto;">
+                        <table class="agri-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Qty</th>
+                                    <th>Price/Unit</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myListingsBody">
+                                <tr>
+                                    <td colspan="6" class="agri-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== TRAINING ==================== -->
+            <div id="training" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-chalkboard-teacher"></i> Training Programs</h2>
+                </div>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">
+                    Government-organized training programs to help farmers learn modern farming techniques, pest
+                    management, and more.
+                </p>
+
+                <div id="trainingProgramsList">
+                    <div class="agri-loader"><i class="fas fa-spinner fa-spin"></i> Loading programs...</div>
+                </div>
+
+                <!-- My Registrations -->
+                <div class="agri-card" style="margin-top: 2rem;">
+                    <h3><i class="fas fa-check-circle"></i> My Training Registrations</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="agri-table">
+                            <thead>
+                                <tr>
+                                    <th>Program</th>
+                                    <th>Location</th>
+                                    <th>Dates</th>
+                                    <th>Trainer</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myTrainingBody">
+                                <tr>
+                                    <td colspan="5" class="agri-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </main>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/agriculture.js"></script>
+</body>
+
+</html>

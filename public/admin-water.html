@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Water Resources | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/water.css">
+    <link rel="stylesheet" href="css/admin-water.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #0369a1, #0ea5e9);">
+                    <i class="fas fa-user-shield" style="color: #fff;"></i>
+                </div>
+                <h3 style="color: #7dd3fc;">Admin Panel</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Water Resources Management</p>
+            </div>
+            <nav class="nav-links">
+                <a href="reports.html"><i class="fas fa-arrow-left"></i> Back to Admin Panel</a>
+                <a href="#" onclick="AdminWater.showTab('dashboard')" class="active" id="nav-dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="#" onclick="AdminWater.showTab('connections')" id="nav-connections"><i class="fas fa-faucet-drip"></i> Connections</a>
+                <a href="#" onclick="AdminWater.showTab('bills')" id="nav-bills"><i class="fas fa-file-invoice-dollar"></i> Bills</a>
+                <a href="#" onclick="AdminWater.showTab('quality')" id="nav-quality"><i class="fas fa-flask"></i> Water Quality</a>
+                <a href="#" onclick="AdminWater.showTab('complaints')" id="nav-complaints"><i class="fas fa-exclamation-triangle"></i> Complaints</a>
+                <a href="#" onclick="AdminWater.showTab('projects')" id="nav-projects"><i class="fas fa-project-diagram"></i> Projects</a>
+                <a href="water.html"><i class="fas fa-globe"></i> Public Water Page</a>
+                <a href="#" onclick="AdminWater.logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ==================== DASHBOARD TAB ==================== -->
+            <div id="tab-dashboard" class="admin-tab">
+                <div class="admin-water-banner">
+                    <h1><i class="fas fa-user-shield"></i> Water Resources Admin Panel</h1>
+                    <span class="admin-badge"><i class="fas fa-lock"></i> Admin Access</span>
+                </div>
+
+                <div class="admin-stats-grid" id="adminStatsGrid">
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">🔗</span>
+                        <span class="stat-value" id="adm-total-conn">-</span>
+                        <span class="stat-label">Total Connections</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #fbbf24;">⏳</span>
+                        <span class="stat-value" id="adm-pending-conn">-</span>
+                        <span class="stat-label">Pending Connections</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #34d399;">✅</span>
+                        <span class="stat-value" id="adm-active-conn">-</span>
+                        <span class="stat-label">Active Connections</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">💳</span>
+                        <span class="stat-value" id="adm-total-bills">-</span>
+                        <span class="stat-label">Total Bills</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #34d399;">💰</span>
+                        <span class="stat-value" id="adm-paid-bills">-</span>
+                        <span class="stat-label">Paid Bills</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">💵</span>
+                        <span class="stat-value" id="adm-revenue">-</span>
+                        <span class="stat-label">Revenue (৳)</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">📝</span>
+                        <span class="stat-value" id="adm-total-complaints">-</span>
+                        <span class="stat-label">Complaints</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #f87171;">🔴</span>
+                        <span class="stat-value" id="adm-open-complaints">-</span>
+                        <span class="stat-label">Open Complaints</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">🔬</span>
+                        <span class="stat-value" id="adm-total-quality">-</span>
+                        <span class="stat-label">Quality Reports</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #ef4444;">⚠️</span>
+                        <span class="stat-value" id="adm-critical-quality">-</span>
+                        <span class="stat-label">Critical Quality</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">📊</span>
+                        <span class="stat-value" id="adm-total-projects">-</span>
+                        <span class="stat-label">Total Projects</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #a78bfa;">🔄</span>
+                        <span class="stat-value" id="adm-ongoing-projects">-</span>
+                        <span class="stat-label">Ongoing Projects</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== CONNECTIONS TAB ==================== -->
+            <div id="tab-connections" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-faucet-drip"></i> Water Connection Applications</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="conn-filter-status" onchange="AdminWater.loadConnections()">
+                            <option value="">All</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Active">Active</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Suspended">Suspended</option>
+                            <option value="Disconnected">Disconnected</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="conn-filter-search" placeholder="Name, NID, Connection No..."
+                            onkeypress="if(event.key==='Enter') AdminWater.loadConnections()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-water" onclick="AdminWater.loadConnections()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>Conn. No.</th>
+                                <th>Holder Name</th>
+                                <th>Type</th>
+                                <th>Region</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminConnBody">
+                            <tr><td colspan="8" class="water-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== BILLS TAB ==================== -->
+            <div id="tab-bills" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Bill Payments</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="bill-filter-status" onchange="AdminWater.loadBills()">
+                            <option value="">All</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Overdue">Overdue</option>
+                            <option value="Failed">Failed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="bill-filter-search" placeholder="Conn. No, Name, TXN..."
+                            onkeypress="if(event.key==='Enter') AdminWater.loadBills()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-water" onclick="AdminWater.loadBills()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Conn. No.</th>
+                                <th>Month</th>
+                                <th>Amount (৳)</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminBillBody">
+                            <tr><td colspan="8" class="water-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== WATER QUALITY TAB ==================== -->
+            <div id="tab-quality" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-flask"></i> Water Quality Reports</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="qual-filter-status" onchange="AdminWater.loadQuality()">
+                            <option value="">All</option>
+                            <option value="Reported">Reported</option>
+                            <option value="Under Investigation">Under Investigation</option>
+                            <option value="Testing">Testing</option>
+                            <option value="Action Taken">Action Taken</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Severity</label>
+                        <select id="qual-filter-severity" onchange="AdminWater.loadQuality()">
+                            <option value="">All</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                            <option value="Critical">Critical</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="qual-filter-search" placeholder="Issue, District, Name..."
+                            onkeypress="if(event.key==='Enter') AdminWater.loadQuality()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-water" onclick="AdminWater.loadQuality()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Reporter</th>
+                                <th>Source</th>
+                                <th>Issue</th>
+                                <th>Severity</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminQualBody">
+                            <tr><td colspan="8" class="water-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== COMPLAINTS TAB ==================== -->
+            <div id="tab-complaints" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Water Complaints</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="wcomp-filter-status" onchange="AdminWater.loadComplaints()">
+                            <option value="">All</option>
+                            <option value="Submitted">Submitted</option>
+                            <option value="Assigned">Assigned</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Priority</label>
+                        <select id="wcomp-filter-priority" onchange="AdminWater.loadComplaints()">
+                            <option value="">All</option>
+                            <option value="Low">Low</option>
+                            <option value="Normal">Normal</option>
+                            <option value="High">High</option>
+                            <option value="Emergency">Emergency</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="wcomp-filter-search" placeholder="Type, District, Name..."
+                            onkeypress="if(event.key==='Enter') AdminWater.loadComplaints()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-water" onclick="AdminWater.loadComplaints()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Type</th>
+                                <th>Priority</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminCompBody">
+                            <tr><td colspan="8" class="water-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== PROJECTS TAB ==================== -->
+            <div id="tab-projects" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-project-diagram"></i> Water Projects Management</h2>
+                    <button class="btn-water" onclick="AdminWater.showAddProjectForm()">
+                        <i class="fas fa-plus"></i> Add Project
+                    </button>
+                </div>
+                <div class="admin-table-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Division</th>
+                                <th>Budget (Cr)</th>
+                                <th>Progress</th>
+                                <th>Status</th>
+                                <th>Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminProjBody">
+                            <tr><td colspan="8" class="water-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="admin-modal-overlay" id="detailModalOverlay">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2><i class="fas fa-water"></i> <span id="modalTitle">Details</span></h2>
+                <button class="admin-modal-close" onclick="AdminWater.closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="admin-modal-body" id="modalBody">
+                <div class="water-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/admin-water.js"></script>
+</body>
+
+</html>

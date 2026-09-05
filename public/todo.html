@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/todo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+    <!-- FullCalendar -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <style>
+        /* Modern Calendar Styling */
+        #calendar {
+            margin-top: 3rem;
+            padding: 20px;
+            background: rgba(30, 41, 59, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            max-width: 100%;
+        }
+
+        /* FullCalendar overrides for dark mode */
+        .fc-theme-standard .fc-scrollgrid {
+            border-color: rgba(148, 163, 184, 0.1);
+        }
+
+        .fc-theme-standard td,
+        .fc-theme-standard th {
+            border-color: rgba(148, 163, 184, 0.1);
+        }
+
+        .fc-col-header-cell-cushion {
+            color: #f1f5f9;
+            padding: 10px 0 !important;
+            font-weight: 500;
+        }
+
+        .fc-daygrid-day-number {
+            color: #94a3b8;
+        }
+
+        .fc-day-today {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+        }
+
+        .fc-toolbar-title {
+            color: #f1f5f9;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .fc-button-primary {
+            background-color: rgba(15, 23, 42, 0.5) !important;
+            border-color: rgba(148, 163, 184, 0.2) !important;
+            color: #f1f5f9 !important;
+            transition: all 0.3s;
+        }
+
+        .fc-button-primary:hover {
+            background-color: rgba(59, 130, 246, 0.5) !important;
+        }
+
+        .fc-button-primary:not(:disabled).fc-button-active {
+            background-color: #3b82f6 !important;
+            border-color: #3b82f6 !important;
+        }
+
+        .fc-daygrid-event {
+            border-radius: 6px;
+            padding: 3px 5px;
+            font-size: 0.8rem;
+            border: none;
+        }
+
+        .fc-h-event .fc-event-main {
+            color: #fff;
+        }
+
+        .fc-event-todo {
+            background: rgba(245, 158, 11, 0.2);
+            border-left: 3px solid #fbbf24;
+            color: #fbbf24;
+        }
+
+        .fc-event-progress {
+            background: rgba(59, 130, 246, 0.2);
+            border-left: 3px solid #60a5fa;
+            color: #60a5fa;
+        }
+
+        .fc-event-done {
+            background: rgba(52, 211, 153, 0.2);
+            border-left: 3px solid #34d399;
+            color: #34d399;
+            text-decoration: line-through;
+        }
+
+        @media (max-width: 768px) {
+            .fc-toolbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="userName">Loading...</h3>
+                <p id="userNid" style="color: var(--text-muted); font-size: 0.8rem;">...</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="documents.html"><i class="fas fa-folder"></i> My Documents</a>
+                <a href="history.html"><i class="fas fa-history"></i> History</a>
+                <a href="#" class="active"><i class="fas fa-tasks"></i> To Do</a>
+                <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                <a href="market.html"><i class="fas fa-chart-line"></i> Market Info</a>
+                <a href="events.html"><i class="fas fa-bullhorn"></i> Notices</a>
+                <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="javascript:void(0)" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header-bar">
+                <div>
+                    <h1>My To-Do List</h1>
+                    <p style="color: var(--text-muted);">Manage your tasks and priorities</p>
+                </div>
+            </div>
+
+            <!-- Kanban -->
+            <div>
+                <div class="kanban-board">
+                    <div class="kanban-column">
+                        <div class="kanban-header" style="color: #fbbf24">To Do</div>
+                        <div id="todo" class="kanban-list" data-status="todo"></div>
+                        <button class="add-task-btn" onclick="createTask()">+ Add Item</button>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="kanban-header" style="color: #60a5fa">In Progress</div>
+                        <div id="progress" class="kanban-list" data-status="progress"></div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="kanban-header" style="color: #34d399">Done</div>
+                        <div id="done" class="kanban-list" data-status="done"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div id="calendar"></div>
+
+        </main>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভর্তি আবেদন | Apply for Admission</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e74c3c, #27ae60);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            color: #ffd700;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Admission Info Card */
+        .admission-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admission-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .uni-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .uni-details h2 {
+            font-size: 1.6rem;
+            color: #ffd700;
+        }
+
+        .uni-details p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .admission-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-item .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .meta-item .label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Form Sections */
+        .form-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title i {
+            width: 30px;
+            text-align: center;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-group input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-group select option {
+            background: #1a2a4a;
+        }
+
+        /* Verify Button */
+        .verify-section {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .verify-section .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-verify {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            height: 52px;
+        }
+
+        .btn-verify:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #ffb800);
+            color: #1a2a4a;
+            width: 100%;
+            justify-content: center;
+            font-size: 1.1rem;
+            padding: 16px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-message.success {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid #27ae60;
+        }
+
+        .status-message.error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+        }
+
+        .status-message.warning {
+            background: rgba(241, 196, 15, 0.2);
+            border: 1px solid #f1c40f;
+        }
+
+        .status-message.info {
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db;
+        }
+
+        .status-message i {
+            font-size: 1.5rem;
+        }
+
+        .status-message.success i {
+            color: #27ae60;
+        }
+
+        .status-message.error i {
+            color: #e74c3c;
+        }
+
+        .status-message.warning i {
+            color: #f1c40f;
+        }
+
+        .status-message.info i {
+            color: #3498db;
+        }
+
+        /* Eligibility Card */
+        .eligibility-card {
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .eligibility-card.eligible {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(39, 174, 96, 0.2));
+            border: 2px solid #27ae60;
+        }
+
+        .eligibility-card.not-eligible {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(192, 57, 43, 0.2));
+            border: 2px solid #e74c3c;
+        }
+
+        .eligibility-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .eligibility-card.eligible h4 {
+            color: #27ae60;
+        }
+
+        .eligibility-card.not-eligible h4 {
+            color: #e74c3c;
+        }
+
+        /* Student Info Display */
+        .student-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-item .label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .info-item .value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        /* My Applications Section */
+        .applications-list {
+            margin-top: 30px;
+        }
+
+        .application-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-info h4 {
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .app-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .app-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .app-status.paid {
+            background: #27ae60;
+        }
+
+        .app-status.pending {
+            background: #f39c12;
+        }
+
+        .app-status.failed {
+            background: #e74c3c;
+        }
+
+        /* Success Page */
+        .success-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 50px;
+        }
+
+        .success-container h2 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+
+        .success-container p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .application-id {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed #ffd700;
+            margin: 20px 0;
+        }
+
+        .application-id .label {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+
+        .application-id .id {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-overlay.hidden {
+            display: none;
+        }
+
+        .spinner {
+            font-size: 3rem;
+            color: #ffd700;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .verify-section {
+                flex-direction: column;
+            }
+
+            .btn-verify {
+                width: 100%;
+            }
+
+            .admission-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .application-item {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <i class="fas fa-spinner spinner"></i>
+    </div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="logo-text">
+                <h1>ভর্তি আবেদন</h1>
+                <p>University Admission Application</p>
+            </div>
+        </div>
+        <a href="admission.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">
+            <i class="fas fa-arrow-left"></i> ফিরে যান
+        </a>
+    </header>
+
+    <div class="container">
+        <!-- Success Message (shown after payment) -->
+        <div id="successContainer" class="success-container" style="display: none;">
+            <div class="success-icon"><i class="fas fa-check"></i></div>
+            <h2>আবেদন সফল হয়েছে!</h2>
+            <p>আপনার আবেদন সফলভাবে জমা হয়েছে এবং পেমেন্ট সম্পন্ন হয়েছে।</p>
+            <div class="application-id">
+                <div class="label">আবেদন নম্বর</div>
+                <div class="id" id="successAppId">-</div>
+            </div>
+            <p>এই নম্বরটি সংরক্ষণ করুন। প্রবেশপত্র ডাউনলোড ও পরীক্ষার তথ্যের জন্য এটি প্রয়োজন হবে।</p>
+            <a href="admission.html" class="btn btn-primary" style="width: auto; display: inline-flex;">
+                <i class="fas fa-home"></i> হোমে ফিরুন
+            </a>
+        </div>
+
+        <!-- Main Form Container -->
+        <div id="mainFormContainer">
+            <!-- Admission Info -->
+            <div class="admission-info" id="admissionInfo">
+                <div class="admission-header">
+                    <div class="uni-logo" id="uniLogo">-</div>
+                    <div class="uni-details">
+                        <h2 id="uniName">লোড হচ্ছে...</h2>
+                        <p id="unitInfo">-</p>
+                    </div>
+                </div>
+                <div class="admission-meta">
+                    <div class="meta-item">
+                        <div class="value" id="minGpa">-</div>
+                        <div class="label">ন্যূনতম GPA</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="value" id="appFee">-</div>
+                        <div class="label">আবেদন ফি</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="value" id="endDate">-</div>
+                        <div class="label">শেষ তারিখ</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="value" id="reqGroup">-</div>
+                        <div class="label">গ্রুপ</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 1: HSC Verification -->
+            <div class="form-section" id="verifySection">
+                <h3 class="section-title"><i class="fas fa-search"></i> ধাপ ১: HSC তথ্য যাচাই</h3>
+
+                <div id="verifyStatus"></div>
+
+                <div class="verify-section">
+                    <div class="form-group">
+                        <label>HSC রোল নম্বর *</label>
+                        <input type="text" id="hscRoll" placeholder="যেমন: 123456" required>
+                    </div>
+                    <div class="form-group">
+                        <label>পাসের সাল *</label>
+                        <select id="hscYear">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-verify" onclick="verifyHsc()">
+                        <i class="fas fa-search"></i> যাচাই করুন
+                    </button>
+                </div>
+
+                <!-- Student Info Display -->
+                <div id="studentInfo" style="display: none;">
+                    <div id="eligibilityCard"></div>
+                    <div class="student-info-grid" id="studentInfoGrid"></div>
+                </div>
+            </div>
+
+            <!-- Step 2: Contact Information -->
+            <div class="form-section" id="contactSection" style="display: none;">
+                <h3 class="section-title"><i class="fas fa-phone"></i> ধাপ ২: যোগাযোগের তথ্য</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>মোবাইল নম্বর *</label>
+                        <input type="tel" id="mobile" placeholder="01XXXXXXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ইমেইল (ঐচ্ছিক)</label>
+                        <input type="email" id="email" placeholder="example@email.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>বর্তমান ঠিকানা</label>
+                    <input type="text" id="address" placeholder="আপনার বর্তমান ঠিকানা লিখুন">
+                </div>
+            </div>
+
+            <!-- Step 3: Payment -->
+            <div class="form-section" id="paymentSection" style="display: none;">
+                <h3 class="section-title"><i class="fas fa-credit-card"></i> ধাপ ৩: পেমেন্ট</h3>
+
+                <div id="paymentStatus"></div>
+
+                <div style="text-align: center; padding: 20px;">
+                    <p style="margin-bottom: 15px; color: rgba(255,255,255,0.7);">
+                        আবেদন জমা দিতে নিচের বাটনে ক্লিক করে পেমেন্ট সম্পন্ন করুন
+                    </p>
+                    <div style="font-size: 2rem; font-weight: 700; color: #ffd700; margin-bottom: 20px;">
+                        ৳ <span id="paymentAmount">0</span>
+                    </div>
+                    <button class="btn btn-primary" id="payBtn" onclick="submitApplication()" disabled>
+                        <i class="fas fa-lock"></i> পেমেন্ট করুন ও আবেদন জমা দিন
+                    </button>
+                </div>
+            </div>
+
+            <!-- My Applications -->
+            <div class="form-section applications-list" id="myApplications" style="display: none;">
+                <h3 class="section-title"><i class="fas fa-list"></i> আমার আবেদনসমূহ</h3>
+                <div id="applicationsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let admissionData = null;
+        let hscData = null;
+        let isEligible = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const admissionId = urlParams.get('id');
+            const success = urlParams.get('success');
+            const appId = urlParams.get('applicationId');
+
+            if (success === 'true' && appId) {
+                showSuccess(appId);
+                return;
+            }
+
+            if (admissionId) {
+                loadAdmissionDetails(admissionId);
+            } else {
+                alert('ভর্তি তথ্য পাওয়া যায়নি');
+                window.location.href = 'admission.html';
+            }
+        });
+
+        function showSuccess(appId) {
+            document.getElementById('mainFormContainer').style.display = 'none';
+            document.getElementById('successContainer').style.display = 'block';
+            document.getElementById('successAppId').textContent = appId;
+        }
+
+        async function loadAdmissionDetails(id) {
+            try {
+                const res = await fetch(`/api/university/admissions/${id}`);
+                if (!res.ok) throw new Error('Admission not found');
+
+                admissionData = await res.json();
+
+                document.getElementById('uniLogo').textContent = admissionData.university_code;
+                document.getElementById('uniName').textContent = admissionData.university_name;
+                document.getElementById('unitInfo').textContent = `${admissionData.unit_code} - ${admissionData.unit_name} | সেশন: ${admissionData.session}`;
+                document.getElementById('minGpa').textContent = admissionData.min_gpa;
+                document.getElementById('appFee').textContent = `৳${admissionData.application_fee}`;
+                document.getElementById('endDate').textContent = formatDate(admissionData.end_date);
+                document.getElementById('reqGroup').textContent = admissionData.required_group || 'যেকোনো';
+                document.getElementById('paymentAmount').textContent = admissionData.application_fee;
+
+            } catch (error) {
+                console.error('Error loading admission:', error);
+                alert('ভর্তি তথ্য লোড করতে সমস্যা হয়েছে');
+            }
+        }
+
+        async function verifyHsc() {
+            const roll = document.getElementById('hscRoll').value.trim();
+            const year = document.getElementById('hscYear').value;
+
+            if (!roll) {
+                showVerifyStatus('error', 'অনুগ্রহ করে রোল নম্বর প্রদান করুন');
+                return;
+            }
+
+            showLoading(true);
+
+            try {
+                const res = await fetch(`/api/university/verify-hsc/${roll}/${year}?admissionId=${admissionData.id}`);
+                const data = await res.json();
+
+                if (!res.ok || !data.found) {
+                    showVerifyStatus('error', data.message || 'HSC তথ্য পাওয়া যায়নি। রোল নম্বর ও সাল সঠিক কিনা যাচাই করুন।');
+                    document.getElementById('studentInfo').style.display = 'none';
+                    showLoading(false);
+                    return;
+                }
+
+                hscData = data.hscData;
+                isEligible = data.eligible;
+
+                // Check if already applied
+                if (data.alreadyApplied) {
+                    showVerifyStatus('warning', `আপনি ইতিমধ্যে এই ভর্তির জন্য আবেদন করেছেন। আবেদন নম্বর: ${data.applicationId}`);
+                    displayStudentInfo(hscData);
+                    showLoading(false);
+                    return;
+                }
+
+                // Display eligibility
+                displayStudentInfo(hscData);
+                displayEligibility(data.eligible, data.reason);
+
+                if (data.eligible) {
+                    showVerifyStatus('success', 'আপনি এই ভর্তির জন্য যোগ্য! নিচে যোগাযোগের তথ্য প্রদান করুন।');
+                    document.getElementById('contactSection').style.display = 'block';
+                    document.getElementById('paymentSection').style.display = 'block';
+                    document.getElementById('payBtn').disabled = false;
+                } else {
+                    showVerifyStatus('error', `আপনি এই ভর্তির জন্য যোগ্য নন। ${data.reason || ''}`);
+                }
+
+            } catch (error) {
+                console.error('Verification error:', error);
+                showVerifyStatus('error', 'যাচাই করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+            }
+
+            showLoading(false);
+        }
+
+        function displayStudentInfo(data) {
+            document.getElementById('studentInfo').style.display = 'block';
+            document.getElementById('studentInfoGrid').innerHTML = `
+                <div class="info-item">
+                    <div class="label">নাম</div>
+                    <div class="value">${data.student_name}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">পিতার নাম</div>
+                    <div class="value">${data.father_name || '-'}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">মাতার নাম</div>
+                    <div class="value">${data.mother_name || '-'}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">রোল নম্বর</div>
+                    <div class="value">${data.roll_number}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">রেজিস্ট্রেশন</div>
+                    <div class="value">${data.registration_number || '-'}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">বোর্ড</div>
+                    <div class="value">${data.board_name || '-'}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">গ্রুপ</div>
+                    <div class="value">${data.exam_group || '-'}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">GPA</div>
+                    <div class="value" style="color: #ffd700; font-size: 1.2rem;">${data.gpa}</div>
+                </div>
+                <div class="info-item">
+                    <div class="label">প্রতিষ্ঠান</div>
+                    <div class="value">${data.institution_name || '-'}</div>
+                </div>
+            `;
+        }
+
+        function displayEligibility(eligible, reason) {
+            const card = document.getElementById('eligibilityCard');
+            card.innerHTML = `
+                <div class="eligibility-card ${eligible ? 'eligible' : 'not-eligible'}">
+                    <h4>
+                        <i class="fas ${eligible ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                        ${eligible ? 'আপনি যোগ্য!' : 'আপনি যোগ্য নন'}
+                    </h4>
+                    <p>${eligible ?
+                    'আপনার HSC ফলাফল এই ভর্তির জন্য প্রয়োজনীয় যোগ্যতা পূরণ করে।' :
+                    reason || 'আপনার ফলাফল প্রয়োজনীয় যোগ্যতা পূরণ করে না।'
+                }</p>
+                </div>
+            `;
+        }
+
+        async function submitApplication() {
+            const mobile = document.getElementById('mobile').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const address = document.getElementById('address').value.trim();
+
+            if (!mobile) {
+                alert('মোবাইল নম্বর প্রদান করুন');
+                return;
+            }
+
+            if (!/^01[3-9]\d{8}$/.test(mobile)) {
+                alert('সঠিক মোবাইল নম্বর প্রদান করুন (যেমন: 01712345678)');
+                return;
+            }
+
+            showLoading(true);
+
+            try {
+                // First, create the application
+                const applyRes = await fetch('/api/university/apply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        admissionPostId: admissionData.id,
+                        hscRoll: hscData.roll_number,
+                        hscYear: hscData.exam_year,
+                        mobile,
+                        email,
+                        presentAddress: address
+                    })
+                });
+
+                const applyData = await applyRes.json();
+
+                if (!applyRes.ok) {
+                    throw new Error(applyData.error || 'আবেদন জমা দিতে সমস্যা হয়েছে');
+                }
+
+                // Initialize payment
+                const payRes = await fetch('/api/university/payment/init', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ applicationId: applyData.applicationId })
+                });
+
+                const payData = await payRes.json();
+
+                if (payData.url) {
+                    window.location.href = payData.url;
+                } else {
+                    // If payment init fails, show manual success (for testing)
+                    showLoading(false);
+                    alert('পেমেন্ট গেটওয়ে সংযোগ নেই। আবেদন সেভ হয়েছে।');
+                    showSuccess(applyData.applicationId);
+                }
+
+            } catch (error) {
+                console.error('Submit error:', error);
+                alert(error.message || 'আবেদন জমা দিতে সমস্যা হয়েছে');
+                showLoading(false);
+            }
+        }
+
+        function showVerifyStatus(type, message) {
+            const icons = { success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-triangle', info: 'fa-info-circle' };
+            document.getElementById('verifyStatus').innerHTML = `
+                <div class="status-message ${type}">
+                    <i class="fas ${icons[type]}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+        }
+
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').classList.toggle('hidden', !show);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+    </script>
+</body>
+
+</html>

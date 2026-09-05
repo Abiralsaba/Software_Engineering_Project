@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Passport Management | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/passport.css">
+    <link rel="stylesheet" href="css/admin-passport.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #d4ac0d, #f4d03f);">
+                    <i class="fas fa-user-shield" style="color: #0a1628;"></i>
+                </div>
+                <h3 style="color: var(--pp-gold-light);">Admin Panel</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Passport Management</p>
+            </div>
+            <nav class="nav-links">
+                <a href="reports.html"><i class="fas fa-arrow-left"></i> Back to Admin Panel</a>
+                <a href="admin-passport.html" class="active"><i class="fas fa-passport"></i> Passport Applications</a>
+                <a href="passport.html"><i class="fas fa-globe"></i> Public Passport Page</a>
+                <a href="#" onclick="AdminPassport.logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Banner -->
+            <div class="admin-pp-banner">
+                <h1><i class="fas fa-user-shield"></i> Passport Admin Panel</h1>
+                <span class="admin-badge"><i class="fas fa-lock"></i> Admin Access</span>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="admin-stats-grid">
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: var(--pp-accent);">📋</span>
+                    <span class="stat-value" id="statTotal">-</span>
+                    <span class="stat-label">Total Applications</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #f4d03f;">⏳</span>
+                    <span class="stat-value" id="statPending">-</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #5dade2;">⚙️</span>
+                    <span class="stat-value" id="statProcessing">-</span>
+                    <span class="stat-label">Processing</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #2ecc71;">✅</span>
+                    <span class="stat-value" id="statDelivered">-</span>
+                    <span class="stat-label">Delivered</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #f87171;">❌</span>
+                    <span class="stat-value" id="statRejected">-</span>
+                    <span class="stat-label">Rejected</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: var(--pp-gold-light);">💰</span>
+                    <span class="stat-value" id="statRevenue" style="font-size: 1.3rem;">-</span>
+                    <span class="stat-label">Total Revenue</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #48c9b0;">📅</span>
+                    <span class="stat-value" id="statToday">-</span>
+                    <span class="stat-label">Today's Apps</span>
+                </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="admin-filter-bar">
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="filterStatus">
+                        <option value="">All Statuses</option>
+                        <option value="Submitted">Submitted</option>
+                        <option value="Payment Verified">Payment Verified</option>
+                        <option value="Under Review">Under Review</option>
+                        <option value="Biometric Scheduled">Biometric Scheduled</option>
+                        <option value="Biometric Enrolled">Biometric Enrolled</option>
+                        <option value="Police Verification">Police Verification</option>
+                        <option value="Police Verification Completed">Police Verification Completed</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Printing">Printing</option>
+                        <option value="Dispatched">Dispatched</option>
+                        <option value="Ready for Delivery">Ready for Delivery</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="On Hold">On Hold</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Office</label>
+                    <select id="filterOffice">
+                        <option value="">All Offices</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>From Date</label>
+                    <input type="date" id="filterDateFrom">
+                </div>
+                <div class="filter-group">
+                    <label>To Date</label>
+                    <input type="date" id="filterDateTo">
+                </div>
+                <div class="filter-group">
+                    <label>Search</label>
+                    <input type="text" id="filterSearch" placeholder="App No, Name, NID...">
+                </div>
+                <div class="filter-actions">
+                    <button class="btn-pp" onclick="AdminPassport.applyFilters()" style="padding: 0.7rem 1.2rem; font-size: 0.85rem;">
+                        <i class="fas fa-search"></i> Filter
+                    </button>
+                    <button class="btn-pp-outline" onclick="AdminPassport.clearFilters()" style="padding: 0.7rem 1.2rem; font-size: 0.85rem;">
+                        <i class="fas fa-rotate-left"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <!-- Applications Table -->
+            <div class="admin-table-card">
+                <h3><i class="fas fa-list"></i> Passport Applications</h3>
+                <div class="table-info">
+                    <span class="count" id="appCount">Loading...</span>
+                    <button class="refresh-btn" onclick="AdminPassport.applyFilters()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <table class="admin-pp-table">
+                    <thead>
+                        <tr>
+                            <th>Application No.</th>
+                            <th>Applicant</th>
+                            <th>NID</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Office</th>
+                            <th>Submitted</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTableBody">
+                        <tr>
+                            <td colspan="9" style="text-align:center; padding:3rem;">
+                                <div class="pp-loading"><div class="pp-spinner"></div></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Detail / Update Modal -->
+    <div class="admin-modal-overlay" id="detailModalOverlay">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2><i class="fas fa-passport"></i> <span id="modalTitle">Application Details</span></h2>
+                <button class="admin-modal-close" onclick="AdminPassport.closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="admin-modal-body" id="modalBody">
+                <div class="pp-loading"><div class="pp-spinner"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/admin-passport.js"></script>
+</body>
+
+</html>

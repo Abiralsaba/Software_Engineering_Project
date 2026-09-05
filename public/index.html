@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Government of Bangladesh</title>
+    <meta name="description"
+        content="Secure login portal for citizens and administrators of the Government of Bangladesh e-Service Platform.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+
+        <div class="wave-container">
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+    </div>
+
+    <!-- Floating Icons -->
+    <div class="floating-icons">
+        <i class="fas fa-landmark floating-icon"></i>
+        <i class="fas fa-id-card floating-icon"></i>
+        <i class="fas fa-file-alt floating-icon"></i>
+        <i class="fas fa-university floating-icon"></i>
+    </div>
+
+    <!-- Main Container -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Decorative Corners -->
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+
+            <!-- Header -->
+            <div class="auth-header">
+                <div class="flag-emblem">
+                    <div class="flag-circle"></div>
+                </div>
+                <h1 id="headerTitle">গণপ্রজাতন্ত্রী বাংলাদেশ</h1>
+                <p id="headerSubtitle">Government e-Service Portal</p>
+                <div class="govt-badge" id="headerBadge">
+                    <i class="fas fa-shield-halved" id="badgeIcon"></i>
+                    <span id="badgeText">Secure Government Login</span>
+                </div>
+            </div>
+
+            <!-- ========== Role Tab Switcher ========== -->
+            <div class="role-tabs">
+                <button class="role-tab active" id="citizenTab" data-tab="citizen">
+                    <i class="fas fa-users"></i>
+                    <span>Citizen</span>
+                </button>
+                <button class="role-tab" id="adminTab" data-tab="admin">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin</span>
+                </button>
+            </div>
+
+            <!-- ========== CITIZEN SECTION ========== -->
+            <div class="login-section active" id="citizenSection">
+                <!-- Alert Box -->
+                <div id="alertBox" class="alert"></div>
+
+                <!-- Citizen Login Form -->
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" class="form-control" placeholder="citizen@bangladesh.gov.bd"
+                                required>
+                            <i class="fas fa-envelope input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                                required>
+                            <i class="fas fa-lock input-icon"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span>Login to Portal</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <!-- Forgot Password -->
+                <div class="forgot-link">
+                    <a href="forgot-password.html">
+                        <i class="fas fa-key"></i> Forgot Password?
+                    </a>
+                </div>
+
+                <!-- Auth Links -->
+                <div class="auth-links">
+                    <span>New Citizen?</span>
+                    <a href="register.html">
+                        Create Account <i class="fas fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== ADMIN SECTION ========== -->
+            <div class="login-section" id="adminSection">
+                <!-- Pending Notice -->
+                <div class="admin-pending-notice" id="adminPendingNotice">
+                    <i class="fas fa-clock"></i>
+                    <p>Your registration is pending approval. Please contact the super administrator.</p>
+                </div>
+
+                <!-- Admin Login Form -->
+                <form id="adminLoginForm" class="auth-form admin-login-visible">
+                    <div class="form-group">
+                        <label for="adminEmail">
+                            <i class="fas fa-envelope"></i> Admin Email
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="email" id="adminEmail" class="form-control" placeholder="admin@example.com"
+                                required>
+                            <i class="fas fa-envelope input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="password" id="adminPassword" class="form-control"
+                                placeholder="Enter admin password" required>
+                            <i class="fas fa-lock input-icon"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit admin-btn">
+                        <span>Sign In to Admin Panel</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <div class="admin-toggle">
+                        <span>Don't have an admin account?</span>
+                        <a href="#" id="showAdminRegister">Register <i class="fas fa-user-plus"></i></a>
+                    </div>
+                </form>
+
+                <!-- Admin Register Form -->
+                <form id="adminRegisterForm" class="auth-form admin-register-hidden">
+                    <div class="form-group">
+                        <label for="adminRegName">
+                            <i class="fas fa-user"></i> Full Name
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="text" id="adminRegName" class="form-control" placeholder="John Doe" required>
+                            <i class="fas fa-user input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminRegNid">
+                            <i class="fas fa-id-card"></i> NID Number
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="text" id="adminRegNid" class="form-control" placeholder="National ID Number"
+                                required>
+                            <i class="fas fa-id-card input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminRegEmail">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="email" id="adminRegEmail" class="form-control" placeholder="admin@example.com"
+                                required>
+                            <i class="fas fa-envelope input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminRegMobile">
+                            <i class="fas fa-phone"></i> Mobile Number (Optional)
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="adminRegMobile" class="form-control" placeholder="01XXXXXXXXX">
+                            <i class="fas fa-phone input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminRegPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="password" id="adminRegPassword" class="form-control"
+                                placeholder="Min. 6 characters" minlength="6" required>
+                            <i class="fas fa-lock input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminRegConfirmPassword">
+                            <i class="fas fa-check-circle"></i> Confirm Password
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="password" id="adminRegConfirmPassword" class="form-control"
+                                placeholder="Confirm your password" required>
+                            <i class="fas fa-check-circle input-icon"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit admin-btn">
+                        <span>Register as Admin</span>
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+
+                    <div class="admin-toggle">
+                        <span>Already have an account?</span>
+                        <a href="#" id="showAdminLogin">Sign In <i class="fas fa-sign-in-alt"></i></a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Security Badge -->
+            <div class="security-badge">
+                <i class="fas fa-lock"></i>
+                <span>Protected with 256-bit SSL Encryption</span>
+                <i class="fas fa-certificate"></i>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+
+    <!-- Additional Animations Script -->
+    <script>
+        // Add focus effects
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentElement.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', function () {
+                this.parentElement.parentElement.classList.remove('focused');
+            });
+        });
+
+        // Button loading state for citizen login
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            const btn = this.querySelector('.btn-submit');
+            btn.classList.add('loading');
+            btn.innerHTML = '<span>Authenticating...</span>';
+        });
+    </script>
+</body>
+
+</html>

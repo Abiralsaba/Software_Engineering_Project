@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্বাস্থ্য মন্ত্রণালয় | Ministry of Health | Govt of Bangladesh</title>
+    <meta name="description"
+        content="Bangladesh Ministry of Health and Family Welfare - Health Card, Vaccination, Hospitals, Appointments, Ambulance Service">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/health.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3 style="color: #fca5a5;">স্বাস্থ্য মন্ত্রণালয়</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Ministry of Health & Family Welfare</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" onclick="showSection('overview')" class="active"><i class="fas fa-home"></i> Overview</a>
+                <a href="#" onclick="showSection('health-card')"><i class="fas fa-id-card-alt"></i> Health Card</a>
+                <a href="#" onclick="showSection('vaccination')"><i class="fas fa-syringe"></i> Vaccination</a>
+                <a href="#" onclick="showSection('hospitals')"><i class="fas fa-hospital"></i> Hospitals</a>
+                <a href="#" onclick="showSection('appointments')"><i class="fas fa-calendar-check"></i> Appointments</a>
+                <a href="#" onclick="showSection('ambulance')"><i class="fas fa-ambulance"></i> Ambulance</a>
+                <a href="#" onclick="showSection('complaints')"><i class="fas fa-exclamation-triangle"></i> Complaints</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ==================== OVERVIEW ==================== -->
+            <div id="overview" class="content-section">
+                <!-- Banner -->
+                <div class="health-banner">
+                    <h1><i class="fas fa-heartbeat"></i> Ministry of Health & Family Welfare</h1>
+                    <p class="bangla-text">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়</p>
+                    <p class="subtitle">সুস্থ জাতি, সমৃদ্ধ দেশ — Healthy Nation, Prosperous Country 🏥</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="health-stats-grid" id="overviewStats">
+                    <div class="health-stat-card">
+                        <span class="stat-icon">🪪</span>
+                        <span class="stat-value" id="stat-cards">0</span>
+                        <span class="stat-label">Health Card</span>
+                    </div>
+                    <div class="health-stat-card">
+                        <span class="stat-icon">💉</span>
+                        <span class="stat-value" id="stat-vaccines">0</span>
+                        <span class="stat-label">Vaccinations</span>
+                    </div>
+                    <div class="health-stat-card">
+                        <span class="stat-icon">📅</span>
+                        <span class="stat-value" id="stat-appointments">0</span>
+                        <span class="stat-label">Appointments</span>
+                    </div>
+                    <div class="health-stat-card">
+                        <span class="stat-icon">🚑</span>
+                        <span class="stat-value" id="stat-ambulance">0</span>
+                        <span class="stat-label">Ambulance Req.</span>
+                    </div>
+                    <div class="health-stat-card">
+                        <span class="stat-icon">📝</span>
+                        <span class="stat-value" id="stat-complaints">0</span>
+                        <span class="stat-label">Complaints</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="health-action-grid">
+                    <div class="health-action-card" onclick="showSection('health-card')">
+                        <span class="action-icon">🪪</span>
+                        <h4>Digital Health Card</h4>
+                        <p>Apply for your digital health card — স্বাস্থ্য কার্ডের জন্য আবেদন করুন</p>
+                        <button class="btn-health"><i class="fas fa-arrow-right"></i> Apply Now</button>
+                    </div>
+                    <div class="health-action-card" onclick="showSection('vaccination')">
+                        <span class="action-icon">💉</span>
+                        <h4>Vaccination</h4>
+                        <p>Register for vaccinations — টিকাদান কর্মসূচিতে নিবন্ধন করুন</p>
+                        <button class="btn-health-blue"><i class="fas fa-arrow-right"></i> Register</button>
+                    </div>
+                    <div class="health-action-card" onclick="showSection('hospitals')">
+                        <span class="action-icon">🏥</span>
+                        <h4>Find Hospitals</h4>
+                        <p>Search government hospitals & clinics — সরকারি হাসপাতাল খুঁজুন</p>
+                        <button class="btn-health"><i class="fas fa-arrow-right"></i> Search</button>
+                    </div>
+                    <div class="health-action-card" onclick="showSection('appointments')">
+                        <span class="action-icon">👨‍⚕️</span>
+                        <h4>Book Appointment</h4>
+                        <p>Schedule a doctor appointment — ডাক্তার অ্যাপয়েন্টমেন্ট বুক করুন</p>
+                        <button class="btn-health-blue"><i class="fas fa-arrow-right"></i> Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Emergency Info -->
+                <div class="health-card emergency-card">
+                    <h3><i class="fas fa-phone-alt"></i> Emergency Numbers — জরুরি নম্বর</h3>
+                    <div class="emergency-grid">
+                        <div class="emergency-item">
+                            <span class="em-number">999</span>
+                            <span class="em-label">National Emergency</span>
+                        </div>
+                        <div class="emergency-item">
+                            <span class="em-number">16263</span>
+                            <span class="em-label">Health Helpline (DGHS)</span>
+                        </div>
+                        <div class="emergency-item">
+                            <span class="em-number">333</span>
+                            <span class="em-label">Govt Info Service</span>
+                        </div>
+                        <div class="emergency-item">
+                            <span class="em-number">10655</span>
+                            <span class="em-label">Ambulance (BRAC)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="health-card">
+                    <h3><i class="fas fa-clock"></i> Recent Activity</h3>
+                    <div id="recentActivityList">
+                        <div class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== HEALTH CARD ==================== -->
+            <div id="health-card" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-id-card-alt"></i> Digital Health Card — ডিজিটাল স্বাস্থ্য কার্ড</h2>
+                </div>
+
+                <div class="health-card">
+                    <h3><i class="fas fa-file-alt"></i> Apply for Health Card</h3>
+                    <form id="healthCardForm" class="health-form">
+                        <div class="form-group">
+                            <label>Full Name <span class="required">*</span></label>
+                            <input type="text" id="hc-fullname" required placeholder="পূর্ণ নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Name</label>
+                            <input type="text" id="hc-father" placeholder="পিতার নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Mother's Name</label>
+                            <input type="text" id="hc-mother" placeholder="মাতার নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="hc-nid" required placeholder="জাতীয় পরিচয়পত্র নম্বর">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="hc-dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender <span class="required">*</span></label>
+                            <select id="hc-gender" required>
+                                <option value="">Select</option>
+                                <option value="Male">পুরুষ (Male)</option>
+                                <option value="Female">মহিলা (Female)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Blood Group</label>
+                            <select id="hc-blood">
+                                <option value="">Select</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" id="hc-phone" required placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Emergency Contact</label>
+                            <input type="tel" id="hc-emergency" placeholder="জরুরি যোগাযোগ নম্বর">
+                        </div>
+                        <div class="form-group">
+                            <label>Division <span class="required">*</span></label>
+                            <select id="hc-division" required onchange="HealthApp.loadDistricts('hc')">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District <span class="required">*</span></label>
+                            <select id="hc-district" required onchange="HealthApp.loadUpazilas('hc')">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upazila <span class="required">*</span></label>
+                            <select id="hc-upazila" required>
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Address</label>
+                            <textarea id="hc-address" rows="2" placeholder="বিস্তারিত ঠিকানা"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Known Allergies</label>
+                            <input type="text" id="hc-allergies" placeholder="e.g. Penicillin, Dust">
+                        </div>
+                        <div class="form-group">
+                            <label>Chronic Diseases</label>
+                            <input type="text" id="hc-chronic" placeholder="e.g. Diabetes, Hypertension">
+                        </div>
+                        <div class="form-group">
+                            <label>Disability</label>
+                            <select id="hc-disability">
+                                <option value="None">নেই (None)</option>
+                                <option value="Physical">শারীরিক (Physical)</option>
+                                <option value="Visual">দৃষ্টি (Visual)</option>
+                                <option value="Hearing">শ্রবণ (Hearing)</option>
+                                <option value="Intellectual">বুদ্ধিবৃত্তিক (Intellectual)</option>
+                                <option value="Multiple">একাধিক (Multiple)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-health"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Health Card Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- My Health Card -->
+                <div class="health-card">
+                    <h3><i class="fas fa-id-card"></i> My Health Card</h3>
+                    <div id="myHealthCardContainer">
+                        <div class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== VACCINATION ==================== -->
+            <div id="vaccination" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-syringe"></i> Vaccination — টিকাদান কর্মসূচি</h2>
+                </div>
+
+                <div class="health-card">
+                    <h3><i class="fas fa-file-medical"></i> Register for Vaccination</h3>
+                    <form id="vaccineForm" class="health-form">
+                        <div class="form-group">
+                            <label>Vaccine Type <span class="required">*</span></label>
+                            <select id="vac-type" required onchange="HealthApp.onVaccineTypeChange()">
+                                <option value="">Select Vaccine</option>
+                                <option value="COVID-19">কোভিড-১৯ (COVID-19)</option>
+                                <option value="Hepatitis B">হেপাটাইটিস বি (Hepatitis B)</option>
+                                <option value="BCG">বিসিজি (BCG)</option>
+                                <option value="Polio">পোলিও (Polio)</option>
+                                <option value="DPT">ডিপিটি (DPT)</option>
+                                <option value="Measles">হাম (Measles)</option>
+                                <option value="TT">টিটি (TT - Tetanus)</option>
+                                <option value="Pneumococcal">নিউমোকক্কাল (Pneumococcal)</option>
+                                <option value="Influenza">ইনফ্লুয়েঞ্জা (Influenza)</option>
+                                <option value="Rabies">জলাতঙ্ক (Rabies)</option>
+                                <option value="Typhoid">টাইফয়েড (Typhoid)</option>
+                                <option value="Cholera">কলেরা (Cholera)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Vaccine Name <span class="required">*</span></label>
+                            <input type="text" id="vac-name" required placeholder="e.g. Pfizer, AstraZeneca, Sinopharm">
+                        </div>
+                        <div class="form-group">
+                            <label>Dose Number</label>
+                            <select id="vac-dose">
+                                <option value="1">1st Dose</option>
+                                <option value="2">2nd Dose</option>
+                                <option value="3">3rd Dose (Booster)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Date</label>
+                            <input type="date" id="vac-date">
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Center</label>
+                            <input type="text" id="vac-center" placeholder="Hospital / Center name">
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-health-blue"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Register for Vaccination
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="health-card">
+                    <h3><i class="fas fa-history"></i> My Vaccination Records</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="health-table">
+                            <thead>
+                                <tr>
+                                    <th>Vaccine</th>
+                                    <th>Type</th>
+                                    <th>Dose</th>
+                                    <th>Date</th>
+                                    <th>Center</th>
+                                    <th>Status</th>
+                                    <th>Certificate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vaccineHistoryBody">
+                                <tr>
+                                    <td colspan="7" class="health-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== HOSPITALS ==================== -->
+            <div id="hospitals" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-hospital"></i> Government Hospitals — সরকারি হাসপাতাল</h2>
+                </div>
+
+                <!-- Search/Filter -->
+                <div class="health-card">
+                    <div class="hospital-filter-bar">
+                        <div class="filter-group">
+                            <label>Division</label>
+                            <select id="hosp-filter-division" onchange="HealthApp.filterHospitals()">
+                                <option value="">All Divisions</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Type</label>
+                            <select id="hosp-filter-type" onchange="HealthApp.filterHospitals()">
+                                <option value="">All Types</option>
+                                <option value="Medical College">Medical College</option>
+                                <option value="District Hospital">District Hospital</option>
+                                <option value="Upazila Health Complex">Upazila Health Complex</option>
+                                <option value="Specialized Hospital">Specialized Hospital</option>
+                                <option value="Community Clinic">Community Clinic</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Search</label>
+                            <input type="text" id="hosp-filter-search" placeholder="Hospital name..."
+                                onkeyup="HealthApp.filterHospitals()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital Cards -->
+                <div class="hospital-grid" id="hospitalGrid">
+                    <div class="health-loader" style="grid-column: 1/-1;"><i class="fas fa-spinner fa-spin"></i>
+                        Loading hospitals...</div>
+                </div>
+            </div>
+
+            <!-- ==================== APPOINTMENTS ==================== -->
+            <div id="appointments" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Doctor Appointment — ডাক্তার অ্যাপয়েন্টমেন্ট</h2>
+                </div>
+
+                <div class="health-card">
+                    <h3><i class="fas fa-calendar-plus"></i> Book New Appointment</h3>
+                    <form id="appointmentForm" class="health-form">
+                        <div class="form-group">
+                            <label>Patient Name <span class="required">*</span></label>
+                            <input type="text" id="apt-name" required placeholder="রোগীর নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Patient Age</label>
+                            <input type="number" id="apt-age" placeholder="বয়স" min="0" max="150">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="apt-gender">
+                                <option value="">Select</option>
+                                <option value="Male">পুরুষ (Male)</option>
+                                <option value="Female">মহিলা (Female)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" id="apt-phone" required placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Hospital</label>
+                            <select id="apt-hospital">
+                                <option value="">Select Hospital</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Department <span class="required">*</span></label>
+                            <select id="apt-department" required>
+                                <option value="">Select Department</option>
+                                <option value="Medicine">মেডিসিন (Medicine)</option>
+                                <option value="Surgery">সার্জারি (Surgery)</option>
+                                <option value="Gynecology">গাইনি (Gynecology)</option>
+                                <option value="Pediatrics">শিশু (Pediatrics)</option>
+                                <option value="Orthopedics">অর্থোপেডিক্স (Orthopedics)</option>
+                                <option value="ENT">নাক-কান-গলা (ENT)</option>
+                                <option value="Eye">চক্ষু (Eye)</option>
+                                <option value="Dermatology">চর্ম (Dermatology)</option>
+                                <option value="Cardiology">হৃদরোগ (Cardiology)</option>
+                                <option value="Neurology">নিউরোলজি (Neurology)</option>
+                                <option value="Psychiatry">মানসিক (Psychiatry)</option>
+                                <option value="Dental">দন্ত (Dental)</option>
+                                <option value="Emergency">জরুরি (Emergency)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Doctor</label>
+                            <input type="text" id="apt-doctor" placeholder="Doctor name (if known)">
+                        </div>
+                        <div class="form-group">
+                            <label>Appointment Date <span class="required">*</span></label>
+                            <input type="date" id="apt-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Time</label>
+                            <input type="time" id="apt-time">
+                        </div>
+                        <div class="form-group">
+                            <label>Urgency</label>
+                            <select id="apt-urgency">
+                                <option value="Normal">সাধারণ (Normal)</option>
+                                <option value="Urgent">জরুরি (Urgent)</option>
+                                <option value="Emergency">অতি জরুরি (Emergency)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Symptoms / Complaints</label>
+                            <textarea id="apt-symptoms" rows="2" placeholder="Describe your symptoms..."></textarea>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-health"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-calendar-check"></i> Book Appointment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="health-card">
+                    <h3><i class="fas fa-history"></i> My Appointments</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="health-table">
+                            <thead>
+                                <tr>
+                                    <th>Hospital</th>
+                                    <th>Department</th>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Urgency</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentHistoryBody">
+                                <tr>
+                                    <td colspan="7" class="health-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== AMBULANCE ==================== -->
+            <div id="ambulance" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-ambulance"></i> Ambulance Service — অ্যাম্বুলেন্স সেবা</h2>
+                </div>
+
+                <div class="health-card emergency-card">
+                    <h3><i class="fas fa-exclamation-circle"></i> Emergency? Call 999 Immediately!</h3>
+                    <p style="color: #fca5a5; font-size: 0.9rem;">জরুরি অবস্থায় প্রথমে ৯৯৯ নম্বরে কল করুন। এই ফর্মটি
+                        অনলাইন অ্যাম্বুলেন্স অনুরোধের জন্য।</p>
+                </div>
+
+                <div class="health-card">
+                    <h3><i class="fas fa-file-medical"></i> Request Ambulance</h3>
+                    <form id="ambulanceForm" class="health-form">
+                        <div class="form-group">
+                            <label>Patient Name <span class="required">*</span></label>
+                            <input type="text" id="amb-name" required placeholder="রোগীর নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone <span class="required">*</span></label>
+                            <input type="tel" id="amb-phone" required placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Emergency Type <span class="required">*</span></label>
+                            <select id="amb-type" required>
+                                <option value="">Select Emergency</option>
+                                <option value="Accident">দুর্ঘটনা (Accident)</option>
+                                <option value="Heart Attack">হার্ট অ্যাটাক (Heart Attack)</option>
+                                <option value="Stroke">স্ট্রোক (Stroke)</option>
+                                <option value="Pregnancy">গর্ভকালীন (Pregnancy)</option>
+                                <option value="Burns">পোড়া (Burns)</option>
+                                <option value="Breathing Difficulty">শ্বাসকষ্ট (Breathing Difficulty)</option>
+                                <option value="Unconscious">অচেতন (Unconscious)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Division <span class="required">*</span></label>
+                            <select id="amb-division" required onchange="HealthApp.loadAmbDistricts()">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District <span class="required">*</span></label>
+                            <select id="amb-district" required>
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Pickup Address <span class="required">*</span></label>
+                            <textarea id="amb-address" rows="2" required placeholder="বিস্তারিত ঠিকানা লিখুন"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Destination Hospital</label>
+                            <input type="text" id="amb-destination" placeholder="কোন হাসপাতালে নিতে চান?">
+                        </div>
+                        <div class="form-group">
+                            <label>Urgency</label>
+                            <select id="amb-urgency">
+                                <option value="Normal">সাধারণ (Normal)</option>
+                                <option value="Urgent">জরুরি (Urgent)</option>
+                                <option value="Critical">গুরুতর (Critical)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ambulance Type</label>
+                            <select id="amb-ambulance-type">
+                                <option value="Basic">সাধারণ (Basic)</option>
+                                <option value="Advanced">উন্নত (Advanced)</option>
+                                <option value="ICU">আইসিইউ (ICU)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-health-emergency"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-ambulance"></i> Request Ambulance Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="health-card">
+                    <h3><i class="fas fa-history"></i> My Ambulance Requests</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="health-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Emergency</th>
+                                    <th>Location</th>
+                                    <th>Urgency</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ambulanceHistoryBody">
+                                <tr>
+                                    <td colspan="6" class="health-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== COMPLAINTS ==================== -->
+            <div id="complaints" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Health Complaint — স্বাস্থ্য অভিযোগ</h2>
+                </div>
+
+                <div class="health-card">
+                    <h3><i class="fas fa-file-alt"></i> Submit a Complaint</h3>
+                    <form id="complaintForm" class="health-form">
+                        <div class="form-group">
+                            <label>Complaint Type <span class="required">*</span></label>
+                            <select id="comp-type" required>
+                                <option value="">Select Type</option>
+                                <option value="Hospital Service">হাসপাতাল সেবা (Hospital Service)</option>
+                                <option value="Doctor Conduct">ডাক্তারের আচরণ (Doctor Conduct)</option>
+                                <option value="Medicine Quality">ওষুধের মান (Medicine Quality)</option>
+                                <option value="Ambulance Delay">অ্যাম্বুলেন্স বিলম্ব (Ambulance Delay)</option>
+                                <option value="Corruption">দুর্নীতি (Corruption)</option>
+                                <option value="Unsanitary Conditions">অস্বাস্থ্যকর পরিবেশ (Unsanitary Conditions)</option>
+                                <option value="Staff Behavior">কর্মীদের আচরণ (Staff Behavior)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Hospital/Facility Name</label>
+                            <input type="text" id="comp-hospital" placeholder="হাসপাতাল / প্রতিষ্ঠানের নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Division</label>
+                            <select id="comp-division" onchange="HealthApp.loadCompDistricts()">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District</label>
+                            <select id="comp-district">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Description <span class="required">*</span></label>
+                            <textarea id="comp-description" rows="4" required
+                                placeholder="বিস্তারিত বর্ণনা দিন..."></textarea>
+                        </div>
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-health"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Complaint
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- History -->
+                <div class="health-card">
+                    <h3><i class="fas fa-history"></i> My Complaints</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="health-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Hospital</th>
+                                    <th>Status</th>
+                                    <th>Resolution</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="complaintHistoryBody">
+                                <tr>
+                                    <td colspan="5" class="health-loader"><i class="fas fa-spinner fa-spin"></i>
+                                        Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/health.js"></script>
+</body>
+
+</html>

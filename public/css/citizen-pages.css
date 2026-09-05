@@ -1,0 +1,545 @@
+/* Shared visual system for authenticated citizen pages.
+   Loaded after legacy page styles so old layout rules cannot break React pages. */
+
+.nationx-citizen-pages .citizen-content-shell {
+    padding-bottom: 2rem;
+    animation: citizenPageIn 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nationx-citizen-pages .react-page-header {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 108px;
+    margin: 0 0 1.4rem;
+    padding: 1.35rem 1.45rem 1.25rem 1.65rem;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 92% 0%, rgba(0, 166, 118, 0.13), transparent 44%),
+        linear-gradient(145deg, rgba(14, 43, 38, 0.78), rgba(7, 24, 27, 0.74));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.14), inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.nationx-citizen-pages .react-page-header::before {
+    content: '';
+    position: absolute;
+    top: 1.35rem;
+    bottom: 1.25rem;
+    left: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #38d9a9, #006a4e);
+    box-shadow: 0 0 16px rgba(56, 217, 169, 0.3);
+}
+
+.nationx-citizen-pages .react-page-header::after {
+    content: '';
+    position: absolute;
+    right: -34px;
+    bottom: -58px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgba(56, 217, 169, 0.11);
+    border-radius: 50%;
+}
+
+.nationx-citizen-pages .react-page-header > * {
+    position: relative;
+    z-index: 1;
+}
+
+.nationx-citizen-pages .react-page-header h1 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: clamp(1.75rem, 3vw, 2.55rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+}
+
+.nationx-citizen-pages .react-page-header p {
+    margin: 0.45rem 0 0;
+    color: #91a5af;
+    font-size: 0.83rem;
+}
+
+.nationx-citizen-pages .react-page-header time {
+    color: #7f958f;
+    font-size: 0.76rem;
+}
+
+.nationx-citizen-pages .react-section-heading {
+    margin: 2.2rem 0 1.1rem;
+    padding: 0 0 0.8rem 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+    border-left: 3px solid #00a676;
+}
+
+.nationx-citizen-pages .react-section-heading h2,
+.nationx-citizen-pages .react-panel h2 {
+    color: #f3f7f7;
+    letter-spacing: -0.025em;
+}
+
+.nationx-citizen-pages .react-section-heading p,
+.nationx-citizen-pages .react-panel p {
+    color: #82959f;
+}
+
+.nationx-citizen-pages .react-panel,
+.nationx-citizen-pages .history-card,
+.nationx-citizen-pages .react-calendar-panel {
+    color: #eaf2f2;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(0, 166, 118, 0.07), transparent 42%),
+        linear-gradient(145deg, rgba(15, 39, 38, 0.84), rgba(8, 24, 28, 0.84));
+    border: 1px solid rgba(255, 255, 255, 0.085);
+    border-radius: 18px;
+    box-shadow: 0 16px 42px rgba(0, 0, 0, 0.13), inset 0 1px rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(14px);
+}
+
+.nationx-citizen-pages .react-panel {
+    padding: 1.35rem;
+}
+
+.nationx-citizen-pages .react-two-column {
+    gap: 1rem;
+}
+
+.nationx-citizen-pages .react-form-stack {
+    gap: 0.9rem;
+}
+
+.nationx-citizen-pages .react-form-stack label,
+.nationx-citizen-pages .react-filter-grid label,
+.nationx-citizen-pages .react-profile-fields label {
+    color: #c4d1d6;
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+.nationx-citizen-pages .react-form-stack input,
+.nationx-citizen-pages .react-form-stack select,
+.nationx-citizen-pages .react-form-stack textarea,
+.nationx-citizen-pages .react-filter-grid input,
+.nationx-citizen-pages .react-filter-grid select,
+.nationx-citizen-pages .react-toolbar input {
+    min-height: 46px;
+    padding: 0.75rem 0.85rem;
+    color: #f8fafc;
+    background: rgba(2, 14, 18, 0.66);
+    border: 1px solid rgba(148, 163, 184, 0.19);
+    border-radius: 11px;
+    outline: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.nationx-citizen-pages .react-form-stack textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.nationx-citizen-pages .react-form-stack input:focus,
+.nationx-citizen-pages .react-form-stack select:focus,
+.nationx-citizen-pages .react-form-stack textarea:focus,
+.nationx-citizen-pages .react-filter-grid input:focus,
+.nationx-citizen-pages .react-filter-grid select:focus,
+.nationx-citizen-pages .react-toolbar input:focus {
+    border-color: rgba(56, 217, 169, 0.62);
+    box-shadow: 0 0 0 4px rgba(0, 166, 118, 0.11);
+    transform: translateY(-1px);
+}
+
+.nationx-citizen-pages .btn-primary,
+.nationx-citizen-pages .btn-secondary,
+.nationx-citizen-pages .btn-sm {
+    min-height: 42px;
+    padding: 0.68rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 11px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, background 200ms ease;
+}
+
+.nationx-citizen-pages .btn-primary {
+    background: linear-gradient(135deg, #008d67, #006a4e);
+    box-shadow: 0 10px 24px rgba(0, 106, 78, 0.2), inset 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.nationx-citizen-pages .btn-secondary {
+    color: #d8e3e6;
+    background: rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.nationx-citizen-pages .btn-primary:hover,
+.nationx-citizen-pages .btn-primary:focus-visible,
+.nationx-citizen-pages .btn-secondary:hover,
+.nationx-citizen-pages .btn-secondary:focus-visible,
+.nationx-citizen-pages .btn-sm:hover,
+.nationx-citizen-pages .btn-sm:focus-visible {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.nationx-citizen-pages .react-service-tabs,
+.nationx-citizen-pages .react-chip-row,
+.nationx-citizen-pages .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.nationx-citizen-pages .react-service-tabs button,
+.nationx-citizen-pages .react-chip-row button,
+.nationx-citizen-pages .filter-btn {
+    min-height: 38px;
+    padding: 0.5rem 0.85rem;
+    color: #aebec5;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.nationx-citizen-pages .react-service-tabs button.active,
+.nationx-citizen-pages .react-chip-row button.active,
+.nationx-citizen-pages .filter-btn.active,
+.nationx-citizen-pages .filter-btn:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #008d67, #006a4e);
+    border-color: rgba(56, 217, 169, 0.35);
+}
+
+.nationx-citizen-pages .react-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 14px;
+}
+
+.nationx-citizen-pages table {
+    width: 100%;
+    color: #dbe7e9;
+    border-collapse: collapse;
+}
+
+.nationx-citizen-pages th,
+.nationx-citizen-pages td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+}
+
+.nationx-citizen-pages th {
+    color: #7f949e;
+    background: rgba(255, 255, 255, 0.025);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.nationx-citizen-pages tbody tr {
+    transition: background 160ms ease;
+}
+
+.nationx-citizen-pages tbody tr:hover {
+    background: rgba(0, 166, 118, 0.045);
+}
+
+.nationx-citizen-pages .react-empty-state,
+.nationx-citizen-pages .empty-state {
+    width: 100%;
+    margin: 0.8rem 0;
+    padding: 2.2rem 1rem;
+    color: #788d98;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.018);
+    border: 1px dashed rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+}
+
+/* Documents */
+.nationx-citizen-pages .doc-grid,
+.nationx-citizen-pages .react-doc-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+    padding: 0;
+}
+
+.nationx-citizen-pages .doc-card {
+    display: flex;
+    min-width: 0;
+    min-height: 210px;
+    flex-direction: column;
+    padding: 1.2rem;
+    color: #edf5f4;
+    background: linear-gradient(145deg, rgba(14, 39, 36, 0.84), rgba(7, 24, 27, 0.82));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 17px;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.nationx-citizen-pages .doc-card:hover {
+    border-color: rgba(56, 217, 169, 0.32);
+    transform: translateY(-4px);
+}
+
+.nationx-citizen-pages .doc-body {
+    flex: 1;
+}
+
+.nationx-citizen-pages .doc-body p {
+    overflow-wrap: anywhere;
+}
+
+.nationx-citizen-pages .doc-card .btn-renew,
+.nationx-citizen-pages .doc-card .btn-view {
+    color: #fff;
+    background: rgba(0, 166, 118, 0.14);
+    border-color: rgba(0, 166, 118, 0.2);
+}
+
+/* Todo */
+.nationx-citizen-pages .react-kanban-board {
+    height: auto;
+    gap: 0.9rem;
+}
+
+.nationx-citizen-pages .react-kanban-board .kanban-column {
+    min-height: 300px;
+    padding: 1rem;
+    background: linear-gradient(145deg, rgba(13, 37, 35, 0.78), rgba(6, 22, 27, 0.75));
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 17px;
+}
+
+.nationx-citizen-pages .react-kanban-item {
+    padding: 0.85rem;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-radius: 11px;
+}
+
+.nationx-citizen-pages .react-calendar-panel {
+    margin-top: 1rem;
+    padding: 1.2rem;
+}
+
+.nationx-citizen-pages .react-task-calendar > header button {
+    color: #dce7e8;
+    background: rgba(0, 166, 118, 0.12);
+    border-color: rgba(0, 166, 118, 0.2);
+}
+
+.nationx-citizen-pages .react-calendar-weekdays strong {
+    color: #718790;
+}
+
+.nationx-citizen-pages .react-calendar-days > div,
+.nationx-citizen-pages .react-calendar-days > div.empty {
+    min-height: 5rem;
+    color: #9babb1;
+    background: rgba(2, 14, 18, 0.42);
+    border-color: rgba(148, 163, 184, 0.1);
+}
+
+/* Community and Market */
+.nationx-citizen-pages .react-hub-grid,
+.nationx-citizen-pages .react-group-grid {
+    gap: 0.9rem;
+}
+
+.nationx-citizen-pages .react-hub-card,
+.nationx-citizen-pages .react-group-card,
+.nationx-citizen-pages .react-card-list article,
+.nationx-citizen-pages .react-service-card-grid article {
+    color: #eef6f5;
+    background: linear-gradient(145deg, rgba(14, 38, 36, 0.82), rgba(8, 24, 29, 0.82));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 17px;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.03);
+    transition: transform 210ms ease, border-color 210ms ease, box-shadow 210ms ease;
+}
+
+.nationx-citizen-pages .react-hub-card {
+    position: relative;
+    min-height: 190px;
+    overflow: hidden;
+}
+
+.nationx-citizen-pages .react-hub-card:hover,
+.nationx-citizen-pages .react-group-card:hover,
+.nationx-citizen-pages .react-service-card-grid article:hover {
+    border-color: rgba(56, 217, 169, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+}
+
+.nationx-citizen-pages .react-hub-card > i {
+    color: #38d9a9;
+}
+
+/* Notices */
+.nationx-citizen-pages .react-notice-stats {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.nationx-citizen-pages .react-notice-stats .react-panel {
+    min-width: 0;
+    padding: 1rem 0.75rem;
+}
+
+.nationx-citizen-pages .react-notice-stats strong {
+    color: #38d9a9;
+    font-size: 1.7rem;
+}
+
+.nationx-citizen-pages .react-filter-grid {
+    grid-template-columns: 1.5fr repeat(3, minmax(135px, 1fr));
+}
+
+.nationx-citizen-pages .react-notice-card {
+    padding: 1.15rem;
+    color: #ecf5f4;
+    background: linear-gradient(145deg, rgba(13, 36, 35, 0.84), rgba(8, 24, 29, 0.82));
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    border-left: 3px solid #60a5fa;
+    border-radius: 15px;
+    transition: transform 190ms ease, border-color 190ms ease, background 190ms ease;
+}
+
+.nationx-citizen-pages .react-notice-card:hover,
+.nationx-citizen-pages .react-notice-card:focus-visible {
+    background: linear-gradient(145deg, rgba(16, 47, 43, 0.94), rgba(8, 28, 31, 0.9));
+    border-color: rgba(56, 217, 169, 0.27);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.nationx-citizen-pages .react-notice-card > p {
+    max-width: 100%;
+}
+
+/* Contact */
+.nationx-citizen-pages .react-hotline-grid div {
+    background: linear-gradient(145deg, rgba(244, 42, 65, 0.11), rgba(89, 25, 43, 0.1));
+    border: 1px solid rgba(244, 42, 65, 0.1);
+    border-radius: 12px;
+}
+
+.nationx-citizen-pages .react-link-list a {
+    padding: 0.55rem 0.7rem;
+    color: #5ee2bb;
+    text-decoration: none;
+    background: rgba(0, 166, 118, 0.07);
+    border-radius: 9px;
+}
+
+.nationx-citizen-pages .react-link-list a:hover {
+    background: rgba(0, 166, 118, 0.13);
+}
+
+@keyframes citizenPageIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1180px) {
+    .nationx-citizen-pages .doc-grid,
+    .nationx-citizen-pages .react-doc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .nationx-citizen-pages .react-notice-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .nationx-citizen-pages .react-filter-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .nationx-citizen-pages .react-page-content {
+        padding-top: 5.2rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .nationx-citizen-pages .react-page-header,
+    .nationx-citizen-pages .react-section-heading {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .nationx-citizen-pages .react-page-header {
+        min-height: 0;
+        padding: 1.25rem 1.1rem 1.15rem 1.35rem;
+    }
+
+    .nationx-citizen-pages .doc-grid,
+    .nationx-citizen-pages .react-doc-grid,
+    .nationx-citizen-pages .react-hub-grid,
+    .nationx-citizen-pages .react-group-grid,
+    .nationx-citizen-pages .react-notice-stats,
+    .nationx-citizen-pages .react-filter-grid,
+    .nationx-citizen-pages .react-two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .nationx-citizen-pages .react-kanban-board {
+        grid-template-columns: 1fr;
+    }
+
+    .nationx-citizen-pages .react-kanban-board .kanban-column {
+        min-height: 190px;
+        margin-bottom: 0;
+    }
+
+    .nationx-citizen-pages .react-calendar-days > div,
+    .nationx-citizen-pages .react-calendar-days > div.empty {
+        min-height: 3.4rem;
+        padding: 0.25rem;
+    }
+
+    .nationx-citizen-pages .react-calendar-task {
+        font-size: 0.62rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nationx-citizen-pages .react-page-content {
+        padding-top: 4.75rem;
+    }
+
+    .nationx-citizen-pages .react-page-header h1 {
+        font-size: 1.65rem;
+    }
+
+    .nationx-citizen-pages .react-panel {
+        padding: 1rem;
+        border-radius: 15px;
+    }
+
+    .nationx-citizen-pages th,
+    .nationx-citizen-pages td {
+        padding: 0.7rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nationx-citizen-pages .citizen-content-shell {
+        animation: none;
+    }
+}

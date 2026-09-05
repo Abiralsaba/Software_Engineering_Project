@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — NID Wing | Election Commission</title>
+    <meta name="description" content="NID Admin Panel used by Election Commission Officials">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/nid.css">
+    <link rel="stylesheet" href="css/admin-nid.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #16a34a, #15803d);">
+                    <i class="fas fa-user-shield" style="color: #fff;"></i>
+                </div>
+                <h3 style="color: var(--nid-success);">NID Admin</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Election Commission</p>
+            </div>
+            <nav class="nav-links">
+                <a href="reports.html"><i class="fas fa-arrow-left"></i> Back to Admin Panel</a>
+                <a href="admin-nid.html" class="active"><i class="fas fa-id-card"></i> NID Applications</a>
+                <a href="nid.html"><i class="fas fa-globe"></i> Public NID Page</a>
+                <a href="#" onclick="AdminNID.logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Banner -->
+            <div class="admin-nid-banner">
+                <h1><i class="fas fa-user-shield"></i> NID Wing Admin Panel</h1>
+                <span class="admin-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;"><i class="fas fa-lock"></i> Official Access</span>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="admin-stats-grid">
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: var(--nid-accent);">📋</span>
+                    <span class="stat-value" id="statTotal">-</span>
+                    <span class="stat-label">Total Applications</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #fbbf24;">⏳</span>
+                    <span class="stat-value" id="statPending">-</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #3b82f6;">⚙️</span>
+                    <span class="stat-value" id="statProcessing">-</span>
+                    <span class="stat-label">Processing</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #22c55e;">✅</span>
+                    <span class="stat-value" id="statApproved">-</span>
+                    <span class="stat-label">Approved/Active</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #f87171;">❌</span>
+                    <span class="stat-value" id="statRejected">-</span>
+                    <span class="stat-label">Rejected</span>
+                </div>
+                 <div class="admin-stat-card">
+                    <span class="stat-icon" style="color: #a855f7;">🔄</span>
+                    <span class="stat-value" id="statCorrections">-</span>
+                    <span class="stat-label">Corrections</span>
+                </div>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="admin-filter-bar">
+                <div class="filter-group">
+                    <label>Application Type</label>
+                    <select id="filterType">
+                        <option value="">All Types</option>
+                        <option value="New NID">New NID</option>
+                        <option value="Correction">Correction</option>
+                        <option value="Reissue">Reissue</option>
+                        <option value="Smart Card">Smart Card</option>
+                        <option value="Address Change">Address Change</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="filterStatus">
+                        <option value="">All Statuses</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Submitted">Submitted</option>
+                        <option value="Under Review">Under Review</option>
+                        <option value="Biometric Pending">Biometric Pending</option>
+                        <option value="Verified">Verified</option>
+                        <option value="Document Verification">Document Verification</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Card Printing">Card Printing</option>
+                        <option value="Ready for Collection">Ready for Collection</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="flex: 1.5;">
+                    <label>Search</label>
+                    <input type="text" id="filterSearch" placeholder="Search by Name, NID or Reference No...">
+                </div>
+                <button class="filter-btn" onclick="AdminNID.applyFilters()">
+                    <i class="fas fa-filter"></i> Apply Filters
+                </button>
+            </div>
+
+            <!-- Applications Table -->
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Ref No</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #94a3b8;">Loading data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="detail-modal-overlay" id="detailModalOverlay">
+        <div class="detail-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-alt"></i> Application Details</h2>
+                <button class="modal-close" onclick="AdminNID.closeModal()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- Content injected by JS -->
+                </div>
+
+                <div class="admin-actions-panel">
+                    <h3><i class="fas fa-tasks"></i> Admin Actions</h3>
+                    <div class="update-status-form">
+                        <div class="filter-group status-select">
+                            <label>Update Status</label>
+                            <select id="updateStatus">
+                                <!-- Populated dynamically by JS based on application type -->
+                            </select>
+                        </div>
+                        <div class="filter-group" style="flex: 2;">
+                            <label>Admin Remarks / Reason</label>
+                            <input type="text" id="adminRemarks" placeholder="Enter remarks or rejection reason...">
+                        </div>
+                        <button class="admin-btn" onclick="AdminNID.submitStatusUpdate()">Update Status</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/admin-nid.js"></script>
+</body>
+</html>

@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Ministry | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/land.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* --- Overview Section Styles --- */
+        #overview-section {
+            padding: 2rem;
+        }
+
+        .land-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-land {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+
+        .btn-land:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        /* --- Mutation Section Styles (Dark Theme Adapted) --- */
+        #mutation-section {
+            display: none;
+            background: #0f172a;
+            min-height: 100%;
+        }
+
+        .top-header {
+            background: rgba(30, 41, 59, 0.7);
+            /* translucent dark */
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bd-logo {
+            width: 50px;
+            height: 50px;
+            background: #006a4e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f42a41;
+            font-size: 1.5rem;
+        }
+
+        .header-date {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .header-actions button {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .header-actions button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .header-actions button.primary {
+            background: #15803d;
+            border: none;
+            color: white;
+        }
+
+        .header-actions button.primary:hover {
+            background: #166534;
+        }
+
+        /* Dark Hero with Green Accents */
+        .hero-section {
+            /* Dark gradient sitting up top */
+            background: radial-gradient(circle at center, rgba(22, 163, 74, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            padding: 4rem 2rem 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .landscape-art {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            /* Using the green shape but checking opacity against dark bg */
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23064e3b' fill-opacity='1' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: bottom;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .tree-icon {
+            position: absolute;
+            bottom: 40px;
+            color: #fbbf24;
+            /* Golden yellow for trees */
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+            /* Yellow Glow */
+            font-size: 3rem;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            color: #4ade80;
+            /* Bright green text */
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+        }
+
+        .hero-desc {
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn-hero {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-hero.new {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-hero.status {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Search Bar Floating - Dark Glass */
+        .search-bar-container {
+            max-width: 900px;
+            margin: -40px auto 3rem auto;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-label {
+            font-weight: 600;
+            color: #4ade80;
+            min-width: 200px;
+        }
+
+        .search-input-group {
+            flex: 1;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-select,
+        .form-input {
+            padding: 0.75rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 6px;
+            width: 100%;
+        }
+
+        .form-select:focus,
+        .form-input:focus {
+            outline: none;
+            border-color: #4ade80;
+        }
+
+        .btn-search {
+            background: #059669;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover {
+            background: #047857;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3 style="color: #a78bfa;">Land Ministry</h3>
+                <p style="color: #94a3b8; font-size: 0.8rem;">Ministry of Land</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" onclick="switchTab(event, this, 'overview')" class="active"><i class="fas fa-home"></i>
+                    Overview</a>
+                <a href="#" onclick="switchTab(event, this, 'records')"><i class="fas fa-file-contract"></i> My
+                    Records</a>
+                <a href="#" onclick="switchTab(event, this, 'mutation')"><i class="fas fa-exchange-alt"></i>
+                    Mutation</a>
+                <a href="#" onclick="switchTab(event, this, 'tax')"><i class="fas fa-money-bill-wave"></i> Land Tax</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- SECTION 1: OVERVIEW (Default) -->
+            <div id="overview-section">
+                <div class="header-bar"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h1>Land Ministry Services</h1>
+                        <p style="color: var(--text-muted);">Digital Land Management System</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Removed -->
+
+
+                <!-- Laws & Notices Section -->
+                <div style="margin-top: 3rem;">
+                    <h2
+                        style="color: #e2e8f0; margin-bottom: 1.5rem; border-left: 4px solid #34d399; padding-left: 1rem;">
+                        Laws & Notices</h2>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+
+                        <!-- Land Tax Act -->
+                        <div class="card" style="background: rgba(30, 41, 59, 0.6);">
+                            <h4 style="color: #34d399; margin-bottom: 0.8rem;"><i class="fas fa-gavel"></i> Land
+                                Development Tax Act 2023</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">
+                                The new act streamlines tax collection. Key points:
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: #cbd5e1; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                        style="color: #34d399; margin-right: 5px;"></i> Fiscal year: July 1 - June 30
+                                </li>
+                                <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                                        style="color: #34d399; margin-right: 5px;"></i> Agri exemption: Up to 25 bighas
+                                </li>
+                                <li><i class="fas fa-check" style="color: #34d399; margin-right: 5px;"></i> Online
+                                    payment mandatory</li>
+                            </ul>
+                        </div>
+
+                        <!-- Mutation Rules -->
+                        <div class="card" style="background: rgba(30, 41, 59, 0.6);">
+                            <h4 style="color: #fbbf24; margin-bottom: 0.8rem;"><i class="fas fa-file-contract"></i>
+                                Mutation (Namjari) Guidelines</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">
+                                Complete mutation within 28 days.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: #cbd5e1; font-size: 0.9rem;">
+                                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right"
+                                        style="color: #fbbf24; margin-right: 5px;"></i> Fee: 1,170 BDT (Cashless)</li>
+                                <li style="margin-bottom: 0.5rem;"><i class="fas fa-arrow-right"
+                                        style="color: #fbbf24; margin-right: 5px;"></i> Apply online with NID & Deed
+                                </li>
+                                <li><i class="fas fa-arrow-right" style="color: #fbbf24; margin-right: 5px;"></i>
+                                    Tracking available via SMS</li>
+                            </ul>
+                        </div>
+
+                        <!-- Land Services -->
+                        <div class="card" style="background: rgba(30, 41, 59, 0.6);">
+                            <h4 style="color: #60a5fa; margin-bottom: 0.8rem;"><i class="fas fa-laptop-code"></i>
+                                Digital Land Services</h4>
+                            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">
+                                Access all services from home.
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <span
+                                    style="background: rgba(96, 165, 250, 0.1); color: #60a5fa; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">E-Khatian</span>
+                                <span
+                                    style="background: rgba(96, 165, 250, 0.1); color: #60a5fa; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">Online
+                                    Review</span>
+                                <span
+                                    style="background: rgba(96, 165, 250, 0.1); color: #60a5fa; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem;">Mortgage
+                                    Verify</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Emergency Contacts & Offices -->
+                <div style="margin-top: 3rem; margin-bottom: 2rem;">
+                    <h2
+                        style="color: #e2e8f0; margin-bottom: 1.5rem; border-left: 4px solid #ef4444; padding-left: 1rem;">
+                        Emergency & Contacts</h2>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+
+                        <!-- Helpline -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(30, 41, 59, 0.8)); border-color: #ef4444;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <div
+                                    style="background: #ef4444; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div>
+                                    <h3 style="margin: 0; color: white;">Land Service Hotline</h3>
+                                    <p style="margin: 0; color: #cbd5e1;">Available 24/7</p>
+                                </div>
+                            </div>
+                            <h1 style="color: white; font-size: 2.5rem; margin: 0.5rem 0;">16122</h1>
+                            <p style="color: #94a3b8; font-size: 0.9rem;">Call for any land related query or complaint.
+                            </p>
+                        </div>
+
+                        <!-- Division Offices -->
+                        <div class="card" style="background: rgba(30, 41, 59, 0.6);">
+                            <h4 style="color: #60a5fa; margin-bottom: 1rem;"><i class="fas fa-building"></i> Divisional
+                                Offices</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                                    <div>
+                                        <p style="margin: 0; color: #e2e8f0; font-weight: 500;">Dhaka Division</p>
+                                        <p style="margin: 0; font-size: 0.8rem; color: #94a3b8;"><i
+                                                class="fas fa-phone-alt"></i> 02-9555555</p>
+                                    </div>
+                                    <a href="#" style="color: #60a5fa; font-size: 0.9rem;"><i class="fas fa-globe"></i>
+                                        Visit</a>
+                                </div>
+
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                                    <div>
+                                        <p style="margin: 0; color: #e2e8f0; font-weight: 500;">Chattogram Division</p>
+                                        <p style="margin: 0; font-size: 0.8rem; color: #94a3b8;"><i
+                                                class="fas fa-phone-alt"></i> 031-611111</p>
+                                    </div>
+                                    <a href="#" style="color: #60a5fa; font-size: 0.9rem;"><i class="fas fa-globe"></i>
+                                        Visit</a>
+                                </div>
+
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                                    <div>
+                                        <p style="margin: 0; color: #e2e8f0; font-weight: 500;">Rajshahi Division</p>
+                                        <p style="margin: 0; font-size: 0.8rem; color: #94a3b8;"><i
+                                                class="fas fa-phone-alt"></i> 0721-772222</p>
+                                    </div>
+                                    <a href="#" style="color: #60a5fa; font-size: 0.9rem;"><i class="fas fa-globe"></i>
+                                        Visit</a>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <p style="margin: 0; color: #e2e8f0; font-weight: 500;">Khulna Division</p>
+                                        <p style="margin: 0; font-size: 0.8rem; color: #94a3b8;"><i
+                                                class="fas fa-phone-alt"></i> 041-720000</p>
+                                    </div>
+                                    <a href="#" style="color: #60a5fa; font-size: 0.9rem;"><i class="fas fa-globe"></i>
+                                        Visit</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: MUTATION LANDING PAGE (Dark Theme) -->
+            <div id="mutation-section">
+                <!-- Top Header -->
+                <div class="top-header">
+                    <div class="logo-section">
+                        <div class="bd-logo">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <div>
+                            <h2 style="color: #f1f5f9; margin: 0; font-size: 1.2rem;">Land Management Automation Project
+                            </h2>
+                            <p style="margin: 0; font-size: 0.9rem; color: #94a3b8;">Ministry of Land</p>
+                        </div>
+                    </div>
+                    <div class="header-date" id="currentDate"></div>
+                    <div class="header-actions">
+                        <button>English</button>
+                        <button class="primary" onclick="location.href='profile.html'"><i class="fas fa-user"></i>
+                            Profile</button>
+                    </div>
+                </div>
+
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <i class="fas fa-tree tree-icon" style="left: 10%;"></i>
+                    <i class="fas fa-tree tree-icon" style="left: 15%; font-size: 2rem;"></i>
+                    <i class="fas fa-tree tree-icon" style="right: 10%;"></i>
+                    <i class="fas fa-tree tree-icon" style="right: 5%; font-size: 4rem;"></i>
+                    <i class="fas fa-dove" style="position: absolute; top: 20%; left: 20%; color: #22c55e;"></i>
+                    <i class="fas fa-dove" style="position: absolute; top: 15%; right: 30%; color: #22c55e;"></i>
+
+                    <div class="landscape-art"></div>
+
+                    <div class="hero-content">
+                        <h1 class="hero-title">Welcome to Mutation System!</h1>
+                        <p class="hero-desc">The Ministry of Land has implemented the mutation system to simplify and
+                            speed up land ownership changes. You can complete form filling, fee payment, and khatian
+                            collection online through this system.</p>
+
+                        <div class="hero-buttons">
+                            <button class="btn-hero new" onclick="applyMutationPopup()">
+                                <i class="fas fa-file-alt"></i> Click for New Application
+                            </button>
+                            <button class="btn-hero status" onclick="scrollToSearch()">
+                                <i class="fas fa-search"></i> Check Application Status
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-bar-container" id="statusSearch">
+                    <div class="search-label">Check Latest Application Status</div>
+                    <div class="search-input-group">
+                        <select class="form-select" id="statusDivision">
+                            <option value="">Select Division</option>
+                        </select>
+                        <input type="text" class="form-input" placeholder="Tracking Number (e.g. LMT-2026-XXXX)"
+                            id="statusAppId">
+                        <button class="btn-search" onclick="checkStatus()">Search</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SECTION 3: RECORDS -->
+            <div id="records-section" style="display: none; padding: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2 style="color: white; margin: 0;">My Land Records</h2>
+                    <button class="btn-land"
+                        style="width: auto; margin: 0; background: linear-gradient(135deg, #3b82f6, #2563eb);"
+                        onclick="openAddRecordModal()">
+                        <i class="fas fa-plus"></i> Add New Record
+                    </button>
+                </div>
+
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; color: #e2e8f0; min-width: 600px;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); text-align: left;">
+                                <th style="padding: 1rem;">Khatian No.</th>
+                                <th style="padding: 1rem;">Dag No.</th>
+                                <th style="padding: 1rem;">Mouza</th>
+                                <th style="padding: 1rem;">Size (Dec)</th>
+                                <th style="padding: 1rem;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsList">
+                            <!-- Loaded via JS -->
+                        </tbody>
+                    </table>
+                    <p id="recordsLoading" class="text-center text-muted" style="margin-top: 1rem;">Loading...</p>
+                </div>
+            </div>
+
+            <!-- Add Record Modal -->
+            <!-- Add New Record Modal (Detailed) -->
+            <div id="addRecordModal" class="modal-overlay">
+                <div class="modal-content" style="max-width: 800px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 style="color: #4ade80;">Add New Land Record</h2>
+                        <button onclick="closeAddRecordModal()"
+                            style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1.5rem;">&times;</button>
+                    </div>
+
+                    <form id="addRecordForm" onsubmit="submitNewRecord(event)">
+
+                        <!-- 1. Land Location -->
+                        <h4
+                            style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem; color: #e2e8f0;">
+                            1. Land Location</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; color: #94a3b8;">Division</label>
+                                <select id="addRecordDivision" name="division_id" class="form-select"
+                                    onchange="loadAddRecordDistricts()" required>
+                                    <option value="">Select Division</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; color: #94a3b8;">District</label>
+                                <select id="addRecordDistrict" name="district_id" class="form-select"
+                                    onchange="loadAddRecordUpazilas()" required disabled>
+                                    <option value="">Select District</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; color: #94a3b8;">Upazila</label>
+                                <select id="addRecordUpazila" name="upazila_id" class="form-select" required disabled>
+                                    <option value="">Select Upazila</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; color: #94a3b8;">Mouza
+                                    (Specific)</label>
+                                <input type="text" name="mouza" class="form-input" placeholder="e.g. Mouza Name / JL No"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- 2. Owner NID (for verification) -->
+                        <h4
+                            style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem; color: #e2e8f0;">
+                            2. Owner Information</h4>
+                        <div style="margin-bottom: 1.5rem;">
+                            <input type="text" name="nid" class="form-input" placeholder="Owner NID (for verification)"
+                                required>
+                        </div>
+
+                        <!-- 3. Land Details -->
+                        <h4
+                            style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem; color: #e2e8f0;">
+                            3. Land Details</h4>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                            <input type="text" name="khatian" class="form-input" placeholder="Khatian No" required>
+                            <input type="text" name="dag" class="form-input" placeholder="Dag No" required>
+                            <input type="text" name="deed_no" class="form-input" placeholder="Dalil (Deed) No" required>
+                        </div>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+                            <input type="text" name="land_size" class="form-input" placeholder="Land Amount (Dec/Acre)"
+                                required>
+                            <input type="number" name="land_price" class="form-input" placeholder="Estimated Price">
+                            <input type="text" name="description" class="form-input"
+                                placeholder="Owner Type (Self/Inherited)" value="My Own Land">
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                            <button type="button" class="btn-hero status"
+                                onclick="closeAddRecordModal()">Cancel</button>
+                            <button type="submit" class="btn-hero new">Verify & Save Record</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- SECTION 4: LAND TAX (New) -->
+            <div id="tax-section" style="display: none; padding: 2rem;">
+                <h2 style="color: white; margin-bottom: 2rem;">Land Development Tax</h2>
+
+                <!-- Notice Board -->
+                <div class="card" style="margin-bottom: 2rem; border-left: 4px solid #facc15;">
+                    <h3 style="color: #facc15; font-size: 1.1rem; margin-bottom: 0.5rem;"><i
+                            class="fas fa-info-circle"></i>
+                        Note 2024-2025</h3>
+                    <p style="color: #cbd5e1; font-size: 0.9rem;">
+                        Residential: 10 BDT/dec, Commercial: 20 BDT/dec. Agricultural land up to 25 bighas (825 dec) is
+                        Tax
+                        Free.
+                    </p>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="card">
+                    <h3 style="color: #34d399; margin-bottom: 1.5rem;">Online Tax Payment Form</h3>
+                    <form id="taxForm" onsubmit="initiateTaxPayment(event)">
+                        <!-- Auto-fill from Records -->
+                        <div
+                            style="margin-bottom: 2rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">
+                            <label
+                                style="color: #fbbf24; margin-bottom: 0.5rem; display: block; font-weight: 500;">Select
+                                from My Records (Optional)</label>
+                            <select id="recordSelect" class="form-select" onchange="fillTaxFormFromRecord()">
+                                <option value="">-- Select Verified Land --</option>
+                            </select>
+                        </div>
+
+                        <!-- Personal Info -->
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                            <input type="text" name="nid" class="form-input" placeholder="NID Number" required>
+                            <input type="text" name="mobile" class="form-input" placeholder="Mobile Number" required>
+                        </div>
+
+                        <!-- Land Location (Reusing existing loader logic if possible, else manual inputs) -->
+                        <h4
+                            style="color: #94a3b8; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                            Land Location</h4>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                            <!-- We can reuse loadDivisions(), but keep IDs unique -->
+                            <select id="taxDivision" name="division_id" class="form-select"
+                                onchange="loadTaxDistricts()" required>
+                                <option value="">Select Division</option>
+                            </select>
+                            <select id="taxDistrict" name="district_id" class="form-select" onchange="loadTaxUpazilas()"
+                                required disabled>
+                                <option value="">Select District</option>
+                            </select>
+                            <select id="taxUpazila" name="upazila_id" class="form-select" required disabled>
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+
+                        <!-- Land Details & Tax Calc -->
+                        <h4
+                            style="color: #94a3b8; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                            Land Details & Tax</h4>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                            <input type="text" name="khatian_no" class="form-input" placeholder="Khatian No" required>
+                            <input type="text" name="dag_no" class="form-input" placeholder="Dag No" required>
+
+                            <select id="landType" name="land_type" class="form-select" onchange="calculateTax()"
+                                required>
+                                <option value="">Select Land Type</option>
+                                <option value="Residential">Residential</option>
+                                <option value="Commercial">Commercial</option>
+                                <option value="Agricultural">Agricultural</option>
+                            </select>
+
+                            <div style="position: relative;">
+                                <input type="number" id="landSize" name="land_size" class="form-input"
+                                    placeholder="Land Size (Decimal)" oninput="calculateTax()" step="0.01" required>
+                                <span
+                                    style="position: absolute; right: 10px; top: 10px; color: #94a3b8; font-size: 0.8rem;">decimals</span>
+                            </div>
+                        </div>
+
+                        <!-- Total Tax Display -->
+                        <div
+                            style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; text-align: center; margin-bottom: 2rem;">
+                            <span style="color: #94a3b8;">Estimated Tax Amount:</span>
+                            <h2 style="color: #facc15; margin: 0.5rem 0;" id="displayTax">0 BDT</h2>
+                            <input type="hidden" name="tax_amount" id="taxAmount" value="0">
+                        </div>
+
+                        <button type="submit" class="btn-land" style="width: 100%; font-size: 1.1rem;">
+                            <i class="fas fa-check-circle"></i> Pay Now via SSLCommerz
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Scripts for Tax Section -->
+            <script>
+                // Load Divisions for Tax Form (Reuse existing API but different IDs)
+                async function loadTaxDivisions() {
+                    const sel = document.getElementById('taxDivision');
+                    if (sel.options.length > 1) return; // Already loaded
+                    try {
+                        const res = await fetch('/api/departments/locations/divisions', { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+                        const data = await res.json();
+                        sel.innerHTML = '<option value="">Select Division</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                    } catch (e) { console.error(e); }
+                }
+
+                async function loadTaxDistricts() {
+                    const divId = document.getElementById('taxDivision').value;
+                    const sel = document.getElementById('taxDistrict');
+                    sel.innerHTML = '<option value="">Loading...</option>';
+                    sel.disabled = true;
+                    try {
+                        const res = await fetch(`/api/departments/locations/districts/${divId}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+                        const data = await res.json();
+                        sel.innerHTML = '<option value="">Select District</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                        sel.disabled = false;
+                    } catch (e) { console.error(e); }
+                }
+
+                async function loadTaxUpazilas() {
+                    const distId = document.getElementById('taxDistrict').value;
+                    const sel = document.getElementById('taxUpazila');
+                    sel.innerHTML = '<option value="">Loading...</option>';
+                    sel.disabled = true;
+                    try {
+                        const res = await fetch(`/api/departments/locations/upazilas/${distId}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } });
+                        const data = await res.json();
+                        sel.innerHTML = '<option value="">Select Upazila</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                        sel.disabled = false;
+                    } catch (e) { console.error(e); }
+                }
+
+                function calculateTax() {
+                    const type = document.getElementById('landType').value;
+                    const size = parseFloat(document.getElementById('landSize').value) || 0;
+                    let tax = 0;
+
+                    if (type === 'Residential') tax = size * 10;
+                    else if (type === 'Commercial') tax = size * 20;
+                    else if (type === 'Agricultural') {
+                        if (size > 825) tax = size * 2; // > 25 bighas (approx 825 dec)
+                        else tax = 0;
+                    }
+
+                    document.getElementById('displayTax').innerText = tax.toFixed(2) + ' BDT';
+                    document.getElementById('taxAmount').value = tax.toFixed(2);
+                }
+
+                async function initiateTaxPayment(e) {
+                    e.preventDefault();
+                    console.log('Initiating tax payment...');
+
+                    const form = document.getElementById('taxForm');
+                    const formData = new FormData(form);
+                    const payload = Object.fromEntries(formData.entries());
+
+                    // Add division/district/upazila IDs (selects have text as value, we need IDs)
+                    payload.division_id = document.getElementById('taxDivision').value;
+                    payload.district_id = document.getElementById('taxDistrict').value;
+                    payload.upazila_id = document.getElementById('taxUpazila').value;
+
+                    console.log('Payload:', payload);
+                    Swal.fire({ title: 'Initiating Payment...', didOpen: () => Swal.showLoading(), background: '#1e293b', color: '#fff' });
+
+                    try {
+                        const token = localStorage.getItem('token') ? localStorage.getItem('token').trim() : '';
+                        if (!token) throw new Error('No authentication token found. Please login again.');
+
+                        console.log('Sending request to /api/payment/land/tax/init');
+                        const res = await fetch('/api/payment/land/tax/init', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify(payload)
+                        });
+
+                        console.log('Response status:', res.status);
+
+                        // Check for non-JSON response (e.g. 404 HTML)
+                        const contentType = res.headers.get("content-type");
+                        if (!contentType || !contentType.includes("application/json")) {
+                            const text = await res.text();
+                            console.error('Non-JSON response:', text);
+                            throw new Error(`Server returned ${res.status} ${res.statusText}. Please RESTART your server (npm start).`);
+                        }
+
+                        const data = await res.json();
+                        console.log('Response data:', data);
+
+                        if (data.url) {
+                            window.location.href = data.url;
+                        } else {
+                            throw new Error(data.error || 'Payment Gateway URL missing');
+                        }
+                    } catch (error) {
+                        console.error('Payment Error:', error);
+                        Swal.fire({ icon: 'error', title: 'Payment Error', text: error.message, background: '#1e293b', color: '#fff' });
+                    }
+                }
+            </script>
+
+        </main>
+    </div>
+
+    <!-- Mutation Application Modal -->
+    <div id="mutationModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; overflow-y: auto;">
+        <div
+            style="background: #1e293b; color: white; padding: 2rem; border-radius: 12px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1); margin-top: 5vh;">
+            <h2 style="color: #4ade80; text-align: center; margin-bottom: 2rem;">New Mutation Application</h2>
+
+            <form id="mutationForm" onsubmit="submitMutation(event)">
+                <!-- Auto-fill from Records -->
+                <div style="margin-bottom: 2rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">
+                    <label style="color: #4ade80; margin-bottom: 0.5rem; display: block; font-weight: 500;">Select Land
+                        to Sell (from My Records)</label>
+                    <select id="mutationRecordSelect" class="form-select" onchange="fillMutationFormFromRecord()">
+                        <option value="">-- Select Land --</option>
+                    </select>
+                </div>
+
+                <!-- 1. Location -->
+                <h4 style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem;">1. Land
+                    Location</h4>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                    <div>
+                        <label class="text-sm text-gray-400">Division</label>
+                        <select id="formDivision" class="form-select" onchange="loadDistricts()" required>
+                            <option value="">Select Division</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400">District</label>
+                        <select id="formDistrict" class="form-select" onchange="loadUpazilas()" required disabled>
+                            <option value="">Select District</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm text-gray-400">Upazila</label>
+                        <select id="formUpazila" class="form-select" required disabled>
+                            <option value="">Select Upazila</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 2. Applicant Info -->
+                <h4 style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem;">2. Applicant
+                    / Current Owner Info</h4>
+                <div style="margin-bottom: 1.5rem;">
+                    <input type="text" id="appNid" class="form-input" placeholder="Applicant NID (Must be registered)"
+                        required>
+                </div>
+
+                <!-- 3. Land Info -->
+                <h4 style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem;">3. Land
+                    Details</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" id="khatian" class="form-input" placeholder="Khatian No" required>
+                    <input type="text" id="dag" class="form-input" placeholder="Dag No" required>
+                    <input type="text" id="deed" class="form-input" placeholder="Dalil (Deed) No" required>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" id="amount" class="form-input" placeholder="Land Amount (Dec/Acre)" required>
+                    <input type="number" id="price" class="form-input" placeholder="Estimated Price" required>
+                    <select id="ownType" class="form-select" required>
+                        <option value="Own">My Own Land</option>
+                        <option value="Other">Other / Inherited</option>
+                    </select>
+                </div>
+
+                <!-- 4. Buyer Info -->
+                <h4 style="border-bottom: 1px solid #334155; padding-bottom: 0.5rem; margin-bottom: 1rem;">4. Buyer
+                    Information</h4>
+                <div style="margin-bottom: 2rem;">
+                    <input type="text" id="buyerNid" class="form-input" placeholder="Buyer NID (Must be registered)"
+                        required>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn-hero status" onclick="closeMutationModal()">Cancel</button>
+                    <button type="submit" class="btn-hero new">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sanitize token to remove quotes/spaces that cause 'String did not match expected pattern' error
+        const token = localStorage.getItem('token') ? localStorage.getItem('token').replace(/['"]+/g, '').trim() : '';
+        if (!token) window.location.href = 'index.html';
+
+        // --- Navigation Logic ---
+        function switchTab(e, el, tabName) {
+            if (e) e.preventDefault();
+
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            el.classList.add('active');
+            ['overview', 'mutation', 'records', 'tax'].forEach(sec => {
+                const div = document.getElementById(sec + '-section');
+                if (div) div.style.display = 'none';
+            });
+            const target = document.getElementById(tabName + '-section');
+            if (target) target.style.display = 'block';
+
+            // Auto-load divisions when switching to Mutation tab if not already loaded
+            if (tabName === 'mutation') {
+                loadDivisions(true);
+            }
+            if (tabName === 'tax') {
+                if (typeof loadTaxDivisions === 'function') loadTaxDivisions();
+            }
+            if (tabName === 'records') {
+                loadMyRecords();
+            }
+        }
+
+        async function loadMyRecords() {
+            const list = document.getElementById('recordsList');
+            const loading = document.getElementById('recordsLoading');
+            list.innerHTML = '';
+            loading.style.display = 'block';
+
+            try {
+                const res = await fetch('/api/departments/land/records', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error('Failed to fetch records');
+                const data = await res.json();
+
+                if (data.length === 0) {
+                    loading.innerHTML = 'No land records found. Click "Add New Record" to add one.';
+                } else {
+                    loading.style.display = 'none';
+                    list.innerHTML = data.map(item => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 1rem; color: #a78bfa;">${item.khatian_no}</td>
+                            <td style="padding: 1rem;">${item.dag_no}</td>
+                            <td style="padding: 1rem;">${item.mouza || '-'}</td>
+                            <td style="padding: 1rem;">${item.land_size}</td>
+                            <td style="padding: 1rem;">
+                                <span style="background: ${item.status === 'Approved' ? 'rgba(52, 211, 153, 0.2)' : 'rgba(251, 191, 36, 0.2)'}; color: ${item.status === 'Approved' ? '#34d399' : '#fbbf24'}; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                    ${item.status || 'Pending'}
+                                </span>
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error(error);
+                loading.innerHTML = 'Error loading records.';
+            }
+        }
+
+        function openAddRecordModal() {
+            console.log('Opening Add Record Modal...');
+            document.getElementById('addRecordModal').style.display = 'flex';
+            // Use the shared, working function from Mutation Logic
+            setTimeout(() => {
+                loadAddRecordDivisions();
+            }, 100);
+        }
+
+        function closeAddRecordModal() {
+            document.getElementById('addRecordModal').style.display = 'none';
+        }
+
+        // Add Record - Location Handling (Similar to Mutation but separate IDs)
+        async function loadAddRecordDivisions() {
+            console.log('Loading Add Record Divisions...');
+            const sel = document.getElementById('addRecordDivision');
+            if (!sel) {
+                console.error('Dropdown #addRecordDivision not found');
+                return;
+            }
+
+            // Visual feedback
+            sel.innerHTML = '<option>Loading...</option>';
+            // sel.disabled = true; // Don't disable to allow inspection
+
+            try {
+                // Add timestamp to prevent cache
+                const res = await fetch('/api/departments/locations/divisions?t=' + Date.now(), {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+
+                const data = await res.json();
+                console.log('Divisions loaded:', data.length);
+
+                if (data.length === 0) {
+                    sel.innerHTML = '<option value="">No Divisions Found</option>';
+                } else {
+                    sel.innerHTML = '<option value="">Select Division</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                }
+                sel.disabled = false;
+
+            } catch (e) {
+                console.error('Error loading divisions:', e);
+                Swal.fire({ icon: 'error', title: 'Load Failed', text: 'Connection error: ' + e.message });
+            }
+        }
+
+        async function loadAddRecordDistricts() {
+            const divId = document.getElementById('addRecordDivision').value;
+            if (!divId) return;
+            try {
+                const res = await fetch(`/api/departments/locations/districts/${divId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                const data = await res.json();
+
+                const sel = document.getElementById('addRecordDistrict');
+                sel.innerHTML = '<option value="">Select District</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                sel.disabled = false;
+                updateHiddenNames();
+            } catch (e) {
+                console.error(e);
+                Swal.fire({ icon: 'error', title: 'Load Failed', text: 'Could not load districts.' });
+            }
+        }
+
+        async function loadAddRecordUpazilas() {
+            const distId = document.getElementById('addRecordDistrict').value;
+            if (!distId) return;
+            try {
+                const res = await fetch(`/api/departments/locations/upazilas/${distId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                const data = await res.json();
+
+                const sel = document.getElementById('addRecordUpazila');
+                sel.innerHTML = '<option value="">Select Upazila</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                sel.disabled = false;
+                updateHiddenNames();
+            } catch (e) {
+                console.error(e);
+                Swal.fire({ icon: 'error', title: 'Load Failed', text: 'Could not load upazilas.' });
+            }
+        }
+
+        function updateHiddenNames() {
+            // No-op: hidden name fields removed (3NF)
+        }
+
+        async function submitNewRecord(e) {
+            e.preventDefault();
+            // Ensure hidden names are updated
+            updateHiddenNames();
+
+            const form = document.getElementById('addRecordForm');
+            const formData = new FormData(form);
+            const payload = Object.fromEntries(formData.entries());
+
+            // Show loading
+            Swal.fire({
+                title: 'Verifying...',
+                text: 'Checking official records...',
+                didOpen: () => Swal.showLoading(),
+                background: '#1e293b',
+                color: '#fff'
+            });
+
+            try {
+                const res = await fetch('/api/departments/land/records', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Verified & Saved',
+                        text: `Record added successfully! Status: ${data.status}`,
+                        background: '#1e293b',
+                        color: '#fff',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    closeAddRecordModal();
+                    form.reset();
+                    loadMyRecords(); // Refresh list
+                } else {
+                    throw new Error(data.error || 'Failed to save');
+                }
+            } catch (error) {
+                // Parse potentially JSON error from SQL logs if printed to response
+                let msg = error.message;
+                try {
+                    // If server sent JSON object as error message string? No, standard fetch error is text.
+                } catch (e) { }
+                Swal.fire({ icon: 'error', title: 'Verification Failed', text: msg, background: '#1e293b', color: '#fff' });
+            }
+        }
+
+        // Global storage for records
+        window.myLandRecords = [];
+
+        async function loadRecordsToMutation() {
+            const select = document.getElementById('mutationRecordSelect');
+            try {
+                const res = await fetch('/api/departments/land/records', { headers: { 'Authorization': `Bearer ${token}` } });
+                const data = await res.json();
+
+                // Store all records
+                window.myLandRecords = data;
+
+                // Filter for Approved only
+                const validRecords = data.filter(r => r.status === 'Approved');
+                const validIndices = data.map((r, i) => ({ ...r, originalIndex: i })).filter(r => r.status === 'Approved');
+
+                if (validRecords.length === 0) {
+                    select.innerHTML = '<option value="">(No Approved Land Available - Add & Verify first)</option>';
+                } else {
+                    select.innerHTML = '<option value="">-- Select Approved Land to Sell --</option>' +
+                        validIndices.map(r => `
+                             <option value='${r.originalIndex}'>
+                                 Khatian: ${r.khatian_no} | Dag: ${r.dag_no} | Size: ${r.land_size}
+                             </option>
+                         `).join('');
+                }
+            } catch (e) { console.error('Error loading mutation records', e); }
+        }
+
+        function fillMutationFormFromRecord() {
+            const select = document.getElementById('mutationRecordSelect');
+            const idx = select.value;
+            if (idx === "") return;
+
+            const r = window.myLandRecords[idx];
+            if (!r) return;
+
+            // Helper to set value if element exists
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+
+            // 1. Locations — set by division_id/district_id/upazila_id
+            if (r.division_id) {
+                const divSel = document.getElementById('formDivision');
+                divSel.value = r.division_id;
+                divSel.dispatchEvent(new Event('change'));
+                setTimeout(() => {
+                    if (r.district_id) {
+                        document.getElementById('formDistrict').value = r.district_id;
+                        document.getElementById('formDistrict').dispatchEvent(new Event('change'));
+                        setTimeout(() => {
+                            if (r.upazila_id) document.getElementById('formUpazila').value = r.upazila_id;
+                        }, 500);
+                    }
+                }, 500);
+            }
+
+            // 2. NID (auto-fill from logged-in user's NID if available)
+            setVal('appNid', '');
+
+            // 3. Land Details
+            setVal('khatian', r.khatian_no);
+            setVal('dag', r.dag_no);
+            setVal('deed', r.deed_no);
+            setVal('amount', r.land_size);
+            setVal('price', r.land_price);
+
+            // Set Owner Type based on description or default
+            const ownType = document.getElementById('ownType');
+            if (ownType) ownType.value = (r.description && r.description.includes('Inherited')) ? 'Other' : 'Own';
+
+            // Make fields read-only to enforce security
+            document.getElementById('khatian').readOnly = true;
+            document.getElementById('dag').readOnly = true;
+            document.getElementById('khatian').style.backgroundColor = '#334155';
+            document.getElementById('dag').style.backgroundColor = '#334155';
+        }
+
+        function triggerMutationTab() {
+            const overviewLink = document.querySelector('.nav-links a[onclick*="mutation"]');
+            if (overviewLink) overviewLink.click();
+            document.getElementById('mutationModal').style.display = 'flex';
+            loadRecordsToMutation(); // Load records when opening modal
+        }
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+
+        // --- Tax Logic ---
+        // Load verified records into Tax Dropdown
+        async function loadRecordsToTax() {
+            const select = document.getElementById('recordSelect');
+            try {
+                const res = await fetch('/api/departments/land/records', { headers: { 'Authorization': `Bearer ${token}` } });
+                const data = await res.json();
+
+                // Only show Approved records
+                const validRecords = data.filter(r => r.status === 'Approved');
+
+                select.innerHTML = '<option value="">-- Select Verified Land --</option>' +
+                    validRecords.map((r, index) => `
+                        <option value='${JSON.stringify(r)}'>
+                            Khatian: ${r.khatian_no} | Dag: ${r.dag_no} | Size: ${r.land_size}
+                        </option>
+                    `).join('');
+            } catch (e) { console.error('Error loading tax records', e); }
+        }
+
+        function fillTaxFormFromRecord() {
+            const select = document.getElementById('recordSelect');
+            const val = select.value;
+            if (!val) return;
+
+            const r = JSON.parse(val);
+
+            // Auto-fill form fields
+            document.querySelector('[name="khatian_no"]').value = r.khatian_no;
+            document.querySelector('[name="dag_no"]').value = r.dag_no;
+            document.getElementById('landSize').value = r.land_size;
+
+            // Trigger calculation
+            calculateTax();
+        }
+
+        async function loadTaxDivisions() {
+            loadRecordsToTax(); // Also load records when opening tax tab
+            try {
+                const res = await fetch('/api/departments/locations/divisions', { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                const data = await res.json();
+
+                const sel = document.getElementById('taxDivision');
+                if (sel) sel.innerHTML = '<option value="">Select Division</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // --- Overview Logic ---
+        async function loadLandData() {
+            const list = document.getElementById('landApplications');
+            try {
+                const res = await fetch('/api/departments/land/applications', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                console.log('Land Applications:', data); // Debugging
+
+                if (data.length === 0) list.innerHTML = '<p class="text-muted">No recent applications.</p>';
+                else list.innerHTML = data.map(item => `
+                    <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 0; font-size: 0.9rem;">
+                        <div style="display:flex; justify-content:space-between; color: white;">
+                            <span>Mutation (K: ${item.khatian_no})</span>
+                            <span style="color: ${item.status === 'Approved' ? '#34d399' : '#fbbf24'}">${item.status}</span>
+                        </div>
+                    </div>`).join('');
+            } catch (e) {
+                console.error('Error loading land data:', e);
+                list.innerHTML = `<p class="text-muted">Failed to load. ${e.message}</p>`;
+            }
+        }
+        loadLandData();
+
+        async function searchKhatian() {
+            const khatianNo = document.getElementById('khatianInput').value;
+            if (!khatianNo) return;
+            document.getElementById('searchResults').style.display = 'block';
+            document.getElementById('searchContent').innerHTML = 'Searching...';
+            setTimeout(() => {
+                document.getElementById('searchContent').innerHTML = 'No record found.';
+            }, 800);
+        }
+
+        // --- Mutation Logic ---
+        function scrollToSearch() {
+            document.getElementById('statusSearch').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function checkStatus() {
+            const trackNum = document.getElementById('statusAppId').value;
+            if (!trackNum) {
+                return Swal.fire({ icon: 'warning', title: 'Input Required', text: 'Please enter a Tracking Number.', background: '#1e293b', color: '#fff' });
+            }
+
+            Swal.fire({ title: 'Checking...', didOpen: () => Swal.showLoading(), background: '#1e293b', color: '#fff' });
+
+            try {
+                const res = await fetch(`/api/departments/land/mutation/status/${trackNum}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                // Check for JSON response
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    throw new Error("Server returned non-JSON response. Please RESTART your server (npm start).");
+                }
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    let statusColor = '#fbbf24'; // Pending
+                    let iconType = 'info';
+
+                    if (data.status === 'Approved') {
+                        statusColor = '#34d399';
+                        iconType = 'success';
+                    }
+                    if (data.status === 'Rejected') {
+                        statusColor = '#f87171';
+                        iconType = 'error';
+                    }
+
+                    Swal.fire({
+                        icon: iconType,
+                        title: `Status: ${data.status}`,
+                        html: `
+                            <div style="text-align: left; font-size: 0.95rem;">
+                                <p><strong>Applicant:</strong> ${data.applicant_name}</p>
+                                <p><strong>Land Amount:</strong> ${data.land_amount}</p>
+                                <p><strong>Tracking No:</strong> <span style="color:${statusColor}">${data.tracking_number}</span></p>
+                                <p><strong>Submitted:</strong> ${new Date(data.created_at).toLocaleDateString()}</p>
+                            </div>
+                        `,
+                        background: '#1e293b',
+                        color: '#fff'
+                    });
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Not Found', text: data.error, background: '#1e293b', color: '#fff' });
+                }
+            } catch (error) {
+                console.error(error);
+                Swal.fire({ icon: 'error', title: 'Connection Error', text: error.message, background: '#1e293b', color: '#fff' });
+            }
+        }
+
+        // --- Advanced Form Logic ---
+        function applyMutationPopup() {
+            document.getElementById('mutationModal').style.display = 'flex';
+            loadDivisions();
+            loadRecordsToMutation(); // Fix: Load records for dropdown
+        }
+
+        function closeMutationModal() {
+            document.getElementById('mutationModal').style.display = 'none';
+        }
+
+        function handleAuthError() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Session Expired',
+                text: 'Please log in again.',
+                background: '#1e293b',
+                color: '#fff',
+                confirmButtonText: 'Go to Login'
+            }).then(() => {
+                localStorage.removeItem('token');
+                window.location.href = 'index.html';
+            });
+        }
+
+        // Modified to populate both dropdowns
+        async function loadDivisions() {
+            try {
+                const res = await fetch('/api/departments/locations/divisions', { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                const data = await res.json();
+
+                // Form Dropdown
+                const sel = document.getElementById('formDivision');
+                if (sel) sel.innerHTML = '<option value="">Select Division</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+
+                // Status Search Dropdown
+                const statusSel = document.getElementById('statusDivision');
+                if (statusSel) statusSel.innerHTML = '<option value="">Select Division</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+
+                // Add Record Form Dropdown (New)
+                const addSel = document.getElementById('addRecordDivision');
+                if (addSel) addSel.innerHTML = '<option value="">Select Division</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+
+            } catch (error) {
+                console.error(error);
+                // Only alert if we're opening the modal, otherwise silent fail for background loading
+                // Swal.fire({ icon: 'error', title: 'Load Failed', text: 'Could not load divisions: ' + error.message });
+            }
+        }
+
+        async function loadDistricts() {
+            try {
+                const divId = document.getElementById('formDivision').value;
+                if (!divId) return;
+                const res = await fetch(`/api/departments/locations/districts/${divId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                const data = await res.json();
+                const sel = document.getElementById('formDistrict');
+                sel.innerHTML = '<option value="">Select District</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                sel.disabled = false;
+            } catch (error) {
+                console.error(error);
+                Swal.fire({ icon: 'error', title: 'Load Failed', text: 'Could not load districts: ' + error.message });
+            }
+        }
+
+        async function loadUpazilas() {
+            try {
+                const distId = document.getElementById('formDistrict').value;
+                if (!distId) return;
+                const res = await fetch(`/api/departments/locations/upazilas/${distId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.status === 401) return handleAuthError();
+                if (!res.ok) throw new Error(`Server Error: ${res.status}`);
+                const data = await res.json();
+                const sel = document.getElementById('formUpazila');
+                sel.innerHTML = '<option value="">Select Upazila</option>' + data.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+                sel.disabled = false;
+            } catch (error) {
+                console.error(error);
+                Swal.fire({ icon: 'error', title: 'Load Failed', text: 'Could not load upazilas: ' + error.message });
+            }
+        }
+
+        async function submitMutation(e) {
+            e.preventDefault();
+
+            const payload = {
+                divId: document.getElementById('formDivision').value,
+                distId: document.getElementById('formDistrict').value,
+                upaId: document.getElementById('formUpazila').value,
+                appNid: document.getElementById('appNid').value,
+                khatian: document.getElementById('khatian').value,
+                dag: document.getElementById('dag').value,
+                amount: document.getElementById('amount').value,
+                price: document.getElementById('price').value,
+                deed: document.getElementById('deed').value,
+                ownType: document.getElementById('ownType').value,
+                buyerNid: document.getElementById('buyerNid').value
+            };
+
+            Swal.fire({ title: 'Submitting...', didOpen: () => Swal.showLoading(), background: '#1e293b', color: '#fff' });
+
+            try {
+                const res = await fetch('/api/departments/land/mutation_v2', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    closeMutationModal();
+                    document.getElementById('mutationForm').reset();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Application Submitted!',
+                        html: `Your Tracking No: <b style="color: #4ade80; font-size: 1.2rem;">${data.trackingNumber}</b><br>Please save this for future reference.`,
+                        background: '#1e293b',
+                        color: '#fff'
+                    });
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Error', text: data.error, background: '#1e293b', color: '#fff' });
+                }
+            } catch (err) {
+                Swal.fire({ icon: 'error', title: 'Network Error', background: '#1e293b', color: '#fff' });
+            }
+        }
+    </script>
+    <script src="js/sidebar.js"></script>
+</body>
+
+</html>

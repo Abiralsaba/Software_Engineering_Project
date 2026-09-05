@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ই-পাসপোর্ট | Department of Immigration & Passports | Govt of Bangladesh</title>
+    <meta name="description" content="Bangladesh e-Passport Online Application, Tracking, Fee Calculator, and Passport Office Information">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/passport.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #1a5276, #2980b9);">
+                    <i class="fas fa-passport"></i>
+                </div>
+                <h3 style="color: #85c1e9;">ই-পাসপোর্ট সেবা</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Department of Immigration & Passports</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" onclick="showSection('overview')" class="active"><i class="fas fa-home"></i> Overview</a>
+                <a href="#" onclick="showSection('apply')"><i class="fas fa-file-circle-plus"></i> New Application</a>
+                <a href="#" onclick="showSection('track')"><i class="fas fa-magnifying-glass-location"></i> Track Application</a>
+                <a href="#" onclick="showSection('applications')"><i class="fas fa-folder-open"></i> My Applications</a>
+                <a href="#" onclick="showSection('fees')"><i class="fas fa-calculator"></i> Fee Calculator</a>
+                <a href="#" onclick="showSection('offices')"><i class="fas fa-building-columns"></i> Passport Offices</a>
+                <a href="#" onclick="showSection('guidelines')"><i class="fas fa-book-open"></i> Guidelines</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ==================== OVERVIEW ==================== -->
+            <div id="overview" class="content-section">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-passport"></i> e-Passport Services</h1>
+                    <p class="bangla-text">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — ইমিগ্রেশন ও পাসপোর্ট অধিদপ্তর</p>
+                    <p class="subtitle">Department of Immigration & Passports (DIP)</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="pp-stats-grid" id="overviewStats">
+                    <div class="pp-stat-card">
+                        <span class="stat-icon">📋</span>
+                        <span class="stat-value" id="stat-total">0</span>
+                        <span class="stat-label">Total Applications</span>
+                    </div>
+                    <div class="pp-stat-card">
+                        <span class="stat-icon">⏳</span>
+                        <span class="stat-value" id="stat-active">0</span>
+                        <span class="stat-label">Active / Processing</span>
+                    </div>
+                    <div class="pp-stat-card">
+                        <span class="stat-icon">✅</span>
+                        <span class="stat-value" id="stat-delivered">0</span>
+                        <span class="stat-label">Delivered</span>
+                    </div>
+                    <div class="pp-stat-card">
+                        <span class="stat-icon">🔔</span>
+                        <span class="stat-value" id="stat-pending">0</span>
+                        <span class="stat-label">Pending Review</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="pp-action-grid">
+                    <div class="pp-action-card" onclick="showSection('apply')">
+                        <span class="action-icon">🛂</span>
+                        <h4>Apply for e-Passport</h4>
+                        <p>Submit new passport application with all required documents</p>
+                        <button class="btn-pp">Apply Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                    <div class="pp-action-card" onclick="showSection('track')">
+                        <span class="action-icon">🔍</span>
+                        <h4>Track Application</h4>
+                        <p>Check your application status using application number</p>
+                        <button class="btn-pp-outline">Track Status <i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="pp-action-card" onclick="showSection('fees')">
+                        <span class="action-icon">💰</span>
+                        <h4>Fee Calculator</h4>
+                        <p>Calculate passport fees based on type, pages & delivery</p>
+                        <button class="btn-pp-outline">Calculate <i class="fas fa-calculator"></i></button>
+                    </div>
+                    <div class="pp-action-card" onclick="showSection('offices')">
+                        <span class="action-icon">🏛️</span>
+                        <h4>Passport Offices</h4>
+                        <p>Find nearest Regional Passport Office (RPO) information</p>
+                        <button class="btn-pp-outline">View Offices <i class="fas fa-location-dot"></i></button>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="pp-card">
+                    <h3><i class="fas fa-clock-rotate-left"></i> Recent Applications</h3>
+                    <div id="recentApplicationsContainer">
+                        <div class="pp-empty-state">
+                            <i class="fas fa-passport"></i>
+                            <p>No applications yet. Start by applying for an e-Passport!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== NEW APPLICATION (Multi-Step Form) ==================== -->
+            <div id="apply" class="content-section" style="display:none;">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-file-circle-plus"></i> New Passport Application</h1>
+                    <p class="bangla-text">ই-পাসপোর্ট আবেদন ফরম</p>
+                    <p class="subtitle">Complete all steps carefully. Fields marked with <span style="color:#f87171;">*</span> are required.</p>
+                </div>
+
+                <!-- Step Indicator -->
+                <div class="step-indicator" id="stepIndicator">
+                    <div class="step-item">
+                        <div class="step-circle active" onclick="goToStep(1)">1<span class="step-label">Service</span></div>
+                    </div>
+                    <div class="step-line" id="stepLine1"></div>
+                    <div class="step-item">
+                        <div class="step-circle" onclick="goToStep(2)">2<span class="step-label">Personal</span></div>
+                    </div>
+                    <div class="step-line" id="stepLine2"></div>
+                    <div class="step-item">
+                        <div class="step-circle" onclick="goToStep(3)">3<span class="step-label">Address</span></div>
+                    </div>
+                    <div class="step-line" id="stepLine3"></div>
+                    <div class="step-item">
+                        <div class="step-circle" onclick="goToStep(4)">4<span class="step-label">Contact</span></div>
+                    </div>
+                    <div class="step-line" id="stepLine4"></div>
+                    <div class="step-item">
+                        <div class="step-circle" onclick="goToStep(5)">5<span class="step-label">Review</span></div>
+                    </div>
+                </div>
+
+                <form id="passportApplicationForm">
+                    <!-- STEP 1: Service Selection -->
+                    <div class="form-step active" id="step1">
+                        <div class="pp-card">
+                            <h3><i class="fas fa-cogs"></i> Step 1: Service Selection</h3>
+                            <p class="step-description">Choose the type of passport service you need.</p>
+
+                            <label style="color: var(--pp-accent); margin-bottom: 1rem; display: block;">Application Type <span class="required">*</span></label>
+                            <div class="service-type-grid" id="serviceTypeGrid">
+                                <label class="service-type-option selected">
+                                    <input type="radio" name="service_type" value="New" checked>
+                                    <span class="service-icon">🆕</span>
+                                    <span class="service-name">New Passport</span>
+                                    <span class="service-desc">First-time e-Passport</span>
+                                </label>
+                                <label class="service-type-option">
+                                    <input type="radio" name="service_type" value="Renewal">
+                                    <span class="service-icon">🔄</span>
+                                    <span class="service-name">Renewal</span>
+                                    <span class="service-desc">Renew expired passport</span>
+                                </label>
+                                <label class="service-type-option">
+                                    <input type="radio" name="service_type" value="Lost Replacement">
+                                    <span class="service-icon">🔎</span>
+                                    <span class="service-name">Lost Passport</span>
+                                    <span class="service-desc">Replace lost/stolen</span>
+                                </label>
+                                <label class="service-type-option">
+                                    <input type="radio" name="service_type" value="Damaged Replacement">
+                                    <span class="service-icon">📄</span>
+                                    <span class="service-name">Damaged</span>
+                                    <span class="service-desc">Replace damaged passport</span>
+                                </label>
+                                <label class="service-type-option">
+                                    <input type="radio" name="service_type" value="Correction">
+                                    <span class="service-icon">✏️</span>
+                                    <span class="service-name">Correction</span>
+                                    <span class="service-desc">Amend passport info</span>
+                                </label>
+                                <label class="service-type-option">
+                                    <input type="radio" name="service_type" value="Duplicate">
+                                    <span class="service-icon">📑</span>
+                                    <span class="service-name">Duplicate</span>
+                                    <span class="service-desc">Pages exhausted</span>
+                                </label>
+                            </div>
+
+                            <div class="pp-form" style="margin-top: 2rem;">
+                                <div class="form-group">
+                                    <label>Passport Type <span class="required">*</span></label>
+                                    <select id="passportType" name="passport_type" onchange="calculateFee()">
+                                        <option value="Ordinary">Ordinary (সাধারণ) - Green Cover</option>
+                                        <option value="Official">Official (সরকারি) - Blue Cover</option>
+                                        <option value="Diplomatic">Diplomatic (কূটনৈতিক) - Red Cover</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Number of Pages <span class="required">*</span></label>
+                                    <select id="pageCount" name="page_count" onchange="calculateFee()">
+                                        <option value="48">48 Pages (Standard)</option>
+                                        <option value="64">64 Pages (Frequent Travelers)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Validity Period <span class="required">*</span></label>
+                                    <select id="validityYears" name="validity_years" onchange="calculateFee()">
+                                        <option value="5">5 Years</option>
+                                        <option value="10">10 Years</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Delivery Type <span class="required">*</span></label>
+                                    <select id="deliveryType" name="delivery_type" onchange="calculateFee()">
+                                        <option value="Regular">Regular (15-21 Working Days)</option>
+                                        <option value="Express">Express (7 Working Days)</option>
+                                        <option value="Super Express">Super Express (2-3 Working Days)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Preferred Passport Office <span class="required">*</span></label>
+                                    <select id="preferredOffice" name="preferred_office">
+                                        <option value="">Loading offices...</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Fee Display -->
+                            <div class="fee-display" id="feeDisplay">
+                                <div class="fee-row">
+                                    <span>Application Fee</span>
+                                    <span class="fee-amount" id="feeBase">৳ 0.00</span>
+                                </div>
+                                <div class="fee-row" id="penaltyRow" style="display: none;">
+                                    <span>Penalty (Lost/Damaged)</span>
+                                    <span class="fee-amount" id="feePenalty">৳ 5,000.00</span>
+                                </div>
+                                <div class="fee-row total">
+                                    <span>Total Fee</span>
+                                    <span class="fee-amount" id="feeTotal">৳ 0.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <div></div>
+                            <button type="button" class="btn-pp" onclick="nextStep(2)">
+                                Next: Personal Info <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Personal Information -->
+                    <div class="form-step" id="step2">
+                        <div class="pp-card">
+                            <h3><i class="fas fa-user"></i> Step 2: Personal Information</h3>
+                            <p class="step-description">Enter your personal details exactly as they appear on your NID/Birth Certificate.</p>
+
+                            <div class="pp-form">
+                                <div class="form-group">
+                                    <label>Full Name (English) <span class="required">*</span></label>
+                                    <input type="text" id="fullNameEn" name="full_name_en" placeholder="FULL NAME IN BLOCK LETTERS" required style="text-transform: uppercase;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Full Name (Bangla) <span class="bn">নাম (বাংলায়)</span></label>
+                                    <input type="text" id="fullNameBn" name="full_name_bn" placeholder="সম্পূর্ণ নাম বাংলায়">
+                                </div>
+                                <div class="form-group">
+                                    <label>Father's Name (English) <span class="required">*</span></label>
+                                    <input type="text" id="fatherNameEn" name="father_name_en" placeholder="Father's full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Father's Name (Bangla) <span class="bn">পিতার নাম</span></label>
+                                    <input type="text" id="fatherNameBn" name="father_name_bn" placeholder="পিতার নাম বাংলায়">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mother's Name (English) <span class="required">*</span></label>
+                                    <input type="text" id="motherNameEn" name="mother_name_en" placeholder="Mother's full name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mother's Name (Bangla) <span class="bn">মাতার নাম</span></label>
+                                    <input type="text" id="motherNameBn" name="mother_name_bn" placeholder="মাতার নাম বাংলায়">
+                                </div>
+                                <div class="form-group">
+                                    <label>Spouse Name (English)</label>
+                                    <input type="text" id="spouseNameEn" name="spouse_name_en" placeholder="If married">
+                                </div>
+                                <div class="form-group">
+                                    <label>Spouse Name (Bangla) <span class="bn">স্বামী/স্ত্রীর নাম</span></label>
+                                    <input type="text" id="spouseNameBn" name="spouse_name_bn" placeholder="স্বামী/স্ত্রীর নাম">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birth <span class="required">*</span> <span class="bn">জন্ম তারিখ</span></label>
+                                    <input type="date" id="dateOfBirth" name="date_of_birth" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender <span class="required">*</span> <span class="bn">লিঙ্গ</span></label>
+                                    <select id="gender" name="gender" required>
+                                        <option value="">Select</option>
+                                        <option value="Male">Male (পুরুষ)</option>
+                                        <option value="Female">Female (মহিলা)</option>
+                                        <option value="Other">Other (অন্যান্য)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Religion <span class="bn">ধর্ম</span></label>
+                                    <select id="religion" name="religion">
+                                        <option value="Islam">Islam (ইসলাম)</option>
+                                        <option value="Hinduism">Hinduism (হিন্দু)</option>
+                                        <option value="Buddhism">Buddhism (বৌদ্ধ)</option>
+                                        <option value="Christianity">Christianity (খ্রিস্টান)</option>
+                                        <option value="Other">Other (অন্যান্য)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Marital Status <span class="required">*</span> <span class="bn">বৈবাহিক অবস্থা</span></label>
+                                    <select id="maritalStatus" name="marital_status" required>
+                                        <option value="Single">Single (অবিবাহিত)</option>
+                                        <option value="Married">Married (বিবাহিত)</option>
+                                        <option value="Divorced">Divorced (তালাকপ্রাপ্ত)</option>
+                                        <option value="Widowed">Widowed (বিধবা/বিপত্নীক)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>National ID Number <span class="bn">জাতীয় পরিচয়পত্র নম্বর</span></label>
+                                    <input type="text" id="nidNumber" name="nid_number" placeholder="10 or 17 digit NID" maxlength="17">
+                                </div>
+                                <div class="form-group">
+                                    <label>Birth Certificate No. <span class="bn">জন্ম নিবন্ধন নম্বর</span></label>
+                                    <input type="text" id="birthCertNo" name="birth_certificate_no" placeholder="17-digit number" maxlength="17">
+                                </div>
+                                <div class="form-group">
+                                    <label>Blood Group <span class="bn">রক্তের গ্রুপ</span></label>
+                                    <select id="bloodGroup" name="blood_group">
+                                        <option value="">Select</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Profession <span class="bn">পেশা</span></label>
+                                    <input type="text" id="profession" name="profession" placeholder="e.g. Student, Engineer, Doctor">
+                                </div>
+                                <div class="form-group">
+                                    <label>Education <span class="bn">শিক্ষাগত যোগ্যতা</span></label>
+                                    <select id="education" name="education">
+                                        <option value="No Formal Education">No Formal Education</option>
+                                        <option value="PSC">PSC</option>
+                                        <option value="JSC">JSC</option>
+                                        <option value="SSC" selected>SSC</option>
+                                        <option value="HSC">HSC</option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Graduate">Graduate</option>
+                                        <option value="Post Graduate">Post Graduate</option>
+                                        <option value="PhD">PhD</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>TIN Number (Optional)</label>
+                                    <input type="text" id="tinNumber" name="tin_number" placeholder="Tax Identification Number" maxlength="12">
+                                </div>
+                                <div class="form-group">
+                                    <label>Height</label>
+                                    <div style="display: flex; gap: 1rem;">
+                                        <input type="number" id="heightFt" name="height_ft" placeholder="Feet" min="1" max="8" style="width: 50%;">
+                                        <input type="number" id="heightIn" name="height_in" placeholder="Inches" min="0" max="11" style="width: 50%;">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Distinguishing Mark <span class="bn">সনাক্তকরণ চিহ্ন</span></label>
+                                    <input type="text" id="distinguishingMark" name="distinguishing_mark" placeholder="e.g. Mole on left cheek">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="btn-pp-outline" onclick="prevStep(1)">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn-pp" onclick="nextStep(3)">
+                                Next: Address <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Address -->
+                    <div class="form-step" id="step3">
+                        <div class="pp-card">
+                            <h3><i class="fas fa-map-location-dot"></i> Step 3: Address Information</h3>
+                            <p class="step-description">Provide your present and permanent address details.</p>
+
+                            <!-- Present Address -->
+                            <h4 style="color: var(--pp-gold-light); margin-bottom: 1rem; font-size: 1.1rem;">
+                                <i class="fas fa-location-dot"></i> Present Address <span class="bn" style="font-weight: 400;">(বর্তমান ঠিকানা)</span>
+                            </h4>
+                            <div class="pp-form" style="margin-bottom: 2rem;">
+                                <div class="form-group">
+                                    <label>Division <span class="required">*</span> <span class="bn">বিভাগ</span></label>
+                                    <select id="presentDivision" name="present_division" onchange="loadDistricts('present')" required>
+                                        <option value="">Select Division</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>District <span class="required">*</span> <span class="bn">জেলা</span></label>
+                                    <select id="presentDistrict" name="present_district" onchange="loadUpazilas('present')" required>
+                                        <option value="">Select District</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Upazila/Thana <span class="bn">উপজেলা/থানা</span></label>
+                                    <select id="presentUpazila" name="present_upazila">
+                                        <option value="">Select Upazila</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Post Office <span class="bn">ডাকঘর</span></label>
+                                    <input type="text" id="presentPostOffice" name="present_post_office" placeholder="Post Office name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Postal Code <span class="bn">পোস্ট কোড</span></label>
+                                    <input type="text" id="presentPostalCode" name="present_postal_code" placeholder="e.g. 1207" maxlength="10">
+                                </div>
+                                <div class="form-group">
+                                    <label>Village/Road/House <span class="bn">গ্রাম/রাস্তা/বাড়ি</span></label>
+                                    <input type="text" id="presentVillageRoad" name="present_village_road" placeholder="Village, Road No., House No.">
+                                </div>
+                                <div class="form-group">
+                                    <label>Care Of</label>
+                                    <input type="text" id="presentCareOf" name="present_care_of" placeholder="C/O (Optional)">
+                                </div>
+                            </div>
+
+                            <!-- Permanent Address -->
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                                <h4 style="color: var(--pp-gold-light); font-size: 1.1rem; margin: 0;">
+                                    <i class="fas fa-house"></i> Permanent Address <span class="bn" style="font-weight: 400;">(স্থায়ী ঠিকানা)</span>
+                                </h4>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; color: #e2e8f0; cursor: pointer; font-size: 0.9rem;">
+                                    <input type="checkbox" id="sameAsPresent" onchange="handleSameAddress()" style="width: auto; accent-color: var(--pp-secondary);">
+                                    Same as Present Address
+                                </label>
+                            </div>
+                            <div class="pp-form" id="permanentAddressFields">
+                                <div class="form-group">
+                                    <label>Division <span class="bn">বিভাগ</span></label>
+                                    <select id="permanentDivision" name="permanent_division" onchange="loadDistricts('permanent')">
+                                        <option value="">Select Division</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>District <span class="bn">জেলা</span></label>
+                                    <select id="permanentDistrict" name="permanent_district" onchange="loadUpazilas('permanent')">
+                                        <option value="">Select District</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Upazila/Thana <span class="bn">উপজেলা/থানা</span></label>
+                                    <select id="permanentUpazila" name="permanent_upazila">
+                                        <option value="">Select Upazila</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Post Office <span class="bn">ডাকঘর</span></label>
+                                    <input type="text" id="permanentPostOffice" name="permanent_post_office" placeholder="Post Office name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Postal Code <span class="bn">পোস্ট কোড</span></label>
+                                    <input type="text" id="permanentPostalCode" name="permanent_postal_code" placeholder="e.g. 1207" maxlength="10">
+                                </div>
+                                <div class="form-group">
+                                    <label>Village/Road/House <span class="bn">গ্রাম/রাস্তা/বাড়ি</span></label>
+                                    <input type="text" id="permanentVillageRoad" name="permanent_village_road" placeholder="Village, Road No., House No.">
+                                </div>
+                                <div class="form-group">
+                                    <label>Care Of</label>
+                                    <input type="text" id="permanentCareOf" name="permanent_care_of" placeholder="C/O (Optional)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="btn-pp-outline" onclick="prevStep(2)">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn-pp" onclick="nextStep(4)">
+                                Next: Contact Info <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Contact & Previous Passport -->
+                    <div class="form-step" id="step4">
+                        <div class="pp-card">
+                            <h3><i class="fas fa-phone"></i> Step 4: Contact & Emergency Information</h3>
+                            <p class="step-description">Provide your contact details and emergency contact person.</p>
+
+                            <div class="pp-form">
+                                <div class="form-group">
+                                    <label>Mobile Number <span class="required">*</span> <span class="bn">মোবাইল নম্বর</span></label>
+                                    <input type="tel" id="mobileNumber" name="mobile_number" placeholder="01XXXXXXXXX" required maxlength="15">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address <span class="bn">ইমেইল</span></label>
+                                    <input type="email" id="emailAddress" name="email" placeholder="your.email@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Emergency Contact Name <span class="bn">জরুরি যোগাযোগ ব্যক্তির নাম</span></label>
+                                    <input type="text" id="emergencyName" name="emergency_contact_name" placeholder="Emergency contact person">
+                                </div>
+                                <div class="form-group">
+                                    <label>Emergency Contact Phone</label>
+                                    <input type="tel" id="emergencyPhone" name="emergency_contact_phone" placeholder="01XXXXXXXXX" maxlength="15">
+                                </div>
+                                <div class="form-group">
+                                    <label>Relation with Emergency Contact <span class="bn">সম্পর্ক</span></label>
+                                    <select id="emergencyRelation" name="emergency_contact_relation">
+                                        <option value="">Select Relation</option>
+                                        <option value="Father">Father (পিতা)</option>
+                                        <option value="Mother">Mother (মাতা)</option>
+                                        <option value="Spouse">Spouse (স্বামী/স্ত্রী)</option>
+                                        <option value="Brother">Brother (ভাই)</option>
+                                        <option value="Sister">Sister (বোন)</option>
+                                        <option value="Son">Son (ছেলে)</option>
+                                        <option value="Daughter">Daughter (মেয়ে)</option>
+                                        <option value="Friend">Friend (বন্ধু)</option>
+                                        <option value="Other">Other (অন্যান্য)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Previous Passport Section (Conditional) -->
+                        <div class="pp-card" id="previousPassportSection" style="display: none;">
+                            <h3><i class="fas fa-passport"></i> Previous Passport Details</h3>
+                            <p class="step-description">Required for Renewal, Lost/Damaged replacement applications.</p>
+
+                            <div class="pp-form">
+                                <div class="form-group">
+                                    <label>Previous Passport Number</label>
+                                    <input type="text" id="oldPassportNumber" name="old_passport_number" placeholder="e.g. AT1234567" maxlength="15">
+                                </div>
+                                <div class="form-group">
+                                    <label>Issue Date</label>
+                                    <input type="date" id="oldPassportIssueDate" name="old_passport_issue_date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Expiry Date</label>
+                                    <input type="date" id="oldPassportExpiryDate" name="old_passport_expiry_date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Place of Issue</label>
+                                    <input type="text" id="oldPassportIssuePlace" name="old_passport_issue_place" placeholder="e.g. Dhaka">
+                                </div>
+                                <div class="form-group">
+                                    <label>Reason for Re-issue</label>
+                                    <select id="reasonForReissue" name="reason_for_reissue">
+                                        <option value="">Select Reason</option>
+                                        <option value="Expired">Expired</option>
+                                        <option value="Lost">Lost</option>
+                                        <option value="Damaged">Damaged</option>
+                                        <option value="Pages Exhausted">Pages Exhausted</option>
+                                        <option value="Name Change">Name Change</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="btn-pp-outline" onclick="prevStep(3)">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn-pp" onclick="nextStep(5)">
+                                Next: Review & Submit <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Document Upload & Review -->
+                    <div class="form-step" id="step5">
+                        <div class="pp-card">
+                            <h3><i class="fas fa-cloud-arrow-up"></i> Document Upload</h3>
+                            <p class="step-description">Upload required documents. Accepted formats: JPG, PNG, PDF (Max 5MB each).</p>
+
+                            <div class="doc-upload-grid">
+                                <div class="doc-upload-card" id="uploadPhoto">
+                                    <i class="fas fa-camera upload-icon"></i>
+                                    <div class="upload-label">Passport Photo</div>
+                                    <div class="upload-hint">White background, 35mm × 45mm</div>
+                                    <input type="file" name="photo" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(this, 'uploadPhoto')">
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="doc-upload-card" id="uploadNid">
+                                    <i class="fas fa-id-card upload-icon"></i>
+                                    <div class="upload-label">NID Card Scan</div>
+                                    <div class="upload-hint">Front & back of NID</div>
+                                    <input type="file" name="nid_scan" accept=".jpg,.jpeg,.png,.pdf" onchange="handleFileSelect(this, 'uploadNid')">
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="doc-upload-card" id="uploadBirthCert">
+                                    <i class="fas fa-file-lines upload-icon"></i>
+                                    <div class="upload-label">Birth Certificate</div>
+                                    <div class="upload-hint">Online birth certificate</div>
+                                    <input type="file" name="birth_cert" accept=".jpg,.jpeg,.png,.pdf" onchange="handleFileSelect(this, 'uploadBirthCert')">
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="doc-upload-card" id="uploadOldPassport" style="display: none;">
+                                    <i class="fas fa-passport upload-icon"></i>
+                                    <div class="upload-label">Previous Passport</div>
+                                    <div class="upload-hint">All pages scan</div>
+                                    <input type="file" name="old_passport_scan" accept=".jpg,.jpeg,.png,.pdf" onchange="handleFileSelect(this, 'uploadOldPassport')">
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="doc-upload-card" id="uploadNoc" style="display: none;">
+                                    <i class="fas fa-file-shield upload-icon"></i>
+                                    <div class="upload-label">NOC (Govt. Employee)</div>
+                                    <div class="upload-hint">No Objection Certificate</div>
+                                    <input type="file" name="noc" accept=".jpg,.jpeg,.png,.pdf" onchange="handleFileSelect(this, 'uploadNoc')">
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="doc-upload-card" id="uploadAffidavit" style="display: none;">
+                                    <i class="fas fa-gavel upload-icon"></i>
+                                    <div class="upload-label">Court Affidavit</div>
+                                    <div class="upload-hint">Required for lost passport</div>
+                                    <input type="file" name="affidavit" accept=".jpg,.jpeg,.png,.pdf" onchange="handleFileSelect(this, 'uploadAffidavit')">
+                                    <div class="file-name"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Application Review Summary -->
+                        <div class="pp-card">
+                            <h3><i class="fas fa-clipboard-check"></i> Application Summary</h3>
+                            <p class="step-description">Please review all information before submitting.</p>
+                            <div class="review-summary" id="reviewSummary"></div>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="pp-card">
+                            <label style="display: flex; align-items: flex-start; gap: 0.8rem; cursor: pointer; color: #e2e8f0; font-size: 0.9rem;">
+                                <input type="checkbox" id="agreeTerms" style="width: auto; min-width: 18px; margin-top: 3px; accent-color: var(--pp-secondary);">
+                                <span>I hereby declare that all the information provided in this application is true and correct to the best of my knowledge. I understand that providing false information is a punishable offense under the Passport Act, 2023 of Bangladesh.</span>
+                            </label>
+                        </div>
+
+                        <div class="step-actions">
+                            <button type="button" class="btn-pp-outline" onclick="prevStep(4)">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button type="button" class="btn-pp-gold" onclick="submitApplication()" id="submitBtn">
+                                <i class="fas fa-paper-plane"></i> Submit Application
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ==================== TRACK APPLICATION ==================== -->
+            <div id="track" class="content-section" style="display:none;">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-magnifying-glass-location"></i> Track Application</h1>
+                    <p class="bangla-text">আবেদনের অবস্থা ট্র্যাক করুন</p>
+                    <p class="subtitle">Enter your application number to check current status</p>
+                </div>
+
+                <div class="pp-card">
+                    <div class="tracker-search">
+                        <input type="text" id="trackingNumber" placeholder="Enter Application Number (e.g. EP2026021800001)" maxlength="20">
+                        <button class="btn-pp" onclick="trackApplication()">
+                            <i class="fas fa-search"></i> Track
+                        </button>
+                    </div>
+
+                    <div id="trackingResult" style="display: none;">
+                        <!-- Will be populated by JS -->
+                    </div>
+
+                    <div id="trackingEmpty" class="pp-empty-state">
+                        <i class="fas fa-magnifying-glass-location"></i>
+                        <p>Enter your application number above to track your passport application status.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== MY APPLICATIONS ==================== -->
+            <div id="applications" class="content-section" style="display:none;">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-folder-open"></i> My Applications</h1>
+                    <p class="bangla-text">আমার আবেদনসমূহ</p>
+                    <p class="subtitle">View and manage all your passport applications</p>
+                </div>
+
+                <div class="pp-card">
+                    <h3><i class="fas fa-list"></i> All Applications</h3>
+                    <div id="applicationsTableContainer" style="overflow-x: auto;">
+                        <div class="pp-loading" id="applicationsLoading">
+                            <div class="pp-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== FEE CALCULATOR ==================== -->
+            <div id="fees" class="content-section" style="display:none;">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-calculator"></i> Fee Calculator</h1>
+                    <p class="bangla-text">পাসপোর্ট ফি ক্যালকুলেটর</p>
+                    <p class="subtitle">Calculate your e-Passport application fees</p>
+                </div>
+
+                <!-- Calculator -->
+                <div class="pp-card">
+                    <h3><i class="fas fa-coins"></i> Calculate Your Fee</h3>
+                    <div class="pp-form">
+                        <div class="form-group">
+                            <label>Passport Type</label>
+                            <select id="calcPassportType" onchange="calcFee()">
+                                <option value="Ordinary">Ordinary (সাধারণ)</option>
+                                <option value="Official">Official (সরকারি)</option>
+                                <option value="Diplomatic">Diplomatic (কূটনৈতিক)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Pages</label>
+                            <select id="calcPageCount" onchange="calcFee()">
+                                <option value="48">48 Pages</option>
+                                <option value="64">64 Pages</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Validity</label>
+                            <select id="calcValidity" onchange="calcFee()">
+                                <option value="5">5 Years</option>
+                                <option value="10">10 Years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery</label>
+                            <select id="calcDelivery" onchange="calcFee()">
+                                <option value="Regular">Regular (15-21 days)</option>
+                                <option value="Express">Express (7 days)</option>
+                                <option value="Super Express">Super Express (2-3 days)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Type</label>
+                            <select id="calcServiceType" onchange="calcFee()">
+                                <option value="New">New / Renewal / Correction</option>
+                                <option value="Lost Replacement">Lost Replacement (+৳5,000)</option>
+                                <option value="Damaged Replacement">Damaged Replacement (+৳5,000)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="fee-display" id="calcFeeDisplay" style="margin-top: 2rem;">
+                        <div class="fee-row">
+                            <span>Application Fee</span>
+                            <span class="fee-amount" id="calcFeeBase">৳ 0.00</span>
+                        </div>
+                        <div class="fee-row" id="calcPenaltyRow" style="display: none;">
+                            <span>Penalty (Lost/Damaged)</span>
+                            <span class="fee-amount" id="calcFeePenalty">৳ 5,000.00</span>
+                        </div>
+                        <div class="fee-row total">
+                            <span>Total Fee</span>
+                            <span class="fee-amount" id="calcFeeTotal">৳ 0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fee Schedule Table -->
+                <div class="pp-card fee-table-card">
+                    <h3><i class="fas fa-table"></i> Complete Fee Schedule (Ordinary Passport)</h3>
+                    <table class="pp-fee-table">
+                        <thead>
+                            <tr>
+                                <th>Pages</th>
+                                <th>Validity</th>
+                                <th>Regular<br><small>(15-21 days)</small></th>
+                                <th>Express<br><small>(7 days)</small></th>
+                                <th>Super Express<br><small>(2-3 days)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>48 Pages</td>
+                                <td>5 Years</td>
+                                <td class="fee-amount-cell">৳ 3,450</td>
+                                <td class="fee-amount-cell">৳ 6,900</td>
+                                <td class="fee-amount-cell">৳ 13,800</td>
+                            </tr>
+                            <tr>
+                                <td>48 Pages</td>
+                                <td>10 Years</td>
+                                <td class="fee-amount-cell">৳ 5,750</td>
+                                <td class="fee-amount-cell">৳ 11,500</td>
+                                <td class="fee-amount-cell">৳ 23,000</td>
+                            </tr>
+                            <tr>
+                                <td>64 Pages</td>
+                                <td>5 Years</td>
+                                <td class="fee-amount-cell">৳ 4,600</td>
+                                <td class="fee-amount-cell">৳ 9,200</td>
+                                <td class="fee-amount-cell">৳ 18,400</td>
+                            </tr>
+                            <tr>
+                                <td>64 Pages</td>
+                                <td>10 Years</td>
+                                <td class="fee-amount-cell">৳ 6,900</td>
+                                <td class="fee-amount-cell">৳ 13,800</td>
+                                <td class="fee-amount-cell">৳ 27,600</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="color: #94a3b8; font-size: 0.82rem; margin-top: 1rem;">
+                        <i class="fas fa-info-circle"></i> Lost/Damaged passport replacement incurs an additional ৳5,000 penalty fee.
+                        Payment can be made via Sonali Bank Challan, bKash, Nagad, Rocket, or VISA/MasterCard.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ==================== PASSPORT OFFICES ==================== -->
+            <div id="offices" class="content-section" style="display:none;">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-building-columns"></i> Passport Offices</h1>
+                    <p class="bangla-text">আঞ্চলিক পাসপোর্ট অফিসসমূহ</p>
+                    <p class="subtitle">Regional Passport Offices across Bangladesh</p>
+                </div>
+
+                <div class="offices-grid" id="officesGrid">
+                    <div class="pp-loading">
+                        <div class="pp-spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== GUIDELINES ==================== -->
+            <div id="guidelines" class="content-section" style="display:none;">
+                <div class="pp-banner">
+                    <h1><i class="fas fa-book-open"></i> Guidelines & FAQs</h1>
+                    <p class="bangla-text">নির্দেশিকা ও সাধারণ প্রশ্নাবলী</p>
+                    <p class="subtitle">Important information about e-Passport application process</p>
+                </div>
+
+                <!-- Required Documents -->
+                <div class="guideline-accordion">
+                    <div class="guideline-header active" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-file-lines" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> Required Documents for New Passport</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content active">
+                        <ul>
+                            <li><strong>National ID Card (NID):</strong> Original + photocopy (both sides). 10 or 17 digit NID number required.</li>
+                            <li><strong>Online Birth Certificate:</strong> 17-digit birth registration number. Must be from BDRIS (bdris.gov.bd).</li>
+                            <li><strong>Passport-size Photographs:</strong> Recent color photo with white background, size 35mm × 45mm. Must be taken within last 6 months.</li>
+                            <li><strong>Academic Certificate:</strong> Optional, but recommended for profession verification.</li>
+                            <li><strong>Citizenship Certificate:</strong> Required if born before NID era or for special cases.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guideline-accordion">
+                    <div class="guideline-header" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-rotate" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> Documents for Renewal</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content">
+                        <ul>
+                            <li><strong>Previous Passport:</strong> Original passport + photocopy of all pages (including blank pages).</li>
+                            <li><strong>National ID Card (NID):</strong> Original + photocopy.</li>
+                            <li><strong>Online Birth Certificate:</strong> 17-digit registration number.</li>
+                            <li><strong>Passport-size Photographs:</strong> Same specifications as new passport.</li>
+                            <li><strong>Note:</strong> Apply for renewal at least 6 months before passport expiry date.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guideline-accordion">
+                    <div class="guideline-header" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-triangle-exclamation" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> Documents for Lost/Damaged Passport</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content">
+                        <ul>
+                            <li><strong>General Diary (GD):</strong> Must be filed at nearest police station within 24 hours of loss.</li>
+                            <li><strong>Court Affidavit:</strong> Sworn statement on judicial stamp paper describing circumstances of loss.</li>
+                            <li><strong>National ID Card (NID):</strong> Original + photocopy.</li>
+                            <li><strong>Online Birth Certificate:</strong> 17-digit registration number.</li>
+                            <li><strong>Photocopy of Lost Passport:</strong> If available, any photocopy of the lost passport.</li>
+                            <li><strong>Penalty Fee:</strong> Additional ৳5,000 penalty applies for lost/damaged replacement.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guideline-accordion">
+                    <div class="guideline-header" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-building" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> For Government Employees</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content">
+                        <ul>
+                            <li><strong>NOC (No Objection Certificate):</strong> From controlling authority/ministry. Mandatory for all government employees.</li>
+                            <li><strong>Service ID Card:</strong> Copy of government service identity card.</li>
+                            <li><strong>Government Order (GO):</strong> Required for Official/Diplomatic passport applications.</li>
+                            <li><strong>Ministry Forwarding Letter:</strong> Required for Official/Diplomatic passport.</li>
+                            <li><strong>All standard documents</strong> for ordinary passport are also required.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guideline-accordion">
+                    <div class="guideline-header" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-camera" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> Photo Specifications</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content">
+                        <ul>
+                            <li><strong>Size:</strong> 35mm × 45mm (width × height)</li>
+                            <li><strong>Background:</strong> Plain white background with no shadow</li>
+                            <li><strong>Face coverage:</strong> Face must cover 70-80% of the photograph</li>
+                            <li><strong>Expression:</strong> Neutral expression, mouth closed, both eyes open</li>
+                            <li><strong>Glasses:</strong> No glasses or sunglasses</li>
+                            <li><strong>Head covering:</strong> Religious head coverings allowed if face is fully visible</li>
+                            <li><strong>Recency:</strong> Must be taken within the last 6 months</li>
+                            <li><strong>Quality:</strong> High resolution, no blur, proper lighting, no red-eye</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guideline-accordion">
+                    <div class="guideline-header" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-route" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> Application Process Steps</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content">
+                        <ul>
+                            <li><strong>Step 1 — Online Application:</strong> Fill out the online form with all required information.</li>
+                            <li><strong>Step 2 — Fee Payment:</strong> Pay the applicable fee via Sonali Bank Challan, bKash, Nagad, Rocket, or VISA/MasterCard.</li>
+                            <li><strong>Step 3 — Biometric Enrollment:</strong> Visit your selected Regional Passport Office on the scheduled date for biometric capture (fingerprint, iris scan, facial photo).</li>
+                            <li><strong>Step 4 — Police Verification:</strong> Special Branch police will verify your provided information at your permanent address.</li>
+                            <li><strong>Step 5 — Processing:</strong> Your application will be processed, passport printed and quality checked.</li>
+                            <li><strong>Step 6 — Delivery:</strong> Collect your e-Passport from the Regional Passport Office you selected, or receive it via postal delivery.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guideline-accordion">
+                    <div class="guideline-header" onclick="toggleGuideline(this)">
+                        <span><i class="fas fa-circle-question" style="color: var(--pp-gold); margin-right: 0.8rem;"></i> Frequently Asked Questions (FAQs)</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="guideline-content">
+                        <ul>
+                            <li><strong>Q: How long does it take to get an e-Passport?</strong><br>
+                                A: Regular delivery takes 15-21 working days, Express 7 working days, and Super Express 2-3 working days after biometric enrollment.</li>
+                            <li><strong>Q: Can I apply for someone else?</strong><br>
+                                A: No, you must apply in person. For minors, parents/legal guardians can apply.</li>
+                            <li><strong>Q: What if my NID information doesn't match my birth certificate?</strong><br>
+                                A: You must first correct the information in either document before applying. Contact NID wing or BDRIS.</li>
+                            <li><strong>Q: Can I have two valid passports at the same time?</strong><br>
+                                A: No. When you apply for a new passport, the old one gets cancelled.</li>
+                            <li><strong>Q: What is the validity of an e-Passport?</strong><br>
+                                A: e-Passports are available in 5-year and 10-year validity options.</li>
+                            <li><strong>Q: Can I track my passport delivery?</strong><br>
+                                A: Yes, use the Track Application section with your application number to check real-time status.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Important Notice -->
+                <div class="pp-card" style="border-color: rgba(212, 172, 13, 0.3); margin-top: 2rem;">
+                    <h3><i class="fas fa-bell"></i> Important Notice</h3>
+                    <div style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.8;">
+                        <p>📌 All passport applications are processed by the Department of Immigration & Passports (DIP), Government of Bangladesh.</p>
+                        <p>📌 Providing false information is punishable under Passport Act, 2023.</p>
+                        <p>📌 Biometric enrollment (fingerprint + iris scan) is mandatory at the Regional Passport Office.</p>
+                        <p>📌 Police verification is conducted by the Special Branch at your permanent address.</p>
+                        <p>📌 For any queries, contact DIP helpline: <strong style="color: var(--pp-gold-light);">16345</strong></p>
+                        <p>📌 Official website: <strong style="color: var(--pp-accent);">www.dip.gov.bd</strong></p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/passport.js"></script>
+</body>
+
+</html>

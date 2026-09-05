@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBR Tax Portal - Bangladesh Government</title>
+    <meta name="description"
+        content="National Board of Revenue (NBR) Tax Portal - File returns, register TIN, pay taxes, and manage your tax obligations online.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/tax.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.85) 100%), url('images/tax_bg.png') center/100% 100% no-repeat fixed;
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .tax-sidebar {
+            width: 280px;
+            background: rgba(15, 23, 42, 0.95);
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            overflow-y: auto;
+        }
+
+        .sidebar-brand {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar-brand .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sidebar-brand .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .sidebar-brand h2 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .sidebar-brand h2 span {
+            display: block;
+            color: #34d399;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .nav-section {
+            padding: 1rem 0.75rem;
+        }
+
+        .nav-section-title {
+            color: #475569;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 0.75rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .nav-links a i {
+            width: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a .count-badge {
+            margin-left: auto;
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            padding: 0.1rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .sidebar-footer a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar-footer a:hover {
+            color: #e2e8f0;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .tax-sidebar {
+                width: 260px;
+            }
+
+            .main-content {
+                margin-left: 260px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tax-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .tax-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-toggle {
+                display: block !important;
+            }
+        }
+
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 200;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #fff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="mobile-toggle" onclick="document.querySelector('.tax-sidebar').classList.toggle('open')">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="tax-sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-area">
+                    <div class="logo-icon"><i class="fas fa-landmark"></i></div>
+                    <h2>NBR Tax Portal <span>National Board of Revenue</span></h2>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Main</div>
+                <ul class="nav-links">
+                    <li><a data-section="dashboard" onclick="showTaxSection('dashboard')" class="active">
+                            <i class="fas fa-th-large"></i> Dashboard
+                        </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Tax Services</div>
+                <ul class="nav-links">
+                    <li><a data-section="tin" onclick="showTaxSection('tin')">
+                            <i class="fas fa-id-card"></i> TIN Registration
+                        </a></li>
+                    <li><a data-section="ereturn" onclick="showTaxSection('ereturn')">
+                            <i class="fas fa-file-invoice-dollar"></i> e-Return Filing
+                        </a></li>
+                    <li><a data-section="calculator" onclick="showTaxSection('calculator')">
+                            <i class="fas fa-calculator"></i> Tax Calculator
+                        </a></li>
+                    <li><a data-section="payments" onclick="showTaxSection('payments')">
+                            <i class="fas fa-money-bill-wave"></i> Payments
+                        </a></li>
+                    <li><a data-section="challan" onclick="showTaxSection('challan')">
+                            <i class="fas fa-receipt"></i> Challan
+                        </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Business</div>
+                <ul class="nav-links">
+                    <li><a data-section="vat" onclick="showTaxSection('vat')">
+                            <i class="fas fa-percent"></i> VAT / BIN
+                        </a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Information</div>
+                <ul class="nav-links">
+                    <li><a data-section="notices" onclick="showTaxSection('notices')">
+                            <i class="fas fa-bell"></i> Notices
+                            <span class="count-badge" id="sidebar-notice-count" style="display:none;">0</span>
+                        </a></li>
+                    <li><a data-section="zones" onclick="showTaxSection('zones')">
+                            <i class="fas fa-map-marked-alt"></i> Tax Zones
+                        </a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Portal</a>
+                <a href="#" onclick="localStorage.removeItem('token'); window.location.href='index.html';"><i
+                        class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ======================== DASHBOARD ======================== -->
+            <section id="tax-dashboard" class="tax-section active">
+                <div class="tax-header">
+                    <div>
+                        <h1>Tax Dashboard</h1>
+                        <p>Overview of your tax activities and obligations</p>
+                    </div>
+                    <div class="nbr-badge"><i class="fas fa-shield-alt"></i> NBR Verified Portal</div>
+                </div>
+
+                <div class="tax-stats-grid">
+                    <div class="tax-stat-card emerald">
+                        <div class="stat-icon"><i class="fas fa-id-card"></i></div>
+                        <div id="dash-tin-status"><span class="tax-badge draft">Loading...</span></div>
+                        <div class="stat-label" style="margin-top: 0.5rem;">TIN Status</div>
+                        <div id="dash-tin-number"
+                            style="font-family: monospace; color: #34d399; margin-top: 0.25rem; font-size: 0.9rem;">—
+                        </div>
+                    </div>
+                    <div class="tax-stat-card blue">
+                        <div class="stat-icon"><i class="fas fa-file-invoice"></i></div>
+                        <div class="stat-value" id="dash-returns-count">0</div>
+                        <div class="stat-label">Returns Filed</div>
+                    </div>
+                    <div class="tax-stat-card amber">
+                        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="stat-value" id="dash-tax-paid" style="font-size: 1.3rem;">৳0</div>
+                        <div class="stat-label">Total Tax Paid</div>
+                    </div>
+                    <div class="tax-stat-card rose">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-value" id="dash-pending">0</div>
+                        <div class="stat-label">Pending Returns</div>
+                    </div>
+                    <div class="tax-stat-card purple">
+                        <div class="stat-icon"><i class="fas fa-bell"></i></div>
+                        <div class="stat-value" id="dash-notices">0</div>
+                        <div class="stat-label">Unread Notices</div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="tax-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <button class="btn-nbr" onclick="showTaxSection('ereturn')"><i class="fas fa-file-alt"></i> File
+                            e-Return</button>
+                        <button class="btn-nbr blue" onclick="showTaxSection('tin')"><i class="fas fa-id-card"></i> TIN
+                            Status</button>
+                        <button class="btn-nbr amber" onclick="showTaxSection('calculator')"><i
+                                class="fas fa-calculator"></i> Tax Calculator</button>
+                        <button class="btn-nbr secondary" onclick="showTaxSection('payments')"><i
+                                class="fas fa-credit-card"></i> Make Payment</button>
+                    </div>
+                </div>
+
+                <!-- Tax Slabs -->
+                <div class="tax-card">
+                    <h3><i class="fas fa-layer-group"></i> Income Tax Slabs (FY 2025-26)</h3>
+                    <table class="slab-table">
+                        <thead>
+                            <tr>
+                                <th>Income Slab</th>
+                                <th>Tax Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First ৳3,50,000</td>
+                                <td class="rate-highlight">0%</td>
+                            </tr>
+                            <tr>
+                                <td>Next ৳1,00,000</td>
+                                <td class="rate-highlight">5%</td>
+                            </tr>
+                            <tr>
+                                <td>Next ৳4,00,000</td>
+                                <td class="rate-highlight">10%</td>
+                            </tr>
+                            <tr>
+                                <td>Next ৳5,00,000</td>
+                                <td class="rate-highlight">15%</td>
+                            </tr>
+                            <tr>
+                                <td>Next ৳5,00,000</td>
+                                <td class="rate-highlight">20%</td>
+                            </tr>
+                            <tr>
+                                <td>Remaining Amount</td>
+                                <td class="rate-highlight">25%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.75rem;">* Tax-free threshold is ৳4,00,000
+                        for women and senior citizens (65+)</p>
+                </div>
+            </section>
+
+            <!-- ======================== TIN REGISTRATION ======================== -->
+            <section id="tax-tin" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>TIN Registration</h1>
+                        <p>Apply for a new Taxpayer Identification Number</p>
+                    </div>
+                </div>
+
+                <div id="tin-status-display"></div>
+
+                <div id="tin-form-container">
+                    <div class="tax-info-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <p>A TIN (Taxpayer Identification Number) is required for filing income tax returns, opening
+                            bank accounts, and other financial transactions in Bangladesh.</p>
+                    </div>
+
+                    <div class="tax-card">
+                        <h3><i class="fas fa-user-plus"></i> TIN Application Form</h3>
+                        <form class="tax-form" onsubmit="applyTIN(event)">
+                            <div class="form-group">
+                                <label>Taxpayer Name <span class="required">*</span></label>
+                                <input type="text" name="taxpayer_name" class="form-control"
+                                    placeholder="Full name as per NID" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Taxpayer Type</label>
+                                <select name="taxpayer_type" class="form-control">
+                                    <option value="Individual">Individual</option>
+                                    <option value="Company">Company</option>
+                                    <option value="Firm">Partnership Firm</option>
+                                    <option value="AOP">Association of Persons</option>
+                                    <option value="Trust">Trust / Fund</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Father's Name</label>
+                                <input type="text" name="father_name" class="form-control"
+                                    placeholder="Father's full name">
+                            </div>
+                            <div class="form-group">
+                                <label>Mother's Name</label>
+                                <input type="text" name="mother_name" class="form-control"
+                                    placeholder="Mother's full name">
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth <span class="required">*</span></label>
+                                <input type="date" name="date_of_birth" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>NID Number</label>
+                                <input type="text" name="nid_number" class="form-control"
+                                    placeholder="National ID number">
+                            </div>
+                            <div class="form-group">
+                                <label>Passport Number</label>
+                                <input type="text" name="passport_number" class="form-control" placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile <span class="required">*</span></label>
+                                <input type="tel" name="mobile" class="form-control" placeholder="+880..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Source of Income</label>
+                                <input type="text" name="source_of_income" class="form-control"
+                                    placeholder="e.g. Salary, Business, Freelance">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Present Address</label>
+                                <textarea name="present_address" class="form-control"
+                                    placeholder="Current address"></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Permanent Address</label>
+                                <textarea name="permanent_address" class="form-control"
+                                    placeholder="Permanent address"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tax Zone</label>
+                                <select name="zone_id" class="form-control zone-select">
+                                    <option value="">Select Tax Zone</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: flex-end;">
+                                <button type="submit" class="btn-nbr full-width"><i class="fas fa-paper-plane"></i>
+                                    Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== E-RETURN FILING ======================== -->
+            <section id="tax-ereturn" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>e-Return Filing</h1>
+                        <p>File your income tax return electronically</p>
+                    </div>
+                </div>
+
+                <div class="tax-info-banner">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Deadline: Tax returns for assessment year 2026-27 must be filed by 30 November 2026. Late filing
+                        may attract penalties.</p>
+                </div>
+
+                <!-- Return Form -->
+                <div class="tax-card">
+                    <h3><i class="fas fa-file-signature"></i> Income Tax Return Form</h3>
+                    <form class="tax-form three-col" onsubmit="fileReturn(event)">
+                        <div class="form-group">
+                            <label>Assessment Year <span class="required">*</span></label>
+                            <select name="assessment_year" class="form-control" required>
+                                <option value="2026-27">2026-27</option>
+                                <option value="2025-26">2025-26</option>
+                                <option value="2024-25">2024-25</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Income Year <span class="required">*</span></label>
+                            <select name="income_year" class="form-control" required>
+                                <option value="2025-26">2025-26</option>
+                                <option value="2024-25">2024-25</option>
+                                <option value="2023-24">2023-24</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Return Type</label>
+                            <select name="return_type" class="form-control">
+                                <option value="Normal">Normal</option>
+                                <option value="Revised">Revised</option>
+                                <option value="Belated">Belated</option>
+                            </select>
+                        </div>
+
+                        <!-- Income -->
+                        <div class="form-group full-width" style="margin-top: 1rem;">
+                            <h4 style="color: #34d399; font-size: 0.9rem;"><i class="fas fa-coins"></i> Income Details
+                                (in BDT)</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Salary Income</label>
+                            <input type="number" name="salary_income" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>House Property Income</label>
+                            <input type="number" name="house_property_income" class="form-control" placeholder="0"
+                                min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Agriculture Income</label>
+                            <input type="number" name="agriculture_income" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Business / Profession Income</label>
+                            <input type="number" name="business_income" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Capital Gains</label>
+                            <input type="number" name="capital_gains" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Other Income</label>
+                            <input type="number" name="other_income" class="form-control" placeholder="0" min="0">
+                        </div>
+
+                        <!-- Tax Deductions -->
+                        <div class="form-group full-width" style="margin-top: 1rem;">
+                            <h4 style="color: #fbbf24; font-size: 0.9rem;"><i class="fas fa-hand-holding-usd"></i> Tax
+                                Adjustments</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Exempted Income</label>
+                            <input type="number" name="tax_exempted_income" class="form-control" placeholder="0"
+                                min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Rebate (Investment)</label>
+                            <input type="number" name="tax_rebate" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Advance Tax Paid</label>
+                            <input type="number" name="tax_paid_advance" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Deducted at Source (TDS)</label>
+                            <input type="number" name="tax_deducted_source" class="form-control" placeholder="0"
+                                min="0">
+                        </div>
+
+                        <!-- Assets -->
+                        <div class="form-group full-width" style="margin-top: 1rem;">
+                            <h4 style="color: #60a5fa; font-size: 0.9rem;"><i class="fas fa-university"></i> Assets,
+                                Liabilities & Expenditure</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Total Assets</label>
+                            <input type="number" name="total_assets" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Liabilities</label>
+                            <input type="number" name="total_liabilities" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Life Expenditure</label>
+                            <input type="number" name="total_expenditure" class="form-control" placeholder="0" min="0">
+                        </div>
+
+                        <div class="form-group full-width" style="margin-top: 0.5rem;">
+                            <button type="submit" class="btn-nbr full-width"><i class="fas fa-paper-plane"></i> Submit
+                                e-Return</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Return History -->
+                <div class="tax-card">
+                    <h3><i class="fas fa-history"></i> Your Filed Returns</h3>
+                    <div id="returns-list">
+                        <div class="tax-loading"><i class="fas fa-spinner fa-spin"></i><br>Loading...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== TAX CALCULATOR ======================== -->
+            <section id="tax-calculator" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>Tax Calculator</h1>
+                        <p>Estimate your income tax liability for FY 2025-26</p>
+                    </div>
+                </div>
+
+                <div class="tax-card">
+                    <h3><i class="fas fa-calculator"></i> Calculate Your Tax</h3>
+                    <div class="tax-form">
+                        <div class="form-group">
+                            <label>Total Annual Income (BDT) <span class="required">*</span></label>
+                            <input type="number" id="calc-income" class="form-control"
+                                placeholder="Enter your total income" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Exempted Income (BDT)</label>
+                            <input type="number" id="calc-exempted" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Investment for Rebate (BDT)</label>
+                            <input type="number" id="calc-investment" class="form-control" placeholder="0" min="0">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button type="button" class="btn-nbr full-width" onclick="calculateTax()"><i
+                                    class="fas fa-calculator"></i> Calculate</button>
+                        </div>
+                    </div>
+
+                    <div id="calc-result" class="calculator-result"></div>
+                </div>
+
+                <!-- Tax Slabs Reference -->
+                <div class="tax-card">
+                    <h3><i class="fas fa-layer-group"></i> Tax Slab Reference (Individual)</h3>
+                    <table class="slab-table">
+                        <thead>
+                            <tr>
+                                <th>Serial</th>
+                                <th>Income Slab (BDT)</th>
+                                <th>Tax Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Up to ৳3,50,000</td>
+                                <td class="rate-highlight">Nil (0%)</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Next ৳1,00,000</td>
+                                <td class="rate-highlight">5%</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Next ৳4,00,000</td>
+                                <td class="rate-highlight">10%</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Next ৳5,00,000</td>
+                                <td class="rate-highlight">15%</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Next ৳5,00,000</td>
+                                <td class="rate-highlight">20%</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Balance</td>
+                                <td class="rate-highlight">25%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="tax-info-banner" style="margin-top: 1rem;">
+                        <i class="fas fa-lightbulb"></i>
+                        <p>Minimum tax for any individual with taxable income is ৳5,000. For area-based minimum: Dhaka &
+                            Chittagong city corporation ৳5,000, other city corporations ৳4,000, other areas ৳3,000.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== PAYMENTS ======================== -->
+            <section id="tax-payments" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>Tax Payments</h1>
+                        <p>Record and track your tax payments</p>
+                    </div>
+                </div>
+
+                <div class="tax-card">
+                    <h3><i class="fas fa-credit-card"></i> Make a Payment</h3>
+                    <form class="tax-form" onsubmit="makePayment(event)">
+                        <div class="form-group">
+                            <label>Payment Type <span class="required">*</span></label>
+                            <select name="payment_type" class="form-control" required>
+                                <option value="Income Tax">Income Tax</option>
+                                <option value="VAT">VAT</option>
+                                <option value="Supplementary Duty">Supplementary Duty</option>
+                                <option value="Customs Duty">Customs Duty</option>
+                                <option value="Excise Duty">Excise Duty</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount (BDT) <span class="required">*</span></label>
+                            <input type="number" name="amount" class="form-control" placeholder="0" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select name="payment_method" class="form-control">
+                                <option value="Online">Online Banking</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="Mobile Banking">Mobile Banking (bKash/Nagad)</option>
+                                <option value="Challan">Treasury Challan</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Fiscal Year</label>
+                            <select name="fiscal_year" class="form-control">
+                                <option value="2025-26">2025-26</option>
+                                <option value="2024-25">2024-25</option>
+                                <option value="2023-24">2023-24</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input type="text" name="bank_name" class="form-control" placeholder="Bank name">
+                        </div>
+                        <div class="form-group">
+                            <label>Branch</label>
+                            <input type="text" name="branch_name" class="form-control" placeholder="Branch name">
+                        </div>
+                        <div class="form-group">
+                            <label>Transaction ID</label>
+                            <input type="text" name="transaction_id" class="form-control"
+                                placeholder="Transaction reference">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button type="submit" class="btn-nbr full-width"><i class="fas fa-check-circle"></i> Record
+                                Payment</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tax-card">
+                    <h3><i class="fas fa-history"></i> Payment History</h3>
+                    <div id="payments-list">
+                        <div class="tax-loading"><i class="fas fa-spinner fa-spin"></i><br>Loading...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== CHALLAN ======================== -->
+            <section id="tax-challan" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>Treasury Challan</h1>
+                        <p>Generate and manage treasury deposit challans</p>
+                    </div>
+                </div>
+
+                <div class="tax-card">
+                    <h3><i class="fas fa-receipt"></i> Generate Challan</h3>
+                    <form class="tax-form" onsubmit="generateChallan(event)">
+                        <div class="form-group">
+                            <label>TIN Number</label>
+                            <input type="text" name="challan_tin" class="form-control" placeholder="Your TIN">
+                        </div>
+                        <div class="form-group">
+                            <label>Assessment Year</label>
+                            <select name="challan_year" class="form-control">
+                                <option value="2026-27">2026-27</option>
+                                <option value="2025-26">2025-26</option>
+                                <option value="2024-25">2024-25</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tax Zone</label>
+                            <input type="text" name="challan_zone" class="form-control" placeholder="Tax zone name">
+                        </div>
+                        <div class="form-group">
+                            <label>Deposit Type</label>
+                            <select name="deposit_type" class="form-control">
+                                <option value="Income Tax">Income Tax</option>
+                                <option value="VAT">VAT</option>
+                                <option value="Advance Tax">Advance Tax</option>
+                                <option value="TDS">Tax Deducted at Source</option>
+                                <option value="Penalty">Penalty</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount (BDT) <span class="required">*</span></label>
+                            <input type="number" name="challan_amount" class="form-control" placeholder="0" min="1"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input type="text" name="challan_bank" class="form-control" placeholder="Deposit bank">
+                        </div>
+                        <div class="form-group">
+                            <label>Branch Name</label>
+                            <input type="text" name="challan_branch" class="form-control" placeholder="Branch">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button type="submit" class="btn-nbr full-width"><i class="fas fa-file-invoice"></i>
+                                Generate Challan</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tax-card">
+                    <h3><i class="fas fa-list"></i> Generated Challans</h3>
+                    <div id="challan-list">
+                        <div class="tax-loading"><i class="fas fa-spinner fa-spin"></i><br>Loading...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== VAT / BIN ======================== -->
+            <section id="tax-vat" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>VAT / BIN Registration</h1>
+                        <p>Apply for Business Identification Number for VAT</p>
+                    </div>
+                </div>
+
+                <div id="vat-status-display"></div>
+
+                <div id="vat-form-container">
+                    <div class="tax-info-banner"
+                        style="border-color: rgba(139, 92, 246, 0.2); background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.1));">
+                        <i class="fas fa-store" style="color: #a78bfa;"></i>
+                        <p style="color: #c4b5fd;">Businesses with annual turnover above ৳30 lakhs must register for VAT
+                            and obtain a BIN.</p>
+                    </div>
+
+                    <div class="tax-card">
+                        <h3><i class="fas fa-store"></i> VAT Registration Form</h3>
+                        <form class="tax-form" onsubmit="registerVAT(event)">
+                            <div class="form-group">
+                                <label>Business Name (English) <span class="required">*</span></label>
+                                <input type="text" name="business_name" class="form-control" placeholder="Business name"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label>Business Name (Bangla)</label>
+                                <input type="text" name="business_name_bn" class="form-control"
+                                    placeholder="ব্যবসার নাম">
+                            </div>
+                            <div class="form-group">
+                                <label>Business Type</label>
+                                <select name="business_type" class="form-control">
+                                    <option value="Service Provider">Service Provider</option>
+                                    <option value="Manufacturer">Manufacturer</option>
+                                    <option value="Trader">Trader</option>
+                                    <option value="Importer">Importer</option>
+                                    <option value="Exporter">Exporter</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Trade License No</label>
+                                <input type="text" name="trade_license_no" class="form-control"
+                                    placeholder="Trade license number">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Business Address <span class="required">*</span></label>
+                                <textarea name="business_address" class="form-control"
+                                    placeholder="Full business address" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Annual Turnover (BDT)</label>
+                                <input type="number" name="annual_turnover" class="form-control" placeholder="0"
+                                    min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Person <span class="required">*</span></label>
+                                <input type="text" name="contact_person" class="form-control" placeholder="Contact name"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Phone <span class="required">*</span></label>
+                                <input type="tel" name="contact_phone" class="form-control" placeholder="+880..."
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Email</label>
+                                <input type="email" name="contact_email" class="form-control"
+                                    placeholder="email@business.com">
+                            </div>
+                            <div class="form-group" style="display: flex; align-items: flex-end;">
+                                <button type="submit" class="btn-nbr full-width"
+                                    style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);"><i
+                                        class="fas fa-paper-plane"></i> Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======================== NOTICES ======================== -->
+            <section id="tax-notices" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>Tax Notices</h1>
+                        <p>Official notices from the National Board of Revenue</p>
+                    </div>
+                </div>
+
+                <div id="notices-list">
+                    <div class="tax-loading"><i class="fas fa-spinner fa-spin"></i><br>Loading...</div>
+                </div>
+            </section>
+
+            <!-- ======================== TAX ZONES ======================== -->
+            <section id="tax-zones" class="tax-section">
+                <div class="tax-header">
+                    <div>
+                        <h1>Tax Zones & Circles</h1>
+                        <p>Find your assigned tax zone and circle office</p>
+                    </div>
+                </div>
+
+                <div id="zones-list">
+                    <div class="tax-loading"><i class="fas fa-spinner fa-spin"></i><br>Loading...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/tax.js"></script>
+</body>
+
+</html>

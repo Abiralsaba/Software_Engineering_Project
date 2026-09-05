@@ -1,0 +1,712 @@
+/* ============================================
+   Admin Health Panel - CSS
+   স্বাস্থ্য প্রশাসন | Health Administration
+   ============================================ */
+
+:root {
+    --ah-primary: #dc2626;
+    --ah-primary-light: #ef4444;
+    --ah-primary-dark: #991b1b;
+    --ah-accent: #f87171;
+    --ah-blue: #3b82f6;
+    --ah-green: #10b981;
+    --ah-yellow: #f59e0b;
+}
+
+/* Banner */
+.admin-health-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.25), rgba(239, 68, 68, 0.15));
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(12px);
+}
+
+.admin-health-banner h1 {
+    color: #fca5a5;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-health-banner h1 i {
+    color: var(--ah-primary-light);
+}
+
+.admin-badge {
+    background: linear-gradient(135deg, var(--ah-primary), var(--ah-primary-dark));
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Stats Grid */
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.admin-stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
+}
+
+.admin-stat-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(248, 113, 113, 0.3);
+    transform: translateY(-3px);
+}
+
+.admin-stat-card .stat-icon {
+    font-size: 1.5rem;
+}
+
+.admin-stat-card .stat-value {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.admin-stat-card .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted, #94a3b8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* Section Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.section-header h2 {
+    color: #fca5a5;
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header h2 i {
+    color: var(--ah-primary-light);
+}
+
+/* Filter Bar */
+.admin-filter-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px 20px;
+    backdrop-filter: blur(6px);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 140px;
+}
+
+.filter-group label {
+    font-size: 0.72rem;
+    color: var(--text-muted, #94a3b8);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.filter-group select,
+.filter-group input {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    border-color: var(--ah-primary-light);
+}
+
+.filter-group select option {
+    background: #1e293b;
+    color: #e2e8f0;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+/* Table Card */
+.admin-table-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+}
+
+.admin-table-card .health-table {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+}
+
+.admin-table-card .health-table thead th {
+    background: rgba(220, 38, 38, 0.12);
+    color: #fca5a5;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(248, 113, 113, 0.15);
+    white-space: nowrap;
+}
+
+.admin-table-card .health-table tbody td {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+}
+
+.admin-table-card .health-table tbody tr:hover {
+    background: rgba(248, 113, 113, 0.06);
+}
+
+.admin-table-card .health-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.health-loader {
+    text-align: center;
+    color: #94a3b8;
+    padding: 30px !important;
+    font-size: 0.9rem;
+}
+
+.health-loader i {
+    margin-right: 8px;
+    color: var(--ah-primary-light);
+}
+
+/* Action Buttons in Table */
+.btn-action {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+    margin: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-action-view {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.btn-action-view:hover {
+    background: rgba(59, 130, 246, 0.3);
+}
+
+.btn-action-update {
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.btn-action-update:hover {
+    background: rgba(16, 185, 129, 0.3);
+}
+
+.btn-action-delete {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-action-delete:hover {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+.btn-action-edit {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fcd34d;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.btn-action-edit:hover {
+    background: rgba(245, 158, 11, 0.3);
+}
+
+/* Status Badges (shared with health.css extensions) */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-pending {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-approved, .badge-confirmed, .badge-completed, .badge-resolved {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.badge-rejected, .badge-cancelled {
+    background: rgba(248, 113, 113, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.badge-registered, .badge-submitted, .badge-requested {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
+.badge-scheduled, .badge-under-review {
+    background: rgba(167, 139, 250, 0.15);
+    color: #a78bfa;
+    border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.badge-dispatched, .badge-en-route {
+    background: rgba(251, 146, 60, 0.15);
+    color: #fb923c;
+    border: 1px solid rgba(251, 146, 60, 0.3);
+}
+
+.badge-arrived {
+    background: rgba(34, 211, 238, 0.15);
+    color: #22d3ee;
+    border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.badge-no-show {
+    background: rgba(156, 163, 175, 0.15);
+    color: #9ca3af;
+    border: 1px solid rgba(156, 163, 175, 0.3);
+}
+
+.badge-active {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.badge-inactive {
+    background: rgba(156, 163, 175, 0.15);
+    color: #9ca3af;
+    border: 1px solid rgba(156, 163, 175, 0.3);
+}
+
+/* Modal */
+.admin-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.admin-modal-overlay.active {
+    display: flex;
+}
+
+.admin-modal {
+    background: #1e293b;
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(248, 113, 113, 0.15);
+    background: rgba(220, 38, 38, 0.08);
+}
+
+.admin-modal-header h2 {
+    color: #fca5a5;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-modal-close {
+    background: rgba(248, 113, 113, 0.15);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: #fca5a5;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.admin-modal-close:hover {
+    background: rgba(248, 113, 113, 0.3);
+}
+
+.admin-modal-body {
+    padding: 24px;
+}
+
+/* Detail Grid inside Modal */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+}
+
+.detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.detail-row.full-width {
+    grid-column: 1 / -1;
+}
+
+.detail-label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.detail-section-title {
+    grid-column: 1 / -1;
+    color: #fca5a5;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-top: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(248, 113, 113, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-section-title i {
+    color: var(--ah-primary-light);
+}
+
+/* Status Update Section inside Modal */
+.status-update-section {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+}
+
+.status-update-section h3 {
+    color: #fca5a5;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-update-section select,
+.status-update-section textarea,
+.status-update-section input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+}
+
+.status-update-section select:focus,
+.status-update-section textarea:focus,
+.status-update-section input:focus {
+    border-color: var(--ah-primary-light);
+}
+
+.status-update-section select option {
+    background: #1e293b;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    justify-content: flex-end;
+}
+
+.modal-actions .btn-health {
+    padding: 9px 22px;
+    font-size: 0.85rem;
+}
+
+.modal-actions .btn-cancel {
+    padding: 9px 22px;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.modal-actions .btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+}
+
+/* Hospital Form in Modal */
+.hospital-form-group {
+    margin-bottom: 12px;
+}
+
+.hospital-form-group label {
+    display: block;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hospital-form-group input,
+.hospital-form-group select,
+.hospital-form-group textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.hospital-form-group input:focus,
+.hospital-form-group select:focus,
+.hospital-form-group textarea:focus {
+    border-color: var(--ah-primary-light);
+}
+
+.hospital-form-group select option {
+    background: #1e293b;
+}
+
+.hospital-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* No Data */
+.no-data-td {
+    text-align: center;
+    color: #64748b;
+    padding: 30px !important;
+    font-size: 0.9rem;
+}
+
+.no-data-td i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 8px;
+    color: #475569;
+}
+
+/* Urgency Colors */
+.urgency-critical {
+    color: #ef4444;
+    font-weight: 700;
+}
+.urgency-high {
+    color: #f97316;
+    font-weight: 600;
+}
+.urgency-normal {
+    color: #22d3ee;
+    font-weight: 500;
+}
+.urgency-low {
+    color: #a3e635;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-health-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 18px;
+    }
+
+    .admin-health-banner h1 {
+        font-size: 1.2rem;
+    }
+
+    .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .admin-filter-bar {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hospital-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-modal {
+        max-height: 90vh;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 550px) {
+    .admin-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .admin-stat-card {
+        padding: 14px 10px;
+    }
+
+    .admin-stat-card .stat-value {
+        font-size: 1.3rem;
+    }
+
+    .admin-table-card {
+        overflow-x: auto;
+    }
+
+    .admin-table-card .health-table {
+        min-width: 700px;
+    }
+}

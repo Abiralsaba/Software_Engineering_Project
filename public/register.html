@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Government of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Additional styles for registration page */
+        body {
+            padding: 40px 20px;
+        }
+        
+        .auth-card {
+            max-width: 550px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: linear-gradient(135deg, var(--bd-green), var(--bd-green-light));
+            border-color: var(--bd-green);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 106, 78, 0.4);
+        }
+
+        .step.completed {
+            background: var(--bd-green);
+            border-color: var(--bd-green);
+            color: #fff;
+        }
+
+        .step-line {
+            width: 30px;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            align-self: center;
+        }
+
+        .step-line.active {
+            background: var(--bd-green);
+        }
+
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-section-title i {
+            color: var(--bd-gold);
+            font-size: 18px;
+        }
+
+        .form-section-title span {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .password-requirements {
+            margin-top: 10px;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .password-requirements p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px 0;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+        }
+
+        .requirement i {
+            font-size: 10px;
+        }
+
+        .requirement.valid {
+            color: var(--bd-green-light);
+        }
+
+        .requirement.valid i {
+            color: var(--bd-green);
+        }
+
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .terms-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--bd-green);
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .terms-checkbox label {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .terms-checkbox label a {
+            color: var(--bd-gold);
+            text-decoration: none;
+        }
+
+        .terms-checkbox label a:hover {
+            text-decoration: underline;
+        }
+
+        .register-benefits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background: rgba(0, 106, 78, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 106, 78, 0.2);
+        }
+
+        .benefit-item i {
+            color: var(--bd-green-light);
+            font-size: 14px;
+        }
+
+        .benefit-item span {
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+        }
+
+        @media (max-width: 600px) {
+            .register-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        
+        <div class="wave-container">
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+    </div>
+
+    <!-- Floating Icons -->
+    <div class="floating-icons">
+        <i class="fas fa-passport floating-icon"></i>
+        <i class="fas fa-id-card floating-icon"></i>
+        <i class="fas fa-user-shield floating-icon"></i>
+        <i class="fas fa-file-signature floating-icon"></i>
+    </div>
+
+    <!-- Main Container -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Decorative Corners -->
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+
+            <!-- Header -->
+            <div class="auth-header">
+                <div class="flag-emblem">
+                    <div class="flag-circle"></div>
+                </div>
+                <h1>নাগরিক নিবন্ধন</h1>
+                <p>Create Your Digital Identity</p>
+                <div class="govt-badge">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Citizen Registration Portal</span>
+                </div>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active">1</div>
+                <div class="step-line active"></div>
+                <div class="step active">2</div>
+                <div class="step-line"></div>
+                <div class="step">3</div>
+            </div>
+
+            <!-- Registration Benefits -->
+            <div class="register-benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Access e-Services</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Save Time</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Portal</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>24/7 Access</span>
+                </div>
+            </div>
+
+            <!-- Alert Box -->
+            <div id="alertBox" class="alert"></div>
+
+            <!-- Registration Form -->
+            <form id="registerForm" class="auth-form">
+                <!-- Personal Information Section -->
+                <div class="form-section-title">
+                    <i class="fas fa-user"></i>
+                    <span>Personal Information</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> Full Name (as per NID)
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" class="form-control" 
+                               placeholder="Enter your full name" required>
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nid">
+                            <i class="fas fa-id-card"></i> NID Number
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="text" id="nid" class="form-control" 
+                                   placeholder="National ID" required>
+                            <i class="fas fa-id-card input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">
+                            <i class="fas fa-phone"></i> Mobile Number
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="mobile" class="form-control" 
+                                   placeholder="017XXXXXXXX" required>
+                            <i class="fas fa-phone input-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">
+                            <i class="fas fa-calendar"></i> Date of Birth
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="date" id="dob" class="form-control" required>
+                            <i class="fas fa-calendar input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">
+                            <i class="fas fa-venus-mars"></i> Gender
+                        </label>
+                        <div class="input-wrapper">
+                            <select id="gender" class="form-control" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <i class="fas fa-venus-mars input-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">
+                        <i class="fas fa-map-marker-alt"></i> Present Address
+                    </label>
+                    <div class="input-wrapper">
+                        <textarea id="address" class="form-control" 
+                                  placeholder="Street, Area, City, District" rows="2"></textarea>
+                        <i class="fas fa-map-marker-alt input-icon" style="top: 18px;"></i>
+                    </div>
+                </div>
+
+                <!-- Account Information Section -->
+                <div class="form-section-title">
+                    <i class="fas fa-lock"></i>
+                    <span>Account Security</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" class="form-control" 
+                               placeholder="citizen@example.com" required>
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" class="form-control" 
+                               placeholder="Create a strong password" required>
+                        <i class="fas fa-lock input-icon"></i>
+                    </div>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="password-requirements">
+                        <p>Password must contain:</p>
+                        <div class="requirement" id="req-length">
+                            <i class="fas fa-circle"></i> At least 6 characters
+                        </div>
+                        <div class="requirement" id="req-upper">
+                            <i class="fas fa-circle"></i> One uppercase letter
+                        </div>
+                        <div class="requirement" id="req-number">
+                            <i class="fas fa-circle"></i> One number
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-check-circle"></i> Confirm Password
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirmPassword" class="form-control" 
+                               placeholder="Confirm your password" required>
+                        <i class="fas fa-check-circle input-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#">Terms of Service</a> and 
+                        <a href="#">Privacy Policy</a> of the Government of Bangladesh e-Service Portal.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <span>Create My Account</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Auth Links -->
+            <div class="auth-links">
+                <span>Already have an account?</span>
+                <a href="index.html">
+                    Login Here <i class="fas fa-sign-in-alt"></i>
+                </a>
+            </div>
+
+            <!-- Security Badge -->
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Your data is protected by Government security protocols</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    
+    <!-- Additional Scripts -->
+    <script>
+        // Password strength checker
+        const passwordInput = document.getElementById('password');
+        const strengthBar = document.getElementById('strengthBar');
+        const reqLength = document.getElementById('req-length');
+        const reqUpper = document.getElementById('req-upper');
+        const reqNumber = document.getElementById('req-number');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+
+            // Check length
+            if (password.length >= 6) {
+                strength++;
+                reqLength.classList.add('valid');
+                reqLength.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                reqLength.classList.remove('valid');
+                reqLength.querySelector('i').className = 'fas fa-circle';
+            }
+
+            // Check uppercase
+            if (/[A-Z]/.test(password)) {
+                strength++;
+                reqUpper.classList.add('valid');
+                reqUpper.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                reqUpper.classList.remove('valid');
+                reqUpper.querySelector('i').className = 'fas fa-circle';
+            }
+
+            // Check number
+            if (/[0-9]/.test(password)) {
+                strength++;
+                reqNumber.classList.add('valid');
+                reqNumber.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                reqNumber.classList.remove('valid');
+                reqNumber.querySelector('i').className = 'fas fa-circle';
+            }
+
+            // Update strength bar
+            strengthBar.className = 'password-strength-bar';
+            if (strength === 1) {
+                strengthBar.classList.add('weak');
+            } else if (strength === 2) {
+                strengthBar.classList.add('medium');
+            } else if (strength === 3) {
+                strengthBar.classList.add('strong');
+            }
+        });
+
+        // Add focus effects
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.parentElement.classList.add('focused');
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.parentElement.classList.remove('focused');
+            });
+        });
+
+        // Button loading state
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const btn = this.querySelector('.btn-submit');
+            btn.classList.add('loading');
+            btn.innerHTML = '<span>Creating Account...</span>';
+        });
+
+        // Confirm password validation
+        const confirmPassword = document.getElementById('confirmPassword');
+        confirmPassword.addEventListener('input', function() {
+            if (this.value !== passwordInput.value) {
+                this.style.borderColor = '#f42a41';
+            } else {
+                this.style.borderColor = '#006a4e';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Health Management | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/health.css">
+    <link rel="stylesheet" href="css/admin-health.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #dc2626, #ef4444);">
+                    <i class="fas fa-user-shield" style="color: #fff;"></i>
+                </div>
+                <h3 style="color: #fca5a5;">Admin Panel</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Health Management</p>
+            </div>
+            <nav class="nav-links">
+                <a href="reports.html"><i class="fas fa-arrow-left"></i> Back to Admin Panel</a>
+                <a href="#" onclick="AdminHealth.showTab('dashboard')" class="active" id="nav-dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="#" onclick="AdminHealth.showTab('health-cards')" id="nav-health-cards"><i class="fas fa-id-card-alt"></i> Health Cards</a>
+                <a href="#" onclick="AdminHealth.showTab('vaccinations')" id="nav-vaccinations"><i class="fas fa-syringe"></i> Vaccinations</a>
+                <a href="#" onclick="AdminHealth.showTab('appointments')" id="nav-appointments"><i class="fas fa-calendar-check"></i> Appointments</a>
+                <a href="#" onclick="AdminHealth.showTab('ambulance')" id="nav-ambulance"><i class="fas fa-ambulance"></i> Ambulance</a>
+                <a href="#" onclick="AdminHealth.showTab('complaints')" id="nav-complaints"><i class="fas fa-exclamation-triangle"></i> Complaints</a>
+                <a href="#" onclick="AdminHealth.showTab('hospitals')" id="nav-hospitals"><i class="fas fa-hospital"></i> Hospitals</a>
+                <a href="health.html"><i class="fas fa-globe"></i> Public Health Page</a>
+                <a href="#" onclick="AdminHealth.logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ==================== DASHBOARD TAB ==================== -->
+            <div id="tab-dashboard" class="admin-tab">
+                <div class="admin-health-banner">
+                    <h1><i class="fas fa-user-shield"></i> Health Admin Panel</h1>
+                    <span class="admin-badge"><i class="fas fa-lock"></i> Admin Access</span>
+                </div>
+
+                <div class="admin-stats-grid" id="adminStatsGrid">
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">🪪</span>
+                        <span class="stat-value" id="adm-total-cards">-</span>
+                        <span class="stat-label">Total Health Cards</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #fbbf24;">⏳</span>
+                        <span class="stat-value" id="adm-pending-cards">-</span>
+                        <span class="stat-label">Pending Cards</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #34d399;">✅</span>
+                        <span class="stat-value" id="adm-approved-cards">-</span>
+                        <span class="stat-label">Approved Cards</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">💉</span>
+                        <span class="stat-value" id="adm-total-vaccines">-</span>
+                        <span class="stat-label">Vaccinations</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">📅</span>
+                        <span class="stat-value" id="adm-total-appts">-</span>
+                        <span class="stat-label">Appointments</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #fbbf24;">⏳</span>
+                        <span class="stat-value" id="adm-pending-appts">-</span>
+                        <span class="stat-label">Pending Appts</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">🚑</span>
+                        <span class="stat-value" id="adm-total-ambulance">-</span>
+                        <span class="stat-label">Ambulance Reqs</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #f87171;">🔴</span>
+                        <span class="stat-value" id="adm-active-ambulance">-</span>
+                        <span class="stat-label">Active Ambulances</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">📝</span>
+                        <span class="stat-value" id="adm-total-complaints">-</span>
+                        <span class="stat-label">Complaints</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon">🏥</span>
+                        <span class="stat-value" id="adm-total-hospitals">-</span>
+                        <span class="stat-label">Hospitals</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="stat-icon" style="color: #22d3ee;">📅</span>
+                        <span class="stat-value" id="adm-today-appts">-</span>
+                        <span class="stat-label">Today's Appts</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== HEALTH CARDS TAB ==================== -->
+            <div id="tab-health-cards" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-id-card-alt"></i> Health Card Applications</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="hc-filter-status" onchange="AdminHealth.loadHealthCards()">
+                            <option value="">All</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="hc-filter-search" placeholder="Name, NID, Card No..."
+                            onkeypress="if(event.key==='Enter') AdminHealth.loadHealthCards()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-health" onclick="AdminHealth.loadHealthCards()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="health-table">
+                        <thead>
+                            <tr>
+                                <th>Card No.</th>
+                                <th>Name</th>
+                                <th>NID</th>
+                                <th>Blood</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminHcBody">
+                            <tr><td colspan="8" class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== VACCINATIONS TAB ==================== -->
+            <div id="tab-vaccinations" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-syringe"></i> Vaccination Records</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="vac-filter-status" onchange="AdminHealth.loadVaccinations()">
+                            <option value="">All</option>
+                            <option value="Registered">Registered</option>
+                            <option value="Scheduled">Scheduled</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="vac-filter-search" placeholder="Vaccine, Name..."
+                            onkeypress="if(event.key==='Enter') AdminHealth.loadVaccinations()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-health" onclick="AdminHealth.loadVaccinations()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="health-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Vaccine</th>
+                                <th>Type</th>
+                                <th>Dose</th>
+                                <th>Date</th>
+                                <th>Center</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminVacBody">
+                            <tr><td colspan="9" class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== APPOINTMENTS TAB ==================== -->
+            <div id="tab-appointments" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Appointments</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="apt-filter-status" onchange="AdminHealth.loadAppointments()">
+                            <option value="">All</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="No Show">No Show</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date</label>
+                        <input type="date" id="apt-filter-date" onchange="AdminHealth.loadAppointments()">
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="apt-filter-search" placeholder="Patient, Phone..."
+                            onkeypress="if(event.key==='Enter') AdminHealth.loadAppointments()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-health" onclick="AdminHealth.loadAppointments()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="health-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patient</th>
+                                <th>Hospital</th>
+                                <th>Department</th>
+                                <th>Date</th>
+                                <th>Urgency</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminAptBody">
+                            <tr><td colspan="8" class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== AMBULANCE TAB ==================== -->
+            <div id="tab-ambulance" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-ambulance"></i> Ambulance Requests</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="amb-filter-status" onchange="AdminHealth.loadAmbulance()">
+                            <option value="">All</option>
+                            <option value="Requested">Requested</option>
+                            <option value="Dispatched">Dispatched</option>
+                            <option value="En Route">En Route</option>
+                            <option value="Arrived">Arrived</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="amb-filter-search" placeholder="Patient, Phone..."
+                            onkeypress="if(event.key==='Enter') AdminHealth.loadAmbulance()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-health" onclick="AdminHealth.loadAmbulance()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="health-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patient</th>
+                                <th>Emergency</th>
+                                <th>Location</th>
+                                <th>Urgency</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminAmbBody">
+                            <tr><td colspan="8" class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== COMPLAINTS TAB ==================== -->
+            <div id="tab-complaints" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Health Complaints</h2>
+                </div>
+                <div class="admin-filter-bar">
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="comp-filter-status" onchange="AdminHealth.loadComplaints()">
+                            <option value="">All</option>
+                            <option value="Submitted">Submitted</option>
+                            <option value="Under Review">Under Review</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" id="comp-filter-search" placeholder="Hospital, Description..."
+                            onkeypress="if(event.key==='Enter') AdminHealth.loadComplaints()">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="btn-health" onclick="AdminHealth.loadComplaints()"><i class="fas fa-search"></i> Filter</button>
+                    </div>
+                </div>
+                <div class="admin-table-card">
+                    <table class="health-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Type</th>
+                                <th>Hospital</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminCompBody">
+                            <tr><td colspan="7" class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== HOSPITALS TAB ==================== -->
+            <div id="tab-hospitals" class="admin-tab" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-hospital"></i> Hospital Management</h2>
+                    <button class="btn-health" onclick="AdminHealth.showAddHospitalForm()">
+                        <i class="fas fa-plus"></i> Add Hospital
+                    </button>
+                </div>
+                <div class="admin-table-card">
+                    <table class="health-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Division</th>
+                                <th>District</th>
+                                <th>Beds</th>
+                                <th>ICU</th>
+                                <th>Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminHospBody">
+                            <tr><td colspan="8" class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="admin-modal-overlay" id="detailModalOverlay">
+        <div class="admin-modal">
+            <div class="admin-modal-header">
+                <h2><i class="fas fa-heartbeat"></i> <span id="modalTitle">Details</span></h2>
+                <button class="admin-modal-close" onclick="AdminHealth.closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="admin-modal-body" id="modalBody">
+                <div class="health-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/admin-health.js"></script>
+</body>
+
+</html>

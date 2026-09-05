@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পানি সম্পদ মন্ত্রণালয় | Water Resources | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/water.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #0369a1, #0ea5e9);">
+                    <i class="fas fa-water" style="color: #fff;"></i>
+                </div>
+                <h3 style="color: #7dd3fc;">পানি সম্পদ মন্ত্রণালয়</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Ministry of Water Resources</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" class="active" onclick="showSection('overview')"><i class="fas fa-home"></i> Overview</a>
+                <a href="#" onclick="showSection('connection')"><i class="fas fa-faucet-drip"></i> Water Connection</a>
+                <a href="#" onclick="showSection('bill')"><i class="fas fa-file-invoice-dollar"></i> Pay Bill</a>
+                <a href="#" onclick="showSection('quality')"><i class="fas fa-flask"></i> Water Quality</a>
+                <a href="#" onclick="showSection('complaints')"><i class="fas fa-exclamation-triangle"></i> Complaints</a>
+                <a href="#" onclick="showSection('projects')"><i class="fas fa-project-diagram"></i> Projects</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ========== OVERVIEW ========== -->
+            <div class="content-section" id="overview">
+                <div class="water-banner">
+                    <div class="water-banner-content">
+                        <h1>💧 পানি সম্পদ মন্ত্রণালয়</h1>
+                        <p>Ministry of Water Resources — Water Supply, Irrigation & Flood Management</p>
+                    </div>
+                </div>
+
+                <div class="water-stats-grid" id="overviewStats">
+                    <div class="water-stat-card">
+                        <span class="stat-icon">🔗</span>
+                        <span class="stat-value" id="stat-connections">-</span>
+                        <span class="stat-label">My Connections</span>
+                    </div>
+                    <div class="water-stat-card">
+                        <span class="stat-icon" style="color: #34d399;">✅</span>
+                        <span class="stat-value" id="stat-active">-</span>
+                        <span class="stat-label">Active Connections</span>
+                    </div>
+                    <div class="water-stat-card">
+                        <span class="stat-icon">💳</span>
+                        <span class="stat-value" id="stat-bills">-</span>
+                        <span class="stat-label">Bills Paid</span>
+                    </div>
+                    <div class="water-stat-card">
+                        <span class="stat-icon" style="color: #fbbf24;">⏳</span>
+                        <span class="stat-value" id="stat-pending-bills">-</span>
+                        <span class="stat-label">Pending Bills</span>
+                    </div>
+                    <div class="water-stat-card">
+                        <span class="stat-icon">📝</span>
+                        <span class="stat-value" id="stat-complaints">-</span>
+                        <span class="stat-label">Complaints</span>
+                    </div>
+                    <div class="water-stat-card">
+                        <span class="stat-icon">🔬</span>
+                        <span class="stat-value" id="stat-quality">-</span>
+                        <span class="stat-label">Quality Reports</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <h3 class="section-title"><i class="fas fa-bolt"></i> Quick Services</h3>
+                <div class="water-action-grid">
+                    <div class="water-action-card" onclick="showSection('connection')">
+                        <i class="fas fa-faucet-drip"></i>
+                        <h4>New Connection</h4>
+                        <p>Apply for water connection</p>
+                    </div>
+                    <div class="water-action-card" onclick="showSection('bill')">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <h4>Pay Bill</h4>
+                        <p>WASA / DPHE bill payment</p>
+                    </div>
+                    <div class="water-action-card" onclick="showSection('quality')">
+                        <i class="fas fa-flask"></i>
+                        <h4>Water Quality</h4>
+                        <p>Report contamination</p>
+                    </div>
+                    <div class="water-action-card" onclick="showSection('complaints')">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>File Complaint</h4>
+                        <p>Report supply issues</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <h3 class="section-title"><i class="fas fa-clock"></i> Recent Activity</h3>
+                <div class="water-card" id="recentActivityContainer">
+                    <p style="color: #94a3b8; text-align: center;">Loading...</p>
+                </div>
+            </div>
+
+            <!-- ========== WATER CONNECTION ========== -->
+            <div class="content-section" id="connection" style="display:none;">
+                <h2 class="section-title"><i class="fas fa-faucet-drip"></i> পানির সংযোগ আবেদন (Water Connection)</h2>
+
+                <div class="water-card">
+                    <h3 class="form-title"><i class="fas fa-plus-circle"></i> Apply for New Connection</h3>
+                    <form id="connectionForm" class="water-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Holder Name / সংযোগধারীর নাম *</label>
+                                <input type="text" id="conn-name" required placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label>NID Number / এনআইডি নম্বর *</label>
+                                <input type="text" id="conn-nid" required placeholder="NID number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone / ফোন নম্বর *</label>
+                                <input type="text" id="conn-phone" required placeholder="01XXXXXXXXX">
+                            </div>
+                            <div class="form-group">
+                                <label>Connection Type / সংযোগের ধরন *</label>
+                                <select id="conn-type" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Residential">Residential (আবাসিক)</option>
+                                    <option value="Commercial">Commercial (বাণিজ্যিক)</option>
+                                    <option value="Industrial">Industrial (শিল্প)</option>
+                                    <option value="Agricultural">Agricultural (কৃষি)</option>
+                                    <option value="Institutional">Institutional (প্রাতিষ্ঠানিক)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Pipe Size / পাইপের মাপ</label>
+                                <select id="conn-pipe">
+                                    <option value="0.5 inch">0.5 inch (½")</option>
+                                    <option value="0.75 inch">0.75 inch (¾")</option>
+                                    <option value="1 inch">1 inch (1")</option>
+                                    <option value="1.5 inch">1.5 inch (1½")</option>
+                                    <option value="2 inch">2 inch (2")</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>WASA Region / অঞ্চল</label>
+                                <select id="conn-region">
+                                    <option value="Dhaka WASA">Dhaka WASA</option>
+                                    <option value="Chittagong WASA">Chittagong WASA</option>
+                                    <option value="Khulna WASA">Khulna WASA</option>
+                                    <option value="Rajshahi WASA">Rajshahi WASA</option>
+                                    <option value="DPHE Regional" selected>DPHE Regional</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Division / বিভাগ *</label>
+                                <select id="conn-division" required onchange="WaterApp.loadDistricts('conn')">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>District / জেলা *</label>
+                                <select id="conn-district" required onchange="WaterApp.loadUpazilas('conn')">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Upazila / উপজেলা *</label>
+                                <select id="conn-upazila" required>
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ward No. / ওয়ার্ড</label>
+                                <input type="text" id="conn-ward" placeholder="Ward number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Full Address / ঠিকানা *</label>
+                            <textarea id="conn-address" required rows="2" placeholder="House, Road, Area..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-water"><i class="fas fa-paper-plane"></i> Submit Application</button>
+                    </form>
+                </div>
+
+                <h3 class="section-title"><i class="fas fa-list"></i> My Connections</h3>
+                <div class="water-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>Connection No.</th>
+                                <th>Type</th>
+                                <th>Region</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myConnectionsBody">
+                            <tr><td colspan="6" style="text-align: center; color: #64748b;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== BILL PAYMENT ========== -->
+            <div class="content-section" id="bill" style="display:none;">
+                <h2 class="section-title"><i class="fas fa-file-invoice-dollar"></i> পানির বিল পরিশোধ (Bill Payment)</h2>
+
+                <div class="water-card">
+                    <h3 class="form-title"><i class="fas fa-credit-card"></i> Pay Water Bill</h3>
+                    <form id="billForm" class="water-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Connection Number / সংযোগ নম্বর *</label>
+                                <input type="text" id="bill-conn-no" required placeholder="e.g. WC12345678">
+                            </div>
+                            <div class="form-group">
+                                <label>Billing Month / বিলের মাস *</label>
+                                <input type="month" id="bill-month" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Previous Meter Reading</label>
+                                <input type="number" id="bill-prev" placeholder="0" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Current Meter Reading</label>
+                                <input type="number" id="bill-current" placeholder="0" min="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Amount / পরিমাণ (৳) *</label>
+                                <input type="number" id="bill-amount" required step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label>Surcharge / সারচার্জ (৳)</label>
+                                <input type="number" id="bill-surcharge" step="0.01" value="0" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Total Amount / মোট (৳) *</label>
+                                <input type="number" id="bill-total" required step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="form-group">
+                                <label>Payment Method / পেমেন্ট পদ্ধতি *</label>
+                                <select id="bill-method" required>
+                                    <option value="bKash">bKash</option>
+                                    <option value="Nagad">Nagad</option>
+                                    <option value="Rocket">Rocket</option>
+                                    <option value="Bank Transfer">Bank Transfer</option>
+                                    <option value="Online">Online</option>
+                                    <option value="Cash">Cash</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Transaction ID / ট্রানজেকশন আইডি</label>
+                            <input type="text" id="bill-txn" placeholder="e.g. TXN123456789">
+                        </div>
+                        <button type="submit" class="btn-water"><i class="fas fa-money-bill-wave"></i> Pay Bill</button>
+                    </form>
+                </div>
+
+                <h3 class="section-title"><i class="fas fa-history"></i> Payment History</h3>
+                <div class="water-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>Conn. No.</th>
+                                <th>Month</th>
+                                <th>Units</th>
+                                <th>Amount (৳)</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myBillsBody">
+                            <tr><td colspan="7" style="text-align: center; color: #64748b;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== WATER QUALITY ========== -->
+            <div class="content-section" id="quality" style="display:none;">
+                <h2 class="section-title"><i class="fas fa-flask"></i> পানির মান পরীক্ষা (Water Quality Report)</h2>
+
+                <div class="water-card">
+                    <h3 class="form-title"><i class="fas fa-microscope"></i> Report Water Quality Issue</h3>
+                    <form id="qualityForm" class="water-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Water Source / পানির উৎস *</label>
+                                <select id="qual-source" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Tube Well">Tube Well (নলকূপ)</option>
+                                    <option value="Deep Tube Well">Deep Tube Well (গভীর নলকূপ)</option>
+                                    <option value="WASA Pipeline">WASA Pipeline</option>
+                                    <option value="Pond">Pond (পুকুর)</option>
+                                    <option value="River">River (নদী)</option>
+                                    <option value="Reservoir">Reservoir</option>
+                                    <option value="Rain Water">Rain Water (বৃষ্টির পানি)</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Issue Type / সমস্যার ধরন *</label>
+                                <select id="qual-issue" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="Arsenic Contamination">Arsenic (আর্সেনিক)</option>
+                                    <option value="Iron Content">Iron Content (লোহা)</option>
+                                    <option value="Salinity">Salinity (লবণাক্ততা)</option>
+                                    <option value="Color/Odor">Color/Odor (রং/গন্ধ)</option>
+                                    <option value="Bacterial">Bacterial (ব্যাকটেরিয়া)</option>
+                                    <option value="Chemical">Chemical (রাসায়নিক)</option>
+                                    <option value="Turbidity">Turbidity (ঘোলাটে)</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Severity / তীব্রতা *</label>
+                                <select id="qual-severity" required>
+                                    <option value="Low">Low (কম)</option>
+                                    <option value="Medium" selected>Medium (মাঝারি)</option>
+                                    <option value="High">High (উচ্চ)</option>
+                                    <option value="Critical">Critical (জরুরি)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Affected People / আক্রান্ত জনসংখ্যা</label>
+                                <input type="number" id="qual-affected" min="0" value="0" placeholder="Approximate number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Division / বিভাগ *</label>
+                                <select id="qual-division" required onchange="WaterApp.loadDistricts('qual')">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>District / জেলা *</label>
+                                <select id="qual-district" required onchange="WaterApp.loadUpazilas('qual')">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Upazila / উপজেলা</label>
+                                <select id="qual-upazila">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Location Details</label>
+                                <input type="text" id="qual-location" placeholder="Specific location...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description / বিবরণ *</label>
+                            <textarea id="qual-desc" required rows="3" placeholder="Describe the water quality issue in detail..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-water"><i class="fas fa-paper-plane"></i> Submit Report</button>
+                    </form>
+                </div>
+
+                <h3 class="section-title"><i class="fas fa-history"></i> My Quality Reports</h3>
+                <div class="water-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Issue</th>
+                                <th>Severity</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myQualityBody">
+                            <tr><td colspan="6" style="text-align: center; color: #64748b;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== COMPLAINTS ========== -->
+            <div class="content-section" id="complaints" style="display:none;">
+                <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> অভিযোগ দাখিল (File Complaint)</h2>
+
+                <div class="water-card">
+                    <h3 class="form-title"><i class="fas fa-bullhorn"></i> Submit Water Complaint</h3>
+                    <form id="complaintForm" class="water-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Complaint Type / অভিযোগের ধরন *</label>
+                                <select id="comp-type" required>
+                                    <option value="">-- Select --</option>
+                                    <option value="No Water Supply">No Water Supply (পানি সরবরাহ নেই)</option>
+                                    <option value="Low Pressure">Low Pressure (কম চাপ)</option>
+                                    <option value="Pipeline Leakage">Pipeline Leakage (পাইপ ফুটো)</option>
+                                    <option value="Contaminated Water">Contaminated Water (দূষিত পানি)</option>
+                                    <option value="Meter Fault">Meter Fault (মিটার সমস্যা)</option>
+                                    <option value="Billing Error">Billing Error (বিল ভুল)</option>
+                                    <option value="Sewage Overflow">Sewage Overflow (পয়ঃনিষ্কাশন)</option>
+                                    <option value="Illegal Connection">Illegal Connection (অবৈধ সংযোগ)</option>
+                                    <option value="Pump Failure">Pump Failure (পাম্প বিকল)</option>
+                                    <option value="Other">Other (অন্যান্য)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Priority / অগ্রাধিকার *</label>
+                                <select id="comp-priority" required>
+                                    <option value="Low">Low</option>
+                                    <option value="Normal" selected>Normal</option>
+                                    <option value="High">High</option>
+                                    <option value="Emergency">Emergency (জরুরি)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Division / বিভাগ *</label>
+                                <select id="comp-division" required onchange="WaterApp.loadDistricts('comp')">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>District / জেলা *</label>
+                                <select id="comp-district" required onchange="WaterApp.loadUpazilas('comp')">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Upazila / উপজেলা</label>
+                                <select id="comp-upazila">
+                                    <option value="">-- Select --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Phone / ফোন</label>
+                                <input type="text" id="comp-phone" placeholder="01XXXXXXXXX">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address / ঠিকানা *</label>
+                            <input type="text" id="comp-address" required placeholder="Full address of the issue location">
+                        </div>
+                        <div class="form-group">
+                            <label>Description / বিবরণ *</label>
+                            <textarea id="comp-desc" required rows="3" placeholder="Describe the problem in detail..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-water"><i class="fas fa-paper-plane"></i> Submit Complaint</button>
+                    </form>
+                </div>
+
+                <h3 class="section-title"><i class="fas fa-history"></i> My Complaints</h3>
+                <div class="water-card">
+                    <table class="water-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Priority</th>
+                                <th>District</th>
+                                <th>Status</th>
+                                <th>Assigned To</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myComplaintsBody">
+                            <tr><td colspan="6" style="text-align: center; color: #64748b;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ========== PROJECTS ========== -->
+            <div class="content-section" id="projects" style="display:none;">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> পানি প্রকল্পসমূহ (Water Projects)</h2>
+
+                <div class="water-filter-bar">
+                    <div class="filter-group">
+                        <label>Division</label>
+                        <select id="proj-filter-division" onchange="WaterApp.loadProjects()">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Type</label>
+                        <select id="proj-filter-type" onchange="WaterApp.loadProjects()">
+                            <option value="">All</option>
+                            <option value="Flood Control">Flood Control</option>
+                            <option value="Irrigation">Irrigation</option>
+                            <option value="Drainage">Drainage</option>
+                            <option value="River Dredging">River Dredging</option>
+                            <option value="Embankment">Embankment</option>
+                            <option value="Water Treatment Plant">Water Treatment Plant</option>
+                            <option value="Pipeline Extension">Pipeline Extension</option>
+                            <option value="Sewerage">Sewerage</option>
+                            <option value="Desalination">Desalination</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="project-grid" id="projectGrid">
+                    <p style="color: #94a3b8; text-align: center; grid-column: 1/-1;">Loading projects...</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/water.js"></script>
+</body>
+
+</html>

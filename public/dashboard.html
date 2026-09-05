@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Dashboard | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <style>
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid System */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Departments Grid */
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .dept-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dept-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .dept-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Kanban Board */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            height: 400px;
+        }
+
+        .kanban-column {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kanban-header {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .kanban-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            min-height: 50px;
+        }
+
+        .kanban-item {
+            background: var(--glass-bg);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: grab;
+            border: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .kanban-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .delete-task {
+            color: #ef4444;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .kanban-item:hover .delete-task {
+            opacity: 1;
+        }
+
+        .add-task-btn {
+            background: transparent;
+            border: 1px dashed var(--text-muted);
+            color: var(--text-muted);
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .add-task-btn:hover {
+            border-color: white;
+            color: white;
+        }
+
+        /* Responsive for this page */
+        @media (max-width: 768px) {
+            .kanban-board {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .kanban-column {
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile" id="userProfileSection" style="cursor: pointer;">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="userName">Loading...</h3>
+                <p id="userNid" style="color: var(--text-muted); font-size: 0.8rem;">...</p>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="documents.html"><i class="fas fa-folder"></i> My Documents</a>
+                <a href="history.html"><i class="fas fa-history"></i> History</a>
+                <a href="todo.html"><i class="fas fa-tasks"></i> To Do</a>
+                <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                <a href="market.html"><i class="fas fa-chart-line"></i> Market Info</a>
+                <a href="events.html"><i class="fas fa-bullhorn"></i> Notices</a>
+                <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="javascript:void(0)" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header-bar">
+                <div>
+                    <h1>Citizen Dashboard</h1>
+                    <p style="color: var(--text-muted);">Welcome to the Digital Bangladesh Portal</p>
+                </div>
+                <button id="newRequestBtn" class="btn-primary" style="width: auto; padding: 0.5rem 1.5rem;">
+                    <i class="fas fa-plus"></i> New Request
+                </button>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="dashboard-grid">
+                <div class="card" onclick="openActiveRequests()" style="cursor: pointer;">
+                    <h3 style="color: #34d399">Active Requests</h3>
+                    <h1 id="statRequests" style="font-size: 3rem; margin: 0.5rem 0;">0</h1>
+                    <p>Pending Review</p>
+                </div>
+                <div class="card" onclick="openCompletedTasks()" style="cursor: pointer;">
+                    <h3 style="color: #60a5fa">Completed Tasks</h3>
+                    <h1 id="statTasks" style="font-size: 3rem; margin: 0.5rem 0;">0</h1>
+                    <p>Approved Applications</p>
+                </div>
+                <div class="card" onclick="openNotifications()" style="cursor: pointer;">
+                    <h3 style="color: #f472b6">Notifications</h3>
+                    <h1 id="statNotifs" style="font-size: 3rem; margin: 0.5rem 0;">0</h1>
+                    <p>Unread Messages</p>
+                </div>
+            </div>
+
+            <!-- Departments -->
+            <div style="margin-bottom: 2rem;">
+                <h2 style="margin-bottom: 1rem; border-left: 4px solid var(--primary-color); padding-left: 10px;">Govt
+                    Departments</h2>
+                <div class="dept-grid" id="deptGrid">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+
+    <!-- Service Request Modal -->
+    <div id="serviceRequestModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>New Service Request</h2>
+                <button onclick="closeServiceModal()" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="serviceRequestForm">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="serviceCategory" class="form-control">
+                            <option value="">Select Category</option>
+                            <option value="identity">Identity & Citizenship</option>
+                            <option value="education">Education</option>
+                            <option value="transport">Transport</option>
+                            <option value="immigration">Immigration</option>
+                            <option value="business">Business & Tax</option>
+                            <option value="legal">Legal & Police</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Service Type</label>
+                        <select id="serviceSubtype" class="form-control" disabled>
+                            <option value="">Select Service Type</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unique Number / ID</label>
+                        <input type="text" id="serviceUniqueId" class="form-control"
+                            placeholder="e.g. NID/Passport/Licence Number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Evidence (Google Drive Link)</label>
+                        <input type="url" id="serviceEvidence" class="form-control"
+                            placeholder="https://drive.google.com/..." required>
+                        <small style="color: #94a3b8; font-size: 0.8rem;">Please upload all necessary documents to a
+                            Google Drive folder and share the link here.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description & Requirements</label>
+                        <textarea id="serviceDescription" class="form-control" rows="4"
+                            placeholder="Describe your problem and what needs to be changed..." required></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary">Cancel</button>
+                        <button type="button" id="submitRequestBtn" class="btn-primary">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Requests Modal -->
+    <div id="activeRequestsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Active Requests (Admin Simulation)</h2>
+                <button onclick="closeModal('activeRequestsModal')" class="close-btn"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="activeRequestsList">
+                    <!-- Loaded via JS -->
+                    <p class="text-center text-muted">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completed Tasks Modal -->
+    <div id="completedTasksModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>Completed Tasks</h2>
+                <button onclick="closeModal('completedTasksModal')" class="close-btn"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; color: white;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left;">
+                                <th style="padding: 10px;">Service</th>
+                                <th style="padding: 10px;">ID</th>
+                                <th style="padding: 10px;">Status</th>
+                                <th style="padding: 10px;">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="completedTasksList">
+                            <!-- Loaded via JS -->
+                        </tbody>
+                    </table>
+                    <p id="completedLoading" class="text-center text-muted" style="margin-top: 10px;">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div id="notificationsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Notifications</h2>
+                <button onclick="closeModal('notificationsModal')" class="close-btn"><i
+                        class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="notificationsList">
+                    <!-- Loaded via JS -->
+                    <p class="text-center text-muted">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #1e293b;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/dashboard.js?v=manual_bust_10"></script>
+</body>
+
+</html>

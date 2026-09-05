@@ -1,0 +1,964 @@
+/* NationX citizen dashboard
+   Uses the auth page's glass, ambient motion, and Bangladesh green/red language
+   while remaining isolated from the service-page styles. */
+
+body {
+    display: block;
+    min-width: 320px;
+    padding: 0;
+    background: #061411;
+    color: #f8fafc;
+    overflow-x: hidden;
+}
+
+#root {
+    width: 100%;
+}
+
+.nationx-dashboard {
+    --dashboard-green: #00a676;
+    --dashboard-green-dark: #006a4e;
+    --dashboard-green-soft: #38d9a9;
+    --dashboard-red: #f42a41;
+    --dashboard-blue: #60a5fa;
+    --dashboard-pink: #f472b6;
+    --dashboard-panel: rgba(12, 34, 31, 0.76);
+    --dashboard-panel-strong: rgba(11, 29, 34, 0.94);
+    --dashboard-border: rgba(255, 255, 255, 0.09);
+    --dashboard-muted: #9aabb8;
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #f8fafc;
+    background:
+        radial-gradient(circle at 31% 8%, rgba(0, 166, 118, 0.2), transparent 32rem),
+        radial-gradient(circle at 94% 82%, rgba(244, 42, 65, 0.17), transparent 32rem),
+        linear-gradient(135deg, #041b16 0%, #020d0b 48%, #081411 100%);
+}
+
+.dashboard-ambient {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.dashboard-grid-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.16;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.dashboard-orb {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(70px);
+    opacity: 0.25;
+    animation: dashboardOrbFloat 16s ease-in-out infinite;
+}
+
+.dashboard-orb-green {
+    top: -9rem;
+    left: 19rem;
+    width: 32rem;
+    height: 32rem;
+    background: #00a676;
+}
+
+.dashboard-orb-red {
+    right: -9rem;
+    bottom: -12rem;
+    width: 34rem;
+    height: 34rem;
+    background: #f42a41;
+    animation-delay: -8s;
+}
+
+.dashboard-orb-gold {
+    top: 46%;
+    right: 16%;
+    width: 12rem;
+    height: 12rem;
+    opacity: 0.06;
+    background: #ffd700;
+    animation-delay: -4s;
+}
+
+.dashboard-wave {
+    position: absolute;
+    right: -10%;
+    bottom: -7rem;
+    width: 90%;
+    height: 13rem;
+    border: 1px solid rgba(0, 166, 118, 0.16);
+    border-radius: 50%;
+    transform: rotate(-4deg);
+    animation: dashboardWave 10s ease-in-out infinite alternate;
+}
+
+.dashboard-wave-two {
+    right: -14%;
+    bottom: -9rem;
+    border-color: rgba(244, 42, 65, 0.12);
+    animation-delay: -4s;
+}
+
+.nationx-dashboard .dashboard-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.nationx-dashboard .sidebar {
+    width: 292px;
+    padding: 1.4rem 1.25rem 1.25rem;
+    color: #f8fafc;
+    background:
+        linear-gradient(180deg, rgba(12, 28, 45, 0.96), rgba(5, 18, 31, 0.985)),
+        radial-gradient(circle at top, rgba(0, 166, 118, 0.14), transparent 46%);
+    border-right: 1px solid rgba(148, 163, 184, 0.11);
+    box-shadow: 22px 0 60px rgba(0, 0, 0, 0.22);
+}
+
+.nationx-dashboard .sidebar::before {
+    height: 3px;
+    background: linear-gradient(90deg, var(--dashboard-green), var(--dashboard-red), var(--dashboard-green));
+    background-size: 220% 100%;
+}
+
+.dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.2rem 0 1.35rem;
+    padding: 0.55rem 0.6rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dashboard-brand-mark {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    background: linear-gradient(145deg, #008d67, #005943);
+    box-shadow: 0 8px 24px rgba(0, 166, 118, 0.24), inset 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.dashboard-brand-mark span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--dashboard-red);
+    box-shadow: 0 0 14px rgba(244, 42, 65, 0.5);
+}
+
+.dashboard-brand > span:last-child {
+    display: grid;
+    line-height: 1.1;
+}
+
+.dashboard-brand strong {
+    font-size: 1.04rem;
+    letter-spacing: 0.02em;
+}
+
+.dashboard-brand small {
+    margin-top: 0.24rem;
+    color: #78909f;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.nationx-dashboard .user-profile {
+    margin-bottom: 1.15rem;
+    padding: 0.95rem 0.75rem 1.35rem;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-radius: 18px 18px 0 0;
+}
+
+.nationx-dashboard .user-profile::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0.8rem;
+    border-radius: 18px;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.025);
+    transition: opacity 250ms ease;
+}
+
+.nationx-dashboard .user-profile:hover::before {
+    opacity: 1;
+}
+
+.nationx-dashboard .user-avatar {
+    width: 82px;
+    height: 82px;
+    margin-bottom: 0.8rem;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, var(--dashboard-green-dark), var(--dashboard-red));
+    box-shadow: 0 12px 32px rgba(0, 106, 78, 0.24), 0 0 0 7px rgba(255, 255, 255, 0.025);
+}
+
+.nationx-dashboard .user-avatar::after {
+    right: 1px;
+    bottom: 2px;
+    width: 14px;
+    height: 14px;
+    border-color: #0a1b2b;
+}
+
+.nationx-dashboard .user-profile h3 {
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.nationx-dashboard .user-profile p {
+    color: #728494;
+    font-size: 0.7rem;
+}
+
+.dashboard-nav-label {
+    padding: 0.2rem 0.9rem 0.45rem;
+    color: #5f7484;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.nationx-dashboard .nav-links {
+    gap: 0.2rem;
+}
+
+.nationx-dashboard .nav-links a,
+.nationx-dashboard .react-nav-button {
+    min-height: 43px;
+    padding: 0.72rem 0.85rem;
+    color: #aebbc6;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 0.83rem;
+    font-weight: 550;
+    transition: color 220ms ease, background 220ms ease, border-color 220ms ease, transform 220ms ease;
+}
+
+.nationx-dashboard .nav-links a i,
+.nationx-dashboard .react-nav-button i {
+    width: 22px;
+    margin-right: 0.55rem;
+    color: #8496a5;
+    text-align: center;
+    transition: color 220ms ease, transform 220ms ease;
+}
+
+.nationx-dashboard .nav-links a::before {
+    display: none;
+}
+
+.nationx-dashboard .nav-links a:hover,
+.nationx-dashboard .nav-links a:focus-visible {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.045);
+    border-color: rgba(255, 255, 255, 0.055);
+    transform: translateX(3px);
+}
+
+.nationx-dashboard .nav-links a.active {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(0, 166, 118, 0.25), rgba(0, 106, 78, 0.08));
+    border-color: rgba(0, 166, 118, 0.15);
+    border-left: 3px solid var(--dashboard-green);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+    transform: none;
+}
+
+.nationx-dashboard .nav-links a.active i,
+.nationx-dashboard .nav-links a:hover i {
+    color: #fff;
+}
+
+.nationx-dashboard .dashboard-logout {
+    margin-top: 0.65rem;
+    color: #f39aa5;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 0;
+}
+
+.nationx-dashboard .dashboard-logout:hover,
+.nationx-dashboard .dashboard-logout:focus-visible {
+    color: #ffb0b9;
+    background: rgba(244, 42, 65, 0.07);
+}
+
+.nationx-dashboard .dashboard-logout i {
+    color: #df7d89;
+}
+
+.nationx-dashboard .main-content {
+    width: auto;
+    min-height: 100vh;
+    margin-left: 292px;
+    padding: clamp(2rem, 4vw, 4.2rem);
+    overflow: visible;
+}
+
+.dashboard-content-shell {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+}
+
+.nationx-dashboard .react-dashboard-header {
+    margin-bottom: 2.1rem;
+    animation: dashboardRise 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dashboard-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.7rem;
+    color: var(--dashboard-green-soft);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.dashboard-eyebrow i {
+    font-size: 0.75rem;
+}
+
+.dashboard-heading h1 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: clamp(2rem, 4vw, 3.15rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+    text-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+.nationx-dashboard .dashboard-heading p {
+    margin-top: 0.65rem;
+    color: var(--dashboard-muted);
+    font-size: 0.92rem;
+}
+
+.dashboard-heading p strong {
+    color: #dce7ec;
+    font-weight: 600;
+}
+
+.nationx-dashboard .react-request-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-width: 156px;
+    min-height: 48px;
+    margin: 0;
+    padding: 0.75rem 1.15rem !important;
+    border: 1px solid rgba(79, 229, 181, 0.18);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #008d67, #006a4e);
+    box-shadow: 0 12px 30px rgba(0, 106, 78, 0.25), inset 0 1px rgba(255, 255, 255, 0.16);
+    font-size: 0.88rem;
+}
+
+.nationx-dashboard .react-request-button:hover,
+.nationx-dashboard .react-request-button:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px rgba(0, 106, 78, 0.34), inset 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.nationx-dashboard .react-request-button i {
+    transition: transform 220ms ease;
+}
+
+.nationx-dashboard .react-request-button:hover i {
+    transform: rotate(90deg);
+}
+
+.nationx-dashboard .react-dashboard-error {
+    margin-bottom: 1.25rem;
+    backdrop-filter: blur(14px);
+}
+
+.nationx-dashboard .react-dashboard-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.6rem;
+}
+
+.nationx-dashboard .react-stat-card {
+    --stat-color: var(--dashboard-green-soft);
+    --stat-rgb: 56, 217, 169;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    min-height: 180px;
+    padding: 1.25rem;
+    color: #f8fafc;
+    text-align: left;
+    background:
+        radial-gradient(circle at 96% 0%, rgba(var(--stat-rgb), 0.12), transparent 48%),
+        linear-gradient(145deg, rgba(16, 45, 40, 0.86), rgba(7, 25, 25, 0.8));
+    border: 1px solid var(--dashboard-border);
+    border-radius: 20px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16), inset 0 1px rgba(255, 255, 255, 0.045);
+    overflow: hidden;
+    isolation: isolate;
+    appearance: none;
+    animation: dashboardRise 650ms 90ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition: transform 250ms ease, border-color 250ms ease, box-shadow 250ms ease;
+}
+
+.nationx-dashboard .react-stat-card:nth-child(2) {
+    animation-delay: 150ms;
+}
+
+.nationx-dashboard .react-stat-card:nth-child(3) {
+    animation-delay: 210ms;
+}
+
+.nationx-dashboard .react-stat-card::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: -42px;
+    bottom: -52px;
+    width: 130px;
+    height: 130px;
+    border: 1px solid rgba(var(--stat-rgb), 0.18);
+    border-radius: 50%;
+    transition: transform 400ms ease;
+}
+
+.nationx-dashboard .react-stat-card:hover,
+.nationx-dashboard .react-stat-card:focus-visible {
+    border-color: rgba(var(--stat-rgb), 0.38);
+    outline: none;
+    transform: translateY(-5px);
+    box-shadow: 0 24px 54px rgba(0, 0, 0, 0.23), 0 0 0 3px rgba(var(--stat-rgb), 0.07);
+}
+
+.nationx-dashboard .react-stat-card:hover::after {
+    transform: scale(1.22);
+}
+
+.nationx-dashboard .stat-completed {
+    --stat-color: var(--dashboard-blue);
+    --stat-rgb: 96, 165, 250;
+}
+
+.nationx-dashboard .stat-notifications {
+    --stat-color: var(--dashboard-pink);
+    --stat-rgb: 244, 114, 182;
+}
+
+.stat-card-top {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.stat-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    color: var(--stat-color);
+    background: rgba(var(--stat-rgb), 0.12);
+    border: 1px solid rgba(var(--stat-rgb), 0.14);
+    border-radius: 13px;
+}
+
+.stat-arrow {
+    color: rgba(255, 255, 255, 0.23);
+    font-size: 0.73rem;
+    transition: color 220ms ease, transform 220ms ease;
+}
+
+.react-stat-card:hover .stat-arrow {
+    color: var(--stat-color);
+    transform: translate(2px, -2px);
+}
+
+.nationx-dashboard .stat-value {
+    align-self: end;
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: 750;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+}
+
+.stat-copy {
+    align-self: end;
+    min-width: 0;
+    text-align: right;
+}
+
+.stat-copy strong,
+.stat-copy small {
+    display: block;
+}
+
+.stat-copy strong {
+    color: #e8f0f2;
+    font-size: 0.88rem;
+    font-weight: 650;
+}
+
+.stat-copy small {
+    margin-top: 0.27rem;
+    color: #718795;
+    font-size: 0.68rem;
+}
+
+.nationx-dashboard .react-departments {
+    animation: dashboardRise 700ms 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dashboard-section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.dashboard-section-heading > div {
+    padding-left: 0.9rem;
+    border-left: 3px solid var(--dashboard-green);
+}
+
+.dashboard-section-heading span {
+    display: block;
+    margin-bottom: 0.26rem;
+    color: var(--dashboard-green-soft);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.nationx-dashboard .dashboard-section-heading h2 {
+    margin: 0;
+    padding: 0;
+    color: #f4f8f8;
+    border: 0;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-section-heading > p {
+    max-width: 360px;
+    color: #708391;
+    font-size: 0.75rem;
+    text-align: right;
+}
+
+.nationx-dashboard .react-dept-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.nationx-dashboard .react-dept-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 108px;
+    padding: 1.05rem;
+    color: #f8fafc;
+    text-align: left;
+    background: linear-gradient(145deg, rgba(14, 39, 35, 0.78), rgba(8, 26, 25, 0.75));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 17px;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.03);
+    opacity: 0;
+    animation: dashboardCardIn 520ms calc(300ms + var(--department-index) * 55ms) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: background 220ms ease, border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.nationx-dashboard .react-dept-card:hover,
+.nationx-dashboard .react-dept-card:focus-visible {
+    color: #fff;
+    background: linear-gradient(145deg, rgba(18, 54, 46, 0.94), rgba(9, 31, 29, 0.92));
+    border-color: rgba(0, 166, 118, 0.34);
+    outline: none;
+    transform: translateY(-4px);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(0, 166, 118, 0.055);
+}
+
+.department-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    color: var(--dashboard-green-soft);
+    background: linear-gradient(145deg, rgba(0, 166, 118, 0.17), rgba(0, 106, 78, 0.08));
+    border: 1px solid rgba(0, 166, 118, 0.15);
+    border-radius: 14px;
+    transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.nationx-dashboard .react-dept-card:hover .department-icon {
+    transform: scale(1.06) rotate(-3deg);
+    box-shadow: 0 9px 22px rgba(0, 106, 78, 0.18);
+}
+
+.nationx-dashboard .react-dept-card .department-icon i {
+    margin: 0;
+    color: inherit;
+    font-size: 1.15rem;
+}
+
+.department-copy {
+    min-width: 0;
+}
+
+.department-copy h3 {
+    margin: 0;
+    color: #eaf2f2;
+    font-size: 0.88rem;
+    font-weight: 650;
+    line-height: 1.2;
+}
+
+.nationx-dashboard .department-copy p {
+    margin: 0.34rem 0 0;
+    color: #778b97;
+    font-size: 0.68rem;
+    line-height: 1.35;
+}
+
+.department-arrow {
+    color: rgba(255, 255, 255, 0.18);
+    font-size: 0.7rem;
+    transition: color 220ms ease, transform 220ms ease;
+}
+
+.react-dept-card:hover .department-arrow {
+    color: var(--dashboard-green-soft);
+    transform: translateX(3px);
+}
+
+.dashboard-footer-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.8rem;
+    padding: 1rem 0 0.25rem;
+    color: #617681;
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
+    font-size: 0.68rem;
+}
+
+.dashboard-footer-note i {
+    margin-right: 0.35rem;
+    color: var(--dashboard-green);
+}
+
+.nationx-dashboard .modal-overlay {
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(1, 9, 11, 0.8);
+    backdrop-filter: blur(12px);
+    animation: dashboardOverlayIn 180ms ease-out both;
+}
+
+.nationx-dashboard .modal-content {
+    position: relative;
+    width: min(100%, 650px);
+    max-height: min(88vh, 760px);
+    color: #edf6f5;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(0, 166, 118, 0.12), transparent 42%),
+        linear-gradient(145deg, rgba(15, 40, 38, 0.98), rgba(7, 22, 28, 0.99));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.56), inset 0 1px rgba(255, 255, 255, 0.055);
+    overflow: hidden;
+    animation: dashboardModalIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.nationx-dashboard .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.nationx-dashboard .modal-header h2 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+}
+
+.nationx-dashboard .close-btn {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    color: #9aabb8;
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 11px;
+    cursor: pointer;
+    transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.nationx-dashboard .close-btn:hover,
+.nationx-dashboard .close-btn:focus-visible {
+    color: #fff;
+    background: rgba(244, 42, 65, 0.18);
+    outline: none;
+    transform: rotate(5deg);
+}
+
+.nationx-dashboard .modal-body {
+    max-height: calc(min(88vh, 760px) - 68px);
+    padding: 1.3rem;
+    overflow-y: auto;
+}
+
+.nationx-dashboard .modal-body .form-control {
+    color: #fff;
+    background-color: rgba(1, 12, 16, 0.6);
+}
+
+.nationx-dashboard .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.nationx-dashboard .modal-footer .btn-primary,
+.nationx-dashboard .modal-footer .btn-secondary {
+    width: auto;
+    min-width: 112px;
+    margin: 0;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+}
+
+.nationx-dashboard .btn-secondary {
+    color: #c8d4da;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.dashboard-online {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.dashboard-online i {
+    width: 7px;
+    height: 7px;
+    margin: 0;
+    border-radius: 50%;
+    background: #2dd4bf;
+    box-shadow: 0 0 12px rgba(45, 212, 191, 0.72);
+    animation: dashboardStatusPulse 2s ease-in-out infinite;
+}
+
+@keyframes dashboardRise {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dashboardCardIn {
+    from { opacity: 0; transform: translateY(15px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes dashboardOrbFloat {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(34px, 28px, 0) scale(1.08); }
+}
+
+@keyframes dashboardWave {
+    from { transform: translate3d(-1%, 0, 0) rotate(-4deg); }
+    to { transform: translate3d(2%, -12px, 0) rotate(-2deg); }
+}
+
+@keyframes dashboardStatusPulse {
+    0%, 100% { opacity: 0.65; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.18); }
+}
+
+@keyframes dashboardOverlayIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes dashboardModalIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 1180px) {
+    .nationx-dashboard .react-dept-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .nationx-dashboard .react-stat-card {
+        min-height: 168px;
+    }
+
+    .stat-copy {
+        max-width: 115px;
+    }
+}
+
+@media (max-width: 900px) {
+    .nationx-dashboard .sidebar {
+        left: 0;
+        width: 280px;
+        padding-top: 1.4rem;
+        transform: translateX(-105%);
+        box-shadow: 24px 0 70px rgba(0, 0, 0, 0.5);
+    }
+
+    .nationx-dashboard .sidebar.react-sidebar-open {
+        transform: translateX(0) !important;
+    }
+
+    .nationx-dashboard .main-content {
+        margin-left: 0;
+        padding: 5.2rem 1.35rem 2rem;
+    }
+
+    .nationx-dashboard .react-sidebar-toggle {
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        color: #fff;
+        background: linear-gradient(145deg, #008d67, #005c45);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        transition: left 260ms ease, background 220ms ease, transform 220ms ease;
+    }
+
+    .nationx-dashboard .react-sidebar-toggle.is-open {
+        left: 218px;
+        background: rgba(244, 42, 65, 0.16);
+        border-color: rgba(244, 42, 65, 0.24);
+        box-shadow: none;
+    }
+
+    .nationx-dashboard .react-sidebar-overlay {
+        background: rgba(2, 10, 13, 0.78);
+        backdrop-filter: blur(8px);
+    }
+
+    .nationx-dashboard .react-dashboard-header {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .nationx-dashboard .react-dashboard-header {
+        align-items: stretch;
+        margin-bottom: 1.55rem;
+    }
+
+    .nationx-dashboard .react-request-button {
+        width: 100% !important;
+    }
+
+    .nationx-dashboard .react-dashboard-grid,
+    .nationx-dashboard .react-dept-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nationx-dashboard .react-stat-card {
+        min-height: 156px;
+    }
+
+    .dashboard-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .dashboard-section-heading > p {
+        padding-left: 1.1rem;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .nationx-dashboard .main-content {
+        padding: 4.75rem 0.9rem 1.3rem;
+    }
+
+    .dashboard-heading h1 {
+        font-size: 2rem;
+    }
+
+    .nationx-dashboard .dashboard-heading p {
+        font-size: 0.82rem;
+        line-height: 1.55;
+    }
+
+    .nationx-dashboard .react-stat-card {
+        padding: 1.05rem;
+        border-radius: 17px;
+    }
+
+    .nationx-dashboard .react-dept-card {
+        min-height: 98px;
+        padding: 0.9rem;
+    }
+
+    .dashboard-footer-note {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nationx-dashboard *,
+    .nationx-dashboard *::before,
+    .nationx-dashboard *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

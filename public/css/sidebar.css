@@ -1,0 +1,591 @@
+/* ===================================================
+   Responsive Sidebar Navigation
+   Mobile-first with Hamburger Menu
+=================================================== */
+
+/* ===== Hamburger Menu Button ===== */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), #00a676);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 12px;
+    box-shadow: 0 4px 15px rgba(0, 106, 78, 0.4);
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 106, 78, 0.5);
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hamburger-menu span::before,
+.hamburger-menu span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    left: 0;
+}
+
+.hamburger-menu span::before {
+    top: -8px;
+}
+
+.hamburger-menu span::after {
+    top: 8px;
+}
+
+/* Hamburger Animation when Open */
+.hamburger-menu.active span {
+    background: transparent;
+}
+
+.hamburger-menu.active span::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.hamburger-menu.active span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+/* ===== Sidebar Overlay ===== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ===== Sidebar Styles ===== */
+.sidebar {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(10, 20, 35, 0.98) 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Sidebar Header Decoration */
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #006a4e, #f42a41, #006a4e);
+    background-size: 200% 100%;
+    animation: gradientSlide 3s ease infinite;
+}
+
+@keyframes gradientSlide {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ===== User Profile Section ===== */
+.user-profile {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.user-avatar {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: white;
+    box-shadow: 
+        0 8px 25px rgba(0, 106, 78, 0.4),
+        inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Online Status Indicator */
+.user-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 15px;
+    height: 15px;
+    background: #22c55e;
+    border-radius: 50%;
+    border: 3px solid rgba(15, 23, 42, 0.95);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.user-profile h3 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.user-profile p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+/* ===== Navigation Links ===== */
+.nav-links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 106, 78, 0.3), transparent);
+    transition: width 0.3s ease;
+    border-radius: 12px;
+}
+
+.nav-links a:hover::before,
+.nav-links a.active::before {
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.nav-links a.active {
+    background: rgba(0, 106, 78, 0.2);
+    border-left: 3px solid var(--primary-color);
+}
+
+.nav-links a i {
+    width: 28px;
+    margin-right: 12px;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover i {
+    transform: scale(1.15);
+}
+
+.nav-links a span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Logout Link Special Style */
+.nav-links a[id="logoutBtn"] {
+    margin-top: auto;
+    color: rgba(239, 68, 68, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.2rem;
+    margin-top: 1rem;
+}
+
+.nav-links a[id="logoutBtn"]:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.nav-links a[id="logoutBtn"]::before {
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.2), transparent);
+}
+
+/* ===== Dashboard Container ===== */
+.dashboard-container {
+    display: block;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ===== Main Content Area ===== */
+.main-content {
+    margin-left: 280px;
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Layout class for pages using .layout instead of .dashboard-container */
+.layout {
+    display: block;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.layout .main-content {
+    margin-left: 280px;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* ===== Mobile Close Button ===== */
+.mobile-close-btn {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background: rgba(239, 68, 68, 0.2);
+    border: none;
+    border-radius: 10px;
+    color: #ef4444;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.mobile-close-btn:hover {
+    background: rgba(239, 68, 68, 0.3);
+    transform: scale(1.1);
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        display: block;
+    }
+
+    .sidebar {
+        width: 240px;
+        padding: 1.5rem 1rem;
+    }
+
+    .main-content {
+        margin-left: 240px;
+    }
+
+    .layout .main-content {
+        margin-left: 240px;
+    }
+
+    .user-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+
+    .nav-links a {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dashboard-container {
+        display: block;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 280px;
+        height: 100vh;
+        z-index: 1000;
+        padding-top: 60px;
+        box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 80px 1rem 1rem;
+        width: 100%;
+    }
+
+    .layout .main-content {
+        margin-left: 0;
+        padding: 80px 1rem 1rem;
+    }
+
+    /* Adjust header bar for mobile */
+    .header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .header-bar h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Adjust grids for mobile */
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dept-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kanban-board {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .kanban-column {
+        min-height: 200px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .hamburger-menu {
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        padding: 10px;
+    }
+
+    .sidebar {
+        width: 260px;
+        left: -260px;
+    }
+
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .user-profile h3 {
+        font-size: 1rem;
+    }
+
+    .nav-links a {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .nav-links a i {
+        width: 24px;
+        margin-right: 10px;
+        font-size: 1rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 70px 0.8rem 0.8rem;
+    }
+
+    .layout .main-content {
+        margin-left: 0;
+        padding: 70px 0.8rem 0.8rem;
+    }
+
+    .dept-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+    }
+
+    .dept-card {
+        padding: 1rem;
+    }
+
+    .dept-card i {
+        font-size: 1.5rem;
+    }
+}
+
+/* ===== Sidebar Animation ===== */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sidebar.active {
+    animation: slideIn 0.3s ease forwards;
+}
+
+/* ===== Nav Link Badges ===== */
+.nav-badge {
+    background: linear-gradient(135deg, #f42a41, #ff6b6b);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: auto;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(244, 42, 65, 0.4);
+}
+
+/* ===== Tooltip for collapsed sidebar ===== */
+.nav-tooltip {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    margin-left: 10px;
+    z-index: 1001;
+    pointer-events: none;
+}
+
+/* ===== Scrollbar for Sidebar ===== */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Logo Section (Optional) ===== */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.sidebar-logo span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #fff, #a8edea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

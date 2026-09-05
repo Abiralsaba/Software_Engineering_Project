@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বিশ্ববিদ্যালয় ভর্তি | University Admissions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e74c3c, #27ae60);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
+            color: #ffd700;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .filter-group select {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .filter-group select option {
+            background: #1a2a4a;
+            color: white;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            padding: 12px;
+            color: white;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .stat-item .label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .admissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+            margin-top: 2rem;
+        }
+
+        .admission-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .admission-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .university-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .university-info h3 {
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .university-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .unit-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .unit-badge.science {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .unit-badge.arts {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .unit-badge.commerce {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+
+        .unit-badge.engineering {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .unit-badge.medical {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .unit-badge.default {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item i {
+            color: #ffd700;
+            width: 20px;
+        }
+
+        .info-item .label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .info-item .value {
+            font-size: 0.95rem;
+            color: white;
+        }
+
+        .deadline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .deadline.urgent {
+            background: rgba(231, 76, 60, 0.2);
+        }
+
+        .deadline .days {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .deadline.urgent .days {
+            color: #e74c3c;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #ffb800);
+            color: #1a2a4a;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: #27ae60;
+        }
+
+        .status-badge.upcoming {
+            background: #f39c12;
+        }
+
+        .status-badge.closed {
+            background: #95a5a6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .loading i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .admissions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="logo-text">
+                <h1>University Admissions</h1>
+                <p>Ministry of Education</p>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="education.html"><i class="fas fa-arrow-left"></i> Education Portal</a>
+            <a href="admission.html" class="active"><i class="fas fa-university"></i> Admissions</a>
+            <a href="#my-applications" id="myAppsLink"><i class="fas fa-file-alt"></i> My Applications</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2><i class="fas fa-university"></i> বিশ্ববিদ্যালয় ভর্তি পোর্টাল</h2>
+            <p>বাংলাদেশের সকল সরকারি বিশ্ববিদ্যালয়ে অনলাইনে আবেদন করুন। HSC রোল নম্বর দিয়ে সহজেই যাচাই করুন আপনার
+                যোগ্যতা।</p>
+        </section>
+
+
+
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>বিশ্ববিদ্যালয়ের ধরন</label>
+                <select id="filterType">
+                    <option value="">সকল ধরন</option>
+                    <option value="Public">পাবলিক বিশ্ববিদ্যালয়</option>
+                    <option value="Private">প্রাইভেট বিশ্ববিদ্যালয়</option>
+                    <option value="National">জাতীয় বিশ্ববিদ্যালয়</option>
+                    <option value="General">সাধারণ বিশ্ববিদ্যালয়</option>
+                    <option value="Engineering">প্রকৌশল বিশ্ববিদ্যালয়</option>
+                    <option value="Medical">মেডিকেল কলেজ</option>
+                    <option value="Science & Technology">বিজ্ঞান ও প্রযুক্তি</option>
+                    <option value="Agricultural">কৃষি বিশ্ববিদ্যালয়</option>
+                </select>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="বিশ্ববিদ্যালয় বা ইউনিট খুঁজুন...">
+            </div>
+        </div>
+
+        <!-- Admissions Grid -->
+        <div class="admissions-grid" id="admissionsGrid">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>ভর্তি তথ্য লোড হচ্ছে...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Applications View -->
+    <div id="myApplicationsView" style="display: none; padding-top: 2rem;">
+        <div
+            style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); max-width: 600px; margin: 0 auto 2rem;">
+            <h3 style="text-align: center; color: #ffd700; margin-bottom: 1.5rem;">আমার আবেদন দেখুন</h3>
+            <div class="filter-group" style="margin-bottom: 1rem;">
+                <label>HSC রোল নম্বর</label>
+                <input type="text" id="myAppRoll" class="search-box"
+                    style="width: 100%; margin-top: 0.5rem; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 8px;"
+                    placeholder="রোল নম্বর">
+            </div>
+            <div class="filter-group" style="margin-bottom: 1.5rem;">
+                <label>পাসের সাল</label>
+                <select id="myAppYear"
+                    style="width: 100%; margin-top: 0.5rem; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 10px; border-radius: 8px;">
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="loadMyApplications()" style="width: 100%;">
+                <i class="fas fa-search"></i> আবেদন খুঁজুন
+            </button>
+        </div>
+
+        <div id="myApplicationsResults" class="admissions-grid">
+            <!-- Results will appear here -->
+        </div>
+    </div>
+    </div>
+
+    <script>
+        let allAdmissions = [];
+
+        // Load admissions on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAdmissions();
+            loadStats();
+
+            // Filter event listeners
+            document.getElementById('filterType').addEventListener('change', filterAdmissions);
+
+            document.getElementById('searchInput').addEventListener('input', filterAdmissions);
+        });
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/university/admissions');
+                const admissions = await res.json();
+
+                const universities = [...new Set(admissions.map(a => a.university_id))].length;
+                const active = admissions.filter(a => a.status === 'Active').length;
+
+                document.getElementById('totalUniversities').textContent = universities;
+                document.getElementById('activeAdmissions').textContent = active;
+                document.getElementById('totalApplications').textContent = admissions.length;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadAdmissions() {
+            try {
+                const res = await fetch('/api/university/admissions');
+                allAdmissions = await res.json();
+                filterAdmissions();
+            } catch (error) {
+                console.error('Error loading admissions:', error);
+                document.getElementById('admissionsGrid').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>ভর্তি তথ্য লোড করতে সমস্যা হয়েছে</p>
+                    </div>
+                `;
+            }
+        }
+
+        function filterAdmissions() {
+            const type = document.getElementById('filterType').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allAdmissions;
+
+            if (type) {
+                filtered = filtered.filter(a => a.university_type === type);
+            }
+
+            if (search) {
+                filtered = filtered.filter(a =>
+                    a.university_name.toLowerCase().includes(search) ||
+                    a.university_name_bn?.includes(search) ||
+                    a.unit_name.toLowerCase().includes(search) ||
+                    a.unit_code.toLowerCase().includes(search)
+                );
+            }
+
+            renderAdmissions(filtered);
+        }
+
+        function renderAdmissions(admissions) {
+            const grid = document.getElementById('admissionsGrid');
+
+            if (admissions.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fas fa-search"></i>
+                        <p>কোন ভর্তি বিজ্ঞপ্তি পাওয়া যায়নি</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = admissions.map(admission => {
+                const unitClass = getUnitClass(admission.unit_code, admission.university_type);
+                const daysRemaining = admission.days_remaining;
+                const isUrgent = daysRemaining <= 7 && daysRemaining > 0;
+
+                return `
+                    <div class="admission-card">
+                        <div class="card-header">
+                            <div class="university-logo">${admission.university_code}</div>
+                            <div class="university-info">
+                                <h3>${admission.university_name}</h3>
+                                <p>${admission.university_location}</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="unit-badge ${unitClass}">${admission.unit_code} - ${admission.unit_name}</span>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <i class="fas fa-star"></i>
+                                    <div>
+                                        <div class="label">ন্যূনতম GPA</div>
+                                        <div class="value">${admission.min_gpa}</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <div class="label">আসন সংখ্যা</div>
+                                        <div class="value">${admission.total_seats || 'N/A'}</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-money-bill"></i>
+                                    <div>
+                                        <div class="label">আবেদন ফি</div>
+                                        <div class="value">৳${admission.application_fee}</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-book"></i>
+                                    <div>
+                                        <div class="label">গ্রুপ</div>
+                                        <div class="value">${admission.required_group || 'Any'}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="deadline ${isUrgent ? 'urgent' : ''}">
+                                <div>
+                                    <i class="fas fa-calendar-alt"></i> 
+                                    শেষ তারিখ: ${formatDate(admission.end_date)}
+                                </div>
+                                <div class="days">
+                                    ${daysRemaining > 0 ? `${daysRemaining} দিন বাকি` :
+                        daysRemaining === 0 ? 'আজই শেষ!' : 'সময় শেষ'}
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                <a href="apply.html?id=${admission.id}" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> আবেদন করুন
+                                </a>
+                                <button class="btn btn-secondary" onclick="viewDetails(${admission.id})">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getUnitClass(unitCode, universityType) {
+            if (universityType === 'Engineering') return 'engineering';
+            if (universityType === 'Medical') return 'medical';
+
+            switch (unitCode) {
+                case 'A': return 'science';
+                case 'B': return 'arts';
+                case 'C': return 'commerce';
+                default: return 'default';
+            }
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('bn-BD', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function viewDetails(id) {
+            window.location.href = `apply.html?id=${id}&view=details`;
+        }
+
+        // Navigation Handling
+        document.getElementById('myAppsLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            showMyApplications();
+        });
+
+        function showHome() {
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.filters').style.display = 'flex';
+            document.getElementById('admissionsGrid').style.display = 'grid';
+            document.getElementById('myApplicationsView').style.display = 'none';
+            // Update active state in nav
+            document.querySelector('a[href="admission.html"]').classList.add('active');
+            document.getElementById('myAppsLink').classList.remove('active');
+        }
+
+        function showMyApplications() {
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.filters').style.display = 'none';
+            document.getElementById('admissionsGrid').style.display = 'none';
+            document.getElementById('myApplicationsView').style.display = 'block';
+
+            // Update active state
+            document.querySelector('a[href="admission.html"]').classList.remove('active');
+            document.getElementById('myAppsLink').classList.add('active');
+        }
+
+        async function loadMyApplications() {
+            const roll = document.getElementById('myAppRoll').value.trim();
+            const year = document.getElementById('myAppYear').value;
+            const container = document.getElementById('myApplicationsResults');
+
+            if (!roll) {
+                alert('অনুগ্রহ করে রোল নম্বর দিন');
+                return;
+            }
+
+            container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i><p>খুঁজছে...</p></div>';
+
+            try {
+                const res = await fetch(`/api/university/my-applications/${roll}/${year}`);
+                const applications = await res.json();
+
+                if (applications.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state" style="grid-column: 1/-1;">
+                            <i class="fas fa-folder-open"></i>
+                            <p>কোন আবেদন পাওয়া যায়নি</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = applications.map(app => `
+                    <div class="admission-card">
+                        <div class="card-header">
+                            <div class="university-logo" style="background-image: url('${app.logo_url}'); background-size: cover; color: transparent;">${app.university_code}</div>
+                            <div class="university-info">
+                                <h3>${app.university_name}</h3>
+                                <p>আবেদন আইডি: <span style="color: #ffd700;">${app.application_id}</span></p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="unit-badge ${getUnitClass(app.unit_code, 'General')}">${app.unit_code} - ${app.unit_name}</span>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <div>
+                                        <div class="label">আবেদনের তারিখ</div>
+                                        <div class="value">${formatDate(app.created_at)}</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-money-check-alt"></i>
+                                    <div>
+                                        <div class="label">পেমেন্ট স্ট্যাটাস</div>
+                                        <div class="value" style="color: ${app.payment_status === 'Paid' ? '#2ecc71' : '#e74c3c'}">${app.payment_status}</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div>
+                                        <div class="label">আবেদন স্ট্যাটাস</div>
+                                        <div class="value">${app.application_status}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card-footer">
+                                ${app.payment_status === 'Pending' ? `
+                                    <a href="apply.html?id=${app.admission_post_id}&continue=${app.application_id}" class="btn btn-primary">
+                                        <i class="fas fa-credit-card"></i> পেমেন্ট সম্পন্ন করুন
+                                    </a>
+                                ` : `
+                                    <button class="btn btn-secondary" onclick="alert('Admit card not published yet')">
+                                        <i class="fas fa-download"></i> প্রবেশপত্র
+                                    </button>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error:', error);
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>তথ্য লোড করতে সমস্যা হয়েছে</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+
+</html>

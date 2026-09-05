@@ -1,0 +1,598 @@
+/* ============================================
+   পানি সম্পদ মন্ত্রণালয়
+   Ministry of Water Resources — CSS
+   ============================================ */
+
+:root {
+    --water-primary: #0369a1;
+    --water-secondary: #0ea5e9;
+    --water-accent: #7dd3fc;
+    --water-dark: #0c4a6e;
+    --water-light: #e0f2fe;
+    --water-card-bg: rgba(3, 105, 161, 0.08);
+}
+
+/* --- Page Background with Water Image --- */
+body {
+    background:
+        linear-gradient(180deg, rgba(7, 30, 52, 0.55) 0%, rgba(7, 30, 52, 0.75) 100%),
+        url('../images/water_bg.png') no-repeat center center fixed !important;
+    background-size: cover !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Animated Background Shapes --- */
+.bg-shape.shape-1 {
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.2), transparent 70%) !important;
+    top: -10%;
+    left: -10%;
+    width: 800px;
+    height: 800px;
+}
+
+.bg-shape.shape-2 {
+    background: radial-gradient(circle, rgba(3, 105, 161, 0.15), transparent 70%) !important;
+    bottom: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+}
+
+/* ============ BANNER ============ */
+.water-banner {
+    background: linear-gradient(135deg, rgba(3, 105, 161, 0.3), rgba(14, 165, 233, 0.15));
+    border: 1px solid rgba(125, 211, 252, 0.25);
+    border-radius: 18px;
+    padding: 32px 36px;
+    margin-bottom: 28px;
+    backdrop-filter: blur(14px);
+    position: relative;
+    overflow: hidden;
+}
+
+.water-banner::before {
+    content: '💧';
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.12;
+}
+
+.water-banner h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+}
+
+.water-banner p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* ============ STATS GRID ============ */
+.water-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.water-stat-card {
+    background: var(--water-card-bg);
+    border: 1px solid rgba(125, 211, 252, 0.12);
+    border-radius: 14px;
+    padding: 18px 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.water-stat-card:hover {
+    background: rgba(14, 165, 233, 0.12);
+    border-color: rgba(125, 211, 252, 0.3);
+    transform: translateY(-3px);
+}
+
+.water-stat-card .stat-icon {
+    font-size: 1.5rem;
+}
+
+.water-stat-card .stat-value {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.water-stat-card .stat-label {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* ============ SECTION TITLES ============ */
+.section-title {
+    color: var(--water-accent);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--water-secondary);
+}
+
+/* ============ ACTION GRID ============ */
+.water-action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.water-action-card {
+    background: var(--water-card-bg);
+    border: 1px solid rgba(125, 211, 252, 0.1);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.water-action-card:hover {
+    background: rgba(14, 165, 233, 0.15);
+    border-color: rgba(125, 211, 252, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.15);
+}
+
+.water-action-card i {
+    font-size: 2rem;
+    color: var(--water-secondary);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.water-action-card h4 {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.water-action-card p {
+    color: #64748b;
+    font-size: 0.78rem;
+}
+
+/* ============ CARD ============ */
+.water-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.form-title {
+    color: var(--water-accent);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.12);
+}
+
+.form-title i {
+    color: var(--water-secondary);
+}
+
+/* ============ FORM ============ */
+.water-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.water-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.water-form .form-group label {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.water-form .form-group input,
+.water-form .form-group select,
+.water-form .form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.water-form .form-group input:focus,
+.water-form .form-group select:focus,
+.water-form .form-group textarea:focus {
+    border-color: var(--water-secondary);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.water-form .form-group select option {
+    background: #1e293b;
+    color: #e2e8f0;
+}
+
+/* ============ BUTTONS ============ */
+.btn-water {
+    background: linear-gradient(135deg, var(--water-primary), var(--water-secondary));
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.btn-water:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.25);
+}
+
+.btn-water:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-water-outline {
+    background: transparent;
+    color: var(--water-accent);
+    border: 1px solid rgba(125, 211, 252, 0.3);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-water-outline:hover {
+    background: rgba(14, 165, 233, 0.1);
+    border-color: var(--water-secondary);
+}
+
+/* ============ TABLE ============ */
+.water-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.water-table thead th {
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--water-accent);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(125, 211, 252, 0.15);
+    white-space: nowrap;
+}
+
+.water-table tbody td {
+    padding: 10px 14px;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+}
+
+.water-table tbody tr:hover {
+    background: rgba(14, 165, 233, 0.05);
+}
+
+.water-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ============ BADGES ============ */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.badge-pending, .badge-submitted { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+.badge-approved, .badge-active, .badge-completed, .badge-resolved, .badge-paid { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+.badge-rejected, .badge-cancelled, .badge-failed, .badge-disconnected { background: rgba(248, 113, 113, 0.15); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+.badge-under-review, .badge-assigned, .badge-in-progress, .badge-ongoing { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3); }
+.badge-reported, .badge-registered, .badge-planned { background: rgba(96, 165, 250, 0.15); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.3); }
+.badge-testing, .badge-under-investigation { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.3); }
+.badge-action-taken { background: rgba(34, 211, 238, 0.15); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); }
+.badge-closed, .badge-suspended, .badge-overdue { background: rgba(156, 163, 175, 0.15); color: #9ca3af; border: 1px solid rgba(156, 163, 175, 0.3); }
+
+/* Severity */
+.severity-low { color: #a3e635; font-weight: 500; }
+.severity-medium { color: #fbbf24; font-weight: 600; }
+.severity-high { color: #f97316; font-weight: 700; }
+.severity-critical { color: #ef4444; font-weight: 800; }
+
+/* Priority */
+.priority-low { color: #a3e635; }
+.priority-normal { color: #22d3ee; }
+.priority-high { color: #f97316; font-weight: 600; }
+.priority-emergency { color: #ef4444; font-weight: 700; }
+
+/* ============ FILTER BAR ============ */
+.water-filter-bar {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 18px;
+    align-items: flex-end;
+}
+
+.water-filter-bar .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 140px;
+}
+
+.water-filter-bar .filter-group label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.water-filter-bar .filter-group select {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.water-filter-bar .filter-group select option {
+    background: #1e293b;
+}
+
+/* ============ PROJECT GRID ============ */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(125, 211, 252, 0.1);
+    border-radius: 14px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.project-card:hover {
+    border-color: rgba(125, 211, 252, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.1);
+}
+
+.project-card h4 {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.project-card .project-bn {
+    color: #7dd3fc;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+}
+
+.project-card .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.project-card .project-meta span {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.project-card .project-meta span i {
+    color: var(--water-secondary);
+    font-size: 0.7rem;
+}
+
+.project-card .project-desc {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar .progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--water-primary), var(--water-secondary));
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* ============ ACTIVITY LIST ============ */
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.activity-info .activity-type {
+    font-size: 0.72rem;
+    color: var(--water-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.activity-info .activity-title {
+    color: #e2e8f0;
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.activity-date {
+    color: #64748b;
+    font-size: 0.72rem;
+    white-space: nowrap;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .water-banner {
+        padding: 22px 18px;
+    }
+
+    .water-banner h1 {
+        font-size: 1.2rem;
+    }
+
+    .water-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .water-form .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .water-action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .water-filter-bar {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 550px) {
+    .water-stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .water-stat-card {
+        padding: 14px 10px;
+    }
+
+    .water-stat-card .stat-value {
+        font-size: 1.3rem;
+    }
+
+    .water-action-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .water-card {
+        padding: 16px;
+        overflow-x: auto;
+    }
+
+    .water-table {
+        min-width: 550px;
+    }
+}

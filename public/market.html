@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Info | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* ============================================
+           MARKET INFO — PREMIUM UI
+           ============================================ */
+
+        .market-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* ---------- HEADER BAR ---------- */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 1.5rem 2.5rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-bar h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.2rem;
+        }
+
+        .header-bar .subtitle {
+            color: #64748b;
+            margin: 0;
+            font-size: 0.88rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* ---------- HUB CARDS ---------- */
+        .hub-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hub-card {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            border-radius: 20px;
+            padding: 2rem 1.8rem;
+            cursor: pointer;
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+
+        .hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease, height 0.4s ease;
+        }
+
+        .hub-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hub-card.store::before {
+            background: linear-gradient(90deg, #006a4e, #00b894, #006a4e);
+            background-size: 200% 100%;
+            animation: shimmerGradient 3s ease infinite;
+        }
+
+        .hub-card.store::after {
+            background: radial-gradient(circle at 30% 30%, rgba(0, 184, 148, 0.08), transparent 70%);
+        }
+
+        .hub-card.prices::before {
+            background: linear-gradient(90deg, #f59e0b, #f97316, #f59e0b);
+            background-size: 200% 100%;
+            animation: shimmerGradient 3s ease infinite 0.5s;
+        }
+
+        .hub-card.prices::after {
+            background: radial-gradient(circle at 30% 30%, rgba(245, 158, 11, 0.08), transparent 70%);
+        }
+
+        .hub-card.report::before {
+            background: linear-gradient(90deg, #ef4444, #f43f5e, #ef4444);
+            background-size: 200% 100%;
+            animation: shimmerGradient 3s ease infinite 1s;
+        }
+
+        .hub-card.report::after {
+            background: radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.08), transparent 70%);
+        }
+
+        @keyframes shimmerGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hub-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(148, 163, 184, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .hub-card:hover::before {
+            height: 4px;
+            opacity: 1;
+        }
+
+        .hub-card:hover::after {
+            opacity: 1;
+        }
+
+        .hub-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.4rem;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .hub-card:hover .hub-card-icon {
+            transform: scale(1.1);
+        }
+
+        .hub-card.store .hub-card-icon {
+            background: linear-gradient(135deg, rgba(0, 106, 78, 0.25), rgba(0, 184, 148, 0.1));
+            color: #00c9a7;
+            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.15);
+        }
+
+        .hub-card.prices .hub-card-icon {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(249, 115, 22, 0.1));
+            color: #fbbf24;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+        }
+
+        .hub-card.report .hub-card-icon {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(244, 63, 94, 0.1));
+            color: #f87171;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);
+        }
+
+        .hub-card h3 {
+            font-size: 1.25rem;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hub-card p {
+            color: #94a3b8;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 1.4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-arrow {
+            color: #64748b;
+            transition: all 0.35s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hub-card:hover .card-arrow {
+            color: #f1f5f9;
+        }
+
+        .hub-card:hover .card-arrow i {
+            transform: translateX(5px);
+            transition: transform 0.3s ease;
+        }
+
+        /* ---------- SECTION PANELS ---------- */
+        .section-panel {
+            display: none;
+            animation: fadeSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            background: rgba(100, 116, 139, 0.15);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            color: #94a3b8;
+            padding: 0.65rem 1.4rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn:hover {
+            background: rgba(100, 116, 139, 0.3);
+            color: #f1f5f9;
+            transform: translateX(-3px);
+        }
+
+        /* ---------- PRICE STATS ---------- */
+        .price-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .price-stat-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.06);
+            border-radius: 14px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .price-stat-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(148, 163, 184, 0.15);
+        }
+
+        .price-stat-card .stat-num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #00c9a7;
+            margin-bottom: 0.2rem;
+        }
+
+        .price-stat-card .stat-label {
+            color: #64748b;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* ---------- CATEGORY TABS ---------- */
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-tab {
+            background: rgba(51, 65, 85, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            color: #94a3b8;
+            padding: 0.5rem 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .category-tab.active,
+        .category-tab:hover {
+            background: linear-gradient(135deg, rgba(0, 106, 78, 0.3), rgba(0, 184, 148, 0.15));
+            color: #00c9a7;
+            border-color: rgba(0, 201, 167, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 184, 148, 0.1);
+        }
+
+        /* ---------- SEARCH BAR ---------- */
+        .search-bar {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            max-width: 500px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            color: #f1f5f9;
+            padding: 0.85rem 1.2rem 0.85rem 2.8rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 1rem center;
+        }
+
+        .search-bar input::placeholder {
+            color: #4b5563;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: rgba(0, 201, 167, 0.4);
+            box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.08);
+        }
+
+        /* ---------- PRICE TABLE ---------- */
+        .price-table-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.06);
+            background: rgba(15, 23, 42, 0.3);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .price-table th {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 1rem 1.3rem;
+            text-align: left;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            white-space: nowrap;
+            border-bottom: 2px solid rgba(0, 201, 167, 0.15);
+        }
+
+        .price-table td {
+            padding: 1rem 1.3rem;
+            border-top: 1px solid rgba(148, 163, 184, 0.04);
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .price-table tbody tr {
+            transition: all 0.25s ease;
+        }
+
+        .price-table tbody tr:nth-child(even) {
+            background: rgba(30, 41, 59, 0.25);
+        }
+
+        .price-table tbody tr:hover {
+            background: rgba(0, 201, 167, 0.06);
+            transform: scale(1.002);
+        }
+
+        .price-table .item-bn {
+            color: #64748b;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .price-table .price-val {
+            font-weight: 700;
+            color: #00c9a7;
+            font-size: 1rem;
+        }
+
+        .price-table .category-badge {
+            background: rgba(100, 116, 139, 0.15);
+            color: #94a3b8;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .effective-date {
+            color: #4b5563;
+            font-size: 0.82rem;
+        }
+
+        /* ---------- COMPLAINT FORM ---------- */
+        .complaint-form {
+            background: rgba(30, 41, 59, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.08);
+            border-radius: 20px;
+            padding: 2.2rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .complaint-form h3 {
+            color: #f1f5f9;
+            font-size: 1.15rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.06);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .form-group label .required-dot {
+            color: #ef4444;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            color: #f1f5f9;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            padding: 0.95rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.35s ease;
+            margin-top: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.25);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* ---------- COMPLAINTS HISTORY ---------- */
+        .history-header {
+            color: #f1f5f9;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .complaint-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.06);
+            border-radius: 14px;
+            padding: 1.4rem 1.6rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: all 0.25s ease;
+        }
+
+        .complaint-card:hover {
+            border-color: rgba(148, 163, 184, 0.12);
+            background: rgba(30, 41, 59, 0.55);
+        }
+
+        .complaint-info h4 {
+            color: #f1f5f9;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .complaint-info p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .complaint-status {
+            padding: 0.35rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+
+        .complaint-status.pending {
+            background: rgba(245, 158, 11, 0.12);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .complaint-status.investigating {
+            background: rgba(59, 130, 246, 0.12);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .complaint-status.resolved {
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .complaint-status.dismissed {
+            background: rgba(100, 116, 139, 0.12);
+            color: #94a3b8;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        .no-data-msg {
+            text-align: center;
+            color: #4b5563;
+            padding: 3.5rem 1rem;
+            font-size: 0.95rem;
+        }
+
+        .no-data-msg i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1024px) {
+            .hub-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .price-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .market-content {
+                padding: 1rem;
+            }
+
+            .hub-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .header-bar {
+                padding: 1rem 1.2rem;
+            }
+
+            .header-bar h1 {
+                font-size: 1.3rem;
+            }
+
+            .price-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                left: -280px;
+                position: fixed;
+                z-index: 1000;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="userName">Loading...</h3>
+                <p id="userNid" style="color: var(--text-muted); font-size: 0.8rem;">...</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="documents.html"><i class="fas fa-folder"></i> My Documents</a>
+                <a href="history.html"><i class="fas fa-history"></i> History</a>
+                <a href="todo.html"><i class="fas fa-tasks"></i> To Do</a>
+                <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                <a href="#" class="active"><i class="fas fa-chart-line"></i> Market Info</a>
+                <a href="events.html"><i class="fas fa-bullhorn"></i> Notices</a>
+                <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="javascript:void(0)" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header-bar">
+                <div class="header-left">
+                    <div class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <div>
+                        <h1>Market Information</h1>
+                        <p class="subtitle">Official prices, government store & fraud reporting</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-content">
+                <!-- Hub Cards (Home View) -->
+                <div id="hubView">
+                    <div class="hub-cards">
+                        <div class="hub-card store" onclick="window.location.href='shop.html'">
+                            <div class="hub-card-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <h3>Government Store</h3>
+                            <p>Browse government publications, souvenirs, and essential goods at official subsidized
+                                prices.</p>
+                            <span class="card-arrow"><i class="fas fa-arrow-right"></i> Open Store</span>
+                        </div>
+
+                        <div class="hub-card prices" onclick="showSection('prices')">
+                            <div class="hub-card-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <h3>Today's Market Price</h3>
+                            <p>Check government-set official prices for daily necessities. Updated regularly to fight
+                                inflation.</p>
+                            <span class="card-arrow"><i class="fas fa-arrow-right"></i> View Prices</span>
+                        </div>
+
+                        <div class="hub-card report" onclick="showSection('report')">
+                            <div class="hub-card-icon">
+                                <i class="fas fa-shield-halved"></i>
+                            </div>
+                            <h3>Report Price Fraud</h3>
+                            <p>Report shops or vendors charging more than official prices. Help fight corruption and
+                                protect citizens.</p>
+                            <span class="card-arrow"><i class="fas fa-arrow-right"></i> File Report</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Market Price Section -->
+                <div class="section-panel" id="pricesSection">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tags" style="color: #fbbf24;"></i> Today's Market Price</h2>
+                        <button class="back-btn" onclick="showSection('hub')">
+                            <i class="fas fa-arrow-left"></i> Back to Hub
+                        </button>
+                    </div>
+
+                    <div class="price-stats" id="priceStats"></div>
+
+                    <div class="search-bar">
+                        <input type="text" id="priceSearch" placeholder="Search item name (English or Bangla)..."
+                            oninput="filterPrices()">
+                    </div>
+
+                    <div class="category-tabs" id="categoryTabs">
+                        <span class="category-tab active" onclick="filterByCategory('All')">All</span>
+                    </div>
+
+                    <div class="price-table-container">
+                        <table class="price-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Item Name</th>
+                                    <th>Category</th>
+                                    <th>Unit</th>
+                                    <th>Price (৳)</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody id="priceTableBody">
+                                <tr>
+                                    <td colspan="6" class="no-data-msg">
+                                        <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem;"></i>
+                                        Loading prices...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Report Price Fraud Section -->
+                <div class="section-panel" id="reportSection">
+                    <div class="section-header">
+                        <h2><i class="fas fa-shield-halved" style="color: #f87171;"></i> Report Price Fraud</h2>
+                        <button class="back-btn" onclick="showSection('hub')">
+                            <i class="fas fa-arrow-left"></i> Back to Hub
+                        </button>
+                    </div>
+
+                    <div class="complaint-form">
+                        <h3><i class="fas fa-pen-to-square"></i> Submit a New Complaint</h3>
+                        <form id="complaintForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Shop Name <span class="required-dot">*</span></label>
+                                    <input type="text" name="shop_name" placeholder="e.g. Karim General Store" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Shop Phone Number</label>
+                                    <input type="text" name="shop_phone" placeholder="e.g. 01712345678">
+                                </div>
+                                <div class="form-group">
+                                    <label>Item Name <span class="required-dot">*</span></label>
+                                    <input type="text" name="item_name" placeholder="e.g. Onion" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Shop Location <span class="required-dot">*</span></label>
+                                    <input type="text" name="shop_location"
+                                        placeholder="e.g. Mohammadpur, Road 5, Block C, Dhaka" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Official Price (৳)</label>
+                                    <input type="number" name="official_price" placeholder="e.g. 50" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Price They Charged (৳) <span class="required-dot">*</span></label>
+                                    <input type="number" name="charged_price" placeholder="e.g. 80" step="0.01"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Difference</label>
+                                    <input type="text" id="priceDifference" placeholder="Auto-calculated" readonly
+                                        style="color: #f87171; font-weight: 600; cursor: default;">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Additional Details</label>
+                                    <textarea name="description"
+                                        placeholder="Describe the situation — when did it happen, were there witnesses, etc..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Submit Complaint
+                            </button>
+                        </form>
+                    </div>
+
+                    <h3 class="history-header">
+                        <i class="fas fa-clock-rotate-left"></i> Your Previous Complaints
+                    </h3>
+                    <div id="myComplaints">
+                        <div class="no-data-msg">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem;"></i>
+                            Loading complaints...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+    </script>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/market.js"></script>
+</body>
+
+</html>

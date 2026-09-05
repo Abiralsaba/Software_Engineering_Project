@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NID Wing | জাতীয় পরিচয় নিবন্ধন অনুবিভাগ | Election Commission of Bangladesh</title>
+    <meta name="description"
+        content="Bangladesh Election Commission - National Identity Registration Wing - NID Services, Correction, Reissue, Smart Card">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/nid.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <!-- Hamburger Menu -->
+    <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleSidebar()">
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <button class="mobile-close-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <div class="user-profile">
+                <div class="user-avatar" style="background: linear-gradient(135deg, #1e3a5f, #2563eb);">
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <h3 style="color: #60a5fa;">NID অনুবিভাগ</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem;">Election Commission</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" onclick="NID.showSection('overview')" class="active"><i class="fas fa-home"></i>
+                    Overview</a>
+                <a href="#" onclick="NID.showSection('profile')"><i class="fas fa-user"></i> My NID Profile</a>
+                <a href="#" onclick="NID.showSection('correction')"><i class="fas fa-edit"></i> Correction</a>
+                <a href="#" onclick="NID.showSection('reissue')"><i class="fas fa-redo-alt"></i> Re-issue</a>
+                <a href="#" onclick="NID.showSection('smart-card')"><i class="fas fa-microchip"></i> Smart Card</a>
+                <a href="#" onclick="NID.showSection('address')"><i class="fas fa-map-marker-alt"></i> Address
+                    Change</a>
+                <a href="#" onclick="NID.showSection('verification')"><i class="fas fa-check-circle"></i> Verify NID</a>
+                <a href="#" onclick="NID.showSection('appointments')"><i class="fas fa-calendar-check"></i>
+                    Appointments</a>
+                <a href="#" onclick="NID.showSection('family')"><i class="fas fa-users"></i> Family Members</a>
+                <a href="#" onclick="NID.showSection('applications')"><i class="fas fa-clipboard-list"></i> All
+                    Applications</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- ==================== OVERVIEW ==================== -->
+            <div id="overview" class="content-section">
+                <!-- Banner -->
+                <div class="nid-banner">
+                    <div class="banner-emblem">
+                        <img src="/images/bd_flag.svg" alt="BD Flag" style="height: 40px; margin-bottom: 10px;">
+                    </div>
+                    <h1><i class="fas fa-id-card"></i> NID Wing</h1>
+                    <p class="bangla-text">জাতীয় পরিচয় নিবন্ধন অনুবিভাগ — বাংলাদেশ নির্বাচন কমিশন</p>
+                    <p class="subtitle">National Identity Registration Wing — Election Commission of Bangladesh</p>
+                </div>
+
+                <!-- NID Card Preview -->
+                <div class="nid-card-preview" id="nidCardPreview">
+                    <div class="nid-card-visual">
+                        <div class="card-header-visual">
+                            <span class="card-govt">গণপ্রজাতন্ত্রী বাংলাদেশ</span>
+                            <span class="card-title-bn">জাতীয় পরিচয়পত্র</span>
+                            <span class="card-title-en">National ID Card</span>
+                        </div>
+                        <div class="card-body-visual">
+                            <div class="card-photo">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="card-details">
+                                <div class="detail-row">
+                                    <span class="label">নাম:</span>
+                                    <span class="value" id="card-name-bn">—</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Name:</span>
+                                    <span class="value" id="card-name-en">—</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">পিতা:</span>
+                                    <span class="value" id="card-father">—</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">মাতা:</span>
+                                    <span class="value" id="card-mother">—</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">জন্ম তারিখ:</span>
+                                    <span class="value" id="card-dob">—</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer-visual">
+                            <div class="nid-number" id="card-nid-number">NID: —</div>
+                            <div class="card-status" id="card-status">Status: —</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="nid-stats-grid" id="overviewStats">
+                    <div class="nid-stat-card" onclick="NID.showSection('correction')">
+                        <span class="stat-icon"><i class="fas fa-edit"></i></span>
+                        <span class="stat-value" id="stat-corrections">0</span>
+                        <span class="stat-label">Corrections</span>
+                    </div>
+                    <div class="nid-stat-card" onclick="NID.showSection('reissue')">
+                        <span class="stat-icon"><i class="fas fa-redo-alt"></i></span>
+                        <span class="stat-value" id="stat-reissues">0</span>
+                        <span class="stat-label">Re-issues</span>
+                    </div>
+                    <div class="nid-stat-card" onclick="NID.showSection('smart-card')">
+                        <span class="stat-icon"><i class="fas fa-microchip"></i></span>
+                        <span class="stat-value" id="stat-smart-cards">0</span>
+                        <span class="stat-label">Smart Cards</span>
+                    </div>
+                    <div class="nid-stat-card" onclick="NID.showSection('address')">
+                        <span class="stat-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <span class="stat-value" id="stat-address">0</span>
+                        <span class="stat-label">Address Changes</span>
+                    </div>
+                    <div class="nid-stat-card" onclick="NID.showSection('verification')">
+                        <span class="stat-icon"><i class="fas fa-check-double"></i></span>
+                        <span class="stat-value" id="stat-verifications">0</span>
+                        <span class="stat-label">Verifications</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="nid-action-grid">
+                    <div class="nid-action-card" onclick="NID.showSection('correction')">
+                        <span class="action-icon">✏️</span>
+                        <h4>সংশোধন আবেদন</h4>
+                        <p>NID-তে নাম, ঠিকানা বা জন্ম তারিখ সংশোধন করুন</p>
+                        <p class="action-desc-en">Correct name, address, or DOB on your NID</p>
+                        <button class="btn-nid"><i class="fas fa-arrow-right"></i> Apply</button>
+                    </div>
+                    <div class="nid-action-card" onclick="NID.showSection('reissue')">
+                        <span class="action-icon">🔄</span>
+                        <h4>পুনঃইস্যু আবেদন</h4>
+                        <p>হারানো বা ক্ষতিগ্রস্ত NID কার্ড পুনরায় পান</p>
+                        <p class="action-desc-en">Re-issue lost or damaged NID card</p>
+                        <button class="btn-nid-gold"><i class="fas fa-arrow-right"></i> Apply</button>
+                    </div>
+                    <div class="nid-action-card" onclick="NID.showSection('smart-card')">
+                        <span class="action-icon">💳</span>
+                        <h4>স্মার্ট কার্ড</h4>
+                        <p>আধুনিক স্মার্ট NID কার্ডের জন্য আবেদন</p>
+                        <p class="action-desc-en">Apply for Smart NID Card with chip</p>
+                        <button class="btn-nid"><i class="fas fa-arrow-right"></i> Apply</button>
+                    </div>
+                    <div class="nid-action-card" onclick="NID.showSection('verification')">
+                        <span class="action-icon">✅</span>
+                        <h4>NID যাচাই</h4>
+                        <p>NID নম্বর দিয়ে তথ্য যাচাই করুন</p>
+                        <p class="action-desc-en">Verify NID information instantly</p>
+                        <button class="btn-nid-gold"><i class="fas fa-arrow-right"></i> Verify</button>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-clock"></i> Recent Applications</h3>
+                    <div id="recentApplicationsList">
+                        <div class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+
+                <!-- Fee Structure -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-money-bill-wave"></i> Service Fee Structure (ফি তালিকা)</h3>
+                    <div id="feeStructure" class="fee-grid">
+                        <div class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== MY NID PROFILE ==================== -->
+            <div id="profile" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-user"></i> My NID Profile</h2>
+                    <p class="section-subtitle">আপনার জাতীয় পরিচয়পত্রের তথ্য</p>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-id-badge"></i> Personal Information (ব্যক্তিগত তথ্য)</h3>
+                    <form id="profileForm" class="nid-form">
+                        <!-- Name Fields -->
+                        <div class="form-section-title">Basic Information (মৌলিক তথ্য)</div>
+                        <div class="form-group">
+                            <label>নাম (বাংলায়) <span class="required">*</span></label>
+                            <input type="text" id="prof-name-bn" required placeholder="আপনার বাংলা নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Name (English) <span class="required">*</span></label>
+                            <input type="text" id="prof-name-en" required placeholder="Your English name">
+                        </div>
+                        <div class="form-group">
+                            <label>পিতার নাম (বাংলায়)</label>
+                            <input type="text" id="prof-father-bn" placeholder="পিতার নাম বাংলায়">
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Name (English)</label>
+                            <input type="text" id="prof-father-en" placeholder="Father's name in English">
+                        </div>
+                        <div class="form-group">
+                            <label>মাতার নাম (বাংলায়)</label>
+                            <input type="text" id="prof-mother-bn" placeholder="মাতার নাম বাংলায়">
+                        </div>
+                        <div class="form-group">
+                            <label>Mother's Name (English)</label>
+                            <input type="text" id="prof-mother-en" placeholder="Mother's name in English">
+                        </div>
+                        <div class="form-group">
+                            <label>স্বামী/স্ত্রীর নাম (বাংলায়)</label>
+                            <input type="text" id="prof-spouse-bn" placeholder="(যদি থাকে)">
+                        </div>
+                        <div class="form-group">
+                            <label>Spouse Name (English)</label>
+                            <input type="text" id="prof-spouse-en" placeholder="(If applicable)">
+                        </div>
+
+                        <!-- Birth & Gender -->
+                        <div class="form-section-title">Birth & Identity (জন্ম ও পরিচয়)</div>
+                        <div class="form-group">
+                            <label>জন্ম তারিখ <span class="required">*</span></label>
+                            <input type="date" id="prof-dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label>জন্মস্থান (বাংলায়)</label>
+                            <input type="text" id="prof-birth-place-bn" placeholder="জন্মস্থান">
+                        </div>
+                        <div class="form-group">
+                            <label>Birth Place (English)</label>
+                            <input type="text" id="prof-birth-place-en" placeholder="Birth place">
+                        </div>
+                        <div class="form-group">
+                            <label>Birth Certificate No.</label>
+                            <input type="text" id="prof-birth-cert" placeholder="জন্ম নিবন্ধন নম্বর">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender <span class="required">*</span></label>
+                            <select id="prof-gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">পুরুষ (Male)</option>
+                                <option value="Female">মহিলা (Female)</option>
+                                <option value="Other">অন্যান্য (Other)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Blood Group</label>
+                            <select id="prof-blood">
+                                <option value="Unknown">Unknown</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="form-section-title">Contact Information (যোগাযোগ)</div>
+                        <div class="form-group">
+                            <label>Mobile (Primary) <span class="required">*</span></label>
+                            <input type="tel" id="prof-mobile1" required placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile (Secondary)</label>
+                            <input type="tel" id="prof-mobile2" placeholder="01XXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="prof-email" placeholder="your@email.com">
+                        </div>
+
+                        <!-- Present Address -->
+                        <div class="form-section-title">Present Address (বর্তমান ঠিকানা)</div>
+                        <div class="form-group">
+                            <label>Division <span class="required">*</span></label>
+                            <select id="prof-present-div" required onchange="NID.loadDistricts('prof-present')">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District <span class="required">*</span></label>
+                            <select id="prof-present-dist" required onchange="NID.loadUpazilas('prof-present')">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upazila <span class="required">*</span></label>
+                            <select id="prof-present-upa" required>
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Post Office</label>
+                            <input type="text" id="prof-present-po" placeholder="ডাকঘর">
+                        </div>
+                        <div class="form-group">
+                            <label>Post Code</label>
+                            <input type="text" id="prof-present-pc" placeholder="পোস্ট কোড">
+                        </div>
+                        <div class="form-group">
+                            <label>Ward No</label>
+                            <input type="text" id="prof-present-ward" placeholder="ওয়ার্ড নং">
+                        </div>
+                        <div class="form-group">
+                            <label>গ্রাম/মহল্লা (বাংলায়)</label>
+                            <input type="text" id="prof-present-village-bn" placeholder="গ্রাম/মহল্লার নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Village/Area (English)</label>
+                            <input type="text" id="prof-present-village-en" placeholder="Village/Area">
+                        </div>
+                        <div class="form-group">
+                            <label>Road/Street</label>
+                            <input type="text" id="prof-present-road" placeholder="রাস্তা নং/নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>House No</label>
+                            <input type="text" id="prof-present-house" placeholder="বাড়ি নং">
+                        </div>
+
+                        <!-- Permanent Address -->
+                        <div class="form-section-title">
+                            Permanent Address (স্থায়ী ঠিকানা)
+                            <label class="same-address-check">
+                                <input type="checkbox" id="sameAddress" onchange="NID.copyAddress()"> Same as Present
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>Division</label>
+                            <select id="prof-perm-div" onchange="NID.loadDistricts('prof-perm')">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District</label>
+                            <select id="prof-perm-dist" onchange="NID.loadUpazilas('prof-perm')">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upazila</label>
+                            <select id="prof-perm-upa">
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Post Office</label>
+                            <input type="text" id="prof-perm-po" placeholder="ডাকঘর">
+                        </div>
+                        <div class="form-group">
+                            <label>Post Code</label>
+                            <input type="text" id="prof-perm-pc" placeholder="পোস্ট কোড">
+                        </div>
+                        <div class="form-group">
+                            <label>Ward No</label>
+                            <input type="text" id="prof-perm-ward" placeholder="ওয়ার্ড নং">
+                        </div>
+                        <div class="form-group">
+                            <label>গ্রাম/মহল্লা (বাংলায়)</label>
+                            <input type="text" id="prof-perm-village-bn" placeholder="গ্রাম/মহল্লার নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>Village/Area (English)</label>
+                            <input type="text" id="prof-perm-village-en" placeholder="Village/Area">
+                        </div>
+                        <div class="form-group">
+                            <label>Road/Street</label>
+                            <input type="text" id="prof-perm-road" placeholder="রাস্তা নং/নাম">
+                        </div>
+                        <div class="form-group">
+                            <label>House No</label>
+                            <input type="text" id="prof-perm-house" placeholder="বাড়ি নং">
+                        </div>
+
+                        <!-- Other Info -->
+                        <div class="form-section-title">Other Information (অন্যান্য তথ্য)</div>
+                        <div class="form-group">
+                            <label>Educational Qualification</label>
+                            <select id="prof-education">
+                                <option value="">Select</option>
+                                <option value="Below SSC">এসএসসি'র নিচে</option>
+                                <option value="SSC">এসএসসি / সমমান</option>
+                                <option value="HSC">এইচএসসি / সমমান</option>
+                                <option value="Graduate">স্নাতক</option>
+                                <option value="Post Graduate">স্নাতকোত্তর</option>
+                                <option value="PhD">পিএইচডি</option>
+                                <option value="Others">অন্যান্য</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>পেশা (বাংলায়)</label>
+                            <input type="text" id="prof-occupation-bn" placeholder="পেশা">
+                        </div>
+                        <div class="form-group">
+                            <label>Occupation (English)</label>
+                            <input type="text" id="prof-occupation-en" placeholder="Occupation">
+                        </div>
+                        <div class="form-group">
+                            <label>Religion</label>
+                            <select id="prof-religion">
+                                <option value="Islam">ইসলাম</option>
+                                <option value="Hinduism">হিন্দু</option>
+                                <option value="Buddhism">বৌদ্ধ</option>
+                                <option value="Christianity">খ্রিষ্টান</option>
+                                <option value="Other">অন্যান্য</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-top: 1rem;">
+                            <button type="submit" class="btn-nid"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-save"></i> Save Profile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ==================== CORRECTION ==================== -->
+            <div id="correction" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-edit"></i> NID Correction (সংশোধন)</h2>
+                    <p class="section-subtitle">NID-তে ভুল তথ্য সংশোধনের জন্য আবেদন করুন</p>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-file-signature"></i> Submit Correction Request</h3>
+                    <form id="correctionForm" class="nid-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="cor-nid" required placeholder="আপনার NID নম্বর" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Correction Type <span class="required">*</span></label>
+                            <select id="cor-type" required>
+                                <option value="">Select Correction Type</option>
+                                <option value="Name">নাম (Name)</option>
+                                <option value="Father Name">পিতার নাম (Father's Name)</option>
+                                <option value="Mother Name">মাতার নাম (Mother's Name)</option>
+                                <option value="Spouse Name">স্বামী/স্ত্রীর নাম (Spouse's Name)</option>
+                                <option value="Date of Birth">জন্ম তারিখ (Date of Birth)</option>
+                                <option value="Blood Group">রক্তের গ্রুপ (Blood Group)</option>
+                                <option value="Present Address">বর্তমান ঠিকানা (Present Address)</option>
+                                <option value="Permanent Address">স্থায়ী ঠিকানা (Permanent Address)</option>
+                                <option value="Photo">ছবি (Photo)</option>
+                                <option value="Signature">স্বাক্ষর (Signature)</option>
+                                <option value="Educational Qualification">শিক্ষাগত যোগ্যতা</option>
+                                <option value="Occupation">পেশা (Occupation)</option>
+                                <option value="Multiple Fields">একাধিক তথ্য (Multiple Fields)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Value (বর্তমান তথ্য) <span class="required">*</span></label>
+                            <textarea id="cor-current" required placeholder="NID-তে এখন যা আছে" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Corrected Value (সঠিক তথ্য) <span class="required">*</span></label>
+                            <textarea id="cor-correct" required placeholder="যা হওয়া উচিত" rows="2"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Supporting Documents (সহায়ক কাগজপত্র)</label>
+                            <input type="file" id="cor-docs" multiple accept=".jpg,.jpeg,.png,.pdf">
+                            <small style="color: #94a3b8;">জন্ম সনদ, শিক্ষা সনদ, পাসপোর্ট ইত্যাদি (Max 3 files, 5MB
+                                each)</small>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Document Description</label>
+                            <textarea id="cor-doc-desc" placeholder="সংযুক্ত কাগজপত্রের বিবরণ" rows="2"></textarea>
+                        </div>
+
+                        <div class="fee-notice">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Correction Fee: <strong>৳230</strong> (Single Field) | <strong>৳345</strong> (Multiple
+                                Fields)</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-nid"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Correction Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Correction History -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-history"></i> My Correction Requests</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="nid-table">
+                            <thead>
+                                <tr>
+                                    <th>Request No</th>
+                                    <th>Type</th>
+                                    <th>Current → Corrected</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="correctionHistoryBody">
+                                <tr>
+                                    <td colspan="5" class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== REISSUE ==================== -->
+            <div id="reissue" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-redo-alt"></i> NID Re-issue (পুনঃইস্যু)</h2>
+                    <p class="section-subtitle">হারানো বা ক্ষতিগ্রস্ত NID কার্ড পুনরায় নিন</p>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-file-alt"></i> Apply for Re-issue</h3>
+                    <form id="reissueForm" class="nid-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="rei-nid" required placeholder="আপনার NID নম্বর" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Reason <span class="required">*</span></label>
+                            <select id="rei-reason" required onchange="NID.toggleGDFields()">
+                                <option value="">Select Reason</option>
+                                <option value="Lost">হারিয়ে গেছে (Lost)</option>
+                                <option value="Stolen">চুরি হয়েছে (Stolen)</option>
+                                <option value="Damaged">ক্ষতিগ্রস্ত হয়েছে (Damaged)</option>
+                                <option value="Expired">মেয়াদ শেষ (Expired)</option>
+                                <option value="Upgrade to Smart Card">স্মার্ট কার্ডে আপগ্রেড</option>
+                                <option value="Name Change After Marriage">বিয়ের পর নাম পরিবর্তন</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Details (বিস্তারিত)</label>
+                            <textarea id="rei-details" placeholder="কখন, কোথায় হারিয়েছে / ক্ষতির বিবরণ"
+                                rows="2"></textarea>
+                        </div>
+
+                        <!-- GD Fields (shown for Lost/Stolen) -->
+                        <div id="gdFields" style="display: none; grid-column: 1/-1;">
+                            <div class="subsection-title"><i class="fas fa-shield-alt"></i> Police Report (জিডি তথ্য)
+                            </div>
+                            <div class="nid-form" style="padding: 0;">
+                                <div class="form-group">
+                                    <label>GD Number</label>
+                                    <input type="text" id="rei-gd-num" placeholder="জিডি নম্বর">
+                                </div>
+                                <div class="form-group">
+                                    <label>GD Date</label>
+                                    <input type="date" id="rei-gd-date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Police Station</label>
+                                    <input type="text" id="rei-ps" placeholder="থানার নাম">
+                                </div>
+                                <div class="form-group">
+                                    <label>GD Document</label>
+                                    <input type="file" id="rei-gd-doc" accept=".jpg,.jpeg,.png,.pdf">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Damaged Card Fields -->
+                        <div id="damagedFields" style="display: none; grid-column: 1/-1;">
+                            <div class="subsection-title"><i class="fas fa-camera"></i> Damaged Card Photo</div>
+                            <div class="form-group">
+                                <label>Upload Photo of Damaged Card</label>
+                                <input type="file" id="rei-damaged-photo" accept=".jpg,.jpeg,.png">
+                            </div>
+                        </div>
+
+                        <!-- Delivery -->
+                        <div class="form-section-title" style="grid-column: 1/-1;">Delivery Preference (সংগ্রহ পদ্ধতি)
+                        </div>
+                        <div class="form-group">
+                            <label>Delivery Type <span class="required">*</span></label>
+                            <select id="rei-delivery" required onchange="NID.toggleDeliveryFields()">
+                                <option value="Collection Center">নির্বাচন অফিস থেকে সংগ্রহ</option>
+                                <option value="Post Office">ডাকঘরে পাঠান</option>
+                                <option value="Home Delivery">বাড়িতে পৌঁছে দিন</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="centerSelectGroup">
+                            <label>Collection Center</label>
+                            <select id="rei-center">
+                                <option value="">Select Center</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width" id="deliveryAddressGroup" style="display: none;">
+                            <label>Delivery Address</label>
+                            <textarea id="rei-address" placeholder="সম্পূর্ণ ঠিকানা" rows="2"></textarea>
+                        </div>
+
+                        <div class="fee-notice">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Re-issue Fee: <strong>৳345</strong> (Lost/Stolen) | <strong>৳230</strong>
+                                (Damaged)</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-nid-gold"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Re-issue Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Reissue History -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-history"></i> My Re-issue Requests</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="nid-table">
+                            <thead>
+                                <tr>
+                                    <th>Request No</th>
+                                    <th>Reason</th>
+                                    <th>Fee</th>
+                                    <th>Status</th>
+                                    <th>Expected Delivery</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reissueHistoryBody">
+                                <tr>
+                                    <td colspan="5" class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== SMART CARD ==================== -->
+            <div id="smart-card" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-microchip"></i> Smart NID Card (স্মার্ট কার্ড)</h2>
+                    <p class="section-subtitle">আধুনিক চিপযুক্ত স্মার্ট NID কার্ডের জন্য আবেদন</p>
+                </div>
+
+                <!-- Smart Card Features -->
+                <div class="smart-features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>সুরক্ষিত চিপ</h4>
+                        <p>Secure microchip with encrypted data</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-fingerprint"></i>
+                        <h4>বায়োমেট্রিক</h4>
+                        <p>Fingerprint & Iris data stored</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-wifi"></i>
+                        <h4>কন্টাক্টলেস</h4>
+                        <p>NFC enabled for quick verification</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-qrcode"></i>
+                        <h4>QR কোড</h4>
+                        <p>QR code for instant scanning</p>
+                    </div>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-credit-card"></i> Apply for Smart Card</h3>
+                    <form id="smartCardForm" class="nid-form">
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="smt-nid" required placeholder="আপনার NID নম্বর" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Card Type</label>
+                            <select id="smt-current-type">
+                                <option value="Standard">Standard NID (সাধারণ)</option>
+                                <option value="Old Laminated">Old Laminated Card (পুরাতন)</option>
+                                <option value="None">No Card (কার্ড নেই)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-section-title" style="grid-column: 1/-1;">Additional Features (অতিরিক্ত সুবিধা)
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="smt-driving">
+                                <span>Include Driving License Info</span>
+                            </label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="smt-passport">
+                                <span>Include Passport Info</span>
+                            </label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="smt-health">
+                                <span>Include Health ID</span>
+                            </label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="smt-bank">
+                                <span>Include Bank Account</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Collection Center <span class="required">*</span></label>
+                            <select id="smt-center" required>
+                                <option value="">Select Center</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Biometric Appointment Date</label>
+                            <input type="date" id="smt-bio-date" min="">
+                        </div>
+
+                        <div class="fee-notice">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Smart Card Fee: <strong>৳575</strong> (Normal) | <strong>৳1150</strong>
+                                (Urgent)</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-nid"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Apply for Smart Card
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Smart Card Applications -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-history"></i> My Smart Card Applications</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="nid-table">
+                            <thead>
+                                <tr>
+                                    <th>Application No</th>
+                                    <th>Features</th>
+                                    <th>Center</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="smartCardHistoryBody">
+                                <tr>
+                                    <td colspan="5" class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ADDRESS CHANGE ==================== -->
+            <div id="address" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-map-marker-alt"></i> Address Change (ঠিকানা পরিবর্তন)</h2>
+                    <p class="section-subtitle">NID-তে ঠিকানা পরিবর্তনের জন্য আবেদন</p>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-map-pin"></i> Submit Address Change Request</h3>
+                    <form id="addressForm" class="nid-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="addr-nid" required readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Address Type <span class="required">*</span></label>
+                            <select id="addr-type" required>
+                                <option value="">Select Type</option>
+                                <option value="Present">বর্তমান ঠিকানা (Present Address)</option>
+                                <option value="Permanent">স্থায়ী ঠিকানা (Permanent Address)</option>
+                                <option value="Both">উভয় ঠিকানা (Both)</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Current Address (বর্তমান ঠিকানা NID-তে)</label>
+                            <textarea id="addr-old" placeholder="NID-তে যা আছে" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-section-title" style="grid-column: 1/-1;">New Address (নতুন ঠিকানা)</div>
+                        <div class="form-group">
+                            <label>Division <span class="required">*</span></label>
+                            <select id="addr-new-div" required onchange="NID.loadDistricts('addr-new')">
+                                <option value="">Select Division</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>District <span class="required">*</span></label>
+                            <select id="addr-new-dist" required onchange="NID.loadUpazilas('addr-new')">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Upazila <span class="required">*</span></label>
+                            <select id="addr-new-upa" required>
+                                <option value="">Select Upazila</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Post Office</label>
+                            <input type="text" id="addr-new-po" placeholder="ডাকঘর">
+                        </div>
+                        <div class="form-group">
+                            <label>Post Code</label>
+                            <input type="text" id="addr-new-pc" placeholder="পোস্ট কোড">
+                        </div>
+                        <div class="form-group">
+                            <label>Ward No</label>
+                            <input type="text" id="addr-new-ward" placeholder="ওয়ার্ড নং">
+                        </div>
+                        <div class="form-group">
+                            <label>Village/Area</label>
+                            <input type="text" id="addr-new-village" placeholder="গ্রাম/মহল্লা">
+                        </div>
+                        <div class="form-group">
+                            <label>Road/Street</label>
+                            <input type="text" id="addr-new-road" placeholder="রাস্তা">
+                        </div>
+                        <div class="form-group">
+                            <label>House No</label>
+                            <input type="text" id="addr-new-house" placeholder="বাড়ি নং">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Reason for Change</label>
+                            <textarea id="addr-reason" placeholder="ঠিকানা পরিবর্তনের কারণ" rows="2"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Proof Document</label>
+                            <input type="file" id="addr-doc" accept=".jpg,.jpeg,.png,.pdf">
+                            <small style="color: #94a3b8;">ইউটিলিটি বিল, ভাড়ার চুক্তিপত্র, জমির দলিল</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Document Type</label>
+                            <select id="addr-doc-type">
+                                <option value="Utility Bill">ইউটিলিটি বিল</option>
+                                <option value="Rent Agreement">ভাড়ার চুক্তিপত্র</option>
+                                <option value="Land Deed">জমির দলিল</option>
+                                <option value="Holding Tax Receipt">হোল্ডিং ট্যাক্স রশিদ</option>
+                                <option value="Other">অন্যান্য</option>
+                            </select>
+                        </div>
+
+                        <div class="fee-notice">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Address Change Fee: <strong>৳230</strong></span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-nid"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Submit Address Change
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Address Change History -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-history"></i> My Address Change Requests</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="nid-table">
+                            <thead>
+                                <tr>
+                                    <th>Request No</th>
+                                    <th>Type</th>
+                                    <th>New Location</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="addressHistoryBody">
+                                <tr>
+                                    <td colspan="5" class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== VERIFICATION ==================== -->
+            <div id="verification" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-check-circle"></i> NID Verification (যাচাই)</h2>
+                    <p class="section-subtitle">NID নম্বর দিয়ে তথ্য যাচাই করুন</p>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-search"></i> Verify NID</h3>
+                    <form id="verifyForm" class="nid-form">
+                        <div class="form-group">
+                            <label>Verification Type <span class="required">*</span></label>
+                            <select id="ver-type" required>
+                                <option value="Self">নিজের NID যাচাই</option>
+                                <option value="Family Member">পরিবারের সদস্য</option>
+                                <option value="Employee">কর্মচারী যাচাই</option>
+                                <option value="Customer">গ্রাহক যাচাই</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Purpose</label>
+                            <input type="text" id="ver-purpose" placeholder="যাচাইয়ের উদ্দেশ্য">
+                        </div>
+                        <div class="form-group">
+                            <label>NID Number <span class="required">*</span></label>
+                            <input type="text" id="ver-nid" required placeholder="যাচাইকৃত NID নম্বর">
+                        </div>
+                        <div class="form-group">
+                            <label>Name (Optional)</label>
+                            <input type="text" id="ver-name" placeholder="নাম যাচাইয়ের জন্য">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth (Optional)</label>
+                            <input type="date" id="ver-dob">
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-nid-gold"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-search"></i> Verify NID
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Verification Result -->
+                <div class="nid-card-section" id="verificationResult" style="display: none;">
+                    <h3><i class="fas fa-clipboard-check"></i> Verification Result</h3>
+                    <div id="verResultContent"></div>
+                </div>
+
+                <!-- Verification History -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-history"></i> Verification History</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="nid-table">
+                            <thead>
+                                <tr>
+                                    <th>NID Number</th>
+                                    <th>Type</th>
+                                    <th>Result</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="verificationHistoryBody">
+                                <tr>
+                                    <td colspan="4" class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== APPOINTMENTS ==================== -->
+            <div id="appointments" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Biometric Appointments</h2>
+                    <p class="section-subtitle">বায়োমেট্রিক তথ্য সংগ্রহের জন্য অ্যাপয়েন্টমেন্ট</p>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-calendar-plus"></i> Book Appointment</h3>
+                    <form id="appointmentForm" class="nid-form">
+                        <div class="form-group">
+                            <label>Appointment For <span class="required">*</span></label>
+                            <select id="apt-type" required>
+                                <option value="New NID">নতুন NID নিবন্ধন</option>
+                                <option value="Smart Card">স্মার্ট কার্ড</option>
+                                <option value="Biometric Update">বায়োমেট্রিক আপডেট</option>
+                                <option value="Correction">সংশোধন</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Collection Center <span class="required">*</span></label>
+                            <select id="apt-center" required onchange="NID.loadAvailableSlots()">
+                                <option value="">Select Center</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Appointment Date <span class="required">*</span></label>
+                            <input type="date" id="apt-date" required min="" onchange="NID.loadAvailableSlots()">
+                        </div>
+                        <div class="form-group">
+                            <label>Time Slot <span class="required">*</span></label>
+                            <select id="apt-slot" required>
+                                <option value="">Select Time Slot</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-nid"
+                                style="width: 100%; justify-content: center; padding: 1rem;">
+                                <i class="fas fa-calendar-check"></i> Book Appointment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- My Appointments -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-calendar-alt"></i> My Appointments</h3>
+                    <div id="appointmentsList">
+                        <div class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== FAMILY MEMBERS ==================== -->
+            <div id="family" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Family Members (পরিবারের সদস্য)</h2>
+                    <button class="btn-nid" onclick="NID.showAddFamilyModal()">
+                        <i class="fas fa-user-plus"></i> Add Member
+                    </button>
+                </div>
+
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-user-friends"></i> Linked Family Members</h3>
+                    <div id="familyList">
+                        <div class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== ALL APPLICATIONS ==================== -->
+            <div id="applications" class="content-section" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-clipboard-list"></i> All Applications</h2>
+                    <p class="section-subtitle">আপনার সকল আবেদনের তালিকা</p>
+                </div>
+
+                <!-- Track Application -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-search"></i> Track Application</h3>
+                    <div class="track-form">
+                        <input type="text" id="trackRefNo" placeholder="Enter Reference Number (e.g., COR-2026-123456)">
+                        <button class="btn-nid" onclick="NID.trackApplication()">
+                            <i class="fas fa-search"></i> Track
+                        </button>
+                    </div>
+                    <div id="trackResult" style="display: none; margin-top: 1rem;"></div>
+                </div>
+
+                <!-- All Applications Table -->
+                <div class="nid-card-section">
+                    <h3><i class="fas fa-list-alt"></i> Application History</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="nid-table">
+                            <thead>
+                                <tr>
+                                    <th>Reference No</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allApplicationsBody">
+                                <tr>
+                                    <td colspan="5" class="nid-loader"><i class="fas fa-spinner fa-spin"></i> Loading...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/nid.js"></script>
+</body>
+
+</html>

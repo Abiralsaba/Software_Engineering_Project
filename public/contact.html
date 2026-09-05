@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>যোগাযোগ | গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, rgba(0, 106, 78, 0.2), rgba(244, 42, 65, 0.1));
+            border: 1px solid rgba(0, 106, 78, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #34d399;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #94a3b8;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Form Styling */
+        .contact-form {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(0, 106, 78, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-form h3 {
+            color: #fde047;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #006a4e;
+            box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #006a4e, #008060);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 106, 78, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Info Cards */
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: rgba(0, 106, 78, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .info-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card h4 i {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        /* Hotline Card */
+        .hotline-card h4 {
+            color: #f42a41;
+        }
+
+        .hotline-card h4 i {
+            background: rgba(244, 42, 65, 0.2);
+            color: #f42a41;
+        }
+
+        .hotline-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .hotline-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(244, 42, 65, 0.05);
+            border-radius: 8px;
+        }
+
+        .hotline-item .number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fde047;
+            min-width: 60px;
+        }
+
+        .hotline-item .label {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Address Card */
+        .address-card h4 {
+            color: #60a5fa;
+        }
+
+        .address-card h4 i {
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+        }
+
+        .address-card p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        /* Ministries Card */
+        .ministries-card h4 {
+            color: #006a4e;
+        }
+
+        .ministries-card h4 i {
+            background: rgba(0, 106, 78, 0.2);
+            color: #34d399;
+        }
+
+        .ministry-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ministry-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .ministry-list a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .ministry-list a:hover {
+            background: rgba(0, 106, 78, 0.15);
+            color: #34d399;
+            padding-left: 1rem;
+        }
+
+        .ministry-list a i {
+            color: #006a4e;
+            font-size: 0.8rem;
+        }
+
+        /* Bangladesh Flag Colors Accent */
+        .bd-accent {
+            height: 4px;
+            background: linear-gradient(90deg, #006a4e 50%, #f42a41 50%);
+            border-radius: 2px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="userName">Loading...</h3>
+                <p id="userNid" style="color: var(--text-muted); font-size: 0.8rem;">...</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="documents.html"><i class="fas fa-folder"></i> My Documents</a>
+                <a href="history.html"><i class="fas fa-history"></i> History</a>
+                <a href="todo.html"><i class="fas fa-tasks"></i> To Do</a>
+                <a href="community.html"><i class="fas fa-users"></i> Community</a>
+                <a href="market.html"><i class="fas fa-chart-line"></i> Market Info</a>
+                <a href="events.html"><i class="fas fa-bullhorn"></i> Notices</a>
+                <a href="education.html"><i class="fas fa-graduation-cap"></i> Education</a>
+                <a href="#" class="active"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="javascript:void(0)" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="bd-accent"></div>
+                <h1><i class="fas fa-headset"></i> যোগাযোগ ও সহায়তা</h1>
+                <p>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — আমরা সর্বদা আপনার সেবায় নিয়োজিত</p>
+            </div>
+
+            <div class="content-grid">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3><i class="fas fa-paper-plane"></i> অভিযোগ / পরামর্শ পাঠান</h3>
+
+                    <div class="form-group">
+                        <label>বিভাগ নির্বাচন করুন</label>
+                        <select id="contactDepartment" class="form-control">
+                            <option value="কৃষি মন্ত্রণালয়">কৃষি মন্ত্রণালয়</option>
+                            <option value="ভূমি মন্ত্রণালয়">ভূমি মন্ত্রণালয়</option>
+                            <option value="শিক্ষা মন্ত্রণালয়">শিক্ষা মন্ত্রণালয়</option>
+                            <option value="স্বাস্থ্য ও পরিবার কল্যাণ">স্বাস্থ্য ও পরিবার কল্যাণ</option>
+                            <option value="পাসপোর্ট ও ইমিগ্রেশন">পাসপোর্ট ও ইমিগ্রেশন</option>
+                            <option value="নির্বাচন কমিশন">নির্বাচন কমিশন</option>
+                            <option value="জাতীয় রাজস্ব বোর্ড">জাতীয় রাজস্ব বোর্ড</option>
+                            <option value="পানি সম্পদ মন্ত্রণালয়">পানি সম্পদ মন্ত্রণালয়</option>
+                            <option value="অন্যান্য">অন্যান্য</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>বিষয় নির্বাচন করুন</label>
+                        <select id="contactSubject" class="form-control">
+                            <option value="প্রযুক্তিগত সমস্যা">প্রযুক্তিগত সমস্যা</option>
+                            <option value="সেবা সংক্রান্ত মতামত">সেবা সংক্রান্ত মতামত</option>
+                            <option value="দুর্নীতির অভিযোগ">দুর্নীতির অভিযোগ</option>
+                            <option value="তথ্য জানতে চাই">তথ্য জানতে চাই</option>
+                            <option value="অন্যান্য">অন্যান্য</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>আপনার বার্তা লিখুন</label>
+                        <textarea id="contactMessage" class="form-control" rows="6"
+                            placeholder="আপনার সমস্যা বা পরামর্শ বিস্তারিত লিখুন..."></textarea>
+                    </div>
+
+                    <button class="btn-submit" onclick="sendContactMessage()">
+                        <i class="fas fa-paper-plane"></i> বার্তা পাঠান
+                    </button>
+                </div>
+
+                <!-- Info Section -->
+                <div class="info-section">
+                    <!-- Emergency Hotlines -->
+                    <div class="info-card hotline-card">
+                        <h4><i class="fas fa-phone-alt"></i> জরুরি হটলাইন নম্বর</h4>
+                        <div class="hotline-grid">
+                            <div class="hotline-item">
+                                <span class="number">৯৯৯</span>
+                                <span class="label">জরুরি সেবা</span>
+                            </div>
+                            <div class="hotline-item">
+                                <span class="number">৩৩৩</span>
+                                <span class="label">জাতীয় হেল্পলাইন</span>
+                            </div>
+                            <div class="hotline-item">
+                                <span class="number">১০৬</span>
+                                <span class="label">দুর্নীতি দমন</span>
+                            </div>
+                            <div class="hotline-item">
+                                <span class="number">১০৯</span>
+                                <span class="label">নারী ও শিশু</span>
+                            </div>
+                            <div class="hotline-item">
+                                <span class="number">১৬২৬৩</span>
+                                <span class="label">স্বাস্থ্য বাতায়ন</span>
+                            </div>
+                            <div class="hotline-item">
+                                <span class="number">১৬১২৩</span>
+                                <span class="label">কৃষি কল সেন্টার</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="info-card address-card">
+                        <h4><i class="fas fa-landmark"></i> প্রধান কার্যালয়</h4>
+                        <p>
+                            <strong>বাংলাদেশ সচিবালয়</strong><br>
+                            আব্দুল গণি রোড, রমনা<br>
+                            ঢাকা-১০০০, বাংলাদেশ<br><br>
+                            <i class="fas fa-envelope" style="color: #60a5fa;"></i> info@gov.bd<br>
+                            <i class="fas fa-globe" style="color: #60a5fa;"></i> www.bangladesh.gov.bd
+                        </p>
+                    </div>
+
+                    <!-- Important Links -->
+                    <div class="info-card ministries-card">
+                        <h4><i class="fas fa-building-columns"></i> গুরুত্বপূর্ণ মন্ত্রণালয় ও ওয়েবসাইট</h4>
+                        <ul class="ministry-list">
+                            <li><a href="https://bangladesh.gov.bd" target="_blank"><i class="fas fa-globe"></i> জাতীয়
+                                    তথ্য বাতায়ন</a></li>
+                            <li><a href="https://cabinet.gov.bd" target="_blank"><i class="fas fa-building"></i>
+                                    মন্ত্রিপরিষদ বিভাগ</a></li>
+                            <li><a href="https://moedu.gov.bd" target="_blank"><i class="fas fa-graduation-cap"></i>
+                                    শিক্ষা মন্ত্রণালয়</a></li>
+                            <li><a href="https://minland.gov.bd" target="_blank"><i class="fas fa-map"></i> ভূমি
+                                    মন্ত্রণালয়</a></li>
+                            <li><a href="https://nid.gov.bd" target="_blank"><i class="fas fa-id-card"></i> জাতীয়
+                                    পরিচয়পত্র সেবা</a></li>
+                            <li><a href="https://epassport.gov.bd" target="_blank"><i class="fas fa-passport"></i>
+                                    ই-পাসপোর্ট সেবা</a></li>
+                            <li><a href="https://a2i.gov.bd" target="_blank"><i class="fas fa-laptop-code"></i> এটুআই
+                                    প্রোগ্রাম</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function sendContactMessage() {
+            const department = document.getElementById('contactDepartment').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            const token = localStorage.getItem('token');
+
+            if (!department || !message) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'বার্তা লিখুন',
+                    text: 'অনুগ্রহ করে আপনার বার্তা লিখুন।',
+                    background: '#0f172a',
+                    color: '#fff',
+                    confirmButtonColor: '#006a4e'
+                });
+                return;
+            }
+
+            if (!token) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'লগইন প্রয়োজন',
+                    text: 'বার্তা পাঠাতে অনুগ্রহ করে লগইন করুন।',
+                    background: '#0f172a',
+                    color: '#fff',
+                    confirmButtonColor: '#006a4e'
+                });
+                return;
+            }
+
+            const btn = document.querySelector('.btn-submit');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ department, subject, message })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'বার্তা সফলভাবে পাঠানো হয়েছে!',
+                        html: `<p>আপনার টিকেট নম্বর: <strong style="color: #fde047;">#${data.ticketId}</strong></p><p style="font-size: 0.9rem; color: #94a3b8;">আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।</p>`,
+                        background: '#0f172a',
+                        color: '#fff',
+                        confirmButtonColor: '#006a4e',
+                        confirmButtonText: 'ঠিক আছে'
+                    });
+                    document.getElementById('contactMessage').value = '';
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'ত্রুটি',
+                        text: data.error || 'বার্তা পাঠাতে ব্যর্থ হয়েছে।',
+                        background: '#0f172a',
+                        color: '#fff',
+                        confirmButtonColor: '#006a4e'
+                    });
+                }
+            } catch (error) {
+                console.error('Contact error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'সংযোগ ত্রুটি',
+                    text: 'সার্ভারে সংযোগ করতে ব্যর্থ হয়েছে।',
+                    background: '#0f172a',
+                    color: '#fff',
+                    confirmButtonColor: '#006a4e'
+                });
+            } finally {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        }
+    </script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,435 @@
+/* =============================================
+   Admin NID Panel Styles
+   Election Commission Theme (Blue & Green)
+============================================= */
+
+:root {
+    --nid-primary: #1e3a5f;
+    --nid-primary-light: #2563eb;
+    --nid-secondary: #0f172a;
+    --nid-accent: #60a5fa;
+    --nid-gold: #f59e0b;
+    --nid-gold-light: #fbbf24;
+    --nid-success: #10b981;
+    --nid-warning: #f59e0b;
+    --nid-danger: #ef4444;
+    --nid-info: #3b82f6;
+    --nid-card-border: rgba(96, 165, 250, 0.2);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --text-muted: #94a3b8;
+}
+
+/* --- Admin Header Banner --- */
+.admin-nid-banner {
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.8), rgba(15, 23, 42, 0.9));
+    border: 1px solid var(--nid-card-border);
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.admin-nid-banner::before {
+    content: '\f2b9'; /* ID Card Icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%) rotate(15deg);
+    font-size: 6rem;
+    opacity: 0.05;
+    color: var(--nid-accent);
+}
+
+.admin-nid-banner h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff 0%, var(--nid-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.admin-nid-banner h1 i {
+    color: var(--nid-success); /* Green for Bangladesh */
+}
+
+/* --- Stats Grid --- */
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.admin-stat-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--nid-card-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--nid-accent);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+/* --- Filter Bar --- */
+.admin-filter-bar {
+    background: var(--glass-bg);
+    border: 1px solid var(--nid-card-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+.filter-group select,
+.filter-group input {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--nid-card-border);
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: var(--nid-accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.filter-btn {
+    background: var(--nid-success);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 46px; /* Match input height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.filter-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+/* --- Applications Table --- */
+.admin-table-container {
+    background: var(--glass-bg);
+    border: 1px solid var(--nid-card-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: var(--nid-accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.admin-table td {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+}
+
+.admin-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.status-pending { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+.status-verified { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.status-approved { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.status-rejected { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.status-active { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 0.5rem;
+}
+
+.action-btn:hover {
+    background: var(--nid-accent);
+    color: #fff;
+}
+
+.action-btn.reject {
+    color: #f87171;
+}
+.action-btn.reject:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+/* --- Detail Modal --- */
+.detail-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.detail-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.detail-modal {
+    background: #1e293b;
+    border: 1px solid var(--nid-card-border);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.detail-modal-overlay.active .detail-modal {
+    transform: translateY(0);
+}
+
+.modal-header {
+    background: linear-gradient(to right, #1e3a5f, #0f172a);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--nid-accent);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 2rem;
+    color: #e2e8f0;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.detail-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.admin-actions-panel {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.admin-actions-panel h3 {
+    margin-top: 0;
+    color: var(--nid-success);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.update-status-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.status-select {
+    flex: 1;
+    min-width: 200px;
+}
+
+.admin-btn {
+    background: var(--nid-success);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-btn:hover {
+    background: #059669;
+}
+
+.photo-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid var(--nid-card-border);
+}
+
+/* Scrollbar */
+.detail-modal::-webkit-scrollbar {
+    width: 8px;
+}
+.detail-modal::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+.detail-modal::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}

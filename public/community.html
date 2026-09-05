@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | Govt of Bangladesh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar"><i class="fas fa-users"></i></div>
+                <h3 style="color: #a78bfa;">Community</h3>
+                <p style="color: #94a3b8; font-size: 0.8rem;">Connect & Share</p>
+            </div>
+            <nav class="nav-links">
+                <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                <a href="#" onclick="showTab('discover')" class="active" id="nav-discover"><i
+                        class="fas fa-compass"></i> Discover</a>
+                <a href="#" onclick="showTab('my-groups')" id="nav-my-groups"><i class="fas fa-layer-group"></i> My
+                    Groups</a>
+                <a href="#" onclick="showTab('create')" id="nav-create"><i class="fas fa-plus-circle"></i> Create
+                    Group</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div id="discover-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <div>
+                        <h1>Discover Communities</h1>
+                        <p style="color: var(--text-muted);">Find and join communities</p>
+                    </div>
+                    <button class="btn-primary" style="width: auto; padding: 0.75rem 1.5rem;"
+                        onclick="showTab('create')">
+                        <i class="fas fa-plus"></i> Create Group
+                    </button>
+                </div>
+                <div class="groups-grid" id="groupsGrid">
+                    <div class="empty-state"><i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="my-groups-section" style="display: none;">
+                <h1 style="margin-bottom: 2rem;">My Groups</h1>
+                <div class="groups-grid" id="myGroupsGrid">
+                    <div class="empty-state"><i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="create-section" style="display: none;">
+                <h1 style="margin-bottom: 2rem;">Create New Community</h1>
+                <div style="max-width: 500px;">
+                    <form id="createGroupForm">
+                        <div class="form-group">
+                            <label>Group Name *</label>
+                            <input type="text" id="groupName" class="form-control" placeholder="Enter group name"
+                                required minlength="3">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="groupDesc" class="form-control" rows="4"
+                                placeholder="What is this group about?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Cover Image (optional)</label>
+                            <div class="cover-upload-wrapper" style="position: relative;">
+                                <input type="file" id="groupCoverFile" accept="image/*" style="display: none;"
+                                    onchange="handleCoverImageUpload(this)">
+                                <button type="button" class="upload-btn"
+                                    onclick="document.getElementById('groupCoverFile').click()"
+                                    style="width: 100%; padding: 1rem; background: rgba(139, 92, 246, 0.2); border: 2px dashed #8b5cf6; border-radius: 12px; color: #a78bfa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span id="uploadBtnText">Click to upload cover image</span>
+                                </button>
+                                <div id="coverPreview" style="display: none; margin-top: 1rem; position: relative;">
+                                    <img id="coverPreviewImg" src="" alt="Cover Preview"
+                                        style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px;">
+                                    <button type="button" onclick="removeCoverImage()"
+                                        style="position: absolute; top: 8px; right: 8px; background: rgba(239, 68, 68, 0.9); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Submit for
+                            Approval</button>
+                        <p style="margin-top: 1rem; color: #64748b; font-size: 0.85rem;"><i
+                                class="fas fa-info-circle"></i> Your group will be reviewed by admin.</p>
+                    </form>
+                </div>
+            </div>
+
+            <div id="group-detail-section" style="display: none;">
+                <a class="back-btn" onclick="showTab('discover')"><i class="fas fa-arrow-left"></i> Back</a>
+                <div class="group-header" id="groupDetailHeader"></div>
+                <div class="post-feed" id="postFeed">
+                    <div class="create-post-box" id="createPostBox" style="display: none;">
+                        <div class="post-avatar" id="currentUserAvatar">U</div>
+                        <input type="text" class="create-post-input" placeholder="What's on your mind?"
+                            onclick="openCreatePostModal()" readonly>
+                    </div>
+                    <div id="postsContainer">
+                        <div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="createPostModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Post</h2>
+                <button class="close-btn" onclick="closeCreatePostModal()">&times;</button>
+            </div>
+            <form id="createPostForm">
+                <div class="form-group">
+                    <label>What would you like to share?</label>
+                    <textarea id="postContent" class="form-control" rows="5" placeholder="Write here..."
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Image (optional)</label>
+                    <div class="post-upload-wrapper" style="position: relative;">
+                        <input type="file" id="postImageFile" accept="image/*" style="display: none;"
+                            onchange="handlePostImageUpload(this)">
+                        <button type="button" class="upload-btn"
+                            onclick="document.getElementById('postImageFile').click()"
+                            style="width: 100%; padding: 1rem; background: rgba(139, 92, 246, 0.2); border: 2px dashed #8b5cf6; border-radius: 12px; color: #a78bfa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-image"></i>
+                            <span id="postUploadBtnText">Click to add an image</span>
+                        </button>
+                        <div id="postImagePreview" style="display: none; margin-top: 1rem; position: relative;">
+                            <img id="postPreviewImg" src="" alt="Image Preview"
+                                style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px;">
+                            <button type="button" onclick="removePostImage()"
+                                style="position: absolute; top: 8px; right: 8px; background: rgba(239, 68, 68, 0.9); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Submit Post</button>
+                <p style="margin-top: 1rem; color: #64748b; font-size: 0.85rem;"><i class="fas fa-info-circle"></i> Post
+                    will be reviewed.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Post Modal -->
+    <div id="editPostModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Post</h2>
+                <button class="close-btn" onclick="closeEditPostModal()">&times;</button>
+            </div>
+            <form id="editPostForm">
+                <input type="hidden" id="editPostId">
+                <div class="form-group">
+                    <label>Update your post</label>
+                    <textarea id="editPostContent" class="form-control" rows="5" placeholder="Write here..."
+                        required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Image (optional)</label>
+                    <div class="edit-upload-wrapper" style="position: relative;">
+                        <input type="file" id="editPostImageFile" accept="image/*" style="display: none;"
+                            onchange="handleEditPostImageUpload(this)">
+                        <button type="button" class="upload-btn"
+                            onclick="document.getElementById('editPostImageFile').click()"
+                            style="width: 100%; padding: 1rem; background: rgba(139, 92, 246, 0.2); border: 2px dashed #8b5cf6; border-radius: 12px; color: #a78bfa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-image"></i>
+                            <span id="editPostUploadBtnText">Click to change image</span>
+                        </button>
+                        <div id="editPostImagePreview" style="display: none; margin-top: 1rem; position: relative;">
+                            <img id="editPostPreviewImg" src="" alt="Image Preview"
+                                style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px;">
+                            <button type="button" onclick="removeEditPostImage()"
+                                style="position: absolute; top: 8px; right: 8px; background: rgba(239, 68, 68, 0.9); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+                <p style="margin-top: 1rem; color: #f59e0b; font-size: 0.85rem;"><i
+                        class="fas fa-exclamation-triangle"></i> Edited posts require re-approval.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Group Modal -->
+    <div id="editGroupModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Group</h2>
+                <button class="close-btn" onclick="closeEditGroupModal()">&times;</button>
+            </div>
+            <form id="editGroupForm">
+                <input type="hidden" id="editGroupId">
+                <div class="form-group">
+                    <label>Group Name *</label>
+                    <input type="text" id="editGroupName" class="form-control" placeholder="Enter group name" required
+                        minlength="3">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="editGroupDesc" class="form-control" rows="4"
+                        placeholder="What is this group about?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Cover Image (optional)</label>
+                    <div class="edit-group-upload-wrapper" style="position: relative;">
+                        <input type="file" id="editGroupCoverFile" accept="image/*" style="display: none;"
+                            onchange="handleEditGroupCoverUpload(this)">
+                        <button type="button" class="upload-btn"
+                            onclick="document.getElementById('editGroupCoverFile').click()"
+                            style="width: 100%; padding: 1rem; background: rgba(139, 92, 246, 0.2); border: 2px dashed #8b5cf6; border-radius: 12px; color: #a78bfa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="editGroupUploadBtnText">Click to change cover image</span>
+                        </button>
+                        <div id="editGroupCoverPreview" style="display: none; margin-top: 1rem; position: relative;">
+                            <img id="editGroupCoverPreviewImg" src="" alt="Cover Preview"
+                                style="width: 100%; max-height: 150px; object-fit: cover; border-radius: 8px;">
+                            <button type="button" onclick="removeEditGroupCover()"
+                                style="position: absolute; top: 8px; right: 8px; background: rgba(239, 68, 68, 0.9); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save Changes</button>
+                <p style="margin-top: 1rem; color: #f59e0b; font-size: 0.85rem;"><i
+                        class="fas fa-exclamation-triangle"></i> Group edits require re-approval.</p>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/sidebar.js"></script>
+    <script src="js/community.js"></script>
+</body>
+
+</html>
