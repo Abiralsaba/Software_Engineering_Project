@@ -1,0 +1,176 @@
+.react-page-content { color: #f8fafc; }
+
+.react-page-header,
+.react-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.react-page-header h1,
+.react-section-heading h2,
+.react-panel h2 { margin: 0; }
+
+.react-page-header p,
+.react-section-heading p,
+.react-panel p { color: #94a3b8; }
+
+.react-panel {
+  padding: 1.5rem;
+  color: #f8fafc;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 16px;
+}
+
+.react-two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 1.5rem;
+}
+
+.react-form-stack { display: grid; gap: 1rem; }
+
+.react-form-stack label,
+.react-profile-fields label,
+.react-filter-grid label {
+  display: grid;
+  gap: 0.4rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.react-form-stack input,
+.react-form-stack select,
+.react-form-stack textarea,
+.react-filter-grid input,
+.react-filter-grid select,
+.react-toolbar input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  color: #f8fafc;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 9px;
+}
+
+.react-success-banner {
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 10px;
+}
+
+.react-hotline-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.react-hotline-grid div {
+  padding: 0.8rem;
+  text-align: center;
+  background: rgba(244, 42, 65, 0.09);
+  border-radius: 10px;
+}
+
+.react-hotline-grid strong,
+.react-hotline-grid span,
+.react-block,
+.react-detail-grid strong { display: block; }
+.react-hotline-grid strong { color: #f87171; font-size: 1.25rem; }
+.react-hotline-grid span { color: #94a3b8; font-size: 0.8rem; }
+.react-link-list { display: grid; gap: 0.5rem; }
+.react-link-list a { color: #60a5fa; }
+
+.react-profile-card { padding: 1.5rem; }
+.react-profile-summary { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.react-profile-photo { position: relative; width: 96px; height: 96px; }
+.react-profile-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.react-profile-photo button { position: absolute; right: 0; bottom: 0; width: 32px; height: 32px; color: white; background: #006a4e; border: 0; border-radius: 50%; cursor: pointer; }
+.react-profile-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-bottom: 1rem; }
+.react-grid-wide { grid-column: 1 / -1; }
+
+.react-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.react-hub-card {
+  min-height: 230px;
+  padding: 1.5rem;
+  color: #f8fafc;
+  text-align: left;
+  text-decoration: none;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.react-hub-card > i { color: #34d399; font-size: 2rem; }
+.react-hub-card p { color: #94a3b8; }
+.react-toolbar { display: grid; gap: 1rem; margin-bottom: 1rem; }
+.react-chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.react-chip-row button,
+.react-chip-row span { padding: 0.35rem 0.7rem; color: #cbd5e1; background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 999px; }
+.react-chip-row button { cursor: pointer; }
+.react-chip-row button.active { color: #fff; background: #006a4e; }
+.react-price-alert { color: #f87171 !important; }
+.react-price-ok { color: #4ade80 !important; }
+
+.react-card-list { display: grid; gap: 0.75rem; }
+.react-card-list article { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem; background: rgba(30, 41, 59, 0.7); border-radius: 10px; }
+.react-card-list h3 { margin-top: 0; }
+
+.react-filter-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 0.75rem; }
+.react-clear-button { margin-top: 1rem; }
+.react-notice-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.react-notice-stats .react-panel { text-align: center; }
+.react-notice-stats strong { display: block; color: #34d399; font-size: 2rem; }
+.react-notice-stats span { color: #94a3b8; }
+
+.react-notice-list { display: grid; gap: 0.85rem; margin-top: 1rem; }
+.react-notice-card { width: 100%; padding: 1.25rem; color: #f8fafc; text-align: left; background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(148, 163, 184, 0.14); border-left: 4px solid #60a5fa; border-radius: 12px; cursor: pointer; }
+.react-notice-card.priority-high { border-left-color: #f87171; }
+.react-notice-card h2 { margin: 0 0 0.25rem; }
+.react-notice-card h3 { margin: 0 0 0.75rem; color: #94a3b8; font-weight: 400; }
+.react-notice-card > p { overflow: hidden; color: #cbd5e1; white-space: nowrap; text-overflow: ellipsis; }
+.react-notice-card footer { display: flex; flex-wrap: wrap; gap: 1rem; color: #94a3b8; font-size: 0.8rem; }
+.react-pagination { display: flex; justify-content: center; align-items: center; gap: 1rem; margin: 1.25rem 0; }
+.react-pagination button { padding: 0.5rem 0.8rem; color: white; background: #006a4e; border: 0; border-radius: 8px; }
+.react-pagination button:disabled { opacity: 0.45; }
+
+.react-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.react-detail-grid p { margin: 0; padding: 0.75rem; color: #cbd5e1; background: rgba(30, 41, 59, 0.65); border-radius: 8px; }
+.react-detail-grid strong { margin-bottom: 0.25rem; color: #94a3b8; font-size: 0.8rem; }
+.react-notice-content { margin-top: 1rem; padding: 1rem; color: #e2e8f0; white-space: pre-wrap; background: rgba(30, 41, 59, 0.6); border-radius: 10px; }
+.react-attachment { display: inline-block; width: auto !important; margin-top: 1rem; text-decoration: none; }
+
+.react-section-heading { margin-top: 2.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(148, 163, 184, 0.15); }
+.react-section-heading .btn-primary { width: auto; }
+.react-doc-grid { display: grid !important; }
+.react-empty-doc { opacity: 0.75; border-style: dashed; }
+
+@media (max-width: 1100px) {
+  .react-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .react-notice-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 800px) {
+  .react-page-content { padding-top: 4.5rem; }
+  .react-page-header, .react-section-heading { align-items: flex-start; flex-direction: column; }
+  .react-two-column, .react-hub-grid, .react-market-columns { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .react-filter-grid, .react-notice-stats, .react-detail-grid { grid-template-columns: 1fr; }
+  .react-grid-wide { grid-column: auto; }
+}

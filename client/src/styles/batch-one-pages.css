@@ -1,0 +1,85 @@
+.react-auto-width { width: auto !important; }
+.react-modal-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1rem; }
+.react-modal-actions select { padding: 0.6rem; color: #fff; background: #1e293b; border: 1px solid #475569; border-radius: 8px; }
+.btn-danger { padding: 0.65rem 1rem; color: white; background: #b91c1c; border: 0; border-radius: 8px; cursor: pointer; }
+
+.react-kanban-board { align-items: stretch; }
+.react-kanban-board .kanban-column { min-height: 290px; }
+.react-kanban-board .kanban-header { display: flex; justify-content: space-between; }
+.react-kanban-board .kanban-header span { min-width: 24px; padding: 0.1rem 0.4rem; text-align: center; background: rgba(148, 163, 184, 0.14); border-radius: 999px; }
+.react-kanban-amber { color: #fbbf24; }
+.react-kanban-blue { color: #60a5fa; }
+.react-kanban-green { color: #34d399; }
+.react-kanban-item { display: grid; gap: 0.35rem; width: 100%; color: #f8fafc; text-align: left; border: 0; cursor: grab; }
+.react-kanban-item time { color: #94a3b8; font-size: 0.72rem; }
+.react-column-empty { padding: 2rem 0.5rem; color: #64748b; text-align: center; border: 1px dashed rgba(148, 163, 184, 0.15); border-radius: 8px; }
+.react-calendar-panel { margin-top: 2rem; padding: 1.25rem; color: #f8fafc; background: rgba(15, 23, 42, 0.82); border: 1px solid rgba(148, 163, 184, 0.12); border-radius: 16px; }
+.react-calendar-panel .fc-theme-standard td,
+.react-calendar-panel .fc-theme-standard th,
+.react-calendar-panel .fc-theme-standard .fc-scrollgrid { border-color: rgba(148, 163, 184, 0.14); }
+.react-calendar-panel .fc-button-primary { background: #006a4e; border-color: #006a4e; }
+.react-calendar-panel .fc-daygrid-day-number,
+.react-calendar-panel .fc-col-header-cell-cushion { color: #cbd5e1; }
+.react-calendar-todo { background: #92400e !important; border-color: #f59e0b !important; }
+.react-calendar-progress { background: #1e40af !important; border-color: #60a5fa !important; }
+.react-calendar-done { background: #065f46 !important; border-color: #34d399 !important; }
+
+.react-narrow-panel { max-width: 620px; }
+.react-check-label { display: flex !important; grid-template-columns: auto 1fr; align-items: center; justify-content: flex-start; }
+.react-check-label input { width: auto; }
+.react-group-grid { align-items: stretch; }
+.react-group-card { padding: 0; overflow: hidden; color: inherit; text-align: left; border: 1px solid rgba(148, 163, 184, 0.14); cursor: pointer; }
+.react-group-card .group-cover { display: flex; width: 100%; height: 150px; align-items: center; justify-content: center; object-fit: cover; color: #c4b5fd; font-size: 2.5rem; background: linear-gradient(135deg, #4c1d95, #312e81); }
+.react-community-header { position: relative; display: grid; grid-template-columns: minmax(180px, 32%) 1fr; gap: 1.5rem; margin: 1rem 0; padding: 1.5rem; overflow: hidden; color: white; background: linear-gradient(135deg, #4c1d95, #312e81); border-radius: 16px; }
+.react-community-header > img { width: 100%; height: 200px; object-fit: cover; border-radius: 12px; }
+.react-create-post { display: flex !important; width: 100%; margin-bottom: 1rem; color: #cbd5e1; text-align: left; border: 1px solid rgba(148, 163, 184, 0.16); cursor: pointer; }
+.react-icon-button { padding: 0.45rem; color: #94a3b8; background: transparent; border: 0; cursor: pointer; }
+.react-icon-button.danger { color: #f87171; }
+.react-post-image { display: block; width: 100%; max-height: 460px; margin: 1rem 0; object-fit: contain; border-radius: 10px; background: #020617; }
+.react-comments { display: block !important; }
+.comment-actions { display: flex; gap: 0.25rem; }
+.comment-actions button { padding: 0.35rem; color: #94a3b8; background: transparent; border: 0; cursor: pointer; }
+.comment-actions button:last-child { color: #f87171; }
+.react-comment-form { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+.react-comment-form input { flex: 1; padding: 0.65rem; color: white; background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 999px; }
+.react-comment-form button { width: 38px; color: white; background: #006a4e; border: 0; border-radius: 50%; }
+
+.react-cart-count { padding: 0.05rem 0.45rem; color: #006a4e; background: white; border-radius: 999px; }
+.react-shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+.react-shop-grid .product-card { padding: 1.25rem; }
+.react-product-placeholder { display: flex; width: 100%; height: 180px; align-items: center; justify-content: center; color: #64748b; font-size: 3.5rem; background: rgba(2, 6, 23, 0.55); border-radius: 12px; }
+.react-payment-warning { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding: 1rem; color: #fde68a; background: rgba(146, 64, 14, 0.26); border: 1px solid rgba(245, 158, 11, 0.38); border-radius: 10px; }
+.react-payment-warning span { flex: 1; }
+.react-payment-warning button { color: inherit; background: transparent; border: 0; cursor: pointer; }
+.react-cart-list { display: grid; gap: 0.75rem; }
+.react-cart-list article { display: grid; grid-template-columns: 54px 1fr auto auto; align-items: center; gap: 0.75rem; padding: 0.75rem; background: rgba(30, 41, 59, 0.68); border-radius: 10px; }
+.react-cart-list img { width: 54px; height: 54px; object-fit: cover; border-radius: 8px; }
+.react-cart-list > article > i { color: #64748b; font-size: 2rem; text-align: center; }
+.react-cart-list h3,
+.react-cart-list p { margin: 0; }
+.react-cart-total { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(148, 163, 184, 0.15); }
+.react-payment-methods { display: grid; gap: 0.6rem; padding: 1rem; border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 10px; }
+.react-payment-methods label { display: flex; grid-template-columns: auto 1fr; align-items: center; }
+.react-payment-methods input { width: auto; }
+.react-disabled-payment { color: #fbbf24 !important; opacity: 0.8; }
+.react-checkout-total { padding: 0.8rem; color: #cbd5e1; background: rgba(30, 41, 59, 0.7); border-radius: 8px; }
+
+@media (max-width: 760px) {
+  .react-community-header { grid-template-columns: 1fr; }
+  .react-cart-list article { grid-template-columns: 42px 1fr auto; }
+  .react-cart-list article > strong { grid-column: 2; }
+  .react-cart-total { align-items: stretch; flex-direction: column; }
+}
+.react-task-calendar > header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.react-task-calendar > header h2 { margin: 0; }
+.react-task-calendar > header button { width: 2.5rem; height: 2.5rem; border: 1px solid #d7e2dc; border-radius: .6rem; background: #fff; cursor: pointer; }
+.react-calendar-weekdays, .react-calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.react-calendar-weekdays strong { padding: .55rem; text-align: center; color: #52645a; }
+.react-calendar-days > div { min-height: 6rem; padding: .45rem; border: 1px solid #e4ebe7; background: #fff; }
+.react-calendar-days > div.empty { background: #f7f9f8; }
+.react-calendar-days > div > span { display: block; margin-bottom: .35rem; font-weight: 700; }
+.react-calendar-task { display: block; width: 100%; margin: .2rem 0; padding: .3rem; overflow: hidden; border: 0; border-radius: .35rem; text-align: left; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+.react-calendar-todo { background: #fff1c7; }
+.react-calendar-progress { background: #dbeafe; }
+.react-calendar-done { background: #d9f5e4; }
+@media (max-width: 720px) { .react-calendar-days > div { min-height: 3.5rem; padding: .2rem; } .react-calendar-task { font-size: .7rem; } }
