@@ -1,0 +1,10 @@
+-- LOGIN & SECURITY LOGS
+
+CREATE TABLE IF NOT EXISTS login_logs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES reg_info(id) ON DELETE CASCADE
+);
