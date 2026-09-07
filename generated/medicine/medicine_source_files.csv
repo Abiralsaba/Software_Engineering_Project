@@ -1,0 +1,3 @@
+source_file_id,filename,sha256,file_size,format,encoding,data_row_count,dataset_version,source_verified,licence_status,import_date
+MARKET,medicine.csv,fa0767285719e093b124a2e68958e86afab9619e499a79e466024f095b0b8791,3843823,CSV,UTF-8,21714,BATCH-255ea5b11b7134630476deb9,0,UNKNOWN,
+REGISTERED,bd_registered_drag_info.xlsx,9ef9f366426757948d24c7a0326b9838771bd524076429c077e6c103cb1b3015,1962832,XLSX,OOXML_UTF8,36085,BATCH-255ea5b11b7134630476deb9,0,UNKNOWN,

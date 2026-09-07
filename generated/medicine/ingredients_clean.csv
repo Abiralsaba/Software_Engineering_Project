@@ -1,0 +1,2373 @@
+ingredient_id,display_name,normalized_name
+ING-003fd98cccc485859b54b4a9,Sulphapyridine,sulphapyridine
+ING-0085e5f484b06f1f67fefaa1,Coenzyme Q10 [Ubidecarenone],coenzyme q10 ubidecarenone
+ING-00e1c4227a8d4f183ab98118,Ponatinib Hydrochloride,ponatinib hydrochloride
+ING-01022faf678f2d43cfccde64,Cyclizine Hydrochloride,cyclizine hydrochloride
+ING-0103bbf84ff0c39d123ae7cd,Digoxin,digoxin
+ING-010ebd0e9b4696daf47890fb,Nevirapine,nevirapine
+ING-011c9a676a993b960d157fe3,Lenvatinib Mesylate,lenvatinib mesylate
+ING-013e1b5f60405434d8c13c76,Selinexor,selinexor
+ING-014a5e7c377fc95f1cf6eb6c,Potassium Iodide,potassium iodide
+ING-019ca7179d6be69898a18cee,Tetramisole,tetramisole
+ING-0209e6dc63c379153f3a7f96,Chlorpheniramine Maleate,chlorpheniramine maleate
+ING-020a98c080e9f4004e0c6ebe,Clostridium Botulinum Toxin Type A Neurotoxin,clostridium botulinum toxin type a neurotoxin
+ING-021d1839aa52f7fe076904ae,Sulconazole Nitrate,sulconazole nitrate
+ING-022c2b50b0fd4b442faaa27a,Cascara Sagrada,cascara sagrada
+ING-0230d04ba2427aa28522353b,Tamoxifen,tamoxifen
+ING-0236f85aa270828a0c6fd807,Vitamin D3,vitamin d3
+ING-023ff8556233c2934adf07c8,Linseed Oil,linseed oil
+ING-024e79b63fd1aabfa869eb1b,Buzuri,buzuri
+ING-027ae8f3b7961fe1dc7f8101,Nab-Paclitaxel [Nanoparticle Albumin-Bound Paclitaxel],nab paclitaxel nanoparticle albumin bound paclitaxel
+ING-029028a8a81c564ea23c2693,Azelastine Hydrochloride,azelastine hydrochloride
+ING-02995b866e66daf4dd530728,Betamethasone Sodium Phosphate,betamethasone sodium phosphate
+ING-02c60fb5530cf33719880729,Ampicillin Sodium,ampicillin sodium
+ING-02d130d71a75e19bbe869308,Enzalutamide,enzalutamide
+ING-02d2885c55419c01bdc431bb,Multivitamin & Multimineral [A-Z gold preparation],multivitamin multimineral a z gold preparation
+ING-02e24686ed2deaabeb9aa03b,Zidovudine,zidovudine
+ING-02fb3e88a3389ba2d68e5378,Aminophylline,aminophylline
+ING-0302fe55cfd6d4c5b7c6b5d8,Isoniazid,isoniazid
+ING-030eb8369f7b1118bbb8699a,Tazobactam,tazobactam
+ING-0325be53f4bea36c2f74bb5e,Palonosetron,palonosetron
+ING-03281ead5288818415a56341,Rocuronium Bromide,rocuronium bromide
+ING-033d2dc83d358f20cee10205,L-Histidine Hcl,l histidine hcl
+ING-03e5987bc90f99924768824b,Atosiban,atosiban
+ING-040e1c5cffb86d241b0c85db,Boric Acid,boric acid
+ING-0417912ffd3cfefb48f76c0d,Naloxone Hydrochloride,naloxone hydrochloride
+ING-044f1fd57a5eaa5db4ecf542,Selpercatinib,selpercatinib
+ING-0487c973d003d3749ec8e8a7,Isoflurane,isoflurane
+ING-04897778e1a0df2215a81977,Amoxicillin Capsule,amoxicillin capsule
+ING-04a522addd4fbeadb6489dce,Hydroxyurea,hydroxyurea
+ING-04b0d7e895a973269167650e,Disposable Syringe,disposable syringe
+ING-04c99b776c4554096c1460af,Asparagus,asparagus
+ING-04ca45d92cc9f954a542bcbb,Semaglutide (Injection),semaglutide injection
+ING-04e9c0db87e7eebbf8123dae,Iron,iron
+ING-04ea3a726eb768824a75370c,Ipratropium Bromide,ipratropium bromide
+ING-04ec8b1f3035f0bb52013b7a,Mentha,mentha
+ING-0512f271ac8d5c777a1be628,Finasteride [For Androgenic Alopecia],finasteride for androgenic alopecia
+ING-0526c3a97742a190a3187a40,Glycopyrronium Bromide (Inhalation capsule),glycopyrronium bromide inhalation capsule
+ING-052ce1c0fe4434d0f9d01af2,Olopatadine,olopatadine
+ING-05400f26edadea4e5e2b1c10,Mesalazine,mesalazine
+ING-0550200054a62868f7c337d3,Drotaverine Hydrochloride,drotaverine hydrochloride
+ING-0555d07fc536eff02d9951e9,Glucosamine Sulphate,glucosamine sulphate
+ING-057d043f7333e03dc623f39f,Aclidinium Bromide,aclidinium bromide
+ING-05b2886edce28290bb97bb29,Bilberry fruit [Vaccinium myrtillus L],bilberry fruit vaccinium myrtillus l
+ING-05ba1f5de878b36253c0a9ca,Centella asiatica,centella asiatica
+ING-05f7bb5e0a32a9a795817bc6,Clotrimazole (Topical),clotrimazole topical
+ING-06078402069b32b13525ed1a,Warfarin Sodium,warfarin sodium
+ING-063937f234a3b216c1c0a9d1,"Vitamin B6, B9 & B12",vitamin b6 b9 b12
+ING-063ced8318b96e9b76d1e8b7,Probiotic Combination [3.2 Billion],probiotic combination 3 2 billion
+ING-0650de3c24bdd4911bbdc754,Rasagiline,rasagiline
+ING-06851fe98c2134b398888177,Ledipasvir,ledipasvir
+ING-0699a2e4095478e9cf5d4720,Deflazacort,deflazacort
+ING-06a196fa452c780bcf96f2d4,Allylestrenol,allylestrenol
+ING-06c5213956c7b2f722004640,Coagulation Factor VIIa [Eptacog Alfa],coagulation factor viia eptacog alfa
+ING-06f41d310b1b6341ef334212,Cefoperazone,cefoperazone
+ING-073ec9ab913d32c70f5b6f7e,Zuclopenthixol,zuclopenthixol
+ING-07b9639e03e7c632555e4f87,Niacin,niacin
+ING-07c4c48fec0b18899cdb71f0,Chloramphenicol (Ophthalmic),chloramphenicol ophthalmic
+ING-07e16b0930fccbd2b6c0ad07,Isopropyl Myristate,isopropyl myristate
+ING-080fc3cced8c39140fd1c506,Bortezomib,bortezomib
+ING-08387c9233da312a20c178f0,Olmesartan Medoxomil,olmesartan medoxomil
+ING-08857c3914c553cca24193c6,Isotretinoin (Topical),isotretinoin topical
+ING-0887401cfe6dd7a10ffea242,Cephalexin,cephalexin
+ING-08973eb924fc724aee7763d8,Levosalbutamol Sulphate,levosalbutamol sulphate
+ING-08a94c55847866a530b7ac58,Vonoprazan Tablet,vonoprazan tablet
+ING-08aa1b53e8352da458f102b6,Tivozanib Hydrochloride,tivozanib hydrochloride
+ING-08aca309367bb8acb2d69c85,Lasmiditan,lasmiditan
+ING-08ddff4ebe39249a9208cd30,Ginger,ginger
+ING-08e27c4cb92e69a81c7d33d9,Calcium Citrate,calcium citrate
+ING-08e69894c0b3a98cfb51ecfe,Fluticasone Propionate,fluticasone propionate
+ING-08e9dbd4534fab0aff60da09,Levothyroxine Sodium,levothyroxine sodium
+ING-08ff5a00951256bbe7516ce7,Curcuma Longa [Turmeric Extract],curcuma longa turmeric extract
+ING-09147e57ee2f28ee0add5ff7,Tobramycin (Ophthalmic),tobramycin ophthalmic
+ING-092aa94ac567ed2eb11c3742,Basiliximab,basiliximab
+ING-096d38d2ad740adbdbcfa954,Tucatinib,tucatinib
+ING-09881f6ed93360a2f6ad81f4,Needle,needle
+ING-09aa3329a405de06a49c5c3d,Long Pepper,long pepper
+ING-09cf288fad8f6526e9c717d1,Primaquine Phosphate,primaquine phosphate
+ING-0a10c3bdd0b1872242afc238,Tetrahydrozoline,tetrahydrozoline
+ING-0a4b19ce9282577c3803f1ce,Budesonide (Tablet),budesonide tablet
+ING-0a594d9dab3129a3ebc8458b,Tetryzoline,tetryzoline
+ING-0a82e672a6e06582f9770635,Streptokinase,streptokinase
+ING-0aa9b906e39b8e6b3c3cd045,Sorafenib Tosylate,sorafenib tosylate
+ING-0ac62233169355294a749d2a,Mirogabalin,mirogabalin
+ING-0ad866134b29447a43d26cb9,Yohimbine Hydrochloride,yohimbine hydrochloride
+ING-0af665a5853505036ce4d33b,Rosiglitazone,rosiglitazone
+ING-0b5279b99ed88c966f0885fc,Brexpiprazole,brexpiprazole
+ING-0b56cc240e600882d44da6ed,Rupatadine,rupatadine
+ING-0b715836f1d3afd52ba2b245,Levomenthol,levomenthol
+ING-0b725fb69f27c449385e71b6,Fluvoxamine Maleate,fluvoxamine maleate
+ING-0ba6d83eaac36b15309ed559,Betamethasone,betamethasone
+ING-0beb5facd7fd2c96c6145329,Tioconazole,tioconazole
+ING-0c4290ef309293a81fe5e903,Oral Rehydration Salt [Powder],oral rehydration salt powder
+ING-0c727a5d898b850a15f24e5d,5 Aminosalicylic Acid,5 aminosalicylic acid
+ING-0ca9cd0c0d2d0931202892c3,Gramacidin,gramacidin
+ING-0cfc6adc2adf78a4ad8f3681,Tolnaftate,tolnaftate
+ING-0d22801a76f9a18f28da1e6c,Insulin Aspart Protamine & Mixture,insulin aspart protamine mixture
+ING-0d39846004cfa4038378d577,Protamine Crystallised Insulin Aspart,protamine crystallised insulin aspart
+ING-0d46756063582c2f68a70b46,Talazoparib,talazoparib
+ING-0d6f8afa3940b7f06bebee65,Sodium Chloride,sodium chloride
+ING-0da7800fc69328a280003ad0,Iodide,iodide
+ING-0df467db8b872faba520fe57,Sodium Stibogluconate,sodium stibogluconate
+ING-0e4117925664a8d9bb1b060c,Moxifloxacin Hydrochloride,moxifloxacin hydrochloride
+ING-0e613bcdc3c64d63c9411d74,Chirata [Swertia Chirata],chirata swertia chirata
+ING-0e8452f6168f709d80e2ed61,Piper longum,piper longum
+ING-0e9acd11b1a5800be330ff27,Conjugated Estrogen (Cream),conjugated estrogen cream
+ING-0e9b8e2bb5e717144a394629,Lopinavir,lopinavir
+ING-0ea16900851f91d0afe03a2b,Sodium Dihydrogen Phosphate,sodium dihydrogen phosphate
+ING-0eac78592e92f0c85cb82730,Flupenthixol,flupenthixol
+ING-0eb962e9fb96e6b4629cab6c,Esomeprazole,esomeprazole
+ING-0ebf41ec93332058e04852e5,Aflibercept,aflibercept
+ING-0ee036ec0ea7420d08396d05,Tenecteplase,tenecteplase
+ING-0ef7b0001869d9a9b0e687d4,"Mudir [Aloe, Saffron, Ferrus sulphate]",mudir aloe saffron ferrus sulphate
+ING-0efd2c2af67dfaa7fcee232c,Hydroxyethyl Cellulose,hydroxyethyl cellulose
+ING-0efe0c1ca5ba296709e35b1d,Sodium Fluoride (Mouthwash),sodium fluoride mouthwash
+ING-0f34c9990cf29cb53c41edc0,Herbal gastric preparation,herbal gastric preparation
+ING-0f3bd8baba227aab906ec5a4,Chlorhexidine,chlorhexidine
+ING-0f52ed6ba8727749cd81767c,Copper Gluconate,copper gluconate
+ING-0f5f1164ed7bfa8ec21e0a05,Barberry,barberry
+ING-0f6b66ee7b01a82be8862797,Sulphaclozine,sulphaclozine
+ING-0f6fff1b8072c874172d16b4,Tapinarof,tapinarof
+ING-0f78fcc486f5315418fbf095,Grape,grape
+ING-0f8ea790d84a67ae03f57cfb,Barium Sulphate,barium sulphate
+ING-0f970030a765cf95180e7af3,Ranibizumab,ranibizumab
+ING-0fe90f87dbf6961218330f2a,Itopride Hydrochloride,itopride hydrochloride
+ING-0ff04cdb48774c99eab44003,Eslicarbazepine Acetate,eslicarbazepine acetate
+ING-10197634374b09fb0ebb24f9,Polymyxin B Sulfate,polymyxin b sulfate
+ING-1038c729c75f71db8ea24ac1,Anastrozole,anastrozole
+ING-1042092fbb686991a25b2a12,Flucloxacillin Sodium,flucloxacillin sodium
+ING-1056c672557de89c1f559457,Moxifloxacin Hydrochloride (Injection),moxifloxacin hydrochloride injection
+ING-1076aad78e5cc234ea0659d8,Verteporfin,verteporfin
+ING-107d53ad8ac03e9454df123a,Multivitamin [Pediatric preparation],multivitamin pediatric preparation
+ING-10a1ebdc694492d5c3137cac,Triamcinolone Acetonide (Injection),triamcinolone acetonide injection
+ING-10a224a12f1c4a147ccbf336,Gilteritinib,gilteritinib
+ING-10ae05047dd5aa5b52b20b07,Bromazepam,bromazepam
+ING-10cd1c0fbba61dabb003f1fe,Olopatadine Hydrochloride (Ophthalmic),olopatadine hydrochloride ophthalmic
+ING-10ef856aedbfe4f9ded1debd,Tacrolimus (Oral),tacrolimus oral
+ING-1113443f0c49ec4499b2f707,Antazoline Hydrochloride,antazoline hydrochloride
+ING-1129fd00613295b2505951ff,Undenatured Type II Collagen,undenatured type ii collagen
+ING-112cd7e1bfb016f595755ad3,Melaleuca Alternifolia Oil,melaleuca alternifolia oil
+ING-118866343f84c08f24970f38,Permirolast Potassium,permirolast potassium
+ING-118dfedafcfde25aea96d2d2,Fluocinolone,fluocinolone
+ING-119f5de31f4bbca887dad6b0,Rabeprazole Sodium,rabeprazole sodium
+ING-11a7091cb822f08837e2092e,Apramycin Sulfate,apramycin sulfate
+ING-11b4ca144a252bda6cce2597,Phytomenadione (Injection),phytomenadione injection
+ING-11c26765a5bdb8bea172c949,Haemophilus Influenzae Type B Vaccine [Conjugated],haemophilus influenzae type b vaccine conjugated
+ING-11ca23c0717529290571a947,Cranberry [Vaccinium macrocarpon],cranberry vaccinium macrocarpon
+ING-11d9c46b534a5c13e4c344ad,Cefaclor,cefaclor
+ING-11eb5d31124c70297dbcdf63,Propylthiouracil,propylthiouracil
+ING-11f64ad3e91968c3f36402e6,Duloxetine,duloxetine
+ING-11f7212f3a5ecbe1cd681875,D-Panthenol,d panthenol
+ING-11f8cbcbf66392d4467c1eae,Chlorobutanol,chlorobutanol
+ING-122714d92cdf0d568ebc1ee9,Gelsemium sempervirens,gelsemium sempervirens
+ING-123a53519efcfcd27636923b,Repaglinide,repaglinide
+ING-12402be81f2c14a7ba88c46d,Simvastatin,simvastatin
+ING-1254da3b364050fee101022a,Phenytoin Sodium,phenytoin sodium
+ING-126bb831088f68b03feba74d,Thiamine Mononitrate (B1),thiamine mononitrate b1
+ING-12769e1b89b98aad4a40451c,Rotavirus Vaccine,rotavirus vaccine
+ING-12830734a9dd454b57945c8a,Oxcarbazepine,oxcarbazepine
+ING-128939f907106c1f9885170e,Trichlorfon,trichlorfon
+ING-129554bf427dd93f54494a20,Cefazolin Sodium,cefazolin sodium
+ING-12a4ea2b5e10de132ff301bb,Clonazepam,clonazepam
+ING-12b4b54bc72e876685557724,Tipiracil,tipiracil
+ING-12b5a8d692427b96eac5122f,Suranjan,suranjan
+ING-12c47f63aa45510c76f1691a,Prednisolone,prednisolone
+ING-12cb783722c5261b2472f417,Pravastatin Sodium,pravastatin sodium
+ING-12cc9f332d10766fdf8249d7,Linagliptin,linagliptin
+ING-134b9d824fde64de12031619,Lefamulin,lefamulin
+ING-1354cf61465d9562ebe5c3ea,Abemaciclib,abemaciclib
+ING-13a1147af69099d6fa07ab45,Glycopyrronium Bromide,glycopyrronium bromide
+ING-13b1b9ec6fe3b0121191801a,Cypermethrin,cypermethrin
+ING-13c03102fe95fdcc7e2f6493,Remimazolam,remimazolam
+ING-14265b926d057f732eca0662,Pegylated Erythropoietin,pegylated erythropoietin
+ING-142c5cd1e3ef944c8d5f1e12,Carica Papaya Leaf Extract,carica papaya leaf extract
+ING-1434da20fcdfd179ac108db6,Echinacea,echinacea
+ING-143f85ab87ccece7e2a4b550,Tart Cherry,tart cherry
+ING-145fdb0fb24175d387a28cf6,Gadodiamide,gadodiamide
+ING-1468a294ab0dcd6bd0e97fd9,Olanzapine,olanzapine
+ING-147512f5f056b4218e3c73f8,Nikethamide,nikethamide
+ING-149ef16e890799eea7207e07,Cefpodoxime Proxetil,cefpodoxime proxetil
+ING-14ba913bcdf0424cb664942e,Propylene Glycol,propylene glycol
+ING-14f879f19d01d90c9647937e,Captopril,captopril
+ING-155f21a55d08af32f121cad9,Carbomer,carbomer
+ING-1574102b1161499770807900,Eucalyptus Oil,eucalyptus oil
+ING-158e6888e668957d56d439f2,Tegaserod,tegaserod
+ING-15a27c0d7f63de89f2388f03,Calcium Gluconate,calcium gluconate
+ING-15c7f9c7cdeb645fb500e7b7,Rivaroxaban,rivaroxaban
+ING-15dc8e118d0d9a106f47320f,Desogestrel (0.03 mg),desogestrel 0 03 mg
+ING-164d6277f21344fc169dbc0c,Protamin Sulphate,protamin sulphate
+ING-168a28f3330872b4003e11a5,Benzoic Acid,benzoic acid
+ING-169f296487926c4f23ffba67,Macitentan,macitentan
+ING-16a78f748cfffaef918dce8c,Deferiprone,deferiprone
+ING-16b3ed458b090a161fdaf84f,Lamivudine,lamivudine
+ING-1715baaf04ea752d1551ba28,Pvc Bags For Iv Infusion,pvc bags for iv infusion
+ING-17788457e1715867a10d0164,Oil Turpentine,oil turpentine
+ING-178fe3e69d2b49a330395c6e,Potassium Citrate,potassium citrate
+ING-17c9ab8ca59b356289b4e85d,Lovastatin,lovastatin
+ING-17de4a7e9771b7838c0de81f,Nutmeg fruit,nutmeg fruit
+ING-17e18eb6dd21815c99a3e5f5,Apixaban,apixaban
+ING-180d490b34c1c4828734ca23,Fluormetholone,fluormetholone
+ING-18367f493198ae3db9799ace,Pilocarpine Hydrochloride (Ophthalmic),pilocarpine hydrochloride ophthalmic
+ING-184531aab74d90ad017a9814,Eloctrolytes,eloctrolytes
+ING-1876e1361d9fa040b6f3e0f5,Bimatoprost,bimatoprost
+ING-187c0a9aa8b31bb38f4ac802,Acidic component [HCO3 Hemodialysis Solution],acidic component hco3 hemodialysis solution
+ING-188938d1542c9d7f1550c711,Gemifloxacin,gemifloxacin
+ING-18a964d58fb14037776265d9,Kabid Nawshadri,kabid nawshadri
+ING-18bf1d6e03f0ffc5dcdf6304,Dutasteride,dutasteride
+ING-18f2370f6f1895e0263dcbc2,Mafenide,mafenide
+ING-190f1ebc5370471e275f8809,Mesalamine,mesalamine
+ING-1933ca8ee2cd9e739577927d,Desloratadine,desloratadine
+ING-1935213371b340a5fb9fa63b,Azelastine Hydrochloride (Eye drop),azelastine hydrochloride eye drop
+ING-19467efe6bffcc99f4b79cdd,Liquid Medical Oxygen,liquid medical oxygen
+ING-196a7315f73f07a25f5ea660,Ibrutinib,ibrutinib
+ING-196c7def5847da983300d0c4,Metformin Hydrochloride,metformin hydrochloride
+ING-19ee1e6f51c6f5bb6e98338f,Ethylene Oxide,ethylene oxide
+ING-1a3f37cff401b27c1439834c,Cholera Saline,cholera saline
+ING-1a54d5b8b34e294d058436d2,Degarelix,degarelix
+ING-1a635e238b9982819e256e3e,Hyoscine Hydrobromide,hyoscine hydrobromide
+ING-1a97a895d2148f33354ba242,Dextran 70,dextran 70
+ING-1acad57f48cc1c901e3d7f66,Almitrine Bismesylate,almitrine bismesylate
+ING-1ad5eac8f27e95f7d3eb130f,Probiotic Combination [10 Billion],probiotic combination 10 billion
+ING-1ad915ad9e2a88e7c26772e4,Docetaxel,docetaxel
+ING-1afa7a8f9b84541e4271aa4b,Clotrimazole (Vaginal tablet),clotrimazole vaginal tablet
+ING-1affa230a6e8943e4916f025,Dacarbazine,dacarbazine
+ING-1b0063705981091724025f6d,Ethyl Alcohol,ethyl alcohol
+ING-1b4ac6feb0601661828ed4dc,Cefixime,cefixime
+ING-1bae96d2e7a192697560e526,Nitroglycerin (Oral preparation),nitroglycerin oral preparation
+ING-1bca179f86fe2cf14eae9905,Calamine,calamine
+ING-1c00e2e075320f7dcb827f36,Entacapone,entacapone
+ING-1c635410b0b7f50509e5392b,Pyridoxine,pyridoxine
+ING-1c6890cc01a07b383c81b356,Fenticonazole Nitrate [Vaginal Cream],fenticonazole nitrate vaginal cream
+ING-1c8db0e79d7a9e1141edbb07,Ceftazidime Pentahydrate,ceftazidime pentahydrate
+ING-1ca88cfa41606b28145f7034,Insulin Lispro,insulin lispro
+ING-1ccdcee08e79a8cde2560b87,Chlortetracycline Hydrochloride,chlortetracycline hydrochloride
+ING-1cf21fcb7ecce355bf843c47,Tirzepatide,tirzepatide
+ING-1d01128785e48bcb1faab08a,Cefuroxime Axetil,cefuroxime axetil
+ING-1d1d7d90769a36e59b9e2d5b,Lactic Acid,lactic acid
+ING-1d38dd90fda743a301e719f2,Nateglinide,nateglinide
+ING-1d44eb1cfb4cea3968db7220,Dantrolene Sodium,dantrolene sodium
+ING-1d801b4d0590ddb530e0d8af,Calcium Carbonate [Elemental source],calcium carbonate elemental source
+ING-1d8765fef2c50b860c19529f,Famotidine,famotidine
+ING-1daf03e5417e4e3eec580f4f,Morantel,morantel
+ING-1dbc8f297e8ce48d1089914a,Nelfinavir,nelfinavir
+ING-1dcdbe203b554295524068a2,Dexamethasone (Ophthalmic),dexamethasone ophthalmic
+ING-1de1fb9f83d6ea5a1c5ca61d,Magnesium Hypophosphite Hexahydrate,magnesium hypophosphite hexahydrate
+ING-1df3fb9cba79f9aed66aeb49,Avibactam,avibactam
+ING-1df7573d5a715d3f51716bca,Fluorometholone,fluorometholone
+ING-1e14d0600bda38c820c5b8de,Bismuth Subsalicylate,bismuth subsalicylate
+ING-1e20108371f4a25aa56645eb,Lutein,lutein
+ING-1ecec4a7d76ea7745f6dc309,Amorolfine Hydrochloride (Nail Lacquer),amorolfine hydrochloride nail lacquer
+ING-1ed85bd2c99a1e1bc773656c,Jinsin,jinsin
+ING-1f1f0955e1e556a2202b6fb1,Imeglimin Hydrochloride,imeglimin hydrochloride
+ING-1f678be12bbfdb15199101bc,Sulphacetamide Sodium,sulphacetamide sodium
+ING-1f6edaa42faab4e8e8462d30,Mannitol,mannitol
+ING-1f89d9407838fbf7f5b3eba2,Quinine Sulfate,quinine sulfate
+ING-1f8a2d45caaa41daa42a3da9,Hyaluronic Acid,hyaluronic acid
+ING-1f8a7defe4e056c387aadbd3,Dicloxacillin,dicloxacillin
+ING-1fa480fda87a1460433ac4b2,Pramipexol,pramipexol
+ING-1fbfe1c12b530f1228a1d2a1,Mitomycin C,mitomycin c
+ING-1fca4e7261073bb774fd3856,Proanthocyanidins,proanthocyanidins
+ING-1fdd67735b381df26db0452a,Fluorescein Sodium,fluorescein sodium
+ING-1fed1d83615a0cfc12fab824,Arformoterol Tartrate,arformoterol tartrate
+ING-205de3baec7fc97c2b55f59d,Trisodium Citrate,trisodium citrate
+ING-206934e0087bd36af576eef7,Oxymetazoline Hydrochloride,oxymetazoline hydrochloride
+ING-207cad7d11b779580c238ec2,Tenoxicam,tenoxicam
+ING-209bd20b4a88a53fea69cc0e,Albendazole,albendazole
+ING-20ee8f8da0858ebbc5052b14,Fondaparinux Sodium,fondaparinux sodium
+ING-20f1fc5758bc16c08e8e3b00,Nitrofurantoin,nitrofurantoin
+ING-2100f4975877b1a4727a830a,Gentamicin Sulfate (Ophthalmic),gentamicin sulfate ophthalmic
+ING-2103b54b315c98e7f10c6454,Pyrantel Pamoate,pyrantel pamoate
+ING-211020db0873f7db043bd9a1,Zaleplon,zaleplon
+ING-21137a1252d0ba69be160b5a,Sodium Carbonate,sodium carbonate
+ING-211b2c87ed72b82029cf5fd9,Methoxsalen,methoxsalen
+ING-21264587fffc98e8a2aab2ce,Ethambutol,ethambutol
+ING-215a810a40b413a63729e887,Nimbadi Churna,nimbadi churna
+ING-217ec6308811e62dac2154a2,Oxaliplatin,oxaliplatin
+ING-21ecc8b9ad360ac7c1c8dbf7,Tenofovir Disoproxil Fumarate,tenofovir disoproxil fumarate
+ING-2209b5d1f81d4b832de46c20,Gaultheria,gaultheria
+ING-221df6f8342b3edc6e7ca29b,Oteseconazole,oteseconazole
+ING-22349d78def3ee7d04c70996,Lacosamide,lacosamide
+ING-2239c1f7f0ae8c04677b4847,Fludrocortisone Acetate,fludrocortisone acetate
+ING-2255c6c7a9139e6ccac28ed3,Ritonavir,ritonavir
+ING-2257e6111cbe7d5271baf33c,Ganciclovir,ganciclovir
+ING-22692d0387e9a365d75163d7,Natural medicine for diabetes,natural medicine for diabetes
+ING-22a358316bc589a74c26d4d1,Iloperidone,iloperidone
+ING-22aff57b85602668c835fcf6,Multivitamin & Multimineral [For nursing mother],multivitamin multimineral for nursing mother
+ING-22c1eb17cf8c495e113c20b7,Budesonide (Inhaler),budesonide inhaler
+ING-22d5620efe85076620d53f59,Finasteride,finasteride
+ING-22d728a3c3dcda5678ea7943,Cetuximab,cetuximab
+ING-22eb3ef21101ccdaf5ca20a7,Garlitab,garlitab
+ING-23187448ecda2d6d995ed67a,Sodium Sulfachloropyridazine,sodium sulfachloropyridazine
+ING-23213db1ef471e16a335824c,Aloe indica,aloe indica
+ING-232b69439e87f183fee83bae,Magnesium Hydroxide,magnesium hydroxide
+ING-233954f7d004e76a01e77b86,Human Milk based Amino Acid,human milk based amino acid
+ING-23401856a13c9011cd566360,Glycopyrronium,glycopyrronium
+ING-2356ca90b02079a8c98a8b67,Yellow Silk Cotton,yellow silk cotton
+ING-235b6ea98b1813d53515e409,Human Tetanus Immunoglobulin,human tetanus immunoglobulin
+ING-236e7010ed8efdf77c4d4fb3,Mizolastine,mizolastine
+ING-236ffa7a1592f943424ecc6f,Phosphorous,phosphorous
+ING-239af917a9db54a24786a7b1,Zonisamide,zonisamide
+ING-23b752651320fd08c4a3f58d,Glycopyrrolate,glycopyrrolate
+ING-23c596e3f4f5f83fbb6fb135,Dexpanthenol,dexpanthenol
+ING-23c8dd6f0b9ebc4091eed0a8,Amalaki Rasayana,amalaki rasayana
+ING-23c9808c4d4c4c062eb90e9f,Benzoyl peroxide,benzoyl peroxide
+ING-23cdf120a2dd3701a24eec9b,Choline,choline
+ING-23ebce72c4424e81ef48a495,Coconut,coconut
+ING-240023db38bdfcb5fe1ea6aa,Mahadrakkharist [Grape extract],mahadrakkharist grape extract
+ING-2412dc44ca55f44d546ade20,Clobetasol Propionate,clobetasol propionate
+ING-2425fabea68092fb71441d57,Mebendazole,mebendazole
+ING-246fb498a9f19b5303db506c,Ispaghula Seed,ispaghula seed
+ING-24832b84b16211148677cb4a,Venlafaxine,venlafaxine
+ING-249199f726e985b93bb576a4,Astaxanthin,astaxanthin
+ING-249f242030a3938d7056fd2e,Poly (0-2 Hydroxyethyl Starch (Hydroxyethyl 130/0.4),poly 0 2 hydroxyethyl starch hydroxyethyl 130 0 4
+ING-24e253e9fc89ffdc7f9ee93a,L-Arginine,l arginine
+ING-25098b221a1529aaabce4a46,Itraconazole,itraconazole
+ING-25136bf99b5221951b7ef8db,Enoxaprin,enoxaprin
+ING-2525ec2a1c77a588d0998ca9,Calcium Carbonate [Algae source],calcium carbonate algae source
+ING-25262dbb4e0600c62762f122,Metoprolol Tartrate,metoprolol tartrate
+ING-253d026d2b8e0a3383ce24a5,Drospirenone (24 tablet),drospirenone 24 tablet
+ING-253de3e594697871500ab844,Pemirolast Potassium,pemirolast potassium
+ING-258809e1ca94cab056a42ccf,Dipyridamole,dipyridamole
+ING-25ae6c55505ba6f26bb8d915,Deutetrabenazine,deutetrabenazine
+ING-25af4f9511ebd0fab38a0e33,Ethanol (96%),ethanol 96
+ING-25b049a5984206dd6fe6eca9,Boron,boron
+ING-25b96f3fa754a86042aa2c68,Rivastigmine,rivastigmine
+ING-26325ec2506e4f615a694c49,Date palm,date palm
+ING-2642b176c5f86f69ec12c272,"Vitamin B1, B6 & B12",vitamin b1 b6 b12
+ING-264fc644a0bb85a123457f47,Elemental Zinc,elemental zinc
+ING-2654d09ae510ced9ae582d39,Oxymorphone Hydrochloride,oxymorphone hydrochloride
+ING-2662a983444a807e8a4f1d4e,Paclitaxel,paclitaxel
+ING-266c15fcec5252a5975b3d20,Temozolomide Hydrochloride,temozolomide hydrochloride
+ING-268950459ef8c4df5b5b9a15,Niraparib,niraparib
+ING-268c2462990fcf43febbe046,Ofloxacin,ofloxacin
+ING-269720e4b3f69ae8c7c2a16b,Cefotaxime,cefotaxime
+ING-269b57c16e41f833839bb116,Lutropin Alfa,lutropin alfa
+ING-269c9c059177782f3b8dacfd,Belleric,belleric
+ING-26a4eec1c3f0c7df95161d70,Alphanate,alphanate
+ING-26a5a5291f8f3113f2b72c30,Loteprednol Etabonate,loteprednol etabonate
+ING-26aa4a069f0dc6b2a8879f13,Glycerin,glycerin
+ING-2785bccae6f4ccc10e0008ac,Datura,datura
+ING-27a25b078d7be68a340b3eed,Crisaborole,crisaborole
+ING-27a6044c6b7c0cc7431241d6,Acyclovir (Injection),acyclovir injection
+ING-27a705e9615c7d62eff4fa76,Obinutuzumab,obinutuzumab
+ING-27c464fcfe622616ef7867c0,Vandetanib,vandetanib
+ING-27d2d275e510743eac72b1cf,Trimetazidine Dihydrochloride,trimetazidine dihydrochloride
+ING-27f4ec17d5a9426baf6c4184,Sunitinib,sunitinib
+ING-28000a79a36e274a0860b4de,Bisacodyl,bisacodyl
+ING-280aed2e56351977f64c6a75,Valproic Acid,valproic acid
+ING-280f5e826786c227397282b7,Choriogonadotropin Alpha,choriogonadotropin alpha
+ING-281918cfed8a743ef4d418a0,Ziprasidone,ziprasidone
+ING-2825974f2747eb57282b1434,Prasugrel Hydrochloride,prasugrel hydrochloride
+ING-282fe35deb80077fdc665a56,Dexamethasone,dexamethasone
+ING-289c5bb2c3e2f49bec735787,Insulin Human [rDNA],insulin human rdna
+ING-2944e9c7a13db026d8c21991,Cabergoline,cabergoline
+ING-295996ee15534bcd6f9d22cd,D-chiro-inositol,d chiro inositol
+ING-2985e90fb6422da31c8ebb7d,Water For Injection,water for injection
+ING-298af6d32cf67ddfef0b6f7b,Etoposide,etoposide
+ING-29a2b3933b7573ba64b49fe2,Procyclidine Hydrochloride,procyclidine hydrochloride
+ING-29a937e888a324f9bdb168fc,Jamani Arka,jamani arka
+ING-29b744fc4b0edba7a11ed969,Amitriptyline Hydrochloride,amitriptyline hydrochloride
+ING-29f1df2b5bb6f7bd69f1ca82,Lincomycin,lincomycin
+ING-2a245b50585b0d8f9a9adc23,S-Amlodipine Besilate (Levamlodipine),s amlodipine besilate levamlodipine
+ING-2a423bc6749824cdfe65a947,Sorafenib,sorafenib
+ING-2a6663825313b548dd935577,Multivitamins & Multiminerals [A-Z prenatal preparation],multivitamins multiminerals a z prenatal preparation
+ING-2a92f6b1241f40ba1c5f6e17,Copper Sulphate,copper sulphate
+ING-2adbce713c43dfddb04cbb71,Nimodipine,nimodipine
+ING-2ae7c5466c0ff5afbbe13201,Saw Palmetto (160 mg),saw palmetto 160 mg
+ING-2af14e3dcf910b24565bb919,Avanafil,avanafil
+ING-2b145b6c49c1fc6b5560e01a,Nimesulide,nimesulide
+ING-2b6a15c1b9de86e60ab94d9a,Vitamin A,vitamin a
+ING-2b822ec94759bdf0a1fe6001,Sulfaquinoxaline Sodium,sulfaquinoxaline sodium
+ING-2b8f7f7485b92e2abc7719a5,Apalutamide,apalutamide
+ING-2bfe524792bd0b5d44978177,Calcipotriol Monohydrate,calcipotriol monohydrate
+ING-2c05857438c0ed2bdf1110d8,Cefaclor Monohydrate,cefaclor monohydrate
+ING-2c8e669dd771398f17d2f4ee,Medical Carbon Dioxide,medical carbon dioxide
+ING-2ca2465c133305c7d346488d,Phenylephrine,phenylephrine
+ING-2ca8582204364deb666bd6f7,Oxymetazoline Hydrochloride (Cream),oxymetazoline hydrochloride cream
+ING-2cf94eda96eb166351cd8f45,Nux vomica,nux vomica
+ING-2d08fce0a96356b660182d55,Chloroxylenol,chloroxylenol
+ING-2d48b526615320bfb6695c9a,Butaphosphan,butaphosphan
+ING-2d66d166ad20fe36d6db4266,Vitamin B complex,vitamin b complex
+ING-2d7d048f143f32ca6029ab8c,Calcium Chloride Dihydrate,calcium chloride dihydrate
+ING-2da041e8809ac2e4f5648d4e,Gelatin,gelatin
+ING-2dae13c0bda517692cb0b541,Mebhydrolin,mebhydrolin
+ING-2dafeb8b85f9d31d478e4a33,Ampicillin Trihydrate,ampicillin trihydrate
+ING-2df86abecd8ccb6bd9f51fce,Sodium PCA,sodium pca
+ING-2e39154702483a7eab108b4a,Super antioxidant [vitamins & minerals],super antioxidant vitamins minerals
+ING-2e49eb3c34f7fa6a3d573439,Rituximab,rituximab
+ING-2e70f32f448f3162b82977c1,Aluminium Chloride Hexahydrate,aluminium chloride hexahydrate
+ING-2e823b0132e68ece68ecea7c,Ejaz,ejaz
+ING-2e87936872917c651988f21d,Umeclidinium,umeclidinium
+ING-2ecf17848948634d85269deb,Enrofloxacin,enrofloxacin
+ING-2f1d01311be046727f869f02,Verapamil Hydrochloride,verapamil hydrochloride
+ING-2f1eeea4fad93b16b596a80f,Hydrocortisone Acetate,hydrocortisone acetate
+ING-2f3f1c0e1ea300286b39314f,Ceftriaxone Sodium,ceftriaxone sodium
+ING-2fb6a8dd96c4a8c20df360e6,Sodium Hypochlorite,sodium hypochlorite
+ING-30447727b517ff4e88273b88,L-Ornithine L-Aspartate,l ornithine l aspartate
+ING-30505273bb9385290907f55e,Betamethasone Dipropionate,betamethasone dipropionate
+ING-307eb82416ec1bee655c822d,Atracurium Besilate,atracurium besilate
+ING-308165d2b3efc89320f0290b,Febuxostat,febuxostat
+ING-30b812e8bbcf6167899ee6ed,23 herb formula to increase breast milk,23 herb formula to increase breast milk
+ING-30d5303a0972226bbf112b4e,Levomilnacipran,levomilnacipran
+ING-30e1c41e6b43fec3b4fccb01,Barsina,barsina
+ING-30f95b13445147049053bd59,Marbofloxacin,marbofloxacin
+ING-31113ebf34548816e1675e20,Herbal cough syrup [Vasakarista],herbal cough syrup vasakarista
+ING-311a7a361f9e3d40b929b2ca,Enramycin,enramycin
+ING-31253da90022b06ce809865a,Sanoon Babla,sanoon babla
+ING-3127bac21ba724dd0a967c36,Moxifloxacin,moxifloxacin
+ING-3141ed115780d72ae6bbf3b9,Moxifloxacin Hydrochloride (Tablet),moxifloxacin hydrochloride tablet
+ING-31434330dc024723a5b01de0,Cefadroxil,cefadroxil
+ING-316cf4fbb021c461ddc0fad6,Tapentadol Hydrochloride,tapentadol hydrochloride
+ING-316dc02b425089487b4a5ba6,Morantel Citrate,morantel citrate
+ING-3170a6e24b2495fda7de39ca,"Diphtheria, Tetanus, Pertussis, Hepatitis B, Poliomyelitis, Influenzae Vaccine",diphtheria tetanus pertussis hepatitis b poliomyelitis influenzae vaccine
+ING-317429fec08e8bb66876e2c0,Polyethylene Glycol 400,polyethylene glycol 400
+ING-31bf2abaa5cb1ead5b464684,Apremilast,apremilast
+ING-31c5209f21c82aea386fe325,Saccharomyces Boulardii,saccharomyces boulardii
+ING-31caa434e94c320c05b1e16c,Levocetirizine Dihydrochloride,levocetirizine dihydrochloride
+ING-31e36da8f8556d7c698cb27f,Mefloquine,mefloquine
+ING-31e739bcbac59ebd938fe268,Cephradine,cephradine
+ING-321652021ad3468b690f6c27,Ketotifen,ketotifen
+ING-32381e324c1e1d1b6c246076,Amprolium Hydrochloride,amprolium hydrochloride
+ING-323a9691ed578df35c3b1a52,Potassium Sulphate,potassium sulphate
+ING-3261afbc9d49e85b4ce49a5b,Olopatadine Hydrochloride (Nasal Spray),olopatadine hydrochloride nasal spray
+ING-326dbc7910b50e7d367d1c12,Sand Lizard,sand lizard
+ING-3277953783faf69c50381c31,Benzyl Benzoate,benzyl benzoate
+ING-328fd3accf7ce1fbdbed3ec3,Oxybendazole,oxybendazole
+ING-32c4f18363862dc341ddea05,Ofloxacin (Ophthalmic),ofloxacin ophthalmic
+ING-32cc576002135ea107522224,Nitroglycerin,nitroglycerin
+ING-32e17573eaf3a007e588fe98,Terbinafine,terbinafine
+ING-32e6ec7823323a5b4ef62622,Trifarotene,trifarotene
+ING-3308b9ae42d213199a6876b6,Salmeterol,salmeterol
+ING-330bada0c9214fcf0bbc53da,Rupatadine Fumarate,rupatadine fumarate
+ING-335fdeedbb5926425532d5e9,Terbutaline Sulphate,terbutaline sulphate
+ING-33600deb37dda63213e4fd60,Acesulfame Potassium,acesulfame potassium
+ING-3369c17e045c4a0af7ef8540,Tetracycline Hydrochloride (Topical),tetracycline hydrochloride topical
+ING-3377f07581071ecf194140bf,Sevoflurane,sevoflurane
+ING-3380085f81b886b0cf154fe5,Estriol (Oral),estriol oral
+ING-338556f0e8c9f2d84a8511d9,Cinchocaine,cinchocaine
+ING-33ae879dbac1d4ddbd15d90e,Cetrimide,cetrimide
+ING-33cc93db1bb3b67d561189df,Antioxident,antioxident
+ING-33fd74aa4e55318d00dbce16,Hydrogen Peroxide 50%,hydrogen peroxide 50
+ING-340b4eccffaa55943db1535f,Gnaphalium,gnaphalium
+ING-3418f0f89fc680f0cdbcfcb5,Pefloxacin Mesylate Dihydrate,pefloxacin mesylate dihydrate
+ING-342d77d17f08a980f01f52fc,Carisoprodol,carisoprodol
+ING-3435803668c74799089dc819,Raubasine,raubasine
+ING-3451a7d95fde24a3f94f2f82,Measles and Rubella,measles and rubella
+ING-3459ec1b219fcc88f07e7a17,Zinc Orotate,zinc orotate
+ING-3479b78c200bc0b32805d253,Ceftiofur,ceftiofur
+ING-348758e7f6b73b25dba794e8,Tetanus [DPT],tetanus dpt
+ING-34892b1eb24e49525268cd3c,Erythromycin (Lotion),erythromycin lotion
+ING-3493d5d828624b5d5efe96eb,Levofloxacin Hemihydrate,levofloxacin hemihydrate
+ING-34a99d4271042852da061ffc,Methimazole,methimazole
+ING-34b6576e4597dee1026e3733,Casirivimab,casirivimab
+ING-358b7c5a7e9a731db91656a2,Benzyl Cinnamate,benzyl cinnamate
+ING-358c0e381c64a4daea774a7d,Zinc Acetate,zinc acetate
+ING-35ff4c4fe66cecc3c69596ad,Sodium Polystyrene Sulfonate,sodium polystyrene sulfonate
+ING-36286c246e27ad1efba1746f,Loratadine,loratadine
+ING-36622e4971f6d87d458902f9,Tetrabenazine,tetrabenazine
+ING-367a6adb2a254990adf4df70,Finerenone,finerenone
+ING-36b9451985ae5023582b24bb,Diclofenac Sodium,diclofenac sodium
+ING-36d7e007fbdb800de0c4ba21,Hyoscine Butyl Bromide,hyoscine butyl bromide
+ING-36da4a552f14cc40bcba25c3,Inositol,inositol
+ING-36eff6ba9c1ca5b83a37f6e7,Halobetasol Propionate,halobetasol propionate
+ING-36fa5c738282f3a811ca8a1e,Nilotinib,nilotinib
+ING-370e85a12a9ede6babe66df0,Nitrazepam,nitrazepam
+ING-371c8917b1645b9f7850946b,Selegiline Hydrochloride,selegiline hydrochloride
+ING-3726a35d5bf33c0e67ff730d,Wool Alcohol,wool alcohol
+ING-373a23e053d27a6093c049dd,Cefazolin,cefazolin
+ING-373c5bc06a593319f4d68e30,Aushokarist [Saraca Indica],aushokarist saraca indica
+ING-378a45b33bf158305460387e,Neostigmine Methyl Sulphate,neostigmine methyl sulphate
+ING-378b6364661d9c924214b548,Nalidixic Acid,nalidixic acid
+ING-3792703dc0b1c421e776686a,Methylprednisolone,methylprednisolone
+ING-37dfebd61ef013cb603291bf,Magnesium Stearate,magnesium stearate
+ING-37f49ee20b903bf6260bb881,Flibanserin,flibanserin
+ING-3848d382ea8931519e4be576,Mupirocin,mupirocin
+ING-384e224dda19feaf65c86b62,Glyceryl Trinitrate,glyceryl trinitrate
+ING-3858fd046b7194c8fe662589,L-Asparaginase,l asparaginase
+ING-385b58d46aa14093eb114ece,Naftifine Hydrochloride,naftifine hydrochloride
+ING-388e9d31ff82ade860a8fb6c,Indomethacin (Rectal),indomethacin rectal
+ING-392928845dfb80085e7dea95,Precipitated Sulpher,precipitated sulpher
+ING-392aa952926811cd61f68221,Gentian Violet,gentian violet
+ING-3931f20bd03bdf3e4ed1f496,Medical Compressed Gas,medical compressed gas
+ING-3979cceacb57e0e26d05d48e,Brinzolamide,brinzolamide
+ING-3986577df5e7594f003f4e2e,Bromocriptine Mesylate,bromocriptine mesylate
+ING-39b19da78d6ad1ebb014de78,Salmeterol Xinafoate,salmeterol xinafoate
+ING-39de7024398399ade875020f,Griseofulvin,griseofulvin
+ING-39dfcb5fa5e9dfbbe2a6a887,Pizotifen,pizotifen
+ING-39e5570a5263593ecbefa052,Azathioprine,azathioprine
+ING-3a0dd16bf660292d0b68f6dc,Inactivated Hepatitis A vaccine,inactivated hepatitis a vaccine
+ING-3a123fb8ce9628200cc6a7c1,Framycetin,framycetin
+ING-3a32f27d9c9017fe71b10d8a,Tocotrienol,tocotrienol
+ING-3a3c20a7c7d3e9e9848ea81e,Ampicillin,ampicillin
+ING-3a69c63f450411d3cde82b40,Levetiracetam,levetiracetam
+ING-3a7315ee72072def407ac91f,Ceftaroline Fosamil,ceftaroline fosamil
+ING-3a79070ba75bf7ddb11089bc,Tizanidine Hydrochloride,tizanidine hydrochloride
+ING-3a7abda4380a98e3f10299f2,Levocarnitine,levocarnitine
+ING-3aa16926a96ec2a6c7e0690c,Prasarani Sandhan,prasarani sandhan
+ING-3aa4b4f7b10d5b0a85bdd736,Acetylcysteine,acetylcysteine
+ING-3aab512cdb15c872e0a72a53,Cytarabine,cytarabine
+ING-3aaebd3bc7c62266e5c05434,Carbimazole,carbimazole
+ING-3ac33a4da82abb1321a9bb3d,Calcium d-Pantothenate,calcium d pantothenate
+ING-3ad7041e91134549b89bf510,Anastrozol,anastrozol
+ING-3ad73b74e2dd7fa840003f66,Leflunomide,leflunomide
+ING-3ade9cf9bd6cce2b470f546a,Simethicone,simethicone
+ING-3af63af38d5ad3e5a1b52a87,Drotaverine,drotaverine
+ING-3afa3d6c1762effc18fe7154,Lanthanum Carbonate,lanthanum carbonate
+ING-3b203fca12c3ceee08571a88,Dimethothiazine Mesylate,dimethothiazine mesylate
+ING-3b26226179a8efe292453da5,Polymixin B Sulphate,polymixin b sulphate
+ING-3b2e8f80ec54c194ac4f94ae,Salmon Oil,salmon oil
+ING-3b35c7e30742c2ed964b6b7f,Insulin Aspart Protamine,insulin aspart protamine
+ING-3b83a696591c2f2a69210b2a,Zileuton,zileuton
+ING-3b8d7dd4cfb8da2f085d2301,Indomethacin (Oral),indomethacin oral
+ING-3ba8e0a2c96fa00bcb73c18d,Thiotepa,thiotepa
+ING-3c0f40cc38b5e48462d7380a,Nalbuphine,nalbuphine
+ING-3c116123c1a2403b65c01bd5,Hydroxyethyl Starch,hydroxyethyl starch
+ING-3c1d3b6cc595c54cd976584c,Dopamine Hydrochloride,dopamine hydrochloride
+ING-3c6a160033d0b7432efb3efe,Aripiprazole,aripiprazole
+ING-3cc094561a4bcc036e85ff7f,Thiopental Sodium,thiopental sodium
+ING-3cc7768811004469f6bfdb5a,Desonide,desonide
+ING-3cedd24fa805e842ee6b3ffc,Ferric Citrate,ferric citrate
+ING-3cfddc589f826985be6b8d2f,Aswagandha,aswagandha
+ING-3cfe5191a80f809b47c69ccc,D-Sorbitol,d sorbitol
+ING-3d00056a63d53cbeb12ca629,Sucralose,sucralose
+ING-3d04e489aeb6b87d431a8f19,Connessi bark],connessi bark
+ING-3d0d94ed3f76c236e183a67e,Terazosin Hydrochloride,terazosin hydrochloride
+ING-3d0f0483d4ef84e9a3d313e6,Pholcodine,pholcodine
+ING-3d83cf7ace4823e0eab2f7ed,Atropine Sulphate,atropine sulphate
+ING-3dbc82d9d2d2c49d6f6cde46,Vitamin D,vitamin d
+ING-3e0baa0973faa3f4268dfae5,Gabapentin,gabapentin
+ING-3e1488dc9d2a5c6d32eaaace,Probiotic Combination [2.3 Billion],probiotic combination 2 3 billion
+ING-3e1f6a6c418b9080c6d8b8c2,Linezolid,linezolid
+ING-3e3b246a6fa3683ba0b2ed08,Vanadium,vanadium
+ING-3e3bf3aa356d34cd20f84480,Ramucirumab,ramucirumab
+ING-3e468b23bfebcb1b5019a647,Lactobacillus Rhamnosus GG,lactobacillus rhamnosus gg
+ING-3e82898159eabfb9f8a01ab0,Dexpanthanol,dexpanthanol
+ING-3e983fc4874e352e55813dd5,Polysaccharide Pneumococcal Vaccine,polysaccharide pneumococcal vaccine
+ING-3ecb356991aaf1f55e088a60,Antioxidants and Micronutrients,antioxidants and micronutrients
+ING-3ed0cb80434e038640c6a909,Monosulfiram,monosulfiram
+ING-3ee007eb506052c06f7c6de4,"Suzark [Chir Pine, Chickpea, Pearl]",suzark chir pine chickpea pearl
+ING-3ef30369f9843d8010ab492f,Oral Cholera Vaccine,oral cholera vaccine
+ING-3f2ae7d9a3e03b6e491afdf0,Cobalt Carbonate,cobalt carbonate
+ING-3f312ed4b16b76030bd7e46a,Sodium Chloride (Intravenous Solution),sodium chloride intravenous solution
+ING-3f7293cc69d26d3f43e38bfb,Lornoxicam,lornoxicam
+ING-3fa3e8f470c1cc222d76c23d,Polymyxin B Sulphate,polymyxin b sulphate
+ING-3fb93e846026573c266d7ba2,Nitroglycerin (IV Infusion),nitroglycerin iv infusion
+ING-402c8b276fcc78c2c19413fc,Miconazole,miconazole
+ING-40aadb1ace13a1622e2ee2d0,Progesterone (Capsule),progesterone capsule
+ING-40babfae4527231ba8766c9b,Mephenesin,mephenesin
+ING-410238355a46cf9a45bcd14e,Magnesium Oxide,magnesium oxide
+ING-412a4de35f30ceb8623b6ee2,Antimony Potassium Tartrate,antimony potassium tartrate
+ING-412ff56398c79b433a836dd4,β-Sitosterol,sitosterol
+ING-414defaaf35a93f227f8b6bb,Tiamulin Hydrogen Fumerate,tiamulin hydrogen fumerate
+ING-4157d2081fc6a407d4e0c6ab,Alprazolam,alprazolam
+ING-415f92ae15e1b4b6e6d8ebba,Jogaraj Guggulu,jogaraj guggulu
+ING-41d8acb5d8b7f2995160afe4,Diphtheria,diphtheria
+ING-41e2b4cdae6181e2da9e0091,Gemefloxacin,gemefloxacin
+ING-41ee9b05d62f130deeadc429,Halcinonide,halcinonide
+ING-4215efa87df45004582ca9f6,Sodium Fluoride,sodium fluoride
+ING-4236b830de9f9ba2ac54520f,Mirtazapine,mirtazapine
+ING-4240ee59da106f61e6f21ca3,Thymus Vulgaris Extracts,thymus vulgaris extracts
+ING-42474afc64812ada57f3e90a,Eucalypytol,eucalypytol
+ING-42575fc89ae0046cd3e4b262,Herbal cough syrup [Adhatoda Vasica],herbal cough syrup adhatoda vasica
+ING-425ff51fc91f5095cbf48ead,Chlorhexidine Hydrochloride,chlorhexidine hydrochloride
+ING-42620ca467618353e1b6fc24,Varenicline,varenicline
+ING-42876f76bc5e12fdeb48bb54,Tamsulosin Hydrochloride,tamsulosin hydrochloride
+ING-42906397a445641c187f8778,Capsicum,capsicum
+ING-429b5bf56b4208920d896e83,Light Liquid Paraffin,light liquid paraffin
+ING-43012cf2edfc9be7c65ec285,Tulsi,tulsi
+ING-43110a0e8a0f2deee239c6cb,Crotamiton,crotamiton
+ING-433f9145820fbc40bb80aee3,Azithromycin Dihydrate,azithromycin dihydrate
+ING-4349c506b486b1dc5f460efc,Potassium Bicarbonate,potassium bicarbonate
+ING-43554843eded028119e180b5,Cellulose,cellulose
+ING-436d407060cfbff361bdb41e,Baricitinib,baricitinib
+ING-439f91bf22c41ed1163dd91a,Flumetasone Pivalate,flumetasone pivalate
+ING-440ff48ba1649c1c63aec136,Dapsone,dapsone
+ING-445ee246fcd1b0e642dd4760,Boswellia serrata,boswellia serrata
+ING-446888fac711003087ee6500,Magnesium Sulphate,magnesium sulphate
+ING-447799e0d7af9d054b896550,Magnesium Trisilicate,magnesium trisilicate
+ING-4478bd9ed72d12af5044153f,Inactivated Influenza Vaccine,inactivated influenza vaccine
+ING-448cd13990bd5ae7a76b20ca,Nabayas Louha Herbal Haematinic,nabayas louha herbal haematinic
+ING-44a1036c3b875bd1d3ac0c24,Retinol Palmitate,retinol palmitate
+ING-44ae49a3c5e32c427e0c416c,Mesna,mesna
+ING-44b35d4600c8e936212e9aaa,Vincristine Sulfate,vincristine sulfate
+ING-44b4c76a20e5b8bd4b317980,Ramosetron Hydrochloride,ramosetron hydrochloride
+ING-44bc82a81577f9c2bfe07f07,Hydroquinone,hydroquinone
+ING-44bd96e7b81dae914b771bd0,Amorolfine Hydrochloride (cream),amorolfine hydrochloride cream
+ING-44d2a7b9d03db6552b1bf983,Vaskar Laban [Piper,vaskar laban piper
+ING-4504b0f9a3f41155e7545fde,Aminocaproic acid,aminocaproic acid
+ING-4524c50ea4ad1c9a00727545,Dinoprostone,dinoprostone
+ING-452b3cd8e5f5f12c3345b9b9,Vasaka,vasaka
+ING-4553e91c74112b766b145392,Arabinoxylan,arabinoxylan
+ING-45b2559f4e1fd4d7ca6a2c17,Budesonide,budesonide
+ING-45b6a5cda4d3273bf0efea8a,Nandrolone Decanoate,nandrolone decanoate
+ING-45e1f3894b80f50001d646b7,Oleoresin Capsicum,oleoresin capsicum
+ING-45ffbcd092030f1472cda921,Nintedanib,nintedanib
+ING-460931bc03ce50dcf3a2e58f,Neratinib,neratinib
+ING-460afc5743fa541a6e752ddc,Podophyllotoxin,podophyllotoxin
+ING-464cf6a1eb3f11933ba95d41,Clobetasone Butyrate,clobetasone butyrate
+ING-4688af8443c04d86d3800c72,Desogestrel,desogestrel
+ING-468a3b6ea1c54a727f4b23fb,Flumequine,flumequine
+ING-468c26f21d5c536dfa350fb7,Terconazole,terconazole
+ING-469a528fbd494f6965b3230e,Sodium Bi Phosphate,sodium bi phosphate
+ING-46b3e392e44a05cf106340c6,Nalbuphine Hydrochloride,nalbuphine hydrochloride
+ING-46b702f0e9694dc3260704bc,Diltiazem Hydrochloride,diltiazem hydrochloride
+ING-46c4aa22b0be9c6579a5d2b2,Betaine,betaine
+ING-475f295af69dc3320b8c38bb,Carprofen,carprofen
+ING-47b371db5738aab61091ed15,Panthenol,panthenol
+ING-47b94a08795a71cebc661448,Choline Bitartrate,choline bitartrate
+ING-47c4d6406db7b34454aa1994,Nickel,nickel
+ING-47cb0005794388adb99277cd,Sparfloxacin,sparfloxacin
+ING-47cc329cc7079fb0e6396dfb,Garlic Oil,garlic oil
+ING-47f96339997d60c616884191,Norethisterone Acetate,norethisterone acetate
+ING-4812f770ebbd39c7900d78c8,Ondansetron,ondansetron
+ING-483bdeff09ce60e32a279d4f,Dicycloverine Hydrochloride,dicycloverine hydrochloride
+ING-4844645cacdd0bcfedbb5948,Capmatibin,capmatibin
+ING-484d20bb39aae12a469621cc,Naftidrofuryl Oxalate,naftidrofuryl oxalate
+ING-487da81bf3ac7351ed4e2315,"Fishar [Snake root, Potassium, Magnesium]",fishar snake root potassium magnesium
+ING-48828697e573d5296ee627ac,Spectinomycin,spectinomycin
+ING-488e6184938a8864d8edc274,Saw palmetto (500 mg),saw palmetto 500 mg
+ING-48a2ff21bf2400f057fd3b50,"Fennel [Mouri, Gohkshura, Kasni]",fennel mouri gohkshura kasni
+ING-48ad66d17d461d686fbbc073,Ringer's Lactate Solution,ringer s lactate solution
+ING-48cb386dee7a28b19d8831c2,Alogliptin,alogliptin
+ING-48ddae83b237067301a8d5a4,Tulathromycin,tulathromycin
+ING-48e971338a4054486afcab32,Trihexyphenidyl Hydrochloride,trihexyphenidyl hydrochloride
+ING-495d838e997c32781e2713ea,Nirmatrelvir,nirmatrelvir
+ING-4982a51c70a834cc1b1d1b31,Lanolin,lanolin
+ING-49bd833e511edf14a6dd45e1,Vinorelbine Tartrate,vinorelbine tartrate
+ING-49c6f3afaad4d2a64b84b26a,Sertraline Hydrochloride,sertraline hydrochloride
+ING-49e1e1950b64b2423f260a31,Magnesium Sulfate Heptahydrate,magnesium sulfate heptahydrate
+ING-49e4efbe71bf7d36a4f3ec04,Ciclopirox Olamine (Nail Lacquer),ciclopirox olamine nail lacquer
+ING-49f327be68d31d3f46fc6922,Virgin Castor Oil,virgin castor oil
+ING-4a26eb88fb2294f310331184,Benzydamine Hydrochloride,benzydamine hydrochloride
+ING-4a3a5e2e187cbd951e068b3b,Malus sylvestris,malus sylvestris
+ING-4a4e4d0eb5effb04abb205bb,Noradrenaline,noradrenaline
+ING-4a7e3ad001d82bb4678d9fa2,Degarelix Acetate,degarelix acetate
+ING-4a93ded25dccd1ea166b92fe,Balsam Peru,balsam peru
+ING-4a978c47b8f5b536659ef788,Ciclopirox Olamine (Cream),ciclopirox olamine cream
+ING-4a9e59a1f4b51be369930487,Semaglutide (Tablet),semaglutide tablet
+ING-4aafc2062fd417aaf168c895,Human Chorionic Gonadotrophin,human chorionic gonadotrophin
+ING-4ac5e7cbdfd41aedeca88469,Belladona,belladona
+ING-4acf49b4041794166a2d7d13,Ceftriaxone,ceftriaxone
+ING-4ae439cef3e61821e604fc85,Methyl Prednisolone Acetate,methyl prednisolone acetate
+ING-4aee76e0a3765251ae468e59,Citric Acid Anhydrous,citric acid anhydrous
+ING-4b2e5d23df6206100e42662e,Haloperidol,haloperidol
+ING-4b59e4b57bbb8dbc3334c57b,Mint Oil,mint oil
+ING-4b5a60fe18d9282ea8a74095,Condroitin Sulphate Sodium,condroitin sulphate sodium
+ING-4b613bae5a321af86c1653fa,Insulin Degludec,insulin degludec
+ING-4b962277733633ff9eec6df1,Sodium Succinate,sodium succinate
+ING-4ba42369f0030cfeac15087a,Methyl Prednisolone,methyl prednisolone
+ING-4c180a132e16cc67ac204e01,Mumshik,mumshik
+ING-4c591c30afa436056d0d5936,Citric Acid,citric acid
+ING-4c62fd8af5ae92ec9b0014ef,Afatinib Dimaleate,afatinib dimaleate
+ING-4c6a976e94fb877a4cd5bcd9,Dextromethorphan,dextromethorphan
+ING-4ca893b397864846bc40e576,Esomeprazole Magnesium,esomeprazole magnesium
+ING-4cb189665ff62a96d317a44d,Black Pepper,black pepper
+ING-4cfb698c3437f2ea0c91f8be,Dexketoprofen,dexketoprofen
+ING-4d2bfa8235fbb2f78f9ee012,Secnidazole,secnidazole
+ING-4d3ca16f130179efa8f062f0,TTO Thermal Toothpaste,tto thermal toothpaste
+ING-4d74bcfedc431466b6bdae48,Velpatasvir,velpatasvir
+ING-4d78c7f26627623bf12066f5,Azelastine,azelastine
+ING-4d8d2be98e3b87f66f8946f5,Dulaglutide,dulaglutide
+ING-4d98e418375c14312cb1eae3,Tavaborole,tavaborole
+ING-4d9b91e2c4f5675822b26439,Cinnarizine,cinnarizine
+ING-4daacaeac9187ea63252e4e4,Pramoxine,pramoxine
+ING-4dad8c9968dfb4048e334ab0,Flurazepam,flurazepam
+ING-4de229a9af5e47a3b5f7213d,Pimecrolimus,pimecrolimus
+ING-4e223f4fcecd879607300516,Docosanol,docosanol
+ING-4e27836a66212398f61c4510,Artemether,artemether
+ING-4e3412b8bfcbbe1ff030b84f,Ethylhexyl Methoxycinnamate,ethylhexyl methoxycinnamate
+ING-4e6fd97fd4bdbbe751ce9ccd,Butyl methoxydibenzoyl methane,butyl methoxydibenzoyl methane
+ING-4e765f8f1eff90c008cd58a8,Fenofibrate,fenofibrate
+ING-4e7b476a095f043d6faf0c3e,Curcuminoids [Curcuma Longa],curcuminoids curcuma longa
+ING-4ea1aef33ff2be0fea661a5f,Esculin,esculin
+ING-4ea1bf8e6e3496ca04adcf63,Ofloxacin (Oral & Injection),ofloxacin oral injection
+ING-4ea659557840276a172b10ab,Pimavanserin,pimavanserin
+ING-4ebd493f8d4453452f9a61ca,Benzathine Penicillin,benzathine penicillin
+ING-4ecd0ee5abf6f7bc5efcf360,Levomefolate,levomefolate
+ING-4ecdd45b35c6b99a44c6be3c,Magaldrate,magaldrate
+ING-4ed8b723f0e0708d8260ef19,Axitinib,axitinib
+ING-4f200d14662791e46ca29ada,Crizotinib,crizotinib
+ING-4f3eccb808e57d5b8df73df5,Lyophilized Bacterial Lysate,lyophilized bacterial lysate
+ING-4f4a3285b5e4437ea26bae67,Dextran 40,dextran 40
+ING-4f7eeb2cd1a9cfab2dc73d1b,Toltrazuril,toltrazuril
+ING-4f833edcd9415bdbcafce289,Saccharin Sodium,saccharin sodium
+ING-4fa206906cc3c80fa7ebd036,Galantamine,galantamine
+ING-4fc202048e65a533d95c97b4,Phenytoin,phenytoin
+ING-4fe8cf4b55b548236bd2b0c0,Sodium Citrate,sodium citrate
+ING-500c9211f28e53e6554c1438,Turpentine Oil,turpentine oil
+ING-50100f40fffc16d4eb8e5d72,Bivalirudin,bivalirudin
+ING-501412629a52e590b56129c8,Folic Acid,folic acid
+ING-50600ed9442e01382ed389ca,Salbutamol (Inhaler),salbutamol inhaler
+ING-50b8eb71b4509deb24ce91ba,Acetate Formulation [Hemodialysis Solution],acetate formulation hemodialysis solution
+ING-50cb8e63e3f7b76db3df41b0,Ambrisentan,ambrisentan
+ING-51333edff24b7168626811b2,Perampanel,perampanel
+ING-5160bdbdd30c648a74f0864f,Levosimendan,levosimendan
+ING-51a5a06c6fe575825b47bacb,Allantoin,allantoin
+ING-51ccf6e611c6a1d5cf5ea3c0,Benzocaine,benzocaine
+ING-521c99d4aacb6c070f35f4d1,Esomeprazole (MUPS tablet),esomeprazole mups tablet
+ING-524a0b304071894bf844ca61,Metronidazole,metronidazole
+ING-52a0b7c2155ac7177d480857,Brimonidine Tartrate,brimonidine tartrate
+ING-52b0e2aef98f84878c6c70fd,Pepsin,pepsin
+ING-52cf76a636d0d9f38acad528,Levo Norgestrel,levo norgestrel
+ING-52d510cbec1ac0388a283816,Levobunolol Hydrochloride,levobunolol hydrochloride
+ING-52e12696fe4fbdb445652fae,Paliperidone Palmitate,paliperidone palmitate
+ING-52f5ef7ecf7048efd7a5c515,Multivitamin & 5% Dextrose,multivitamin 5 dextrose
+ING-5302754782f70fc7c615f743,Estradiol Valerate,estradiol valerate
+ING-530377d0b880ab80bf4aca80,Dex-Ketoprofen Trometamol,dex ketoprofen trometamol
+ING-531edfd8777a634fffcbcd35,Geothermal water,geothermal water
+ING-5373649aff832b888e1d1bc3,Methyl Prednisolone Sodium Succinate,methyl prednisolone sodium succinate
+ING-53b9cc0d5a10c26555e15c13,Miconazole Nitrate (Oral Gel),miconazole nitrate oral gel
+ING-53bce775995c0b4da985ad31,Perilla,perilla
+ING-53d283bb7b11883dd867ccb2,Isoflupredone Acetate,isoflupredone acetate
+ING-53e27a1c4007ab6d60f7e694,Diclazuril,diclazuril
+ING-53e52eb81d19f44e1b5e16fb,L-Lysine,l lysine
+ING-53eed1e81ebd604d549e6390,Sulfadimidine,sulfadimidine
+ING-54086bd3de893f47084f671c,Catechu,catechu
+ING-54132395d6c1a2a01f127609,Guaiphenesin,guaiphenesin
+ING-54238e9415df5dffbf4ba272,Paracetamol,paracetamol
+ING-54372118e2dbaaa718e98334,Erythromycin Thiocyanate,erythromycin thiocyanate
+ING-5447ab51cd59a5a3db51a6c9,Jouban Satadal,jouban satadal
+ING-544c06d6765d0edc95e5de4d,Levocetrizine Dihydrochloride,levocetrizine dihydrochloride
+ING-549306dbfbc1efef92389e85,Ceftazidime,ceftazidime
+ING-549aa4a4a5e7a0ed6cf2c255,Buprenorphine,buprenorphine
+ING-54a9ac69f052cfcb37e529de,Magnessium Chloride,magnessium chloride
+ING-54af32243728418e670e94e0,Griseofulvin [Microsize],griseofulvin microsize
+ING-54f88fe6d26e35ce88df8a3e,Norepinephrine,norepinephrine
+ING-552634efb2432e38313a0857,Conjugated Estrogen,conjugated estrogen
+ING-554790fc0432b1c5a8d6c23a,Pottassium,pottassium
+ING-554c0eed7cb5396a7886f3ad,Oral Polio Vaccine,oral polio vaccine
+ING-555688dff7e1cbb75302a423,Folinic Acid,folinic acid
+ING-5579892da4e6ecd1065b7c4c,Multivitamin [Injection],multivitamin injection
+ING-55a87d6ab083fb71de3892cb,Tabkheer,tabkheer
+ING-55b14dcfd6745dbd6ed8eaa4,Yellow Fever Vaccine,yellow fever vaccine
+ING-55ba6b0814a47184ece7c045,Ozenoxacin,ozenoxacin
+ING-55c7ce939ffc211a8171a23c,Ciclopirox Olamine (Shampoo),ciclopirox olamine shampoo
+ING-55cd96dd284d99d15ac961aa,Tetracycline Hydrochloride,tetracycline hydrochloride
+ING-55def7a1948dcc855c25853b,Fusidic Acid,fusidic acid
+ING-55e677e286c526427bd85166,Ketotifen Fumarate (Ophthalmic),ketotifen fumarate ophthalmic
+ING-563f6c358e474bbeedcf1537,Fluticasone Propionate (Topical),fluticasone propionate topical
+ING-565985002ce14155807427f2,Valbenazine,valbenazine
+ING-5664248743d23553ec12e4b8,Dorzolamide,dorzolamide
+ING-5665c7f0e34a1b022072381e,Darolutamide,darolutamide
+ING-5677f956c64c8fda6e54cbd3,Zafirlukast,zafirlukast
+ING-569319d3249b6c902403e430,Famciclovir,famciclovir
+ING-56d7d321eaef4f662b57c487,Neomycin Sulphate,neomycin sulphate
+ING-56ea232443e5b123dab08029,Cobicistat,cobicistat
+ING-56fb5735696614c67fd1da65,Nizatidine,nizatidine
+ING-570d60f6d386ef4248deed14,Chlorpromazine Hydrochloride,chlorpromazine hydrochloride
+ING-572adc12083e09f4aae52a44,Asciminib,asciminib
+ING-5768e368e11a82c820095264,Lorazepam,lorazepam
+ING-579651b0d574971040b531b6,Basil,basil
+ING-57a8d1d785d481c25cb5cb40,Sodium Selenate,sodium selenate
+ING-57bb6d0d98f54a9d1542529e,Lipase,lipase
+ING-57ff2f0dd49e2ec54f58a242,Urea,urea
+ING-580d66f414c7c9a7d477dab4,Spironolactone,spironolactone
+ING-582cee177d334f5161b74fdd,Herbal cough syrup [Glycyrrhiza Glabra],herbal cough syrup glycyrrhiza glabra
+ING-5891177d540a3d894d8d651a,Infliximab,infliximab
+ING-58e204f3157d95a50942fc00,Cytochrome C,cytochrome c
+ING-58f8759c11b09f81e0da7d9b,Ephedrine Hydrochloride,ephedrine hydrochloride
+ING-591f59cdaeb853a870275697,Insulin Aspert 30/70,insulin aspert 30 70
+ING-5967aa0890b8cb50e5252865,Clobazam,clobazam
+ING-596e0781cce8aff3ad3800d0,Xylometazoline Hydrochloride,xylometazoline hydrochloride
+ING-59be3d74c24e4c6f6ea803f8,Metamizol,metamizol
+ING-59e493f12f9b9c6d8ea2d9de,Epirubicin Hydrochloride,epirubicin hydrochloride
+ING-59e7dfe4af8e79f70be3d852,Adrenochrome Monosemicarbazone,adrenochrome monosemicarbazone
+ING-59f1f2fea03c72689e7e2b3f,Buparvaquone,buparvaquone
+ING-59fa6a225ee9bbb2e9f420cd,Trimebutine Maleate,trimebutine maleate
+ING-5a46ca7f74cacaeaa6b7bffe,Dexibuprofen,dexibuprofen
+ING-5a4d2190068d0de82ea7b973,Devil's Claw,devil s claw
+ING-5a51898389b6a1057a0d9e17,Butamben,butamben
+ING-5a7f6a7c6882c2dec490d11b,Clonidine Hydrochloride,clonidine hydrochloride
+ING-5a8bca26efb9ab9068539af6,Danofloxacin,danofloxacin
+ING-5aae724a5c1bdcc3c71a6da0,Halothane,halothane
+ING-5ab1e315750f8e20e87645c7,Chloramphenicol (Oral),chloramphenicol oral
+ING-5b7afd449246df6a109db3a5,Oxaprozin,oxaprozin
+ING-5b8588ca0d6c3ebd818d1be2,Zoledronic Acid [For hypercalcemia],zoledronic acid for hypercalcemia
+ING-5b85e2d4bec96a7c6605f34a,Fluocinolone Acetonide,fluocinolone acetonide
+ING-5b890ce905a3c4056e228700,Human Anti-D Immunoglobulins,human anti d immunoglobulins
+ING-5b92ad631e147228f1b7a4f4,Eltrombopag,eltrombopag
+ING-5b9c3599f5701d92f507a800,Bendamustine Hydrochloride,bendamustine hydrochloride
+ING-5ba815a819df7f321c11afe3,Multivitamin & Multimineral [A-Z syrup preparation],multivitamin multimineral a z syrup preparation
+ING-5bf5fdfbc64b0aacfaa89d0d,Leuprorelin Acetate,leuprorelin acetate
+ING-5c0dc0dcd18bc82474e756b4,Glycerol,glycerol
+ING-5c1c87dbfb82dca704159553,Estriol (Vaginal),estriol vaginal
+ING-5c407b5d65bf10a6d9206393,Labetalol Hydrochloride (Injection),labetalol hydrochloride injection
+ING-5c5616c611d361706d37195d,Nitroxynil,nitroxynil
+ING-5c6bb1c779c0091a3341cf4a,Citric Acid Monohydrate,citric acid monohydrate
+ING-5cfb95507e5a0ba667c40934,Ciprofloxacin (Ophthalmic),ciprofloxacin ophthalmic
+ING-5d09e89c41448c2387d8a7e3,Ropinirole,ropinirole
+ING-5d1b6f1a6aff1afe3e6a3604,Marham Kharish,marham kharish
+ING-5d3f9a25a1018f6d6312625d,Urokinase,urokinase
+ING-5d68f2426cd9746d56a1a7bd,Travoprost,travoprost
+ING-5d736661a12cb28754b9cb96,Rabies Immunoglobulin,rabies immunoglobulin
+ING-5d8765f7d7534e50a80137bc,Beclomethasone,beclomethasone
+ING-5dd0d84e3605b6b9c1fd3bd9,Ketoconazole (Cream),ketoconazole cream
+ING-5dd1e8658b620a4f2f0ee372,Atezolizumab,atezolizumab
+ING-5e0d604e1c2dea9d76bccddf,Pentoxifylline,pentoxifylline
+ING-5e0e7b9d28a813b0d4f15445,Triprolidine Hydrochloride,triprolidine hydrochloride
+ING-5e65ed44394617c7f7b5d540,Armodafinil,armodafinil
+ING-5e80c108378aa9c0a3622d78,Methoxy Polyethylene Glycol-Epoetin Beta,methoxy polyethylene glycol epoetin beta
+ING-5e9a513305410d1adb16629c,Sodium Dichloroisocyanurate,sodium dichloroisocyanurate
+ING-5e9c20ceab1388d9c1460bc2,Fentanyl Citrate,fentanyl citrate
+ING-5ea0ee24ed6d75dd88705147,Acarbose,acarbose
+ING-5ea77398e1629de4a628558c,Darbepoetin,darbepoetin
+ING-5ebffeed20840d3cd32bb252,Thiophanate,thiophanate
+ING-5ec4925c2ae64becddac0699,Sotalol Hydrochloride,sotalol hydrochloride
+ING-5f0194b3aac51d8289520a49,Lenalidomide,lenalidomide
+ING-5f48a2cbc75dc3bb791baffd,Bisoprolol Hemifumarate,bisoprolol hemifumarate
+ING-5f78b04a6e7972201aea8ac4,Timolol,timolol
+ING-5f85325354e47ae0c004eaea,Amino Acids (Essential),amino acids essential
+ING-5fc1e61c9919d5aacd3d51ef,Omarigliptin,omarigliptin
+ING-5fd305b990097b3a4c79f11b,Mesalazine [5-aminosalicylic acid],mesalazine 5 aminosalicylic acid
+ING-5fd8a115ec0bf9e3353f9781,Moxonidine,moxonidine
+ING-5fdf559a4f93b7f05012ac81,Testosterone Decanoate,testosterone decanoate
+ING-5fe5d42a73c13c640ccdbfba,Hydrogen Peroxide,hydrogen peroxide
+ING-5ff0ba0e1278ddd7090b527a,Ferrous Gluconate,ferrous gluconate
+ING-6036cad3024777ed5f64d62e,Ciprofloxacin,ciprofloxacin
+ING-60495f3e7e0090df572376ef,Pantothenic acid,pantothenic acid
+ING-604c23e6936d5aea1efc3b05,Icosapent Ethyl (Including D-Alpha-Tocopherol As Antioxidant),icosapent ethyl including d alpha tocopherol as antioxidant
+ING-608de3ab2f24046b999502eb,Hyoscine Butylbromide,hyoscine butylbromide
+ING-60a983131cb1b1b452fa9fef,Rizatriptan,rizatriptan
+ING-60a9db507cb11656a1c412d7,Teicoplanin,teicoplanin
+ING-60b1e0f8a7b027cadea1d9aa,Clomipramine Hydrochloride,clomipramine hydrochloride
+ING-60b2dd6a4ce168a91f058b28,Iopamidol,iopamidol
+ING-60dd31fa343d17dd370212d2,Ambergris,ambergris
+ING-6133fb46c48e2de605de784a,Triclosan,triclosan
+ING-61452c54da1583108ce8a983,Doxorubicin Hydrochloride,doxorubicin hydrochloride
+ING-6159f939d498198e7f643e8c,Escitalopram Oxalate,escitalopram oxalate
+ING-618fa4dd4d7d477d7bd94d88,Denosumab,denosumab
+ING-61916606b681f357a4cd197c,Nebivolol,nebivolol
+ING-619401feacecb02ba2ba7c33,Ambroxol Hydrochloride,ambroxol hydrochloride
+ING-61a64080099264d7140954e3,White Soft Paraffin,white soft paraffin
+ING-61a7c29f94a4d257c7cf1ea3,Mepyramine Maleate,mepyramine maleate
+ING-61b911eb2512ab33946b342b,Luliconazole,luliconazole
+ING-61c1d506e2b2536b00c961e4,Perindopril Erbumine,perindopril erbumine
+ING-61ca69c81e9a37ee233779d2,Fesoterodine Fumarate,fesoterodine fumarate
+ING-6203098b6fcd3d34a0307f10,Oxyclozanide,oxyclozanide
+ING-623a6dfc9fa6bd5e1cad44ff,Ketoconazole (Shampoo),ketoconazole shampoo
+ING-624814edcd65a89637f0fc17,Cefepime Hydrochloride,cefepime hydrochloride
+ING-6263c8c744d8926eefdbe6cd,Semaglutide,semaglutide
+ING-6288d543637cc71fbeb06185,Cefoperazone Sodium,cefoperazone sodium
+ING-6292f270df72338d805d63bd,Pentosan Polysulfate Sodium,pentosan polysulfate sodium
+ING-6298c15dd5872e676678e334,Lanolin Anhydrous,lanolin anhydrous
+ING-62a3b1c2b979806d369cf730,Ertapenem,ertapenem
+ING-62d90ceb5a6cd0c3840e1826,Aspartame,aspartame
+ING-62e149263634c40de58c05be,Darbepoetin Alfa,darbepoetin alfa
+ING-62f17abd3701243f7f3ef5ac,Meclizine Hydrochloride,meclizine hydrochloride
+ING-630404406cd3804d74b77fb1,Sodium Fusidate (Oral),sodium fusidate oral
+ING-631f38f8ff72a46e8f1fda31,Bromocriptine,bromocriptine
+ING-6378d323a5a11b1a1c52c576,Temazepam,temazepam
+ING-63ad805012f9b0350debe25f,Nitroglycerin (Ointment),nitroglycerin ointment
+ING-63bcf7c153e810fbcf8cb6e1,Ursodeoxycholic Acid,ursodeoxycholic acid
+ING-642f0e0679eca8fc452a484b,Nanoparticle Albumin-Bound Paclitaxel,nanoparticle albumin bound paclitaxel
+ING-6434b10f6d3e0d63afcbb8c0,Kusta Qalyee [Calcined stannum],kusta qalyee calcined stannum
+ING-644815e30fffb4c067d374a6,Pancuronium Bromide,pancuronium bromide
+ING-6452002f1bed9a69a8d50ee4,Butenafine Hydrochloride,butenafine hydrochloride
+ING-64884aea79248219a7f7c840,Ciprofibrate,ciprofibrate
+ING-649cef64d969c53e549e4a5b,Azithromycin,azithromycin
+ING-64a22b7edcca9b9fdc8b66da,Betacarotene,betacarotene
+ING-64af046d8c5d94435009ab02,Macrogol [Polypropylene glycol],macrogol polypropylene glycol
+ING-64b3244a14b94ef2a12f009b,Atracurium Besylate,atracurium besylate
+ING-64b3cd28c033e0e8b7d25dd4,Magnesium Alginate,magnesium alginate
+ING-64e8ad5a65911a64024d0f64,Acetylsalicylic Acid,acetylsalicylic acid
+ING-64f09a6edfdd938be46c83b6,Roflumilast,roflumilast
+ING-64f3614c9c755bb950ef8315,Multivitamin & Multimineral [A-Z silver preparation],multivitamin multimineral a z silver preparation
+ING-64fe0ef44e0f201572684fcf,Ashokarista,ashokarista
+ING-6525d39ff2348f1c59dfcf35,"Salajeet [Mineral Pitch, Red Sage]",salajeet mineral pitch red sage
+ING-6538667e3eef17a5ddb719f4,Calcium Folinate [Folinic Acid],calcium folinate folinic acid
+ING-65884bfb79b7f0eac52fb25f,Polygeline,polygeline
+ING-65aeaf9dda5b365d81866cf9,Telmisartan,telmisartan
+ING-65c515eaed39e7dad2d14195,L-Cysteine Hcl,l cysteine hcl
+ING-65d1e411d6f42844cc5f7a2f,Zinc Sulphate Monohydrate,zinc sulphate monohydrate
+ING-65db41b3455850d8c894c2b4,Sodium Cromoglicate,sodium cromoglicate
+ING-664518ecff41b61ff3df049f,Glipizide,glipizide
+ING-6658f25d9a48c00081ab7ded,Lanthanum,lanthanum
+ING-666c7bce675da93ae8d5c74c,Methylprednisolone Acetate,methylprednisolone acetate
+ING-6694c42fcf40c597ab827f7b,Pyridostigmine Bromide,pyridostigmine bromide
+ING-669592addb2ff5f0c7065562,Atenolol,atenolol
+ING-66a7509dc5431b78e678d408,Tetramisole Hydrochloride,tetramisole hydrochloride
+ING-670173b084bdc8a6762b753f,Antihemophilic Factor [Factor VIII],antihemophilic factor factor viii
+ING-6726915a482f69b54de85ecd,Diltiazem Hydrochloride (SR tablet),diltiazem hydrochloride sr tablet
+ING-672bb991dce99ef875d2024c,Trastuzumab,trastuzumab
+ING-672f822d6dfda165cd64baee,Cenobamate,cenobamate
+ING-673987dca653ececca7cebd9,Thalidomide,thalidomide
+ING-67610f45681eb6e13e45e565,Xanthan Gum,xanthan gum
+ING-676674b22c069452860b3ae6,Promethazine Hydrochloride (Injection),promethazine hydrochloride injection
+ING-68168b10ed7076ba7d949dfc,Zolpidem Tartrate,zolpidem tartrate
+ING-683afd00ab90aef7d943e3e6,Pralidoxime Chloride,pralidoxime chloride
+ING-68613d5bad3e3099f841432d,Adenosine,adenosine
+ING-686b30f6ed593e429d9b9f6d,Multivitamin & Multimineral,multivitamin multimineral
+ING-68741ec44cb766f27bc6e6d0,Insulin (Human) R,insulin human r
+ING-6875a5f3a5d3bd7fe0c7fac0,Methyldopa,methyldopa
+ING-6879bea10dd6f5f6c22d7380,Cefadroxil Monohydrate,cefadroxil monohydrate
+ING-687b75acf25722590656bd2d,Salsalate,salsalate
+ING-687f442f0c70f7bf9e097bd9,Amisulpride,amisulpride
+ING-688cd9f6b4e1cc1d3086aa37,Sanjivani Rasayan,sanjivani rasayan
+ING-688e1731c88da82c82f40d06,Trisodium Citrate Dihydrate,trisodium citrate dihydrate
+ING-68a24def028e744883a489bb,Pentazocine Hydrochloride,pentazocine hydrochloride
+ING-68a2b3df9676ba77a38419a6,Norgestrel,norgestrel
+ING-68af4cdcb9f07e13eb55567f,Racepinephrine,racepinephrine
+ING-68bac3596b2b55f4bb04e972,Vitamin K3,vitamin k3
+ING-68f25b2ad4646b2e8f00eccf,Natamycin,natamycin
+ING-692902eb8fabb41a10685163,Ceftibuten,ceftibuten
+ING-693d26ff023ef1e78f9f2edb,Adefovir Dipivoxil,adefovir dipivoxil
+ING-6945ff43080b1debdb8fb319,Pitavastatin,pitavastatin
+ING-694a60352db0b68d50d9454f,Glecaprevir,glecaprevir
+ING-6979e68b93072f4457a8c403,Fluoxetine,fluoxetine
+ING-6998f2480468549b542092b0,Ferric Carboxymaltose,ferric carboxymaltose
+ING-69aa41ac0d728b0b043f2807,Progesterone,progesterone
+ING-69cdcc7eb4b306e3370495a6,Sucrose,sucrose
+ING-69d3808f4b2549d293676b4f,S-Amlodipine,s amlodipine
+ING-69fab491da408d0f6d82957b,Riboflavin,riboflavin
+ING-6a081a3cac638e15362280fb,Vasline,vasline
+ING-6a264a11b66428df6bec0786,Bilastine,bilastine
+ING-6a366d269da950c4231e2ed6,Sulphadoxine,sulphadoxine
+ING-6a40af4bda52490741a3dddf,Calcium Polystyrene Sulfonate,calcium polystyrene sulfonate
+ING-6a624f384a15669a53760e8e,Iron Sucrose (Iron (Iii) Hydroxide Sucrose Complex),iron sucrose iron iii hydroxide sucrose complex
+ING-6a6fb85f02ba41618f597bab,Beclometasone Dipropionate,beclometasone dipropionate
+ING-6a759504b7b99f0a16188317,Bicarbonate Component [HCO3 Hemodialysis Solution],bicarbonate component hco3 hemodialysis solution
+ING-6a78289d653c986564046fa7,Proparacaine Hydrochloride,proparacaine hydrochloride
+ING-6a956ce2c6f5fac9fa9826f4,Beclomethasone Dipropionate (Inhaler),beclomethasone dipropionate inhaler
+ING-6a9a5dc95dc2e36d36c8a18d,Cyclosporine (Ophthalmic),cyclosporine ophthalmic
+ING-6aa8000ecee5eea0aed8b569,Methenamine,methenamine
+ING-6ac1c3c45e85a9a2b490bc21,Chlordiazepoxide,chlordiazepoxide
+ING-6adde70afd7d0aae2836ca1e,Oxybuprocaine Hydrochloride,oxybuprocaine hydrochloride
+ING-6ae334b44a9283a66a0b3964,Diclofenac Potassium,diclofenac potassium
+ING-6b25393300f816c3ca3516fb,Vilanterol,vilanterol
+ING-6b35c14d2fa7cb1ab3953a26,Cefotetan,cefotetan
+ING-6b482d3c091b74cbac4e8037,Compound Asparagus,compound asparagus
+ING-6b7532577609ce6faad8a4ef,Paliperidone,paliperidone
+ING-6b77d626e58fffd6dd58be88,Vitamin B6,vitamin b6
+ING-6b9c904887e8864be63f8dbd,Miltefosine,miltefosine
+ING-6bb5038e780299ee21e852a8,Vitamin E [Alpha Tocopherol Acetate],vitamin e alpha tocopherol acetate
+ING-6be0a9074d6bd2d01252ff25,Cobalt Gluconate,cobalt gluconate
+ING-6bf39e02999bcec2fcd14c22,Amoxicillin,amoxicillin
+ING-6bfae9585ece0ace82d5629f,Urea (10%),urea 10
+ING-6c03649d331ba77a9265e1d7,Typhoid Polysaccharide Vaccine,typhoid polysaccharide vaccine
+ING-6c0ce666dbad3781d8d299e4,Carboxymethylcellulose Sodium,carboxymethylcellulose sodium
+ING-6c58758bc547e0459c076d7a,Gliclazide,gliclazide
+ING-6c752584c8aeeb034ab3710a,Nandrolone Phenylpropionate,nandrolone phenylpropionate
+ING-6c8003cf00f4edc507c0660f,Oxybenzone,oxybenzone
+ING-6c905a0c609dba006b917173,Omeprazole (MUPS tablet),omeprazole mups tablet
+ING-6caf0b76c0359b8cd138ffa9,Valerian Root,valerian root
+ING-6cdd85d8638234e8750e388f,Venlafaxine Hydrochloride,venlafaxine hydrochloride
+ING-6ce5855be0200f3cb28c8e89,Acalabrutinib,acalabrutinib
+ING-6cf496715e3854a570e2d2ed,Emblica officinalis,emblica officinalis
+ING-6d28af2f3ff992f2547d05f5,Calcium Lactate Gluconate,calcium lactate gluconate
+ING-6d5ea8ff7347167d35fec378,Ezetimibe,ezetimibe
+ING-6daa07632f6ce545997a9547,Clobetasol Propionate (Scalp Preparation),clobetasol propionate scalp preparation
+ING-6dd90cf86937ac82cdf5157b,Felbinac,felbinac
+ING-6df654996ad8c49bf6c8405d,Ketotifen Fumarate (Oral),ketotifen fumarate oral
+ING-6e4e05b0c81d94d50e2b559e,Zinc Sulphate,zinc sulphate
+ING-6e59a97fda8e76d42a99e746,Zingiber,zingiber
+ING-6e60fc6b10d3bd0e2afa335c,Pramipexole,pramipexole
+ING-6e77fd13d538060126f15e4c,Testosterone,testosterone
+ING-6e80ab0effce310a7c704b19,Morphine Sulfate,morphine sulfate
+ING-6e87d7b5697d3528da123cc6,Florfenicol,florfenicol
+ING-6ea1080e3ee811931bc39340,Chloroquine,chloroquine
+ING-6ebb9045342d958243698559,Dotinurad,dotinurad
+ING-6edd3daf4a1aeca13dcbde5c,Meningococcal Conjugate Vaccine,meningococcal conjugate vaccine
+ING-6efdd6d26159d06a4d679944,Sulindac,sulindac
+ING-6f15cfaab9c1a90dc6266535,Piper nigrum,piper nigrum
+ING-6f25a8996fa26afbbcf012c8,Bosentan,bosentan
+ING-6f35fdc59588578c78214abb,Secukinumab,secukinumab
+ING-6f5e53670f872b4e166bf4e7,Imidocarb dipropionate,imidocarb dipropionate
+ING-6f5fa97e98ae362b8bc9d0aa,Bazedoxifene,bazedoxifene
+ING-6f66e6c78b24cc5c7949487c,Multimineral,multimineral
+ING-6fbd86ec1e85db16c0b97cc3,Ketoprofen (oral & injection),ketoprofen oral injection
+ING-6fd5e124a729280f3af1cc52,Thiamine,thiamine
+ING-6ff2d0c4ea3469337c24d30f,Vitamin K1,vitamin k1
+ING-6ff843ab46e64f5c7e4bc10d,Insulin Human [Fast-Acting],insulin human fast acting
+ING-6ffe020457fd8844a96c5635,Sulfinpyrazone,sulfinpyrazone
+ING-7023bd9ba8e8179452dc02c7,Sodium Hydroxide,sodium hydroxide
+ING-702d8a96da9b29e177e3a9b6,Midazolam,midazolam
+ING-7056934d93ecd7ba406c87e5,Tiotropium (Dry Powder Inhaler),tiotropium dry powder inhaler
+ING-705a075e1c7df7d925816876,Budesonide (Nasal Spray),budesonide nasal spray
+ING-705a60144b0e36059f332926,Probiotic Combination [2 Billion],probiotic combination 2 billion
+ING-70811b3779f0e067643e953e,Mycophenolate Acid,mycophenolate acid
+ING-7082082e0d24dfb6d40dac30,Clotrimazole (Ear drop),clotrimazole ear drop
+ING-70be10e6d87ae8aced58fe31,Minoxidil,minoxidil
+ING-710d20dc0c6f0833ca9024d2,Demeclocycline Hydrochloride,demeclocycline hydrochloride
+ING-711ab55178076b42207403fc,Imatinib,imatinib
+ING-714c76a15054ea40ffc301d3,Diloxanide Furoate,diloxanide furoate
+ING-71648f40cecc6d736d527a05,Darunavir,darunavir
+ING-717b3caf19440039373064b2,Hydroxyprogesterone Caproate,hydroxyprogesterone caproate
+ING-71cee3da9897f1bf1bb569ef,Sonapata,sonapata
+ING-71d3329a9edd44d723dd8290,Nepafenac,nepafenac
+ING-71d8b65b93cf548579899163,Etonogestrel,etonogestrel
+ING-71f97fd5dcd93c5262735716,Sodium Salicylate,sodium salicylate
+ING-7243d422c055916d458a7518,Risperidone (Injection),risperidone injection
+ING-7249b4d3bcb4a756a66c38c2,Epinastine Hydrochloride,epinastine hydrochloride
+ING-726af9974011f0fae2834087,Medroxyprogesterone Acetate,medroxyprogesterone acetate
+ING-72753c233823122a7af771fa,Fludarabine Phosphate,fludarabine phosphate
+ING-729043bf70ecf4bf6050d526,Calcium Carbonate [Coral source],calcium carbonate coral source
+ING-72aad8aadd2602a13e8195ed,Beclomethasone Dipropionate (Nasal Spray),beclomethasone dipropionate nasal spray
+ING-72b04397029f681ed12d0e7b,Epoetin Beta,epoetin beta
+ING-7338725ff84f4922c182f2df,Carbamazepine,carbamazepine
+ING-7347f47f6fd9a19f91897448,Follicle Stimulating Hormone [Urofollitropin],follicle stimulating hormone urofollitropin
+ING-734efc7928b8f926191c3ff1,Chloramphenicol,chloramphenicol
+ING-73548ce593f21f551a100212,Diminazine Aceturate,diminazine aceturate
+ING-737f17df6ddc771d83ff0b9d,Lapatinib,lapatinib
+ING-738f79b71e1bf59434fa2080,Acyclovir,acyclovir
+ING-73a18b6971222fda117fdcfa,Ipratropium Bromide (Inhaler),ipratropium bromide inhaler
+ING-73bff197cddf9322a77a3c66,Neomycin Sulphate (Topical),neomycin sulphate topical
+ING-73ea8f0c8c07a8345f914973,Vitamin B12,vitamin b12
+ING-740754796b62602c876d7b84,Risedronate Sodium,risedronate sodium
+ING-744341df249e9cb950b64ca8,Interferon Alfa-2a [Recombinant],interferon alfa 2a recombinant
+ING-744ea3f79df7b1bbfdf3626b,Chlorhexidine Digluconate,chlorhexidine digluconate
+ING-746824a6ea122479416cca0e,Carmellose Sodium,carmellose sodium
+ING-746cf9ec58a44a093dae8f96,Vonoprazan,vonoprazan
+ING-74d468a6bd90e294e67f9466,Quinine Dihydrochloride,quinine dihydrochloride
+ING-74de93bcd3055488cb09d6b6,Calcium (Algae Source),calcium algae source
+ING-752f724885a26e0d4e3a593f,Dronedarone,dronedarone
+ING-75ce14b9d32aa17772e57605,Calcium Carbonate [Eggshell Source],calcium carbonate eggshell source
+ING-75e8af20987a7018781bdbed,Oral Rehydration Salt [Rice Based],oral rehydration salt rice based
+ING-7607ed1a91bd96f7ac05b01e,Dexmedetomidine Hydrochloride,dexmedetomidine hydrochloride
+ING-76270e9e24511e48f634e2b0,L-Lysine HCl,l lysine hcl
+ING-763778ff22509dd858c17d13,Diphenhydramine Hydrochloride,diphenhydramine hydrochloride
+ING-763cda1b165880ac892ff182,Omega-3 Acid Ethyl Esters,omega 3 acid ethyl esters
+ING-76515b9d0b6de98407993afb,Procainamide Hydrochloride,procainamide hydrochloride
+ING-76566cc3cebc9f5768ada279,Elemental Iron,elemental iron
+ING-765a9e3f32cbe635fd48766d,Pantoprazole,pantoprazole
+ING-767d8fa4ed015e72da2ed769,Phenylbutazone,phenylbutazone
+ING-76ac041cc910a9f182623998,Glimepiride,glimepiride
+ING-76aca9f99137d85451ada78a,Mastic tree,mastic tree
+ING-76adf8715dbe39bd186eeb4b,Triamcinolone Acetonide (Topical),triamcinolone acetonide topical
+ING-76c40c9ed40898d122cf690c,Moxifloxacin Hydrochloride (Ophthalmic),moxifloxacin hydrochloride ophthalmic
+ING-76d87c7d316ec7c270b3522d,Medroxyprogesterone Acetate (Injection),medroxyprogesterone acetate injection
+ING-76f02003d97b5a5ce9652bac,Hydroxocobalamin,hydroxocobalamin
+ING-77316783ffe5201de1149f0c,Dibasic sodium phosphate,dibasic sodium phosphate
+ING-779a613b3e0a0956fa5f75d1,Menthol,menthol
+ING-77aba7793e3a1a0cd6c984ea,Dexlansoprazole,dexlansoprazole
+ING-77d3c492f1cd4b12d3315901,Copper Peptide,copper peptide
+ING-77e0fbc39540b8066baff715,Hazmina,hazmina
+ING-78046b0c968571972fb84265,Epalrestat,epalrestat
+ING-780ad9e49f9bd369dae1e097,Aniseed,aniseed
+ING-784b2bde7b6592c8fb947c20,Articaine Hydrochloride,articaine hydrochloride
+ING-78566c51dd127c2dbd1f0375,Octyldimethyl,octyldimethyl
+ING-7872d1c5d6b62975ffef1884,Terpineol,terpineol
+ING-787f225db2e30b420678fd53,Efavirenz,efavirenz
+ING-787ff3ff6c5496306571747f,Aprepitant,aprepitant
+ING-78a85b41f0c5af4a0d204dd7,Mycophenolate Mofetil,mycophenolate mofetil
+ING-78c345e1d9e6ab3d43e59fbd,Precipitated Sulphur,precipitated sulphur
+ING-78c50fa41383eee71291d629,Lisinopril,lisinopril
+ING-78dd45dcc9b8de4ec6f80c1d,Bepotastine Besilate,bepotastine besilate
+ING-7938ea248edb8149ea91e7dc,Manganese,manganese
+ING-7947f4b17154cd1276e06f30,Azithromycin Dihydrate (Ophthalmic),azithromycin dihydrate ophthalmic
+ING-79554d4e9e90bae7d7796d4a,Amino Acid Keto Analogues,amino acid keto analogues
+ING-798c6fe77221b47541b05c1a,Omeprazole,omeprazole
+ING-799375999e45491d57f2d9fa,Pheniramine Maleate,pheniramine maleate
+ING-7997293390e70e74cb4d6ba9,Rifaximin,rifaximin
+ING-799ca8a84362e0baf2f05cfb,Primaquine,primaquine
+ING-79f71d3a64a8d8776fc80fca,Elagolix,elagolix
+ING-7a3ff10122e9b25a9268c68a,Betrixaban,betrixaban
+ING-7a495b9437afb27246ffcf15,Dimenhydrinate,dimenhydrinate
+ING-7a56dafbe8b658f4692f3112,Labetalol Hydrochloride (Tablet),labetalol hydrochloride tablet
+ING-7a675a98228fc73a617c08dc,Ornidazole,ornidazole
+ING-7a892a72b68cdaa69fd2e50e,Pyrimethamine,pyrimethamine
+ING-7a90fa44b9ec51b5fc36a8bb,Vericiguat,vericiguat
+ING-7a9b7bca81dba36b180aa103,Afatinib,afatinib
+ING-7abe0c7028ceb3381c364540,Budesonide (Nebuliser Suspension),budesonide nebuliser suspension
+ING-7ae669b86fba6d9a9d8bf892,Furosemide,furosemide
+ING-7b360f5d3081fea219666e6f,Agomelatine,agomelatine
+ING-7b412d76f9fb88ca6fdcc6ec,Tafluprost,tafluprost
+ING-7b50943dab3f7f92f4120ca9,Sana,sana
+ING-7b5a25f3cfa4821a7849e5aa,Encephalitis Vaccine,encephalitis vaccine
+ING-7b9af1e94d63a647504dd1aa,Procaine Penicillin,procaine penicillin
+ING-7bb9531361b9830f9477db92,Formoterol Fumarate,formoterol fumarate
+ING-7bd1fb97c0bd4007884f7a8b,Progesterone (Vaginal Pessary),progesterone vaginal pessary
+ING-7bf36eb1b1610eee58cf4bbd,Intravenous Fat Emulsion,intravenous fat emulsion
+ING-7c2b99b1ae46c9723c4f4228,Sulphanilamide,sulphanilamide
+ING-7c7d5bf1c3ac8d9082b19231,Recombinant Follicle Stimulating Hormone (rFSH),recombinant follicle stimulating hormone rfsh
+ING-7c8489a895941c0cc1c30cc5,Montelukast Sodium,montelukast sodium
+ING-7c952430f48782afa44545e4,Clavulanic Acid,clavulanic acid
+ING-7cacd2fee52594d2c2ebbf99,Enoxaparin Sodium,enoxaparin sodium
+ING-7cc6931606785ac10a117212,Chebulic Myrobalan,chebulic myrobalan
+ING-7ce56ba4964103065cb37e39,Hepatitis B Vaccine [rDNA],hepatitis b vaccine rdna
+ING-7d00b0927480e1de7a17b990,Magnesium Sulfate,magnesium sulfate
+ING-7d0f59c475154cfc2237e266,Lercanidipine Hydrochloride,lercanidipine hydrochloride
+ING-7d3f718cf9981960dd392876,Tobramycin (Nebuliser Solution),tobramycin nebuliser solution
+ING-7d42b52fc9afa53ff7cc336b,Fusidic Acid Anhydrous,fusidic acid anhydrous
+ING-7d42d3d2868412ad39653ebb,Eperisone Hydrochloride,eperisone hydrochloride
+ING-7d7f5d37fc405c1d518b5356,Alverine Citrate,alverine citrate
+ING-7d892df9d57183fa707e7873,Vancomycin Hydrochloride,vancomycin hydrochloride
+ING-7da2c9a08681b304c6f50cb3,Donepezil Hydrochloride,donepezil hydrochloride
+ING-7dadbe23dd5765de84b75fbe,Torasemide,torasemide
+ING-7db2f657236d1fc1ffe471c5,Panax Ginseng,panax ginseng
+ING-7df019b973817265cca23622,Antazoline,antazoline
+ING-7df0ca48f4c6f901162dd582,Nystatin,nystatin
+ING-7e1a08e44b735cd9f8f294e5,Labetalol Hydrochloride,labetalol hydrochloride
+ING-7e2f602493ffdc209bda0321,Trifluridine,trifluridine
+ING-7e3c22ff14914645d66758d5,Meningococcal Polysaccharide Vaccine,meningococcal polysaccharide vaccine
+ING-7e7f2a7aa03cf327c4cf23b4,Marwareedi,marwareedi
+ING-7e90ce9ca169bcacc4fa32bf,Black cardamom,black cardamom
+ING-7ea249239a58b13a0c15ed0e,Oxybutynin Hydrochloride,oxybutynin hydrochloride
+ING-7eba2650b7a776c5fde50578,Omalizumab,omalizumab
+ING-7efe363efc5692a17a359f2b,Estetrol,estetrol
+ING-7f095bdff4f7d97606c9e545,Tolperisone Hydrochloride,tolperisone hydrochloride
+ING-7f3ac4e95bd915923e25526b,Rimexolone,rimexolone
+ING-7f6a4ba8eda72fbce3fd76a0,Fluvastatin,fluvastatin
+ING-7f8dd8f4eddb6b27ac274111,Pranlukast Hydrate,pranlukast hydrate
+ING-7fecf7fdf06a811212b35cc0,Mebeverine Hydrochloride,mebeverine hydrochloride
+ING-7ff3c1038f7fae230a925e2d,Sulfaclozine,sulfaclozine
+ING-7fff0a7f01edf281035a45e1,Desferrioxamine Mesilate,desferrioxamine mesilate
+ING-80026bdd5e572fdccbbf3912,Urea (25%),urea 25
+ING-80175085378697893f961038,Paroxetine Hydrochloride,paroxetine hydrochloride
+ING-806ff044b265b4dee0c90a7d,Sulfadiazine,sulfadiazine
+ING-80958304b67ddd7d906e72cd,Adapalene,adapalene
+ING-809dbe7c223eaa0f9e5edea9,Ropivacaine Hydrochloride,ropivacaine hydrochloride
+ING-80a36a541ae12fb4a920e947,Pilocarpine Hydrochloride (Oral),pilocarpine hydrochloride oral
+ING-80c12110669607a30b1c28fa,Dioxybenzone,dioxybenzone
+ING-80df2249ac08cef7152ce38c,Nitroglycerin (Sublingual Spray),nitroglycerin sublingual spray
+ING-80e9b7e9e8351575dfd901a8,Piracetam,piracetam
+ING-80f097a275e6d6825bc9f955,Fenticonazole Nitrate,fenticonazole nitrate
+ING-80f839e4863d14d710d5a1f8,Kanamycin,kanamycin
+ING-8106ef383a52f7a9fc1fc9db,Acacia,acacia
+ING-8114f85e2a2998f59bdf5036,Cisplatin,cisplatin
+ING-81467620337b6acd721dddd8,Caprylic,caprylic
+ING-8162f62986856d37bc30867c,Choline Salicylate,choline salicylate
+ING-81868c930eb6711ea61d289c,Phenol,phenol
+ING-818de2e8395f0fac82793690,Dibromopropamidine Isethionate,dibromopropamidine isethionate
+ING-81ad16fe819c8d86cb54063a,Adhatoda vasica,adhatoda vasica
+ING-81c982dd00dba9522b19de09,Follitropin Beta,follitropin beta
+ING-821e11df79811b2886467bf7,Sodium Fusidate (Topical),sodium fusidate topical
+ING-822f39a2cb6507321ac9c490,Saffron,saffron
+ING-825609d1d18bbcfe293658a2,Lidocaine Hydrochloride,lidocaine hydrochloride
+ING-826a829ce614295b7b3c7856,Octyldimethyl p-aminobenzoate,octyldimethyl p aminobenzoate
+ING-8276048c157f01be7f1c0f2a,Lactitol Monohydrate,lactitol monohydrate
+ING-82992f4123154a674d0ac6bb,Imipramine Hydrochloride,imipramine hydrochloride
+ING-82bc85898261fa339f658687,Hypromellose,hypromellose
+ING-82bde728da11ed662b7459be,Diethylcarbamazine Citrate,diethylcarbamazine citrate
+ING-82cae0ec7adcaf92e07be1c8,Insulin Human [Long-Acting],insulin human long acting
+ING-82ccdf8be75f9276f814c666,Alcaftadine,alcaftadine
+ING-82db4c982737d0b9b51a0f9e,Ergometrine Maleate,ergometrine maleate
+ING-82efbc95cd8ff65ef46afda4,Mitomycin,mitomycin
+ING-82f7f50109431c2c5ff319cc,Diethylamine Salicylate,diethylamine salicylate
+ING-8303ce3792d8ee4738f38ed1,Calcipotriol,calcipotriol
+ING-8322ec4edd2bfec957c04b07,Collagen II & GAGs,collagen ii gags
+ING-834bd02049536693063e95bd,Ferric Pyrophosphate Citrate (Eq. To Iron (Iii),ferric pyrophosphate citrate eq to iron iii
+ING-8383bce882349bbf6e590f5d,Paroxetine,paroxetine
+ING-8398e180a8f1f838e3e28562,Quetiapine,quetiapine
+ING-83b1b6c8b85749c6dae269d9,Osimertinib,osimertinib
+ING-83c84feb61bad0027702024d,Filgrastim,filgrastim
+ING-83cd7e679e19bb1bb521e42d,Almotriptan,almotriptan
+ING-83dd841d0ce48b4cf04dc3e9,Multivitamin with L-Lysine,multivitamin with l lysine
+ING-8407b836119da88dbf7785e6,Dapoxetine Hydrochloride,dapoxetine hydrochloride
+ING-840d09c3f1a2cd86ba374cc0,Aravindasav,aravindasav
+ING-840db34708ba8c82930a7711,Iron Hydroxide Polymaltose,iron hydroxide polymaltose
+ING-841990868695b1b59c50b4c5,Methylphenidate Hydrochloride,methylphenidate hydrochloride
+ING-8429d99f5c0aa7eb5ba267d3,Lomustine,lomustine
+ING-8446a83051742edd2cea9311,Bevacizumab,bevacizumab
+ING-8477bb1a40ef5b71aeacb3b7,Calcium Lactate,calcium lactate
+ING-8486b14a1bd5413f54eec22b,Cimetidine,cimetidine
+ING-84af4f4272b1558dd58f7df7,Prucalopride Succinate,prucalopride succinate
+ING-84c57f9fb2c0d128bc278789,Clotrimazole (Vaginal suppository),clotrimazole vaginal suppository
+ING-84c65a3c391927340496f884,Baloxavir Marboxil,baloxavir marboxil
+ING-84c7e28f7e05b9b58d4a36d8,Gallamine Triethiodide,gallamine triethiodide
+ING-84c8c255fadfda33edc403b3,Etoricoxib,etoricoxib
+ING-84cb70e98d400f31c35c4915,Anti-Thymocyte Globulin,anti thymocyte globulin
+ING-84e16ff83685d3417c8f1579,Calcium Hydrogen Phosphate,calcium hydrogen phosphate
+ING-84f260760776aa19801a79cd,Vitamin K2,vitamin k2
+ING-84f2c157996b529d356abbab,Chlorthalidone,chlorthalidone
+ING-850e9956dc06d882511f7469,Oxyphencyclimine Hydrochloride,oxyphencyclimine hydrochloride
+ING-852adf61a832e69ad0d1f292,Ketorolac Tromethamine (Ophthalmic),ketorolac tromethamine ophthalmic
+ING-85801f64e8d69a44263855a2,Adalimumab,adalimumab
+ING-85bf04378e5d30149f8159da,Tocilizumab,tocilizumab
+ING-85c27be9698f363a4dd1f437,Lidocaine Hydrochloride (Jelly),lidocaine hydrochloride jelly
+ING-85cbb2f4b60f4a7f58cbfff4,Calcium Propionate,calcium propionate
+ING-85db8bb10d0a979cee806d12,Bismuth Oxide,bismuth oxide
+ING-85ea171ac8573d43daba56cc,Carbamide Peroxide,carbamide peroxide
+ING-85f4eb184409aff5c16899e5,Dithranol,dithranol
+ING-860fc342ed383283fbaaef17,L-Isolencine,l isolencine
+ING-862f4a1488a61d6362638e99,Nicotine,nicotine
+ING-86821efcce3aab1d7003ad16,Meropenem Trihydrate,meropenem trihydrate
+ING-8699d9cc042aac7a1555a7cf,Silver Sulfadiazine,silver sulfadiazine
+ING-86d22377381df52b6d9c4f7e,Propafenone Hydrochloride,propafenone hydrochloride
+ING-86da901376b2540d6d17bc45,Dexmedetomidine,dexmedetomidine
+ING-86e32ba420277c2d22cf0dfc,Teriparatide,teriparatide
+ING-873504f0103a88d762191a35,Beeswax,beeswax
+ING-87595db4d28ba64dff0a500d,Fentanyl,fentanyl
+ING-87a2f8d966201dd33a2ed9b9,Methylergonovine Maleate,methylergonovine maleate
+ING-87e1e7f418a4a5748476584d,Propranolol Hydrochloride,propranolol hydrochloride
+ING-87ebc9d39bf4313219a8cf84,Venetoclax,venetoclax
+ING-87ffe2aa7df6fce371f62910,Trimipramine,trimipramine
+ING-8827c0907c6578d8ae763ba9,Miconazole Nitrate,miconazole nitrate
+ING-882e3f42038053afa1877689,Amonium Bicarbonate,amonium bicarbonate
+ING-8831c408fd6aa77f870670fa,Glucosamine Sulfate,glucosamine sulfate
+ING-8846c5abb9d77793ebce5f89,"Tila Jadeed [Madar, Mace arillus, Nutmeg nut]",tila jadeed madar mace arillus nutmeg nut
+ING-88471ff561c98d11b93ba0b6,Dapoxetine,dapoxetine
+ING-8847a4a63a443d7ca206f7da,Tanoxicam,tanoxicam
+ING-885710d578ed8b80fad7bdaf,Balanced Salt Solution,balanced salt solution
+ING-885ce05474dc10112d367ac6,Procapil,procapil
+ING-885e09576102eb49a91be657,Tolvaptan,tolvaptan
+ING-887de8e1932d465ce50700fc,Vilanterol Trifenatate,vilanterol trifenatate
+ING-88835c4887188ec1c5b95a69,Vinblastine Sulfate,vinblastine sulfate
+ING-889edd9046f6a4644e549b09,Empty Hard Gelatin Capsule,empty hard gelatin capsule
+ING-88a2f109b13da1551db0b28c,Glucose,glucose
+ING-88aecec4ffd31565a84d5e14,4-Methylbenzylidene Camphor,4 methylbenzylidene camphor
+ING-88b1b528944b737055a63e4a,Fluconazole,fluconazole
+ING-88ce6485c2e3a9777a13a927,Pertussis,pertussis
+ING-88d43e016d7f7d74d679669e,Ribavirin,ribavirin
+ING-88e9aa0cdf6062dc8df3ea5b,Imatinib Mesylate,imatinib mesylate
+ING-894ec8b954f77efee5243de6,Amlexanox,amlexanox
+ING-897d7ca2c61108ed566d9893,Tacrolimus,tacrolimus
+ING-898eed975ceb9de9858b2ffa,Valacyclovir,valacyclovir
+ING-89e5979ef72b0ffa589dd982,Mavacamten,mavacamten
+ING-89f1196e3333fc58c4e6410b,Ferric Maltol,ferric maltol
+ING-8a17902cc319c6225debaf56,Tetracaine Hydrochloride,tetracaine hydrochloride
+ING-8a26e55215eaa206cf32bdfd,L-Tryptophane,l tryptophane
+ING-8a2d33171c8e8769d527f6e4,Monobasic Sodium Phosphate,monobasic sodium phosphate
+ING-8a3fcbbd2ebfb6c8f2bdbeb5,Gatifloxacin,gatifloxacin
+ING-8a46e6011276a6fd52b62276,Riluzole,riluzole
+ING-8a57567f5af99a9d49d6c228,Mometasone Furoate (Nasal Spray),mometasone furoate nasal spray
+ING-8a60896fe1bac2bb60736e08,Licorice,licorice
+ING-8a78c4cdc2f24b36dc2f9968,Phenazone,phenazone
+ING-8a8396750cb3a31a270d7bee,Benserazide,benserazide
+ING-8a9648941c825a4c3b36b687,Trifluoperazine,trifluoperazine
+ING-8a9734264873dd76b595f045,Bromfenac Sodium,bromfenac sodium
+ING-8acc119fa8c7825d6778fb5f,Probiotic Combination [4 Billion],probiotic combination 4 billion
+ING-8b13edfc34cdb4d7b5250283,Bupivacaine Hydrochloride,bupivacaine hydrochloride
+ING-8b3883dd0031c5007d7a15a7,Coal Tar,coal tar
+ING-8b3e5cba9d45e8f48cfffac4,Terazosin,terazosin
+ING-8b7597665913cb1a72bda929,Oxazepam,oxazepam
+ING-8b7a0ad135010f7313433d1a,Paricalcitol,paricalcitol
+ING-8ba34b01f7275e4e5511a989,Gatifloxacin (Ophthalmic),gatifloxacin ophthalmic
+ING-8ba8cd050f99f016be6dc24c,Pantoprazole Sodium Sesquihydrate,pantoprazole sodium sesquihydrate
+ING-8c0fa1aee9a524565251b8b1,Maprotiline Hydrochloride,maprotiline hydrochloride
+ING-8c19bc5d0f3110facb83f910,Dabigatran Etexilate,dabigatran etexilate
+ING-8c1ec4fa9e80839bcd63d633,Sitagliptin,sitagliptin
+ING-8c60befe9ec616077a60945d,Salep,salep
+ING-8c82e0796e423c9ed275d2ad,Varicella Virus Vaccine,varicella virus vaccine
+ING-8c8ab328679c8adb985cef69,Natril Carbonate,natril carbonate
+ING-8c9e3c8c1900abff58951574,Avobenzone,avobenzone
+ING-8ca286312a58ebc90f05af2b,Butyl Methoxydibenzoylmethane,butyl methoxydibenzoylmethane
+ING-8ca7f8eb8de1239fbdbad729,Terlipressin Acetate,terlipressin acetate
+ING-8cabde976fbb8b00ed3061b9,Erythropoietin Alfa,erythropoietin alfa
+ING-8cd66c45e40ad55c34f11833,Barium Sulfate,barium sulfate
+ING-8cfafcd363f31197a761d785,Insulin Aspart,insulin aspart
+ING-8d06e05b0a54aca99a825c14,Belgiri [Bael fruit,belgiri bael fruit
+ING-8d1e586d8176be3ee8e7ae5d,Homatropine Hydrobromide,homatropine hydrobromide
+ING-8d2d3c181644e6deb5391f96,Magnesium Hypophosphite,magnesium hypophosphite
+ING-8d3287c6fbb605cba17b1f17,Aloe,aloe
+ING-8d3ea7064bca78675fa5613f,Nitrous oxide,nitrous oxide
+ING-8d6fccb7c00bf41ad94a0275,Human Immunoglobulin-G [IgG],human immunoglobulin g igg
+ING-8d72dfb049ed97515315550c,Ipratropium (Inhaler),ipratropium inhaler
+ING-8d859f23fb707aa890db88ae,Drospirenone (HRT),drospirenone hrt
+ING-8d8f96081d44f2d4c7ae7371,Tirofiban,tirofiban
+ING-8db43a96efd3e799119176fa,Emollient [Cepalin,emollient cepalin
+ING-8ddaca5f52533282db52927c,Saribadyarista,saribadyarista
+ING-8ddbc3c706fae41ef574ca47,Metoclopramide,metoclopramide
+ING-8ddce930c8d838c94240a36c,Jeerakaddarishta Carminative,jeerakaddarishta carminative
+ING-8e0344d16307daa0b2790bad,Arjunarista,arjunarista
+ING-8e072a383ee44ae8204ea5d7,Glucosamine Hydrochloride,glucosamine hydrochloride
+ING-8e09fd2d37be6cf4f0a5785f,Melitracen,melitracen
+ING-8e363f2d4642a723f85f3983,Oral Rehydration Salt [Flavored],oral rehydration salt flavored
+ING-8e6905ab6078239a5b582f9d,Clorsulon,clorsulon
+ING-8e762ada90706cc9c18c5d9f,Elobixibat,elobixibat
+ING-8e8279a55a25bb2c9c7f8c84,Gestodene,gestodene
+ING-8eb60395796c8a7a67d5e09e,Fosfomycin,fosfomycin
+ING-8f00b06099ea5cc516610946,Insulin Aspart Premixed,insulin aspart premixed
+ING-8f10c4b2c30c5682389fb30c,Azelaic Acid,azelaic acid
+ING-8f11bee492386bc3ed9d72cc,Disodium Edetate,disodium edetate
+ING-8f27c95bab6e614e423cb900,Fluticasone Propionate (Nebuliser Suspension),fluticasone propionate nebuliser suspension
+ING-8f339ad5df97fd3976f4dee1,Amlodipine Besilate,amlodipine besilate
+ING-8f484c9e0fa70bb7c269a923,Liquid Paraffin,liquid paraffin
+ING-8f52105a3f974273297628f5,Levonorgestrel,levonorgestrel
+ING-8f6d5b20e9f4eb766cf442a3,Fosfomycin Trometamol,fosfomycin trometamol
+ING-8fa9aa3721eed51a78871524,Testosterone Isocaproate,testosterone isocaproate
+ING-8faaccd367ff3ced1108c58f,Zuclopenthixol Decanoate,zuclopenthixol decanoate
+ING-8feaf3a21106a326fb43faeb,Pazopanib Hydrochloride,pazopanib hydrochloride
+ING-8ff79fbec6629da833d4aa69,6-Aminopenicillanic Acid,6 aminopenicillanic acid
+ING-901e5f52dd49d375ef1cb4cf,Calcium (Coral Calcium),calcium coral calcium
+ING-903c39e1605ddfa57e3609e0,St. John’s Wort,st john s wort
+ING-9041bd65105f2c7670ad5032,Magnesium,magnesium
+ING-9051555b00c7d450e0312dde,Cobalt Sulfate,cobalt sulfate
+ING-9095bd0841212631ef8d8aae,Fluorouracil,fluorouracil
+ING-90e62b92a956add6e1c3871b,Almond,almond
+ING-90eca72a15beea2bbd269a20,Erythromycin (Oral),erythromycin oral
+ING-90f8f361fbe05cf14fd1732a,Docusate Sodium,docusate sodium
+ING-911d54afc16f69a93e0cd4fd,Pibrentasvir,pibrentasvir
+ING-91233fdf97ff9e995e954fff,Levamlodipine,levamlodipine
+ING-914f18bddbe0e965d1bcf4d5,Netarsudil Dimesylate,netarsudil dimesylate
+ING-91585dbcc66ca93b5fe391b3,Insulin Glargine [rDNA],insulin glargine rdna
+ING-917d008ce7c26cb461a9e574,Manganese Sulphate,manganese sulphate
+ING-9183c3a577a4bb524f9a009e,Rifampicin,rifampicin
+ING-91968cf5377fbbda196510d9,Risperidone (Oral),risperidone oral
+ING-919969a42f403ccd77a58ce8,Closantel,closantel
+ING-919f681456d6cb98c3ede0c4,Canagliflozin,canagliflozin
+ING-91bf444ddce09839f3689b53,Mace arillus,mace arillus
+ING-91d303da9f0a69170adc2757,Primidone,primidone
+ING-91f4885abb06039fcd2004e9,Fucidic Acid,fucidic acid
+ING-920a380cc724f3c1d50a7885,Chondroitin Sulfate,chondroitin sulfate
+ING-920a527c96bd48fb37c8d7b2,Esmolol Hydrochloride,esmolol hydrochloride
+ING-920edde59b13e5a5f94316b1,Atorvastatin,atorvastatin
+ING-92269ef7156ecbdc17100033,Betel nut,betel nut
+ING-922f38955d3b4844b62e9546,Tylosin,tylosin
+ING-9251f129e36d22db1b07c86a,Caffeine,caffeine
+ING-9258fb1d8cf304efdc9dc47e,Hingastak Churna,hingastak churna
+ING-92676643b9d670ffed28122d,Iodine,iodine
+ING-928f1dfc0a7116751eac71f7,Ciclesonide (Nasal Spray),ciclesonide nasal spray
+ING-9294f67ce17178a0fb8d3a1d,Remifentanil,remifentanil
+ING-92d3e7d1275fbea2cc12e0cb,Hartmann's Solution,hartmann s solution
+ING-92e0c40e4128777b768e0a94,Abhayarista,abhayarista
+ING-92f9b52ca9f51b2aa75a0650,Relugolix,relugolix
+ING-92fbdbc5c1f544fa49327bac,Liposome,liposome
+ING-9303ab7123c015e307020b98,Ambar Momiyaee,ambar momiyaee
+ING-9345ec718f731511f7bf7dcb,Nortriptyline,nortriptyline
+ING-9365ef633798ac7cc71f1170,Polysaccharide Diphtheria Toxoid Conjugate Vaccine,polysaccharide diphtheria toxoid conjugate vaccine
+ING-936b7cad32d2ef031b3f475b,Red Clover [Trifolium Pratense],red clover trifolium pratense
+ING-936f56755c8d527067de0d74,Iron Sucrose Injection [Elemental Iron],iron sucrose injection elemental iron
+ING-937534167c6d94c8faa9a6fb,Delafloxacin,delafloxacin
+ING-9382039ddaf75f3fde3cd6d0,L-Lysine Hydrochloride,l lysine hydrochloride
+ING-93a10aa42b9dee73862efb1f,Trelagliptin Succinate,trelagliptin succinate
+ING-93c5db037b8589ae6a156536,Pyridoxine Hydrochloride,pyridoxine hydrochloride
+ING-93cbed6d8b5b1886f2d71202,Adsorbed Tetanus Vaccine,adsorbed tetanus vaccine
+ING-941a662d76df02adcd68c6a3,Bisoprolol Fumarate,bisoprolol fumarate
+ING-942a31d841401e17be19911b,Disopyramide Phosphate,disopyramide phosphate
+ING-944a23062d6c89ed749bb6ba,Gentamicin Sulfate (Injection),gentamicin sulfate injection
+ING-94611167d8eb5ca2533c3e99,Benazepril Hydrochloride,benazepril hydrochloride
+ING-9471beb910ddacbf46888a87,Pefloxacin,pefloxacin
+ING-947f7d43b9fa800cc5e43ea0,Lynestrenol (0.0375 mg),lynestrenol 0 0375 mg
+ING-949cb281558e7272b29b74e0,Lenvatinib,lenvatinib
+ING-94af6294e5462e6949869166,Irrigating Solution,irrigating solution
+ING-94bde8524e2e03a9e86d7062,Obeticholic Acid,obeticholic acid
+ING-94dfa546aa1caab432d54747,Oxytetracycline,oxytetracycline
+ING-94fcbb3cd51bb2f261cad635,Sennosides,sennosides
+ING-950fb61211d2513f8c220a5c,Melengestrol Acetate,melengestrol acetate
+ING-95170bd62be9c0324d79f51a,Anhydrous Glucose,anhydrous glucose
+ING-9572601dd0bc3e88c35e6761,Gentamicin,gentamicin
+ING-957a9afd92adfbcb91f194b5,Ramipril,ramipril
+ING-95c9d5c540ece2fddb6d4586,Polyethylene Glycol,polyethylene glycol
+ING-95e10d4e638cf2eab4cf8f46,Flupentixol,flupentixol
+ING-95f435032a24533d865e49bb,Hydrogen Peroxide Solution,hydrogen peroxide solution
+ING-960112e14bf62a30a655aa44,Levobunolol,levobunolol
+ING-96044eb01c97fa87f2317289,Lomefloxacin (Oral),lomefloxacin oral
+ING-960753084683b29b1f3d1dbe,Phenobarbital,phenobarbital
+ING-960ed72aadc225d4e5729c95,Chloroquine Phosphate,chloroquine phosphate
+ING-962ec5af43aba8bc10ec018b,Inositol Nicotinate,inositol nicotinate
+ING-965664edd3bd621f5b662cdd,Diaverdin,diaverdin
+ING-9687efee9bf90130d3338d80,Ispaghula [Psyllium] Husk,ispaghula psyllium husk
+ING-96a78c68f494bfb3d34e0690,Tilmicosin,tilmicosin
+ING-96b7ce46b770f9082096407b,Favipiravir,favipiravir
+ING-96b81356ad449355494a0436,Ceritinib,ceritinib
+ING-96d10013026ef7ee9f9807a8,Diltiazem Hydrochloride (FC tablet),diltiazem hydrochloride fc tablet
+ING-96f044fdd840a5b2d4c74105,Flunixin,flunixin
+ING-9712d583cf8179255286760b,Clarithromycin,clarithromycin
+ING-9713e06a3ca9cab0849ae970,Hydrocortisone Butyrate,hydrocortisone butyrate
+ING-97208d57847b8eaa2064d3c3,Eprinomectin,eprinomectin
+ING-975869bfcebc002bd76d0b72,Bacteriostatic Water,bacteriostatic water
+ING-975d864b953e8b60645a25c0,Ulipristal Acetate [For uterine fibroids],ulipristal acetate for uterine fibroids
+ING-978601cf91c9ae421f1e3b26,Sodium Acetate,sodium acetate
+ING-978ba0bbf2b0ee047bf4447e,Ivosidenib,ivosidenib
+ING-978f5584d0bc1d1d7903fa6b,Arformoterol,arformoterol
+ING-979673bbdd2e0844f831cd58,Baclofen,baclofen
+ING-97b7bdc2b8a1c7e741511365,Anhydrous Benzoyl Peroxide,anhydrous benzoyl peroxide
+ING-97c0eeec380b35befdc18934,Cefuroxime,cefuroxime
+ING-97f6f4fe42699af4d3b40f31,Bupivacaine,bupivacaine
+ING-9823e2c3818a7a5510048b24,Penitab,penitab
+ING-982df66376995ffbf34bff89,Inferferon Alfa-2a,inferferon alfa 2a
+ING-9846ab7f20e3fbca746b7353,Indacaterol,indacaterol
+ING-987fa83c1d94361c9b8f1faa,Glutaraldehyde,glutaraldehyde
+ING-98c7f712ffc4b3d1a03877e2,Progesterone (Vaginal Gel),progesterone vaginal gel
+ING-98e52141a95b940724c8e0fd,Tylosin Tartrate,tylosin tartrate
+ING-992378f12c2225d5c0d3488b,Guaiphenasine,guaiphenasine
+ING-9949710462e3c4a4fcfee646,Habb-e-Nishat,habb e nishat
+ING-994c6a964e942396b6f8b6f7,Sevelamer (As Carbonate),sevelamer as carbonate
+ING-9969dad68de3774517b5a86c,Voglibose,voglibose
+ING-996c39ce6557a64e5aa5e0cc,Anhydrous Lanolin,anhydrous lanolin
+ING-99b797b65414a228aa430fe9,Topiramate,topiramate
+ING-99ff8a449961ba7a2f60999c,Dacomitinib,dacomitinib
+ING-9a0ce88f7a1fc9bc9cfb187a,Diroximel Fumarate,diroximel fumarate
+ING-9a0fe3ee13202f74b242a3c4,"Vitamin B1, B2 & B6",vitamin b1 b2 b6
+ING-9a241483dc00c932d5adec74,Dextrose & Hartmann's Solution,dextrose hartmann s solution
+ING-9a423e2116a7bea467aacfd3,Naphazoline Nitrate,naphazoline nitrate
+ING-9a4a39dc0567558c8dac74aa,Sodium Chloride (Tablet),sodium chloride tablet
+ING-9a5d35f2ef9b38d531b6b947,Calcium Acetate,calcium acetate
+ING-9a9ad5ce5d5b072b8d4e70df,Gatifloxacin (Oral),gatifloxacin oral
+ING-9aad6c1052177a32d2ff2e1c,Tinnevelly Senna Pods,tinnevelly senna pods
+ING-9accae4d43a45cb3a3bab72d,Phytomenadione,phytomenadione
+ING-9ae01b01fe6085564a8b0a68,Gemfibrozil,gemfibrozil
+ING-9aec6927fed7a9734caabfd2,Regorafenib,regorafenib
+ING-9afc3570c6ed9f6e21c6a8dd,Bendamustine,bendamustine
+ING-9b4055f14bf8e6880f357703,Sumatriptan,sumatriptan
+ING-9b7b3787ad77e2385a64208c,Strontium Renalate,strontium renalate
+ING-9b84997e953d333da9f2806d,Glycopyrronium Bromide (Oral solution),glycopyrronium bromide oral solution
+ING-9b96ad6d97cd580c4dda072b,Losartan Potassium,losartan potassium
+ING-9ba01bbd5a9b8a17a81c31b2,Busulfan,busulfan
+ING-9ba94914180037ba4e7baf60,Amantadine Hydrochloride,amantadine hydrochloride
+ING-9badf7e2ddf5e8638e5ee1c9,Erdosteine,erdosteine
+ING-9baea3bb5fbc0f69f8fc375a,Upadacitinib,upadacitinib
+ING-9bb43e38cf4d96e7f1021f5d,Tretinoin (Topical),tretinoin topical
+ING-9bbf20ed4436d6c2eda18541,D-Pantothenol,d pantothenol
+ING-9bbf460d7e5b0893997be9e3,L-Threonine,l threonine
+ING-9bc83024f45cea020be19b95,Benzathine Penicillin G,benzathine penicillin g
+ING-9bd3c18235bcf29157922f38,Titanium Dioxide,titanium dioxide
+ING-9c40a37bb57821a057027819,Carvedilol Phosphate,carvedilol phosphate
+ING-9c488e6210c823fdb5992ba4,Ambroxol,ambroxol
+ING-9c4ba9e458cef921f6e0cc7a,Activated Charcoal,activated charcoal
+ING-9c6b65aa5a204cc6504e14c3,Aluminium Hydroxide,aluminium hydroxide
+ING-9c7780a1af83d60e6c9e7489,Voriconazole,voriconazole
+ING-9c8982d726b00b375471639a,Atorvastatin Calcium,atorvastatin calcium
+ING-9c898f9f0bc5315b1adbb91e,"Jadwar [Denudatum, Saffron, Henbane]",jadwar denudatum saffron henbane
+ING-9cc9cd5d2c18b8224fb0f0f8,Hepatitis A Vaccine,hepatitis a vaccine
+ING-9cd38b827ca8f5fdd675e1af,Galangal,galangal
+ING-9d01e99ab5daaff79189dabc,Mebhydrolin Napadisylate,mebhydrolin napadisylate
+ING-9d0889e9a52a23f99756d2b9,Potassium Guaiacol Sulphonate,potassium guaiacol sulphonate
+ING-9d345ebed92828d3cd37d93b,Zinc Sulfate Monohydrate,zinc sulfate monohydrate
+ING-9d364df980ab2539de3356cf,Purified Water,purified water
+ING-9d45191e74fc845006986d04,Pechish,pechish
+ING-9d49ac52a266557552d597df,Cefoxitin,cefoxitin
+ING-9d5829358dff2892f67b394a,Clopidogrel,clopidogrel
+ING-9d6ecf41d95f9240fb118c73,Etodolac,etodolac
+ING-9dc28a1badbe69ba10f1af90,Ethinyl Estradiol,ethinyl estradiol
+ING-9df4c80f82380b0df733fe12,Tropicamide,tropicamide
+ING-9e0cc3ac15e85ac0c39683df,Ketamine,ketamine
+ING-9e33f2bc4b0be623113fdfe1,Peppermint Oil,peppermint oil
+ING-9e3b4a38afc4a933785dcfd1,Larotrectinib,larotrectinib
+ING-9e5cafc627288a5968dc63f3,Aztreonam,aztreonam
+ING-9e86b8dfb2c7723625633aa8,Chlorhexidine Gluconate [4%],chlorhexidine gluconate 4
+ING-9ebf23573b9c3f3c0315aac3,Insulin Glulisine,insulin glulisine
+ING-9ed63154d1e2d3289d59546d,Ferrous Sulfate,ferrous sulfate
+ING-9ef02b3ac5526a7cee7019b9,Dihydrostreptomycin,dihydrostreptomycin
+ING-9f18ea8a7c164bfebfd22685,Pregabalin,pregabalin
+ING-9f2a441c633a204f158f1882,Testosterone Phenyl propionate,testosterone phenyl propionate
+ING-9f4f5f3078da4fb8ec0a9d75,Ethopabate,ethopabate
+ING-9f51490fe737364d822a9266,Alogliptin Benzoate,alogliptin benzoate
+ING-9f9174b926714805176288bc,Ciclopirox Olamine,ciclopirox olamine
+ING-9fc108f2c04e9c2a6b113e5f,Bromfenac,bromfenac
+ING-9fd7deb8896dcdaa958c7633,Diflorasone Diacetate,diflorasone diacetate
+ING-9feba2c4dfbba674b368444c,Azelastin Hydrochloride,azelastin hydrochloride
+ING-a02f1e209b6ba5710f01dfcc,Olaparib,olaparib
+ING-a048756a37bb5902e18c8e8c,Zopiclone,zopiclone
+ING-a05117f52904c0efbf872a6c,Dequalinium Chloride,dequalinium chloride
+ING-a0b0ac0b4f904a14628bca77,Erdafitinib,erdafitinib
+ING-a0bf654f9db21a4702244ab5,Suxamethonium Chloride,suxamethonium chloride
+ING-a0ceb6f64cf43362d733ddd0,Ketoconazole,ketoconazole
+ING-a0f86856a70a38066cd2a85c,Levamisole,levamisole
+ING-a13059f0f4a12fe09d344a06,Cyclopentolate Hydrochloride,cyclopentolate hydrochloride
+ING-a13494970f6c9c01fce15e22,Desvenlafaxine,desvenlafaxine
+ING-a13ce4c1623ad89603eb1efc,L-Phenylalamine,l phenylalamine
+ING-a140f905bf8f9fc7f779cdfe,Cetrorelix Acetate,cetrorelix acetate
+ING-a148ee4156ea096cb21c4fb9,Hydroxypropyl Methyl Cellulose,hydroxypropyl methyl cellulose
+ING-a154a3f2575267aad09f50f6,Carbidopa,carbidopa
+ING-a154eb68c0823b50c42eec38,Lifitegrast,lifitegrast
+ING-a16ca1a7299f4b693d82eec0,Primrose Oil,primrose oil
+ING-a17d9fc5ae33aec58a4a0408,Mesna Disulfide,mesna disulfide
+ING-a19c7610bb897b7a580ac3aa,Cholecalciferol (As Vitamin D3 1.0 M Iu/G),cholecalciferol as vitamin d3 1 0 m iu g
+ING-a1b49b2cf58464a04eb70d63,Sulphadiazine,sulphadiazine
+ING-a1cc759236fcad739b81ad2c,Lactulose,lactulose
+ING-a21093605cdabfc9aec61f77,Dexibuprofen (S Ibuprofen),dexibuprofen s ibuprofen
+ING-a211f5f6690c09079817271c,Gefitinib,gefitinib
+ING-a216e6979a7c7dacbb673ec9,Ranolazine,ranolazine
+ING-a21f9dccbffd4c02fadd0955,Diphenhydramine,diphenhydramine
+ING-a24e19c8d1f17911ed860fb1,Micronised Diosmin,micronised diosmin
+ING-a2561a91a2d21c0a597b0e98,Pitavastatin Calcium,pitavastatin calcium
+ING-a29d7f9d0c84816d61222aac,Fluticasone Propionate (Nasal Spray),fluticasone propionate nasal spray
+ING-a2bc8467d00a9693ea5b30a4,Somatostatin,somatostatin
+ING-a2bdc78162b620e9e831d194,Cobalt,cobalt
+ING-a2cdaf955008b8f719b3a5fa,Pramoxine Hydrochloride,pramoxine hydrochloride
+ING-a2d76e8c5bbf55073829eac1,Dextran,dextran
+ING-a2e715698c18e25071a6ae9e,Heparin Sodium,heparin sodium
+ING-a2f59df7cdbcf8d512b66719,Docetaxel Trihydrate,docetaxel trihydrate
+ING-a320e4541e23ee1f3a6f2429,Ethyl Butylacetylaminopropionate,ethyl butylacetylaminopropionate
+ING-a37af76b459fdb6862c46bf4,Rifamycin,rifamycin
+ING-a3a5a34d4db3d6fde2b3255c,Carvedilol,carvedilol
+ING-a3ace5344e00cf39d2d01536,Glycopyrronium Bromide (Respirator Solution),glycopyrronium bromide respirator solution
+ING-a3ec9f9c5217a876c61e36d0,Tadalafil,tadalafil
+ING-a40bf5125433dead454f3e71,Donepezil,donepezil
+ING-a417116e32d3d29f76f5ed1d,Mometasone Furoate (Inhalation Capsule),mometasone furoate inhalation capsule
+ING-a43cf4617a70911230fbb7ab,Deferasirox,deferasirox
+ING-a44297f85f484d012a1e1406,Montelukast,montelukast
+ING-a47a32db840a1436c3cea17d,Sodium Chloride (Nasal preparation),sodium chloride nasal preparation
+ING-a48b1731c4d384bfe00c7ff9,Oxyphenonium Bromide,oxyphenonium bromide
+ING-a498b279b5e98dd9842cbbf6,Silodosin,silodosin
+ING-a4ca2e7da30cdba57bbb6486,Diosmin,diosmin
+ING-a4cca433880a52cfa4d239dd,Roxatidine,roxatidine
+ING-a4ecf75225c887a68b1cc668,Trimetazidine Hydrochloride,trimetazidine hydrochloride
+ING-a50f2f222cdb14157196b8c0,Norfloxacine,norfloxacine
+ING-a51ea260b2ef8001ad7d4ad9,Ospemifene,ospemifene
+ING-a522bcfe96f306fa7d916418,Daprodustat,daprodustat
+ING-a535bb0c2849fe908d012375,Octreotide Acetate,octreotide acetate
+ING-a5398a037524a2d1257ebcb8,Erythropoietin,erythropoietin
+ING-a53e81b4d85236083e2b960d,Monjistha [Rubia cordifolia],monjistha rubia cordifolia
+ING-a56710c028b8fd7101f74700,Clopidogrel Bisulphate,clopidogrel bisulphate
+ING-a56e7b3de8a4b5b2953c7326,Interferon Alfa-2a,interferon alfa 2a
+ING-a580dde74d796bc5c8b1adb3,Filgotinib,filgotinib
+ING-a582495b597ecfc7bfb9ff99,Diclofenac,diclofenac
+ING-a5a625edd973c763736fdec4,Sulfacetamide sodium,sulfacetamide sodium
+ING-a5bd0c5b39e4def96669017c,Pancreatin,pancreatin
+ING-a5e2a0418ec6c03282da0d65,Vinorelbine,vinorelbine
+ING-a5e408f61072fdf7fcba3bb8,Glucose 19%,glucose 19
+ING-a5f2c357fe64269d68ccb310,"Zinc oxide, Octinoxate, Enzacamene and Avobenzone",zinc oxide octinoxate enzacamene and avobenzone
+ING-a60e583822e991edf22d558f,Perindopril Arginine,perindopril arginine
+ING-a64cf55fb4c002d6876ca3c9,Allopurinol,allopurinol
+ING-a666291b1243e67317119462,Brahmi Rasayan,brahmi rasayan
+ING-a670530567194409c154c89f,Clozapine,clozapine
+ING-a68da580db3e0bb0015b66fd,Hydrous Benzoyl Peroxide,hydrous benzoyl peroxide
+ING-a6996d2bd63e4de4e1489e92,Lincomycin Base,lincomycin base
+ING-a69a7146900814f2cc9f6f8e,Ferrous Sulphate,ferrous sulphate
+ING-a6baa73c05934095f6f5bd87,Clove oil,clove oil
+ING-a6cb06a77ec04139a75d91af,Mefenamic acid,mefenamic acid
+ING-a6e022ce13527c7e616418ce,Granisetron,granisetron
+ING-a6e71026d584f3ab9b762955,Docusate Sodium (Ear drop),docusate sodium ear drop
+ING-a6f3b57266c4a5a65cc56c52,Ashoka bark,ashoka bark
+ING-a6f8fad67bcef7a47cebfc14,Pioglitazone,pioglitazone
+ING-a731cb2d0548aa0a342363a9,Ferric Derisomaltose,ferric derisomaltose
+ING-a74320e10d5f02ac37fa924d,Procain Penicillin G,procain penicillin g
+ING-a770a4a76fe67e46e3cc9394,Metriphonate,metriphonate
+ING-a775492f4004c7df9a8cdf9a,Saroglitazar,saroglitazar
+ING-a79616120b7d856f06aff9c1,Amitriptyline,amitriptyline
+ING-a7e73a9467ae1f9a04272112,Streptomycin,streptomycin
+ING-a7e85e1c9773ddc4348bed3c,Cetalkonium Chloride,cetalkonium chloride
+ING-a7ecc92f6fb76ca573eb888e,Azelastine Hydrochloride (Nasal Spray),azelastine hydrochloride nasal spray
+ING-a7f187a6f4f060d524a66aec,Ibuprofen,ibuprofen
+ING-a830b39399e19230560aca50,Zeaxanthin,zeaxanthin
+ING-a837cd9d22f65fcca33384d9,Oil Clove,oil clove
+ING-a83f78ccd9f4d67bddc3a4c7,Cloxacillin Sodium,cloxacillin sodium
+ING-a843a2390884d8b85a099c68,Fenticonazole Nitrate [Vaginal Tablet],fenticonazole nitrate vaginal tablet
+ING-a858339feaf6bb9ddf52c06f,Pidotimod,pidotimod
+ING-a85bcc4c2e8f11c7ff82c5c0,Stevia Rebaudiana,stevia rebaudiana
+ING-a87b025fae9424a10e1c07eb,Sodium Picosulfate,sodium picosulfate
+ING-a87c0dc3e1c799480d6c2ed2,Dextromethorphan Hydrobromide,dextromethorphan hydrobromide
+ING-a87ea7fd73534d1c1383ac6d,Dydrogesterone,dydrogesterone
+ING-a8a88b73d470d5d41e80d6bf,Tetanus Antitoxin [Equine],tetanus antitoxin equine
+ING-a8c3aac2bf14af3839b18f23,Mometasone Furoate (Topical),mometasone furoate topical
+ING-a8d16987966cd67960c1cc37,Chlorhexidine Gluconate [7.1%],chlorhexidine gluconate 7 1
+ING-a8dedb05e97e926404efb544,Clascoterone,clascoterone
+ING-a930172429840b3877e45275,Tildipirosin,tildipirosin
+ING-a95c1ebe39757bb7ad65b6de,Calendula Officinalis [Marigold],calendula officinalis marigold
+ING-a98cbad6a37763a1c7dd444f,Flurbiprofen,flurbiprofen
+ING-a98ee9b705711e4187226a9c,Empagliflozin,empagliflozin
+ING-a9a86807c98a5e52b0520ee1,Tretinoin,tretinoin
+ING-a9b3754137c477b341d59909,Pipecuronium Bromide,pipecuronium bromide
+ING-a9b73a1e37ce80851b188989,Sertraline,sertraline
+ING-a9b889561f21c0f31b3074b4,Potassium Chloride,potassium chloride
+ING-a9e54c8fe842f2d30abd321f,Lamivudine [For HIV Infection],lamivudine for hiv infection
+ING-a9ee7a13cb1d8b30d6a10569,Naproxen,naproxen
+ING-aa056641e9869d24139ce8cd,Tocopherol,tocopherol
+ING-aa0a13bcfb78751c3588b4dd,Adrenaline,adrenaline
+ING-aa13076afeeeb48291939de2,Levocetirizine Hydrochloride,levocetirizine hydrochloride
+ING-aa260d27847dec909fc58915,Aspirin,aspirin
+ING-aa2db32f7cc27905b6a6d6ee,"Magnesium Hydroxide Paste, 34%",magnesium hydroxide paste 34
+ING-aa77f528c51fa461af110faa,Pegfilgrastim [Pegylated Filgrastim],pegfilgrastim pegylated filgrastim
+ING-aac23e599cb2180e1ece9f8e,Calcium Pantothenate,calcium pantothenate
+ING-aac25457570aa6b5b477fd23,Emblic Myrobalan,emblic myrobalan
+ING-aadce2e1dae7dbcaaf7f84a0,Miglitol,miglitol
+ING-ab12cbcfcbe5f8f811beaff5,Neomycin Sulfate,neomycin sulfate
+ING-ab547757da37eb600011051f,Tin,tin
+ING-ab6fc72dae93a9a5f55b9e1f,Imiquimod,imiquimod
+ING-ab7b0097048e5eaad482c791,Lithium Carbonate,lithium carbonate
+ING-ab88c53b79e6302e1d018c87,Molnupiravir,molnupiravir
+ING-aba1054d29473b2023cbe916,Amlodipine,amlodipine
+ING-abfbb4bf4cec59a044f2d38d,Caffeine Citrate,caffeine citrate
+ING-ac301fbebe7635d2f259513b,Everolimus,everolimus
+ING-ac80acec7061cd2e1d9f5dbe,Bumetanide,bumetanide
+ING-accce224eeec745fdce17a6c,Spiramycin,spiramycin
+ING-accd12b789c7199f6abdc8a0,Insulin Glargin,insulin glargin
+ING-ad085f1ad4cf95c89281976a,Diclofenac Sodium (Ophthalmic),diclofenac sodium ophthalmic
+ING-ad1c53066476283d8d24085a,Snake Venom Antiserum,snake venom antiserum
+ING-ad2039142f871d9c7d7fa428,Probiotic Combination [20 Billion],probiotic combination 20 billion
+ING-ad243defa4f7e65e72b8b3fe,Quinine Sulphate,quinine sulphate
+ING-ad2700b81c3f4a540e6a6a85,Zilpaterol Hydrochloride,zilpaterol hydrochloride
+ING-ad31c1e9111d9c9717304215,Sharbat Musaffi,sharbat musaffi
+ING-ad39b5b10883ad411eb774a3,Oseltamivir,oseltamivir
+ING-ad40b2fd69ded3148fb7cf04,Dinoprost,dinoprost
+ING-ad466db77f949fa167420e52,Sodium Valproate,sodium valproate
+ING-ad55af0ca1664ee9be24e383,Indapamide,indapamide
+ING-ad58300dc3a3c87ad5e6bff9,Polymixin,polymixin
+ING-ada6dbaf46b310e60d4e6f8d,Conjugated Oestrogens,conjugated oestrogens
+ING-ada9cdb5d50fd342ed2b6965,Cariprazine,cariprazine
+ING-ae07eeff252e414a58fb4ebf,Rivastigmine Tartrate,rivastigmine tartrate
+ING-ae2a3fc950d38e0c6866a4d3,Rucaparib,rucaparib
+ING-ae37b14c4b83289147ab882a,Besifloxacin,besifloxacin
+ING-ae3dfc73601053aad2c7ef7a,Sodium Diacetate,sodium diacetate
+ING-ae5a18727fd5ece259d864d5,Daunorubicin,daunorubicin
+ING-ae82a141c718461927008a6d,Ipratropium Bromide (Nebuliser Solution),ipratropium bromide nebuliser solution
+ING-ae82ce9baeed79beb59432f5,Dexamethasone Acetate,dexamethasone acetate
+ING-ae835fa6514b98f1529716cf,Lidocaine Hydrochloride (Spray),lidocaine hydrochloride spray
+ING-ae8a729e66a030a564ef1f9a,Trypan Blue,trypan blue
+ING-ae98e5a274d47d0036323be9,Zolmitriptan,zolmitriptan
+ING-ae9bb0d1345aecf21baed159,Trimethoprim,trimethoprim
+ING-aed73302415db5272e4f439b,Suvorexant,suvorexant
+ING-aef498256400891efe70517b,Sulphamethoxazole,sulphamethoxazole
+ING-af197335bb03d4ffb147f9ca,Apis mellifica,apis mellifica
+ING-af3976ee852d2cfde411fc20,Multivitamin & Multimineral [A-Z teen boys preparation],multivitamin multimineral a z teen boys preparation
+ING-af411d71cbee1f94a74e1689,Lasmiditan Hemisuccinate,lasmiditan hemisuccinate
+ING-af64a27aa23fe46e8e81eb5c,Nivolumab,nivolumab
+ING-af675743181e950300bd4613,Cetirizine Dihydrochloride,cetirizine dihydrochloride
+ING-af8cb068fa5c5f621082e8c5,Sodium Hydrogen Carbonate,sodium hydrogen carbonate
+ING-af8d579a11d9cf09b0e02fdc,Liquid Nitrogen,liquid nitrogen
+ING-af97881fc409401f5809aa68,Iron Dextran,iron dextran
+ING-af9a64f2304b25422ec47e90,Rabies Vaccine,rabies vaccine
+ING-afdbf6908317de30dcf85c1b,Cyclobenzaprine Hydrochloride,cyclobenzaprine hydrochloride
+ING-afe95dc7914b8b94c02252d2,Ferrous Fumarate,ferrous fumarate
+ING-aff2e6435eab367539694b66,Liquid Glucose,liquid glucose
+ING-b0349be94b504e632e08ac13,Parecoxib,parecoxib
+ING-b039326d4b899d5039c0bd39,Aspirin Immediate Release Tablet,aspirin immediate release tablet
+ING-b061a5f0c5e2a4f99b12f60a,Gentian,gentian
+ING-b075106fc9c6a7d184d12e55,Phenoxymethyl Penicillin,phenoxymethyl penicillin
+ING-b0b4630bfa6769cf11d91d59,Prednisolone Acetate,prednisolone acetate
+ING-b0e17b3250366e088183e58d,Cefixime Trihydrate,cefixime trihydrate
+ING-b0ee430221eb9b9b3dd6fe6b,Daclatasvir,daclatasvir
+ING-b11d2d8f4ceb3654dc626c98,Desmopressin Acetate,desmopressin acetate
+ING-b123535a878ac6e2f535e5f7,Mecobalamin,mecobalamin
+ING-b127aaf5134932fcc86cc22a,Guaifenesin,guaifenesin
+ING-b1381797c03e007f6dc9eb95,Peginterferon Alfa-2a,peginterferon alfa 2a
+ING-b174696ecf261aeafc416e5c,Benzyl Penicillin,benzyl penicillin
+ING-b179676668117f1998173f5b,"Human Papillomavirus Quadrivalent (Types 6, 11, 16, and 18)",human papillomavirus quadrivalent types 6 11 16 and 18
+ING-b17f493e9845c80b72d92a03,Salvia Officinalis,salvia officinalis
+ING-b190be7bf69b3c2c63f665fb,Albumin (Human),albumin human
+ING-b1b84ddac09d1674730181bd,Dl-Alpha Tocoferol (Vitamin E),dl alpha tocoferol vitamin e
+ING-b1e10ac35470f5e8a098e0c8,Chloral Hydrate,chloral hydrate
+ING-b20d049ba432c93700ac59c3,Rehmin,rehmin
+ING-b23f4f8a6d4d5ebfd81f3d48,Kaolin,kaolin
+ING-b24d4c302233fd4c87c1631a,Rabeprazole,rabeprazole
+ING-b262ceb17ffcb1ca9a734b3f,Ivermectin (Tablet),ivermectin tablet
+ING-b267f8aba0f437b327f8dfb7,Phenylephrine Hydrochloride,phenylephrine hydrochloride
+ING-b28e98448f7458a03ed1cb61,Cupric Sulphate,cupric sulphate
+ING-b2bac5d9041ab38283b988ee,Hydroxychloroquine Sulphate,hydroxychloroquine sulphate
+ING-b2c19b8166c83f96f4c9272a,Henbane,henbane
+ING-b3034b0e8704bcffcc290765,Atosiban Acetate,atosiban acetate
+ING-b308fcd3ce21aaa38aa4f3e6,Doxylamine Succinate,doxylamine succinate
+ING-b3130d2d2d80a48a851b0290,Piperacillin,piperacillin
+ING-b34b179d9763a61ed1881ce5,L-Menthol,l menthol
+ING-b34f5d33fd1afbf050690220,Acetic Acid,acetic acid
+ING-b3750f11791fa3f0ed1b3ca3,Memantine Hydrochloride,memantine hydrochloride
+ING-b381203feca3fce5ea05f30d,Insulin (Human) N,insulin human n
+ING-b38a3f189d6dee2f9bf55735,Candesartan Cilexetil,candesartan cilexetil
+ING-b394b298b0d271d155ef3f06,Carboprost,carboprost
+ING-b3cdc8eec95f0112993f8412,Buspirone,buspirone
+ING-b3d047debe342e7b5f04901d,Latanoprost,latanoprost
+ING-b3e0f6359133644a2afd5d53,Diazepam,diazepam
+ING-b3e2bf1d876a27db3d1947fe,Tea tree oil,tea tree oil
+ING-b3f487fbc1970da93ec06115,Rhubarb,rhubarb
+ING-b40acfebfc5501953eda5120,Tetryzoline Hydrochloride,tetryzoline hydrochloride
+ING-b40da560d62773cc83807394,Bromhexine Hydrochloride,bromhexine hydrochloride
+ING-b40ff51bd6d781d5dd15fcd4,Eltrombopag Olamine,eltrombopag olamine
+ING-b41e02376c0fc2b87ffd0ebd,"Vitamin A, Vitamin B complex, Vitamin C , Vitamin D and Vitamin E",vitamin a vitamin b complex vitamin c vitamin d and vitamin e
+ING-b46825e3b1851a2ca47cb52b,Permethrin,permethrin
+ING-b4ab48acef1dd12a79aebc99,Desogestrel (0.02 mg),desogestrel 0 02 mg
+ING-b4cd1b8a5a1873702506d684,Doxepin,doxepin
+ING-b4e9406c68a562dc41fe0482,Chlorhexidine Gluconate,chlorhexidine gluconate
+ING-b4f5a8c262eedb0d7eac1e1a,Carbidopa (FC tablet),carbidopa fc tablet
+ING-b509ada517b821151f15ca6d,Halazone,halazone
+ING-b51c0acb43819630074048da,Vildagliptin,vildagliptin
+ING-b521aa77ebbe366c6c26055b,Glycerine,glycerine
+ING-b53f5359ae082147d549eba1,Doxepin (Topical),doxepin topical
+ING-b547fe7c4c3e48abd4fcd48e,Memantine,memantine
+ING-b5643a0b8a9fc335c49f5ee4,Ibandronic Acid & Calcium Orotate,ibandronic acid calcium orotate
+ING-b5712800b0e500f981df7953,Chlorhexidine Gluconate [1%],chlorhexidine gluconate 1
+ING-b5d4e9bf44e169d87cf64b4d,Iodixanol,iodixanol
+ING-b5ebc3b7232eb5ad67eaf544,Ertugliflozin,ertugliflozin
+ING-b5eeb553e36242f0a0c31480,Nandrolone,nandrolone
+ING-b6040ecdb2055eac3ba973b5,Sulfapyridine,sulfapyridine
+ING-b60eab5f65e40b3c0152d1ce,Clavulanate Acid,clavulanate acid
+ING-b60eaf521a9be143d2cc6ef8,Carbidopa (CR tablet),carbidopa cr tablet
+ING-b62df29569271667c0063af2,Silver Sulphadiazine,silver sulphadiazine
+ING-b635ec07185654d16bd663ab,Methylprednisolone Sodium Succcinate,methylprednisolone sodium succcinate
+ING-b66340aff9f1a1613ccc865d,Rhubarb Extract,rhubarb extract
+ING-b6abd657645c95ccc40ba905,Cinnamomum],cinnamomum
+ING-b6bbe058481c83f9067ab47b,Sildenafil,sildenafil
+ING-b6f6db3878e818b7af4cd0c2,Mirabegron,mirabegron
+ING-b6fb707f66ec2a37294ba0e2,Naltrexone,naltrexone
+ING-b71a15fd946ae9cd0d999e5c,Istradefylline,istradefylline
+ING-b7256ae825164e9e848ec207,Alpha Lipoic Acid,alpha lipoic acid
+ING-b72a48b3cea9a563c6fccd72,Eflornithine Hydrochloride Monohydrate,eflornithine hydrochloride monohydrate
+ING-b7545db307056ce7dd526dd1,Artesunate,artesunate
+ING-b76cc23f6c341d34d30e7ddb,Betahistine Mesylate,betahistine mesylate
+ING-b77321a9fc1f281e7aa2c53b,Isosorbide Mononitrate,isosorbide mononitrate
+ING-b7c4cad914f27c410f6dddaa,"Magnesium Hydroxide Dried Gel, 96%",magnesium hydroxide dried gel 96
+ING-b7ea277a4cb6fc8980e78d1c,Betaxolol,betaxolol
+ING-b8073072b8825a4ae4e68cd3,Electrolytes,electrolytes
+ING-b810eb51244ae33a40f1fdcf,Iron Polymaltose Complex,iron polymaltose complex
+ING-b81d00251f1aa4cb62a9a570,Minocycline,minocycline
+ING-b870712ee848fa887829cc1c,Chebulic,chebulic
+ING-b88cd31878b2e6814b774cc5,Multivitamin & Multimineral [A-Z juniors syrup preparation],multivitamin multimineral a z juniors syrup preparation
+ING-b89993c0663c1dc889e7c934,Clomipramine Hydrocloride,clomipramine hydrocloride
+ING-b8a65132c4f1eed047ea1a9f,Liquid Sugar,liquid sugar
+ING-b8b0bab99f80b2337668c25a,Prednisolone Sodium Phosphate,prednisolone sodium phosphate
+ING-b8e36d587537810981ddab7b,Fluticasone Propionate (Inhaler),fluticasone propionate inhaler
+ING-b8f13b9724cb9b38d0bf158b,Cactus extract,cactus extract
+ING-b93286059b482cc0fc8a2e2f,Red Clover Isoflavones,red clover isoflavones
+ING-b937a4ec2775875c176acc58,Hepatitis b immune globulin,hepatitis b immune globulin
+ING-b937d6aa641cac867b4c98cf,Rice Powder (Pregelatineized),rice powder pregelatineized
+ING-b9714ed4ee1ab54b682c15e8,Ponatinib,ponatinib
+ING-b982a09b35429d8f87552f1a,Oxygen,oxygen
+ING-b9b9afb991d37b7908ae1824,Dapagliflozin Propanediol,dapagliflozin propanediol
+ING-b9ef7a460af352dd2e2356fd,Insulin (Human)  50/50,insulin human 50 50
+ING-b9f449a3bc1d835b13c51119,Clindamycin (Vaginal Cream),clindamycin vaginal cream
+ING-ba34774776505d7ce8746b14,Glibenclamide,glibenclamide
+ING-ba554972ddeef18fd35643cb,Nystatin (Oral),nystatin oral
+ING-ba7627b3c1991971f7d44f45,Meloxicam,meloxicam
+ING-baa3cd39f33f98e85f0b256c,Vitamin K,vitamin k
+ING-baa9ff905ffcdb05ff492bad,Probiotic Combination [9 Billion],probiotic combination 9 billion
+ING-baba3fbcb43c8c6ff87089d7,Lansoprazole,lansoprazole
+ING-bafcfc2d70ff00714634eefa,Ketoprofen,ketoprofen
+ING-bb0e224e969b46d1447b263b,Multivitamin & Cod Liver Oil,multivitamin cod liver oil
+ING-bb1a5d8176b6a52ccd569564,Eszopiclone,eszopiclone
+ING-bb2c402959905a7200bf5cf8,Bicalutamide,bicalutamide
+ING-bb4abfaed87a2e990b30051e,Sulphadimethoxine Sodium,sulphadimethoxine sodium
+ING-bb4ae7d8c6f2942c30dbf767,Herbal cough syrup [Tulsi],herbal cough syrup tulsi
+ING-bb6eb6d42fe68eaf8fa77b7e,Cefpirome,cefpirome
+ING-bb77566e6c729a639787b7ec,Bacillus Clausii spores,bacillus clausii spores
+ING-bb77d210bcdc70028fbfcba2,Povidone Iodine,povidone iodine
+ING-bb7f7665c45ed60356895112,Hyaluronidase,hyaluronidase
+ING-bb8366e29a6896b24bb35221,Insulin (Human) 30/70,insulin human 30 70
+ING-bb8411a15dbc1b30d24c7917,Thymol,thymol
+ING-bb9224fe2eb2b750ec25168f,Diethylstilbestrol,diethylstilbestrol
+ING-bba8df7e9eb659846e50bd99,Calcitriol,calcitriol
+ING-bbaeab8a6207ef59f9b2598a,Taurine,taurine
+ING-bbb0ec1b48225169e1925a7d,Cyanocobalamin,cyanocobalamin
+ING-bbb63fdc19d9c6cf2c457a24,Anidulafungin,anidulafungin
+ING-bbbbabbb1b42050ed66dcc0a,Zoledronic Acid,zoledronic acid
+ING-bbd6abc8b93bbfeb2fa1b634,Ebastine,ebastine
+ING-bbe1d5adbe56c9b1f77875f8,Isopropyl alcohol,isopropyl alcohol
+ING-bbf25f6335afb5f6eb7695db,Imipenem,imipenem
+ING-bbf3626519f7b47c3746a806,Phenobarbitone,phenobarbitone
+ING-bc0ab1838a932e8cbbf56c30,Prucalopride,prucalopride
+ING-bc203637e85b86587bd84589,Medical Oxygen & Medical Nitrogen,medical oxygen medical nitrogen
+ING-bc29b234ef8981f8732bec60,Colecalciferol [Vitamin D3],colecalciferol vitamin d3
+ING-bc2d2f7e0f54026541a7fd3b,Vitamin E,vitamin e
+ING-bc2f1aba0b0b7f3008f718c1,Padimate O,padimate o
+ING-bc3050b5b18623ff0a6bdf56,Devil’s Cotton,devil s cotton
+ING-bc68a3d0b171f5aa4df6413f,Dinar,dinar
+ING-bc88785853f983da0f746bf3,Isophane Insulin Human,isophane insulin human
+ING-bd107be8959ffdd668ceccde,Salbutamol,salbutamol
+ING-bd5025d5d30052a763765a4a,Sofosbuvir,sofosbuvir
+ING-bd6d706a5ffbedbc19863282,Glacial Acetic Acid,glacial acetic acid
+ING-bd7f0badffb962ce651f619b,Clotrimazole (Eye ointment),clotrimazole eye ointment
+ING-bd9c651ad0c1ba8f4ba4faf3,Lomefloxacin,lomefloxacin
+ING-bda02186c3786ccd5c0bf78a,Vecuronium Bromide,vecuronium bromide
+ING-bdaee3b0577708cb2c8c9c4a,Citicoline Sodium,citicoline sodium
+ING-be32af7aa26f4cdbe988da82,Abiraterone Acetate,abiraterone acetate
+ING-be34dc913e2b996bb6af4c39,Edible Pine,edible pine
+ING-be42aa66ac6fb0e0e52d5952,Irbesartan,irbesartan
+ING-be47a0cb7af32290d0b41bb8,Diabasic Sodium Phosphate,diabasic sodium phosphate
+ING-be4b60c528e7807364d7e407,Glycopyrronium Bromide (Injection),glycopyrronium bromide injection
+ING-be5055420767ef4b78975f49,Flavoxate Hydrochloride,flavoxate hydrochloride
+ING-be635647a048f15989627bc5,Ethosuximide,ethosuximide
+ING-be8f7580d6e784f0238ffb39,Mucopolysaccharide Polysulphate,mucopolysaccharide polysulphate
+ING-be8fa5417dfcc57fa0d87ce1,Pseudoephedrine,pseudoephedrine
+ING-be99bc599b0685d0fa9ef995,Milnacipran Hydrochloride,milnacipran hydrochloride
+ING-be9c6f7847b4b2fe38d1afe7,Gentamicin Sulfate (Topical),gentamicin sulfate topical
+ING-bec383409f6bc90b38250523,Flucloxacillin,flucloxacillin
+ING-bed6927b24a225c43a8a00b4,Amprolium,amprolium
+ING-befe6515d7ba3764d0a83f67,Formoterol Fumarate Dihydrate,formoterol fumarate dihydrate
+ING-bf1158bce52d0c4d1ff3f79a,Toldimfos Sodium,toldimfos sodium
+ING-bf5230e5ff002c7d08c57987,Peritoneal Dialysis solutions,peritoneal dialysis solutions
+ING-bf717c7a4de0738e7957b1fa,Cetirizine Hydrochloride,cetirizine hydrochloride
+ING-bf7e67fb9387111e95af5ba0,Cetirizine Hydrochloride (Ophthalmic),cetirizine hydrochloride ophthalmic
+ING-bfabdff282bf1c45a5da6b9f,Netarsudil,netarsudil
+ING-c01473d50086ff59e247c50c,Ranitidine Hydrochloride,ranitidine hydrochloride
+ING-c03b9303756f6b29e760e596,Domperidone,domperidone
+ING-c049e9d23cf2c014a9406c6b,Piperazine,piperazine
+ING-c04b4dce12e2fddc0a850423,Bacopa extract [Natural memory enhancer],bacopa extract natural memory enhancer
+ING-c0611babcd818b1600765a09,Sodium Cromoglycate,sodium cromoglycate
+ING-c06614f2d39a153f2dfa00f1,Blood Tubing Set For Hemodialysis,blood tubing set for hemodialysis
+ING-c06848905bb31af1f5c177ee,Insulin Lispro Protamine,insulin lispro protamine
+ING-c07136a795dd93206101024f,Calcium,calcium
+ING-c07ea86bd3132eafb08be6ea,Levofloxacin (Ophthalmic),levofloxacin ophthalmic
+ING-c09907ad09b89b96e590530a,Geothermal water (eye),geothermal water eye
+ING-c0daf2a7f0e5ebe09840992a,Diazoxide,diazoxide
+ING-c0dc5a371d32806f5dbd8557,Prazosin Hydrochloride,prazosin hydrochloride
+ING-c1202a0fd882ce3e51e4d8ce,Cabozantinib,cabozantinib
+ING-c1255d9d92aef52a8b28bef6,"Mustakarista [Cyperus, Zingiber, Piper nigrum]",mustakarista cyperus zingiber piper nigrum
+ING-c145de394cbc047678fd13f0,Vancomycin,vancomycin
+ING-c151655b04b3c04708efe230,Saxagliptin,saxagliptin
+ING-c183bab712f9f3c863b654bc,Carbocisteine,carbocisteine
+ING-c18f8cceb7aa87dad5554c14,Metformin,metformin
+ING-c193c49b27fc0a63802aaf20,Doxophylline,doxophylline
+ING-c1cb17572c37a3fb055ed380,Sacubitril,sacubitril
+ING-c1ec464e314314b56366bb61,Ketorolac Tromethamine,ketorolac tromethamine
+ING-c1edbf85dc45169684bafe50,Letrozole,letrozole
+ING-c229c8806776b3da5670dbd5,Flaxseed oil [Linum Usitatissimum],flaxseed oil linum usitatissimum
+ING-c2883bf413e4af5d7b70ec65,Clarithromycin Tablet,clarithromycin tablet
+ING-c2d6b3f4d8fb7d99a313f6a0,Tetracycline Hydrochloride (Ophthalmic),tetracycline hydrochloride ophthalmic
+ING-c308a46c9fa1d3ab0cd67d2c,L-Methylfolte Calcium,l methylfolte calcium
+ING-c31ce8399469137c0422f0b4,Polymyxin B,polymyxin b
+ING-c335f2c7c97eb5ae8dcae37f,Sodium Bicarbonate,sodium bicarbonate
+ING-c34578aaa6181099b4d9d069,Betamethasone Valerate,betamethasone valerate
+ING-c34b6a86755cc89cf72d5861,Drospirenone,drospirenone
+ING-c36cbc650f29955cfab1c75b,Pumpkin [Cucurbita pepo],pumpkin cucurbita pepo
+ING-c36eada243f1ec86bb0a9c0c,Norephinephrine,norephinephrine
+ING-c371578fdc5ddc302a761f00,Malic Acid,malic acid
+ING-c3a59ffb8a270b50698f2626,Tapentadol,tapentadol
+ING-c3c820bd2263dfeb2262f996,Carboprost Tromethamine,carboprost tromethamine
+ING-c3cd2ebc20fae4cbc4a74e42,Fluticasone Furoate,fluticasone furoate
+ING-c3cfa0e7b8e94e12a02a39c3,Ergotamine Tartrate,ergotamine tartrate
+ING-c3dfc8a06f29ba8f7d1fb678,Sertaconazole Nitrate,sertaconazole nitrate
+ING-c3e312bba0ed0ae83b98c995,Multivitamin & Multimineral [A-Z junior infusion preparation],multivitamin multimineral a z junior infusion preparation
+ING-c3e87e5587fcad72ad8437fc,Morphine Sulphate,morphine sulphate
+ING-c40ef2ac952e6a4af664dc27,Sucralfate,sucralfate
+ING-c44740b27baa8c72479b84ca,Cilostazol,cilostazol
+ING-c49097741575e975561ce76e,Mendione Sodium Bisulphite (Vitamin-K),mendione sodium bisulphite vitamin k
+ING-c4caa594aeeada556636509e,Nitroglycerin (Sublingual Tablet),nitroglycerin sublingual tablet
+ING-c4ce21da0a54a8256714194f,Valsartan,valsartan
+ING-c4da68db93431bbb7bc474cc,Vitamin B1,vitamin b1
+ING-c51471e5c00ddf76a0f4a258,Cyproterone Acetate,cyproterone acetate
+ING-c55378389cc2d069b401cfad,Molybdenum,molybdenum
+ING-c5562d906e4f575cb317ef8f,Triclabendazole,triclabendazole
+ING-c587ceab445a4ceb38bab721,Hydrochlorothiazide,hydrochlorothiazide
+ING-c58cec036fbdd094a35c1834,Nebivolol Hydrochloride,nebivolol hydrochloride
+ING-c5ed6d73e8e88ddb3e4fabd9,Mycophenolic acid,mycophenolic acid
+ING-c603427b128d012685941c3f,"Vitamin C, Vitamin E, Lutein, Copper & Zinc",vitamin c vitamin e lutein copper zinc
+ING-c607127e943d7caebd248179,Lavendar [Lavendula stoechas],lavendar lavendula stoechas
+ING-c6131333dd32d2848bd3d92c,Dextrose,dextrose
+ING-c617ea93d7f10b82e8af9726,Amiodarone Hydrochloride,amiodarone hydrochloride
+ING-c63a89e835643dc16c3fc0aa,Cholecalciferol (Vit. D3),cholecalciferol vit d3
+ING-c64901dcb8a4d7e85e418ac5,Bleomycin,bleomycin
+ING-c687a4ff5be7c6d362e09589,Procaine Benzylpenicillin,procaine benzylpenicillin
+ING-c6a62a487c9ab1e2a5bd0e55,Cynocobalamine,cynocobalamine
+ING-c6a6672c89f2b120dad4acff,Dofetilide,dofetilide
+ING-c6c440f0951afd41f2e3c2e7,Lubiprostone,lubiprostone
+ING-c6dc649a519fecd7a301712a,Carbonyl Iron,carbonyl iron
+ING-c6e4012c39ce29aeb2b924cd,Clomiphene Citrate,clomiphene citrate
+ING-c6f90e45b66e67e7690be6cf,Biphasic Insulin Aspart [rDNA],biphasic insulin aspart rdna
+ING-c70392040083f9860b41e71f,Cefquinome,cefquinome
+ING-c72c76a9c0d59a10bd8515d8,Capecitabine,capecitabine
+ING-c770a1b20f9816ec40745c64,Sulfadoxine,sulfadoxine
+ING-c7738df473f70e311cf7d12b,Prednisolone Anhydrous,prednisolone anhydrous
+ING-c7889e96c1da4576f5f2e4d7,Khakshi,khakshi
+ING-c7933cf69e9d473d641d78ce,Acitretin,acitretin
+ING-c7ac0cf149ff92af268b90d4,Tizanidine,tizanidine
+ING-c7affcaf1505a0d68c65446d,Ivabradine,ivabradine
+ING-c7c5fd8fd7eb963bc62b50f7,Gadoversetamide,gadoversetamide
+ING-c80506f9b0e2ff4bde2a66ce,Ibandronic Acid,ibandronic acid
+ING-c807992514a6c16522fff0b3,COVID Vaccine,covid vaccine
+ING-c8654dfa1e6a3a787d999b21,Clindamycin,clindamycin
+ING-c886ff11f6a51b611a867475,Chalk,chalk
+ING-c8aa617cf1efb32280b26c23,Levobupivacaine Hydrochloride,levobupivacaine hydrochloride
+ING-c8b5601d7e122baa1f4868c6,Beta Carotene,beta carotene
+ING-c8cda2cb89f0c001ed4da23d,Doxycycline Hydrochloride,doxycycline hydrochloride
+ING-c8d7cd4fa5bdec6266a5cf6e,Difloxacin,difloxacin
+ING-c8dffbeb83816b38c17ea62b,Neem,neem
+ING-c8e208941e68a10ccedccd73,Pilocarpine Hydrochloride,pilocarpine hydrochloride
+ING-c902a9f5ccee18bce1238aa7,Bismuth Subgallate,bismuth subgallate
+ING-c926808c3fd9f11b7292874f,Promethazine Hydrochloride,promethazine hydrochloride
+ING-c93fdfaf0a675b3008c7b349,Geothermal water (hair & body),geothermal water hair body
+ING-c95be53bff0cc2cb9567b499,Celiprolol Hydrochloride,celiprolol hydrochloride
+ING-c95d6b5250bb01c0f982bf21,Domperidone Maleate,domperidone maleate
+ING-c9636db02d22e8382dfb3aec,Medroxyprogesterone Acetate (Tablet),medroxyprogesterone acetate tablet
+ING-c96d80af1d2c288342706ca3,Dipyridamole Extended Release Pellets,dipyridamole extended release pellets
+ING-c9720c72406a9789f74272ef,Glycine,glycine
+ING-c97c010cba688c4351dceeac,Antacid [Unani],antacid unani
+ING-c9b8d056c5c60512638b695d,Levofloxacin,levofloxacin
+ING-c9d35fa3b475c642fcdab8da,Flutamide,flutamide
+ING-c9df679b61373e930bb0219c,Bitter Melon [Korola],bitter melon korola
+ING-c9f04ac4b60fd74319a18b70,Ciclesonide (Inhalation Aerosol),ciclesonide inhalation aerosol
+ING-ca15e7fec1b731955ace6322,Coal Tar Solution,coal tar solution
+ING-ca5b46549daf7419d47a3a9d,Minocycline Hydrochloride,minocycline hydrochloride
+ING-ca8343fca14eacd63a30ff0b,Vardenafil,vardenafil
+ING-ca8792d5827a3a55e58a0614,Racecadotril,racecadotril
+ING-caade8771cad3faeaff76bee,Sodium Hyaluronate,sodium hyaluronate
+ING-cac93b6fff4074b1ab84631a,Timolol Maleate,timolol maleate
+ING-cacd41778949c0bfe5de794f,Steviol Glycoside,steviol glycoside
+ING-cae2996f42469349e888fa2c,Beclomethasone Dipropionate,beclomethasone dipropionate
+ING-caecc5e44b044eadfa15bd27,Dapagliflozin,dapagliflozin
+ING-cafc32c323e2235ed09bf0a3,Nitazoxanide,nitazoxanide
+ING-cb0f74075776222dab0f7573,Gemcitabine,gemcitabine
+ING-cb34deac72a863987e64c64a,Amiloride Hydrochloride,amiloride hydrochloride
+ING-cb4599e328ad05342ddcf494,Zinc Oxide [Microfine],zinc oxide microfine
+ING-cb4969ba72dc0de37f592109,Tolmetin,tolmetin
+ING-cb7a2534d5bc5a4baf474d6f,Estradiol,estradiol
+ING-cbc3bb30a36e966931a8bab6,Monosemicarbazone Adrenochrome,monosemicarbazone adrenochrome
+ING-cbe906b429c2331b1898328e,Tenofovir Alafenamide,tenofovir alafenamide
+ING-cbf5c8d76e1dbb076fe383d6,Levodopa,levodopa
+ING-cc0e6164be96aaffcf5ad4e1,Chlorambucil,chlorambucil
+ING-cc2ea0809995569ea9fba5f6,Safinamide,safinamide
+ING-cc568af913c5bc36461e07bf,Tamoxifen Citrate,tamoxifen citrate
+ING-cc709d89ee1533a715c5e55e,Capric Triglyceride,capric triglyceride
+ING-cc7c7779ff330fddc04963d5,Eucalyptol,eucalyptol
+ING-cc8c3da03c4bdafed88ee7f6,Alpelisib,alpelisib
+ING-cc8fc4764da18790acdbaef9,Refined Soyabeen Oil,refined soyabeen oil
+ING-cc990d839e8da3633d696e36,Nifedipine,nifedipine
+ING-ccb2b552b4a68f27d023352b,Doxepin (Oral),doxepin oral
+ING-ccea47f6db2cdf772bcbbc9a,"Protein, Fat, Carbohydrate, Vitamin & Mineral",protein fat carbohydrate vitamin mineral
+ING-cceabf8c9fd19e28a6bdf06a,"Bandish [Oak Galls, Tannic acid]",bandish oak galls tannic acid
+ING-ccf36b70f8d7b1d23e6cf0d7,Acyclovir (Oral),acyclovir oral
+ING-cd0d49e1dc0edbe0a7e51567,Metolazone,metolazone
+ING-cd1c21973363951d152a894f,Fluoxetine Hydrochloride,fluoxetine hydrochloride
+ING-cd3de33b45a92c8497e55f53,Terbutaline Sulfate,terbutaline sulfate
+ING-cd53c8fab23ca34127da0794,Dalteparin Sodium,dalteparin sodium
+ING-cd61859542b232527631e3eb,Testosterone Undecanoate,testosterone undecanoate
+ING-cd73034bfe8b8dd8e8f1174a,Irinotecan Hydrochloride,irinotecan hydrochloride
+ING-cda412db1ce1c10e3d6b9cbf,Ulipristal Acetate,ulipristal acetate
+ING-cdab27005821443f3b9c9a49,Poly Ethylene Glycol 3350,poly ethylene glycol 3350
+ING-cde44efc71a6e2f9e331fed7,Alectinib,alectinib
+ING-cdf516e86ed6c92ea2494e4d,DL-Methionine,dl methionine
+ING-ce41d0c09e906189f9f6a67e,Tibolone,tibolone
+ING-ce6493679ef923b5f73173f7,Indacaterol Maleate,indacaterol maleate
+ING-ce689fb71f0c688c0bbef075,Mometasone Furoate,mometasone furoate
+ING-ce6a9d10bd70deb76c7743ef,"Diphtheria, Tetanus, Pertussis, Poliomyelitis Vaccine",diphtheria tetanus pertussis poliomyelitis vaccine
+ING-ce6db917e329a9168bcb1250,Ferric Ammonium Citrate,ferric ammonium citrate
+ING-ce77c2fd93a2908d3dc4d882,Multivitamin & Multimineral Essentials [For nursing mother],multivitamin multimineral essentials for nursing mother
+ING-ce826aa67b695c02f3b011ce,Ifosfamide,ifosfamide
+ING-ce8a72c8e537faed990cf1f2,Alteplase,alteplase
+ING-ce9f02d622fbd9bf2c22a763,Padimate,padimate
+ING-ceaaa7ca5c786b25f936ae88,Menaquinone-7,menaquinone 7
+ING-ceadf58a4e989cce00f911e0,Atazanavir,atazanavir
+ING-cec0bb08b3a4fe94a83face9,Zoledronic Acid [For osteoporosis],zoledronic acid for osteoporosis
+ING-ced9110f6ba15d3c1f7626fe,Revand Chini,revand chini
+ING-cf0034141c1aea6af98a9734,Aluminium Oxide,aluminium oxide
+ING-cf3dddb73b49b2182dc44e5f,Naphazoline Hydrochloride,naphazoline hydrochloride
+ING-cf676b9749afd1e542e2ea00,Ascorbic Acid,ascorbic acid
+ING-cf701c5538c3410350301ebe,Zinc Sulfate,zinc sulfate
+ING-cf7852928e26c97bce67376d,Lidocaine,lidocaine
+ING-cf7bc2656b34a9305d3e69d4,Alfacalcidol,alfacalcidol
+ING-cfb8daebfc30b1d3ef320422,"vitamins [C, E, B9 and B12] and minerals [Selenium, Copper and Zinc]",vitamins c e b9 and b12 and minerals selenium copper and zinc
+ING-cfbe552da46f9b20dee533e9,Benzalkonium Chloride,benzalkonium chloride
+ING-cfc56a2938912ffae85174bb,Marine Collagen,marine collagen
+ING-cfd83e275fb3bb1fa2e94362,Metoclopramide Hydrochloride,metoclopramide hydrochloride
+ING-cfda6749cb6f29a2ad63e0ba,Imdevimab,imdevimab
+ING-cfde5ae9170ad0afe5df8d99,Somatropin,somatropin
+ING-cffa14321a1b4af40ed09232,Estriol,estriol
+ING-d01c13b78b75b0ccb33ec870,Insulin Detemir,insulin detemir
+ING-d0230688ae0c03c01eae4609,Niclosamide,niclosamide
+ING-d027e007ad83c76cecd73a60,Multivitamin & Normal Saline,multivitamin normal saline
+ING-d0646f9ee151d40af17507b7,Peginterferon alfa-2a [Pegylated Interferon alfa-2a],peginterferon alfa 2a pegylated interferon alfa 2a
+ING-d06828f4e28e0c8c9cd4d289,Rohitakarista,rohitakarista
+ING-d080abff3adf796140209514,Posaconazole,posaconazole
+ING-d095cdb8e3f599b953044470,Sodium Fusidate,sodium fusidate
+ING-d095fbfd33357c34c3b1c45c,Azacitidine,azacitidine
+ING-d0c04f4b1951e4aeaaec8223,Sesame,sesame
+ING-d0f48f633c3c3b24a56141de,Fexofenadine Hydrochloride,fexofenadine hydrochloride
+ING-d1366973720227b91f35fc55,Alendronic Acid,alendronic acid
+ING-d13d167beb2143ceb8a98c9c,Diabasic Calcium Phosphate,diabasic calcium phosphate
+ING-d13d73d7874aa1d24c203b52,Epinephrine,epinephrine
+ING-d151ce22891600a29388b43e,Ciclesonide,ciclesonide
+ING-d16300f1f04339c4cc01fce9,Torsemide,torsemide
+ING-d16f06fe255d801e0639b8d7,Copper,copper
+ING-d1792cab63db0f1ce81f3cde,Camphor,camphor
+ING-d17e54cff432a91a8f458746,Calcium Orotate,calcium orotate
+ING-d1f3d2ce7675fc64a781ccad,Naphazoline,naphazoline
+ING-d1f8b995ebafa10f5f5a66a6,Cloprostenol,cloprostenol
+ING-d1fa643bd8ba97189e65d7f6,Glucosamine,glucosamine
+ING-d201b54a47ee3f2a27a709ca,Tiotropium,tiotropium
+ING-d232bc75e73ce3c2d6e61f18,Spiramycine,spiramycine
+ING-d23b1c800b0475cbdfe3deb7,Thiopentone Sodium,thiopentone sodium
+ING-d24de352bacf06fde7e3d7cf,Isosorbide Dinitrate,isosorbide dinitrate
+ING-d24e9e9936f89ce86ee7593f,Vilazodone Hydrochloride,vilazodone hydrochloride
+ING-d2a0f186c81c2c43930c63f9,Trypsin,trypsin
+ING-d2e8d30826b7b4c8777a0495,Cynocobalamin,cynocobalamin
+ING-d3078c36275e604dd87c2097,Cefdinir,cefdinir
+ING-d3148e5f51e8e12240e779c4,Ramelteon,ramelteon
+ING-d3658387ad267e1c33c0b1e1,Prilocaine,prilocaine
+ING-d3724985896103e085f72ba1,Nabumetone,nabumetone
+ING-d373068ef687da88471524b4,Biotin,biotin
+ING-d389710b3621ea0443e7aee3,Follicle Stimulating Hormone (Urofollitrophin),follicle stimulating hormone urofollitrophin
+ING-d38e886d2f48a8ab6b69a08d,Carbetocin,carbetocin
+ING-d3bc0ce4d44e099cd2fce026,Iohexol,iohexol
+ING-d3c0941d1b6547ce1ff7866a,Ketoprofen (Topical),ketoprofen topical
+ING-d3c4c56917280810271de142,Xylazine,xylazine
+ING-d3db46a1cf4533ca52f2920d,Hydroxy Ethyl Cellulose,hydroxy ethyl cellulose
+ING-d40102c36b1f44f7acd9cf54,Solifenacin Succinate,solifenacin succinate
+ING-d406ca3c5c3366e7bd40f0f4,L-Valine,l valine
+ING-d416cd34aeba5da5afbd4682,Pyrazinamide,pyrazinamide
+ING-d42741845745036d3d2ab264,Ethanol,ethanol
+ING-d4322063426ef2d432db5cbe,Citicoline,citicoline
+ING-d43a706b389e1a44b8d3643d,Fusidic Acid (Ophthalmic),fusidic acid ophthalmic
+ING-d476ca3c2a3c1b2f93744320,Ketoconazole (Tablet),ketoconazole tablet
+ING-d49454e0c38c054016cb95f5,Prochlorperazine Maleate,prochlorperazine maleate
+ING-d4bf68e34e349e7db161f15d,Bempedoic Acid,bempedoic acid
+ING-d4cbcf50afa61fa6c6295a6c,Phospholipids,phospholipids
+ING-d4e63b165e9adcb041f97aee,Diacerein,diacerein
+ING-d4ebafaecef42d261db781fe,Carfilzomib,carfilzomib
+ING-d4ebb3df9eed1d5f7b33b5f6,Vitamin C,vitamin c
+ING-d4f6f2e0f697ce6b743ce673,Fluphenazine,fluphenazine
+ING-d5128f1fbf5dfccfa7a10829,Tigecycline,tigecycline
+ING-d513da9e84b1ceff41eeb1e4,Vortioxetine,vortioxetine
+ING-d569add393e6fe104948e774,Human Menopausal Gonadotrophin,human menopausal gonadotrophin
+ING-d57c41f2cee6872effc93211,Colistin,colistin
+ING-d5b507e5748b50c341921927,Betahistine Dihydrochloride,betahistine dihydrochloride
+ING-d5e122874bc3b1f57b2f0cf9,Sodium Hyaluronate (Injection),sodium hyaluronate injection
+ING-d5f3e2f526bea4f18d3740da,Calcium Chloride,calcium chloride
+ING-d62631796845e7f8b9f239a0,Riboflavine Sodium Phosphate,riboflavine sodium phosphate
+ING-d629082d18332ede5b755f5f,Heparin,heparin
+ING-d63bc7f8f9f86e0a3675c163,Tramadol Hydrochloride,tramadol hydrochloride
+ING-d63ca6a70f7ee6112cce2186,Brivaracetam,brivaracetam
+ING-d6608708c04b029ec343b6b4,Lynestrenol (0.05 mg),lynestrenol 0 05 mg
+ING-d68e30202e287322d76a16c0,Aluminium Hydroxide Gel,aluminium hydroxide gel
+ING-d6924ccb5266dc4045c218f8,Abametapir,abametapir
+ING-d6be47c914288fe0201bbfa2,Pyrantel,pyrantel
+ING-d6e950375c9d56e0aca7328b,Etanercept,etanercept
+ING-d70bde8596839002f92a5afb,Orlistat,orlistat
+ING-d713605522c9681dcb51ed68,Hydroxyzine  Hydrochloride,hydroxyzine hydrochloride
+ING-d71b9d2fb3ad0b5139e06e8f,Tacrolimus (Topical),tacrolimus topical
+ING-d71f074525c96fe806311baa,Lurasidone Hydrochloride,lurasidone hydrochloride
+ING-d738285084697513e35d54b8,Abacavir,abacavir
+ING-d760ffdbf24d2e4442772fe1,Ticlopidine Hydrochloride,ticlopidine hydrochloride
+ING-d764ddb1cb42f1c901cc1fc1,Iron (Iii) Hydroxide Dextran Complex,iron iii hydroxide dextran complex
+ING-d77294b85514bca4f3479dbb,Lactitol,lactitol
+ING-d7813d5512b4ed10ce87f1df,Hydroxypropyl Methylcellulose,hydroxypropyl methylcellulose
+ING-d790559eadc79b8ef4565d01,Eluxadoline,eluxadoline
+ING-d79575a7a9f9cdfe3c3c7cc6,Cabazitaxel,cabazitaxel
+ING-d7d4b28ecde3d68b48b45716,Bupropion Hydrochloride,bupropion hydrochloride
+ING-d7f234460ec7e5fe76de47a6,Trustuzumab,trustuzumab
+ING-d7f8e46d8c55a3ac2ee65634,Ganciclovir (Ophthalmic),ganciclovir ophthalmic
+ING-d8119f0795d15801de5c4617,Sodium Cromoglicate [4%],sodium cromoglicate 4
+ING-d83ff03b975290321093c63e,Ulipristal Acetate [For emergency contraception],ulipristal acetate for emergency contraception
+ING-d846d6eff0f82d0e51d0594b,Hesperidin,hesperidin
+ING-d87898a238289d3ce495a003,Chondroitin,chondroitin
+ING-d89680ad781616b87a51d1f0,Nicotinic Acid [Niacin],nicotinic acid niacin
+ING-d8acadde7de96cefc6818089,Pembrolizumab,pembrolizumab
+ING-d8ced876003ed27f25e76877,Pethidine Hydrochloride,pethidine hydrochloride
+ING-d90cb9a38af6c6811768572f,Non Pareil Seed,non pareil seed
+ING-d93e0a9ae54369a55bc729f1,Lactase,lactase
+ING-d94523d054506a61a2f10941,Mifepristone,mifepristone
+ING-d95581a82dfd1263a25fe997,Varenicline Tartrate,varenicline tartrate
+ING-d95cdc550e1f4cb9010db087,Enalapril Maleate,enalapril maleate
+ING-d98a1c0b8bf46f0af139bf7c,Espand,espand
+ING-d9c08df49a7d1cd8bd91900b,Theophylline,theophylline
+ING-da22b8b3d134b7e007bd3c0c,Vinpocetine,vinpocetine
+ING-da6a0ba66e3fea5c8cd7a20c,Butamirate Citrate,butamirate citrate
+ING-daa8cc24996e8081e6b3e2fc,Probiotic Combination [14 strains],probiotic combination 14 strains
+ING-dac141cce5834e03b9b52514,Salmon Calcitonin,salmon calcitonin
+ING-db0c926bbb8a2bbb19a63bc4,Clindamycin Phosphate,clindamycin phosphate
+ING-db18b99dd47dd91cb254eed4,Oxygenium,oxygenium
+ING-db56e8ffb84a2616b10706ce,Trospium Chloride,trospium chloride
+ING-dbc817b3e5ae1d9dfefe04c1,Chirata,chirata
+ING-dbfab86177402879ccfed846,Loperamide Hydrochloride,loperamide hydrochloride
+ING-dc097fd627bf0c7768f2c00a,Coral Calcium,coral calcium
+ING-dc1c31876a0e7cdf103c9381,Oil Eucalyptus,oil eucalyptus
+ING-dc4d899da1918e4235295b17,Escitalopram,escitalopram
+ING-dc618402991f1b2099313066,Hydrocortisone,hydrocortisone
+ING-dc8717f3fbe337f9b40009be,Levomilnacipran Hydrochloride,levomilnacipran hydrochloride
+ING-dc8be4c3f341d8c59694704e,Psyllium [Ispaghula Husk],psyllium ispaghula husk
+ING-dc9e46379c3e7382138a3be4,Butoconazole Nitrate,butoconazole nitrate
+ING-dcc0340682d3f95dbbfb7fc5,Lidocaine Hydrochloride (Injection),lidocaine hydrochloride injection
+ING-dcd57af6d8ec882f41345ee9,Valganciclovir,valganciclovir
+ING-dcdb24387cbcdbe4af72ddf3,Testosterone Propionate,testosterone propionate
+ING-dcf9467c31a9cbf36373b2e3,Diclofenac Diethylamine,diclofenac diethylamine
+ING-dd2075a7db21974f3175ca5d,Paracetamol (IV Infusion),paracetamol iv infusion
+ING-dd24616fe1e297a3609e4f9f,Fluorometholone Acetate,fluorometholone acetate
+ING-dd395f4ea5130928e7edef45,Lorlatinib,lorlatinib
+ING-dd49e1ad8d8f1770d671e15d,Benzyl Alcohol,benzyl alcohol
+ING-ddd789a86b90b2f448e89ac8,Oxytocin,oxytocin
+ING-ddf8d310d21693308b1ed655,Chromium,chromium
+ING-de0bfb204bd8df0f97aa974e,Sulfasalazine,sulfasalazine
+ING-de23e704adc9c4dffa2b3373,Chondroitin Sulfate Sodium,chondroitin sulfate sodium
+ING-de59c1707594ffafe77afbbf,Celecoxib,celecoxib
+ING-de80c65f83f5cdf8a1c71b04,Praziquantel,praziquantel
+ING-de845544cb0b3f8a7fa2b7de,Phenoxymethyl Penicillin [Penicillin V],phenoxymethyl penicillin penicillin v
+ING-de9bc17c52357ce7a5355ff0,Tylvalosin,tylvalosin
+ING-dedf77f2837dd0065509afc1,Dasatinib,dasatinib
+ING-deedd34cbd64e90ba4bbe963,Capsaicin,capsaicin
+ING-df09ea8bd588f605fba7c3d1,Ivermectin (Topical),ivermectin topical
+ING-df219308c2898f7c1501ff83,Bole Rubra,bole rubra
+ING-df48f0c35782fea89cf574b9,Ammonium Bicarbonate,ammonium bicarbonate
+ING-df9b8db381b8c3fb0950e670,Racecadrotil,racecadrotil
+ING-df9e5574412680a99b08d66b,Misoprostol,misoprostol
+ING-dfb3d6fd31682cd2cd7daa89,Balarista,balarista
+ING-dfd87c144c142fdac379af3f,Pyridostigmine,pyridostigmine
+ING-dfdaed2721de8d2dc23c176d,Neomycin Sulphate (E/E),neomycin sulphate e e
+ING-e02a5c73b1d45b0cc069cde4,Fluconazole (Ophthalmic),fluconazole ophthalmic
+ING-e02addad23e13ef43754ace5,Pirfenidone,pirfenidone
+ING-e04b1b4b16220640a16d77fa,Telbivudine,telbivudine
+ING-e05d3aabf141713d76219fe5,L-Leucine,l leucine
+ING-e09cb619915bc1a1694f8f36,Aliskiren,aliskiren
+ING-e0a113170280b3d74bd306cd,Cilnidipine,cilnidipine
+ING-e0d4448af01d60f664af66e5,Propantheline Bromide,propantheline bromide
+ING-e0ea06117a88359cf8bd42aa,Pridinol,pridinol
+ING-e0fa092684f7903a9cf526c0,Gefapixant,gefapixant
+ING-e10664f53b0c5388a5372254,Liquid Medical Oxygen Compressed,liquid medical oxygen compressed
+ING-e1109ed0ceb75dec43977537,Aluminium Chloride,aluminium chloride
+ING-e1137e4364ea811e18140a14,Duloxetine Hydrochloride,duloxetine hydrochloride
+ING-e1150f8b0339b305b74a3bad,Idoxuridine,idoxuridine
+ING-e12eea17f88abf19ffe9f3ca,Phenobarbitone Sodium,phenobarbitone sodium
+ING-e1b7ac508d074c12a3026cb4,Acetazolamide,acetazolamide
+ING-e1ba5bc3e67e7b0ed32a6cd7,Meropenem,meropenem
+ING-e1d4553852c8f892eea0eb2e,Pemetrexed,pemetrexed
+ING-e1ea9be4dfae8201259cde07,Sodium Nitroprusside Dihydrate,sodium nitroprusside dihydrate
+ING-e2196009e40ff09c0a6765af,Ceftibuten Dihydrate,ceftibuten dihydrate
+ING-e22d5105d053c3160b0a1806,Cefprozil,cefprozil
+ING-e24d3b6f552cae06b4146117,Apomorphine Hydrochloride,apomorphine hydrochloride
+ING-e277b7b7ea6ed13d85367a70,Meclizine,meclizine
+ING-e2de1f078ae3a2b79bfdfcb4,Vitamin B2,vitamin b2
+ING-e2e05a7b9535ae6b6fbeac91,Follitropin Alfa,follitropin alfa
+ING-e2eada4d7358ea3cb18ece85,Sodium Thiosulfate,sodium thiosulfate
+ING-e2f1958489bb1d0c716b40e9,White Damar,white damar
+ING-e2f3435d92cf7196e33c295c,Black Cohosh [Cimicifuga Racemosa],black cohosh cimicifuga racemosa
+ING-e32442313f8dfd2fb7d6dcde,Phytomenadione (Oral),phytomenadione oral
+ING-e376b8c17063b6fcc438dcbc,Naproxen Sodium,naproxen sodium
+ING-e379482dc18f2a29d2b0cb36,Emtricitabine,emtricitabine
+ING-e3dc2973eb5fa09aa7605053,Lomefloxacin (Ophthalmic),lomefloxacin ophthalmic
+ING-e3e61bff46d4960cf77d725c,Rizatriptan Benzoate,rizatriptan benzoate
+ING-e3ee21e04f257df8cab7e42f,Nicotinamide,nicotinamide
+ING-e3f1f5ed32232df171883c51,Amoxicillin Trihydrate,amoxicillin trihydrate
+ING-e3ff23afcf2414947217e9db,Azilsartan Medoxomil,azilsartan medoxomil
+ING-e4080c130ddc818ed4b220c9,Triamterene,triamterene
+ING-e4117614d4fd13781fd51906,Silicon Dioxide,silicon dioxide
+ING-e4152816ca26def2160f3364,Indomethacin,indomethacin
+ING-e419d889784c875ef0f20e0d,Melatonin,melatonin
+ING-e47d61791ae8dc37dd4be405,Tolperisone,tolperisone
+ING-e49302e8a35da1974b6418f1,Avatrombopag,avatrombopag
+ING-e4a032aee6f2fa08f0e725a9,Phenylepherine Hydrochloride,phenylepherine hydrochloride
+ING-e4ac78a732db97b847bf2dc9,Dextrose Anhydrous,dextrose anhydrous
+ING-e4e614c50aaabf176a5ebd5c,"Qurs Mulayin [Scammony, Lavender, Fennel]",qurs mulayin scammony lavender fennel
+ING-e503e268a54d2548ab6cfc0d,Thiamine Nitrate,thiamine nitrate
+ING-e51e2fa346139d11f0bdfcbf,Entecavir,entecavir
+ING-e534e8f06669a0aa4ba13d2b,Nicorandil,nicorandil
+ING-e546d94404b5718e5f5e1734,Colesevelam Hydrochloride,colesevelam hydrochloride
+ING-e54d1d2d1398bd09f1eef4f3,Disodium Hydrogen Phosphate Dodecahydrate,disodium hydrogen phosphate dodecahydrate
+ING-e584282d82bf0549781ee160,Prasugrel,prasugrel
+ING-e5c1bc8b1ab6f7630c8606b7,Para-Amino-Benzoic Acid,para amino benzoic acid
+ING-e5c6d7966c0ef8496037de7f,Cinacalcet,cinacalcet
+ING-e5c76c6d6f07532638521a50,Tetracycline Hydrochloride (Oral),tetracycline hydrochloride oral
+ING-e5c827370fb47766b0cbdb67,Sodium Hyaluronate (Ophthalmic),sodium hyaluronate ophthalmic
+ING-e5ca9f26f23b1486f1efcc78,Ferrous Ascorbate,ferrous ascorbate
+ING-e5cc385259bde7ab2208ac8a,Sharbat Amla,sharbat amla
+ING-e5ce3c44098bf160d7bb5e11,Benzylpenicillin,benzylpenicillin
+ING-e5d6f2e76b59e384fad0f531,Bacitracin Zinc,bacitracin zinc
+ING-e5eba67a5502f7429f604e31,Multivitamin [Adult preparation],multivitamin adult preparation
+ING-e63ddb81083328d7b2738986,Danazol,danazol
+ING-e64dcbe6b0d5613248a033d8,Tazarotene,tazarotene
+ING-e650caf4dde27a487fcc1474,Triamcinolone Acetonide,triamcinolone acetonide
+ING-e67548f5b079816b773827df,Guggul,guggul
+ING-e6755f34dabcd64d369fdfb8,Atomoxetine,atomoxetine
+ING-e67829c3acde78ae94309c15,Isotretinoin,isotretinoin
+ING-e684a3e94efd46f9c5fa0ea8,Selenium,selenium
+ING-e69867ba32df4dbaf0dcd17d,Thiacetazone,thiacetazone
+ING-e6bfc41e40ff0edd307f98cc,Lignocaine,lignocaine
+ING-e6e4989648198eb45209d294,Frusemide,frusemide
+ING-e71fe8a0ebb2bd9a0e337e46,Darifenacin,darifenacin
+ING-e7275cbe1c395641227f9e25,Nonoxinel,nonoxinel
+ING-e7702aaec967f2fd275a00f7,Evening primrose oil,evening primrose oil
+ING-e7c82e6af2ca8467f73e1dd2,Eflornithine Hydrochloride,eflornithine hydrochloride
+ING-e7dab447c4a3d0bdc6e36641,Tetracaine,tetracaine
+ING-e802d98a28211a2186245fe7,Nigella Sativa [Black Seed Oil],nigella sativa black seed oil
+ING-e815ef3f2283811c667152cd,Potassium Bitartrate,potassium bitartrate
+ING-e816f17a5a1d90808ca17519,Vardenafil Hydrochloride,vardenafil hydrochloride
+ING-e83a562e881e6cdd2da419d2,Bismuth Subcitrate,bismuth subcitrate
+ING-e8681ad30f703ce03deef2f8,Megestrol Acetate,megestrol acetate
+ING-e885b41b8a06de9e5d106aa0,Sildenafil Citrate,sildenafil citrate
+ING-e889eb18ea4e675e71f13d6e,Acyclovir (Ophthalmic),acyclovir ophthalmic
+ING-e8b7e1f1a298d3a86f673b93,Ginkgo Biloba,ginkgo biloba
+ING-e8b7e85b28cc1b949272d1f3,Vitamine C,vitamine c
+ING-e8d2fb2727e3b3e431cdeffa,Amino Acid,amino acid
+ING-e8e0069723c97c10b546a891,Niacinamide,niacinamide
+ING-e91629ef683d8ddc508b0156,Erythromycin,erythromycin
+ING-e922ede6ccd2436c69224307,Herbal Multivitamin,herbal multivitamin
+ING-e93958494327329c1d54220a,Methyl Salicylate,methyl salicylate
+ING-e9ac7592a3199f19998e6441,Entrectinib,entrectinib
+ING-e9cfaf2a0e4e47eb75ebffde,Aceclofenac,aceclofenac
+ING-e9ec54abf1ae4d9986b0f95e,Gonadorelin,gonadorelin
+ING-ea036f6addb70fcd6e017c0c,Spirulina,spirulina
+ING-ea0e1747359b5928882a173c,Betaxolol Hydrochloride,betaxolol hydrochloride
+ING-ea0f183370225a08f76acdac,Pseudoephedrine Hydrochloride,pseudoephedrine hydrochloride
+ING-ea1fd6cfa13cea8d4f81bdf9,Sodium Dihydrogen Phosphate Dihydrate,sodium dihydrogen phosphate dihydrate
+ING-ea309931f15beecd021f419d,Bleomycin Sulfate,bleomycin sulfate
+ING-ea7dc7da9c02f1ef77db027e,Lacidipine,lacidipine
+ING-ea9e7a4dffee334d746b10f1,Levosalbutamol (Oral),levosalbutamol oral
+ING-eaac967da73d06e6dc892a09,Tonophosphan,tonophosphan
+ING-ead6fcebebb61fe141b35ecb,Difluprednate,difluprednate
+ING-eaf4631eb3dba361bfa5e8b1,Cod Liver Oil,cod liver oil
+ING-eaf9ef107f498ba18eae537a,Bosentan Monohydrate,bosentan monohydrate
+ING-eb162fbf03a2decd6ef295b6,Cefetamet Pivoxil Hydrochloride,cefetamet pivoxil hydrochloride
+ING-eb3c5c97c281f509c14518f5,Riboflavine-5-Phosphate,riboflavine 5 phosphate
+ING-eb3e96d256c60e5901d9d4ef,Sodium Lactate,sodium lactate
+ING-eb6bdda8528eaf250fad374d,Glucose 11%,glucose 11
+ING-eb86d202afdfc2e111b40103,Adagrasib,adagrasib
+ING-eb89a2ae222e14efc7a4bbce,Atropine Sulfate,atropine sulfate
+ING-eb9e95744756ef079a111ff6,Vincristine Sulphate,vincristine sulphate
+ING-ebccb01d0b744cf08a93a3c4,Allystrenol,allystrenol
+ING-ebdf700de5b0af64411327c2,Alfuzosin Hydrochloride,alfuzosin hydrochloride
+ING-ebf4d7aad3be8278904f17a3,Amphotericin B,amphotericin b
+ING-ebfd8396e9cacde74ea176f6,Fructose,fructose
+ING-ec046665d2575d0050f9393b,Ribociclib,ribociclib
+ING-ec1275e95f5d026ae4536cfa,Deucravacitinib,deucravacitinib
+ING-ec295dfbbf415a47f4d77593,Cefpodoxime,cefpodoxime
+ING-ec53c88522c0ffd5e426b70e,Roxadustat,roxadustat
+ING-ec5849da535b6411a9cb60a2,Macrogol 3350,macrogol 3350
+ING-ec5ba6c5165980e44a8144dd,Indian dill,indian dill
+ING-ec77e6e07935686e06902753,Loperamide,loperamide
+ING-ec7b596519b86166283a55aa,Cefditoren,cefditoren
+ING-ecda30c5f9c56cec3a06595b,Sacaharin Sodium,sacaharin sodium
+ING-ecfcb4027496070eee309737,Monosodium Glutamate,monosodium glutamate
+ING-ed1ecd2653a5c910720f3c65,Tolterodine Tartrate,tolterodine tartrate
+ING-ed2334f563e5e5814a5061ab,Lynestrenol,lynestrenol
+ING-ed23be495c186af2c906213d,Polymixin B,polymixin b
+ING-ed3d5017d36451341a7fdc77,Isradipine,isradipine
+ING-ed3f85a07bac322d786cbc88,Glucose & Electrolytes,glucose electrolytes
+ING-ed49b2a81f4ef6bf5779567e,Doripenem,doripenem
+ING-ed4d17c437bc7d6fdc88a277,Chlorhexidine Gluconate [0.2%],chlorhexidine gluconate 0 2
+ING-ed5444d935d1ceee6c3ad23e,Raloxifene Hydrochloride,raloxifene hydrochloride
+ING-ed7de3680936c19b8f171f42,Roxithromycin,roxithromycin
+ING-ed8fb7b3c625e27308f81696,Adenine,adenine
+ING-ed9248cd97aae815ec3eca15,Dobutamine,dobutamine
+ING-ed940c0c1a7b791765949f93,Oxiconazole,oxiconazole
+ING-edc624bc54f722ae8dc99948,Polyethylene Glycol 3350,polyethylene glycol 3350
+ING-eddaa6828619dc94675cedb3,Sodium Chloride (Ophthalmic Solution),sodium chloride ophthalmic solution
+ING-edfe4f53cf2dfb210f2d7032,Bromelain,bromelain
+ING-ee0cafbfaf87b0dd928cb815,Cholestyramine,cholestyramine
+ING-ee14ba0cb61168fda6f9c031,Tofacitinib,tofacitinib
+ING-ee29dadb3b94776b547e55e4,Pentazocine,pentazocine
+ING-ee2e0f2a58c8d56dc48a600c,Isotretinoin (Oral),isotretinoin oral
+ING-ee32f6e51dead67ec5977cfa,Methenamine Hippurate,methenamine hippurate
+ING-ee4c2cd5890dcda75cfa7bb3,Fenbendazole,fenbendazole
+ING-ef0dd361d16d1ad0703624ae,Oxiconazole Nitrate,oxiconazole nitrate
+ING-ef1e9138f07107d41c3e7ae8,Brigatinib,brigatinib
+ING-ef369d860d42f3daca3e7a93,Thiamine Hydrochloride (Vit-B1),thiamine hydrochloride vit b1
+ING-efad853d4ff821d253edb40d,Selexipag,selexipag
+ING-efba19db340f5efa20c1c5c3,Neomycin,neomycin
+ING-efbbc00eb01125b6e32f4590,Ruxolitinib,ruxolitinib
+ING-efc838620462f2289e523762,Salicylic Acid,salicylic acid
+ING-f01be8bd30771fe9e80e5cfb,Isopropamide,isopropamide
+ING-f08268964fa6d91c124c097e,Pegfilgrastim,pegfilgrastim
+ING-f0c308b2f3b82025a0fe0115,Amikacin,amikacin
+ING-f106f47d17a9358b92949872,Jirakaddarista,jirakaddarista
+ING-f10bfee314e86e2e0553d94a,Cyclosporine,cyclosporine
+ING-f10e5ae5f11feb4f3ce86379,Thiamine Hydrochloride,thiamine hydrochloride
+ING-f1669fa9d1a7846254dd3a04,Human Papillomavirus Bivalent (Types 16 & 18),human papillomavirus bivalent types 16 18
+ING-f188f6c3b9847b6bdf73e03a,Docusate Sodium (Oral),docusate sodium oral
+ING-f18e48678b723e80d272f37b,Dates,dates
+ING-f195534f6637bcb9c4c09841,Allium cepa,allium cepa
+ING-f199fd0365d94715a00868f8,Patrangasav,patrangasav
+ING-f1aab97447f08a7361f3edab,Colistimethate Sodium,colistimethate sodium
+ING-f204a67a76159aeaa12c0a4f,Revefenacin,revefenacin
+ING-f213daa0759177da42ab3fe0,Cefepime,cefepime
+ING-f22b921fdb0c58666a28798f,Dienogest,dienogest
+ING-f22f3a57e03c04c3845f4022,Sulphadimidine,sulphadimidine
+ING-f24132a6414bb496c999b58a,Liraglutide,liraglutide
+ING-f27efcb6c6fdfa62d3fba479,Aswagandharista,aswagandharista
+ING-f2a63529dd403ada051d8fb8,Ciprofloxacin Hydrochloride,ciprofloxacin hydrochloride
+ING-f2abf16580b9918c2b393c28,Tretinoin (Oral),tretinoin oral
+ING-f2acc05c4cdb1da75cacea50,Topotecan,topotecan
+ING-f2ad5c67164511de9cc6e31b,Lymecycline,lymecycline
+ING-f2d2fbc78ef3b03906a385fe,Bambuterol Hydrochloride,bambuterol hydrochloride
+ING-f2d61fc0fb4d4f0d3da3b196,Tetrahydrozoline Hydrochloride,tetrahydrozoline hydrochloride
+ING-f2f211644e9c1f142c34f0ad,Pivmecillinam,pivmecillinam
+ING-f2f9179d1f07d6c30f324a72,Hyoscyamus niger,hyoscyamus niger
+ING-f31f2e11b41537a7cd2e70f4,Hexachlorophene,hexachlorophene
+ING-f326c31c97d460f4bd12449f,Senna Extract,senna extract
+ING-f332f21ff7bd95363f01b826,Canagliflozin Hemihydrate,canagliflozin hemihydrate
+ING-f33e17b5a1fc2f0346d47445,Vamin 18 Novum,vamin 18 novum
+ING-f34e88340126e724bcecfdc7,Ispaghula Husk,ispaghula husk
+ING-f354d5a2ad90fb22c930cf1b,Multivitamin & Multimineral [A-Z for infanrs & childrens],multivitamin multimineral a z for infanrs childrens
+ING-f35efcae0fe760845cd411d6,Atomoxetine Hydrochloride,atomoxetine hydrochloride
+ING-f35f8dbc1857c5ae5495aef8,Finasteride [For B.P.H.],finasteride for b p h
+ING-f38e9271ddbbfee13b4caf91,Arsenic Trioxide,arsenic trioxide
+ING-f39e2921297b98cc5450586d,Deferoxamine Mesylate,deferoxamine mesylate
+ING-f3a25f61795bddd91c0fa8b1,Lamotrigine,lamotrigine
+ING-f3b03e3117c1c9fa98f48866,Tiemonium Methylsulphate,tiemonium methylsulphate
+ING-f3bceb275bbac259fa28c555,Sevelamer Carbonate,sevelamer carbonate
+ING-f3d98aadce19582f8f75a44c,Gramicidin,gramicidin
+ING-f3f77bd2c8bd981711014477,Eplerenone,eplerenone
+ING-f4120b9054bf01b7d0752846,Ipratropium (Solution for inhalation),ipratropium solution for inhalation
+ING-f41393b7a691a813f7def438,Silymarin [Milk thistle],silymarin milk thistle
+ING-f434d545c8769a9031aa6de1,Miconazole Nitrate (Topical),miconazole nitrate topical
+ING-f4508be99b25d4ffec20cd77,Calcium (Eggshell Source),calcium eggshell source
+ING-f45622d9a66e15c3acabc546,Lenograstim,lenograstim
+ING-f4a41aaa8d2378c29f12a40c,Choline Chloride,choline chloride
+ING-f4b571f71d03c61c3c977493,Vitamin C [Ascorbic acid],vitamin c ascorbic acid
+ING-f4d0255acbc1c0e2b07cef3f,Calcium Carbonate,calcium carbonate
+ING-f4d773352dfaa67bbdbb49a9,Sulphachloropyridazone,sulphachloropyridazone
+ING-f4ed4b315e947fc7e04c617f,Eribulin Mesylate,eribulin mesylate
+ING-f53035420640904ad644fe61,Clotrimazole,clotrimazole
+ING-f56cfc92f64623a13013c04a,Pheniramine,pheniramine
+ING-f5a698ca77954e03ec1c7029,Piroxicam,piroxicam
+ING-f5b6ab0b5dba528c3561a67b,Retapamulin,retapamulin
+ING-f5c0870e6d507f248e84d083,Butenafine,butenafine
+ING-f5f7b4329e7383da3a637fb3,Trastuzumab Emtansine,trastuzumab emtansine
+ING-f6158114306bc0353d537f0a,Betahistine Mesilate,betahistine mesilate
+ING-f65f5ac33d08146563d2f7cb,Sesame oil,sesame oil
+ING-f67aabe5136e1cde7fd08e0a,Faropenem,faropenem
+ING-f67f5e229ff4260587d82ead,Prochlorperazine Mesilate,prochlorperazine mesilate
+ING-f723e2702bf12e72107895ec,Calcium Dobesilate,calcium dobesilate
+ING-f7475da3644097d6be099a5c,Multivitamin & Multimineral [A-Z teen girls preparation],multivitamin multimineral a z teen girls preparation
+ING-f76a0c1041cc3f102f1811e8,Omega-3 Acid Ethyl Esters [Salmon Fish Oil],omega 3 acid ethyl esters salmon fish oil
+ING-f78073e5297d5c8469111160,Quetiapine Fumarate,quetiapine fumarate
+ING-f78a6a6e38b62a6af98e9e9a,Prazosin,prazosin
+ING-f78ea752822b648940d51371,Zinc,zinc
+ING-f79518c94febebbb900bb966,Nitrofurazone,nitrofurazone
+ING-f7c6200bf111b84ee533f90c,Ethinylestradiol,ethinylestradiol
+ING-f7c9fd450e76ca839b4e07f5,Difelikefalin,difelikefalin
+ING-f7cef0b66d576da52f5cd385,Colchicine,colchicine
+ING-f811a785ec6e90c509a4a797,L-Arginine Hcl,l arginine hcl
+ING-f8191985cfba86590191fe8a,Andrographis paniculata,andrographis paniculata
+ING-f81c4215ce4e066fd2c1d9c0,Sodium Alginate,sodium alginate
+ING-f83a215f9fee12f592e247c8,Citalopram Hydrobromide,citalopram hydrobromide
+ING-f84d034ff84179100f3f90f3,Sevelamer Hydrochloride,sevelamer hydrochloride
+ING-f861ced3b1dc8620d1a42ae4,Acemetacin,acemetacin
+ING-f870b68c65e4060753c76e0f,Methyl Ergometrine Maleate,methyl ergometrine maleate
+ING-f88184b8243baecc601bfb28,Levosalbutamol,levosalbutamol
+ING-f892bbbb96ce319b1cdbfdc3,Dabigatran Etexilate Mesylate,dabigatran etexilate mesylate
+ING-f8ab54972063c21ee516c85a,Palbociclib,palbociclib
+ING-f8bb9aa222d69b282e47b487,Magnesium Chloride Hexahydrate,magnesium chloride hexahydrate
+ING-f8c561d6efd4cd8abc700b0b,Propofol,propofol
+ING-f8d5f542b5955cad67e1df28,Clindamycin (Lotion),clindamycin lotion
+ING-f8f5717419c8c1f87aeb84df,Cyclophosphamide,cyclophosphamide
+ING-f91374d4f65a06181379edc3,Vitamin A Acetate,vitamin a acetate
+ING-f92949a4937381dd660e16df,Oxymetazoline Hydrochloride (Nasal Preparation),oxymetazoline hydrochloride nasal preparation
+ING-f94cbb1c684784bc9f2b300a,Eptifibatide,eptifibatide
+ING-f9580a9f58628b45a1e7d0e8,Sodium Cromoglicate [2%],sodium cromoglicate 2
+ING-f95bb41b4dafb8c35ff728de,Remdesivir,remdesivir
+ING-f9caf46122bdbb85ad70b6ac,Tolfenamic Acid,tolfenamic acid
+ING-f9d23537d4ee590c4de39e09,Clioquinol,clioquinol
+ING-f9d7b012ed15c475293815c8,Methotrexate,methotrexate
+ING-fa15de6b4bafad1fba92556d,Econazole Nitrate,econazole nitrate
+ING-fa197992fa80e5b89667cdb0,Sotagliflozin,sotagliflozin
+ING-fa4a0f54d69ac103c191d342,Dexamethasone Sodium Phosphate,dexamethasone sodium phosphate
+ING-fa67dc161f178150d58419a1,Ticagrelor,ticagrelor
+ING-fa6bba6f285334b7e4fe2d81,Erlotinib,erlotinib
+ING-fa728715ccea3724678e0433,Silicon,silicon
+ING-faae5e6785efe195f0bcd3ec,Disopyramide,disopyramide
+ING-faf2bceea3edb19fecee9fe7,Bromhexine,bromhexine
+ING-fb24bed61049b5d9227de5a4,Hylan G-F 20,hylan g f 20
+ING-fb2da1061985c64037027910,Temozolomide,temozolomide
+ING-fb3fa41fff85d806c5e68a1a,Vitamin B3,vitamin b3
+ING-fb40d5bb353bdb09209dd7ba,Ferric Pyrophosphate Citrate,ferric pyrophosphate citrate
+ING-fb8349206163fc4744dc551f,Cetirizine,cetirizine
+ING-fb8a9f459b05a87d2e426dc6,Cilastatin,cilastatin
+ING-fb9e3762aa9592fee6aca97b,Carbon Di Oxide,carbon di oxide
+ING-fbc0af433559139af867c681,Saquinavir,saquinavir
+ING-fbc7e4ef056b422cce6530d2,Poppy Seeds,poppy seeds
+ING-fc05ba5edb7f015663d6b3f0,Golimumab,golimumab
+ING-fc07c80625c8b8913a4b5570,Sulphonated Surfactant,sulphonated surfactant
+ING-fc1d976b9cd3064a4cb88fed,Pertuzumab,pertuzumab
+ING-fc30c3873522f71e1ef9dbfd,Tranexamic Acid,tranexamic acid
+ING-fc30ddcefa22111791adb4f6,Sulphaquinoxaline,sulphaquinoxaline
+ING-fc33901267a8176dcd508559,Linaclotide,linaclotide
+ING-fc47d3a1729f4e2094f61f48,Pazopanib,pazopanib
+ING-fc7392629ca24ad8d1eef184,Tulobuterol Hydrochloride,tulobuterol hydrochloride
+ING-fc9c53f3ac3be0230f635d88,Desoximetasone,desoximetasone
+ING-fca0801fbd2e3cdacf2d3a81,Ivermectin,ivermectin
+ING-fcaf0e1c36393c5fd0c1df5d,Carboplatin,carboplatin
+ING-fcc68692865e6b40f80d0dd1,Rosuvastatin,rosuvastatin
+ING-fcd34bf23cb7b9260b1df424,Disodium Hydrogen Phosphate,disodium hydrogen phosphate
+ING-fcd8e5922f8c4cb77b11d87f,Tinidazole,tinidazole
+ING-fce2eb5ed741e651b4985c10,Triamcinolone,triamcinolone
+ING-fcf72c2c3e96cd2312ea428d,Intralipid 20%,intralipid 20
+ING-fcf9a0f0f1a11ef6e124660b,Risperidone,risperidone
+ING-fd0f5b5ac70cd3d2e1eb0d7e,Zinc Oxide,zinc oxide
+ING-fd286324950e9fef7b2506d5,Norethisterone,norethisterone
+ING-fd42ec07688104cd94e2de37,Amorolfine Hydrochloride,amorolfine hydrochloride
+ING-fd4326cdcba4dd71e9ddda30,Terbinafine Hydrochloride,terbinafine hydrochloride
+ING-fd849bcb035f46979419ec69,Promethazine Theoclate,promethazine theoclate
+ING-fd9e10f47eca76015a10dec1,Fluphenazine Decanoate,fluphenazine decanoate
+ING-fdb205bb2a8929162909612f,Lumefantrine,lumefantrine
+ING-fdbf59c9512e5f424eece214,Fermented soy [Lactobacillus Delbrueckii],fermented soy lactobacillus delbrueckii
+ING-fdd3e3ccc9517e97019a2182,Doxycycline,doxycycline
+ING-fddc209e7d03497e65853e75,Nitrofurantoin Microcrystals,nitrofurantoin microcrystals
+ING-fdf913afc0eece0dd18c6491,Dehydroepiandrosterone,dehydroepiandrosterone
+ING-fe04cf5308ac83c5179bf743,Conjugated Estrogen (Tablet),conjugated estrogen tablet
+ING-fe05d9917b524532b651f508,Peppermint,peppermint
+ING-fe0bf5ce8d25464f28606a66,Liquorice,liquorice
+ING-fe148b6d6ff8beb117f2077a,Clobetasol Propionate (Topical Preparation),clobetasol propionate topical preparation
+ING-fe24621f5d59da2b878b997b,Zaleplone,zaleplone
+ING-fe5ca843e2ea393d7ef37840,Cloxacillin,cloxacillin
+ING-fe6df66e9929ce7391dba730,Tedizolid Phosphate,tedizolid phosphate
+ING-fe7099411571539a3d452f30,Triprolidine,triprolidine
+ING-fe7ee104a224f8c72d7c4fb7,Dasamularista,dasamularista
+ING-fea999acb0217eca1f69e789,Cinchocaine Hydrochloride,cinchocaine hydrochloride
+ING-feb52949cc2c9f709ac385b7,Thiamine Mononitrate,thiamine mononitrate
+ING-fec75379ed9639e4007aa90c,Lamivudine [For Chronic Hepatitis B],lamivudine for chronic hepatitis b
+ING-fec7a35958c0ab8ec6a86119,Mercaptopurine,mercaptopurine
+ING-fef207156ac16368f5773b2e,Ritodrine Hydrochloride,ritodrine hydrochloride
+ING-fefeb9ec6e696f3991302818,Nefopam Hydrochloride,nefopam hydrochloride
+ING-ff26790909ceafa8ac6bbf32,Sotorasib,sotorasib
+ING-ff73d1c9c026a278f91c82f4,Triamcinolone Acetonide (Nasal Spray),triamcinolone acetonide nasal spray
+ING-ffa0567ed9fa1867534d116d,Tobramycin,tobramycin
+ING-ffaa2f48c5b133bbb9403755,Flunarizine,flunarizine
+ING-ffac4383a0089268ef50d6a6,Drospirenone (21 tablet),drospirenone 21 tablet
+ING-ffd59d3e01bc77bf3da63094,Acyclovir (Topical),acyclovir topical
+ING-fff4fc75851922ef2a3075d2,Etomidate,etomidate
