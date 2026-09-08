@@ -1,0 +1,100 @@
+# Local notes and documentation (including README.md and gg.md), per request.
+*.[mM][dD]
+*.markdown
+/docs/
+/NationX_Documentation.html
+/NationX_Technical_Specification.html
+/nationx-complete-*.svg
+/nationx-complete-*.png
+/erd clear.png
+
+# Credentials and local environment settings. Keep only the reviewed template.
+.env
+.env.*
+*.env
+.envrc
+!/.env.example
+.npmrc
+.pypirc
+.netrc
+.my.cnf
+.mylogin.cnf
+.ssh/
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+credentials.json
+credentials.*.json
+service-account*.json
+service_account*.json
+
+# Private citizen uploads, prescriptions, identity documents and runtime data.
+uploads/
+# Source/licensing rights are not established; keep dataset artifacts local.
+dataset/
+generated/
+/backups/
+/dumps/
+/exports/
+*.dump
+*.sql.gz
+*.sql.zip
+*.sql.bak
+*_backup.sql
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Installed dependencies, builds and caches (not source or lockfiles).
+node_modules/
+/client/dist/
+/client/build/
+/dist/
+/build/
+.vite/
+.cache/
+.npm/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Generated test reports, recordings, coverage and logs; keep test source.
+playwright-report/
+test-results/
+blob-report/
+coverage/
+.nyc_output/
+logs/
+*.log
+*.pid
+*.pid.lock
+
+# Editor/OS metadata and local backup files.
+.DS_Store*
+._*
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+.history/
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+*.rej
+
+# Do not blanket-ignore SQL, JSON, HTML, images, or license notices:
+# schemas/migrations, package manifests/lockfiles, runtime assets and notices
+# are required project files. Stage only the exact paths approved by the user.
