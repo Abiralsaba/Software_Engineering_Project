@@ -2,6 +2,7 @@ const express = require('express');
 const SSLCommerz = require('sslcommerz-lts');
 const pool = require('../config/db');
 const router = express.Router();
+const verifyToken = require('../middleware/authMiddleware');
 
 // Configuration
 const store_id = process.env.STORE_ID || 'testbox';
@@ -9,7 +10,8 @@ const store_passwd = process.env.STORE_PASS || 'qwerty';
 const is_live = false; // true for live, false for sandbox
 
 // INIT Payment
-router.post('/land/tax/init', async (req, res) => {
+router.post('/land/tax/init', verifyToken, async (req, res) => {
+    if (req.user.isAdmin) return res.status(403).json({ error: 'Citizen account required.' });
     const {
         nid, mobile,
         division_id, district_id, upazila_id,
@@ -21,7 +23,7 @@ router.post('/land/tax/init', async (req, res) => {
 
     try {
         // 1. Get user_id and name from NID
-        const [userRows] = await pool.query('SELECT id, name FROM reg_info WHERE nid = ?', [nid]);
+        const [userRows] = await pool.query('SELECT id, name FROM reg_info WHERE nid = ? AND id = ?', [nid, req.user.id]);
         if (userRows.length === 0) {
             return res.status(400).json({ error: 'A registered citizen NID is required for land tax payment.' });
         }

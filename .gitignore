@@ -79,6 +79,11 @@ logs/
 *.log
 *.pid
 *.pid.lock
+*.wav
+*.webm
+*.ogg
+ggml-*.bin
+/whisper.cpp/
 
 # Editor/OS metadata and local backup files.
 .DS_Store*

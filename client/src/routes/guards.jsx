@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useAuth, isApplicantToken } from '../context/AuthContext.jsx';
 
 export function CitizenGuard({ children }) {
   const { citizenToken } = useAuth();
@@ -8,6 +8,7 @@ export function CitizenGuard({ children }) {
   if (!citizenToken) {
     return <Navigate to="/index.html" replace state={{ from: location.pathname }} />;
   }
+  if (isApplicantToken(citizenToken)) return <Navigate to={`/nid-applicant.html?blocked=${encodeURIComponent(location.pathname + location.search)}`} replace />;
   return children;
 }
 

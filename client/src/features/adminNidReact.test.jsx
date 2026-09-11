@@ -18,6 +18,7 @@ function renderAdmin(path = '/admin-nid.html') {
 }
 
 function emptyAdmin(path) {
+  if (path.startsWith('/api/nid/first-time-admin?')) return Promise.resolve({ rows: [], total: 0, page: 1 });
   if (path === '/api/nid/admin/stats') return Promise.resolve({});
   if (path === '/api/nid/admin/applications') return Promise.resolve([]);
   return Promise.resolve({});

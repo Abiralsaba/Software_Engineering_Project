@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthShell, { AuthHeader, FormField } from '../../layouts/AuthShell.jsx';
-import { authApi } from '../../services/api.js';
+import { authApi, apiRequest } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { alerts } from '../../utils/alerts.js';
 
@@ -21,6 +21,7 @@ export default function LoginPage() {
   const [pendingNotice, setPendingNotice] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [applicantLogin, setApplicantLogin] = useState(false);
 
   useEffect(() => {
     setAudience(location.hash === '#admin' ? 'admin' : 'citizen');
@@ -40,10 +41,10 @@ export default function LoginPage() {
     setSubmitting(true);
     setError('');
     try {
-      const data = await authApi.citizenLogin(citizen);
+      const data = applicantLogin ? await apiRequest('/api/applicants/login', { method: 'POST', auth: false, body: citizen }) : await authApi.citizenLogin(citizen);
       setCitizenSession(data.token);
       await alerts.success('Login Successful!', 'Welcome to NationX.');
-      navigate('/dashboard.html', { replace: true });
+      navigate(applicantLogin ? '/nid-applicant.html' : '/dashboard.html', { replace: true });
     } catch (requestError) {
       setError(requestError.message);
       await alerts.error(requestError.message);
@@ -117,6 +118,7 @@ export default function LoginPage() {
       {audience === 'citizen' ? (
         <section className="login-section active" aria-label="Citizen login">
           <form className="auth-form" onSubmit={submitCitizen}>
+            <label><input type="checkbox" checked={applicantLogin} onChange={event => setApplicantLogin(event.target.checked)} /> I registered without an NID (applicant login)</label>
             <FormField id="citizen-email" type="email" label="Email Address" icon="envelope" placeholder="citizen@bangladesh.gov.bd" value={citizen.email} onChange={event => setCitizen({ ...citizen, email: event.target.value })} required />
             <FormField id="citizen-password" type="password" label="Password" icon="lock" placeholder="Enter your password" value={citizen.password} onChange={event => setCitizen({ ...citizen, password: event.target.value })} required />
             <button className="btn-submit" disabled={submitting} type="submit">

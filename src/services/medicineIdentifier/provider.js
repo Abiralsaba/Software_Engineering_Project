@@ -1,6 +1,7 @@
 'use strict';
 
 const { extractionContract } = require('./schemas');
+const { geminiConfig, createGeminiClient } = require('../geminiClient');
 
 const SCHEMA_VERSION = 'medicine-visible-extraction-v1';
 const CONSENT_TEXT = 'I understand that image extraction may make mistakes. I will verify the result and consult a doctor or pharmacist before changing medicine.';
@@ -63,9 +64,7 @@ function requestedRetryDelayMs(error) {
 
 class GeminiExtractionProvider {
     constructor(options = {}) {
-        this.apiKey = options.apiKey !== undefined ? options.apiKey : process.env.GEMINI_API_KEY;
-        this.model = options.model || process.env.GEMINI_MODEL || 'gemini-3.5-flash';
-        this.timeoutMs = Number(options.timeoutMs || process.env.GEMINI_TIMEOUT_MS || 30000);
+        Object.assign(this, geminiConfig(options));
         this.retryDelayMs = Number(options.retryDelayMs ?? process.env.GEMINI_RETRY_DELAY_MS ?? 1000);
         this.retryJitterMs = Number(options.retryJitterMs ?? process.env.GEMINI_RETRY_JITTER_MS ?? 250);
         this.maxRetryDelayMs = Number(options.maxRetryDelayMs ?? process.env.GEMINI_MAX_RETRY_DELAY_MS ?? 15000);
@@ -77,8 +76,7 @@ class GeminiExtractionProvider {
         if (!this.apiKey) throw Object.assign(new Error('Gemini extraction is not configured. Use manual catalogue search.'), { status: 503, code: 'GEMINI_NOT_CONFIGURED' });
         const { schema, jsonSchema } = extractionContract(mode);
         if (!this.client) {
-            const { GoogleGenAI } = await import('@google/genai');
-            this.client = new GoogleGenAI({ apiKey: this.apiKey });
+            this.client = await createGeminiClient(this.apiKey);
         }
         const request = {
             model: this.model,

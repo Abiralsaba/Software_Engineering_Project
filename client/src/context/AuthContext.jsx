@@ -2,6 +2,11 @@ import { createContext, useContext, useMemo, useState } from 'react';
 import { sanitizeToken } from '../services/api.js';
 
 const AuthContext = createContext(null);
+// Routing hint only. Express verifies the signed token and current database identity.
+export function isApplicantToken(token) {
+  try { return JSON.parse(atob(token.split('.')[1].replaceAll('-', '+').replaceAll('_', '/'))).principal_type === 'NID_APPLICANT'; }
+  catch { return false; }
+}
 
 export function AuthProvider({ children }) {
   const [citizenToken, setCitizenToken] = useState(() => sanitizeToken(localStorage.getItem('token')));

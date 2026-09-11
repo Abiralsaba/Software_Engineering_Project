@@ -14,6 +14,7 @@ import ProfilePage from './features/profile/ProfilePage.jsx';
 import { AdminGuard, CitizenGuard } from './routes/guards.jsx';
 
 const CommunityPage = lazy(() => import('./features/community/CommunityPage.jsx'));
+const ApplicantPage = lazy(() => import('./features/assistant/ApplicantPage.jsx'));
 const AdmissionPage = lazy(() => import('./features/admission/AdmissionPage.jsx'));
 const ApplyPage = lazy(() => import('./features/admission/ApplyPage.jsx'));
 const AdminNidPage = lazy(() => import('./features/admin/AdminNidPage.jsx'));
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/" element={<PublicEntry />} />
       <Route path="/index.html" element={<PublicEntry />} />
       <Route path="/register.html" element={<RegisterPage />} />
+      <Route path="/nid-applicant.html" element={<ApplicantPage />} />
       <Route path="/forgot-password.html" element={<ForgotPasswordPage />} />
       <Route path="/admin-login.html" element={<Navigate to="/index.html#admin" replace />} />
       <Route path="/dashboard.html" element={<CitizenGuard><DashboardPage /></CitizenGuard>} />

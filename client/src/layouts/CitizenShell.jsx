@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useStylesheets } from '../hooks/useStylesheets.js';
 import { apiRequest } from '../services/api.js';
+import AssistantPanel from '../features/assistant/AssistantPanel.jsx';
 
 const navigation = [
   ['dashboard.html', 'home', 'Dashboard'],
@@ -29,6 +30,7 @@ export default function CitizenShell({ children, pageStyles = [] }) {
   const { clearCitizenSession } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile, setProfile] = useState({});
+  const [assistantOpen, setAssistantOpen] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -45,6 +47,8 @@ export default function CitizenShell({ children, pageStyles = [] }) {
 
   return (
     <div className="nationx-dashboard nationx-citizen-pages">
+      <button className="nx-assistant-launch" onClick={() => setAssistantOpen(v => !v)} aria-expanded={assistantOpen}>{assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}</button>
+      {assistantOpen && <aside className="nx-assistant-drawer"><AssistantPanel accountKey={`citizen-${profile.id || ''}`} /></aside>}
       <div className="dashboard-ambient" aria-hidden="true">
         <span className="dashboard-orb dashboard-orb-green" />
         <span className="dashboard-orb dashboard-orb-red" />

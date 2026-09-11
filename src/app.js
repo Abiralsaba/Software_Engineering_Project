@@ -41,6 +41,7 @@ const migratedReactRoutes = [
     '/',
     '/index.html',
     '/register.html',
+    '/nid-applicant.html',
     '/forgot-password.html',
     '/admin-login.html',
     '/dashboard.html',
@@ -100,6 +101,13 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, please try again later.'
 });
 app.use('/api/', limiter);
+// Limited applicants cannot reach legacy citizen-ID routes, even via direct requests.
+app.use('/api', require('./assistant/identity').applicantBoundary);
+app.use('/api/applicants', require('./assistant/applicantRoutes'));
+const firstTimeNid = require('./assistant/applicationRoutes');
+app.use('/api/nid/first-time-applications', firstTimeNid.router);
+app.use('/api/nid/first-time-admin', firstTimeNid.adminRouter);
+app.use('/api/assistant', require('./assistant/assistantRoutes').createAssistantRouter());
 
 // React is an opt-in, route-by-route cutover while legacy pages remain available.
 // API routes, uploads and every unmigrated .html URL continue to use the existing backend/public tree.
