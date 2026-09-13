@@ -118,7 +118,12 @@ export default function LoginPage() {
       {audience === 'citizen' ? (
         <section className="login-section active" aria-label="Citizen login">
           <form className="auth-form" onSubmit={submitCitizen}>
-            <label><input type="checkbox" checked={applicantLogin} onChange={event => setApplicantLogin(event.target.checked)} /> I registered without an NID (applicant login)</label>
+            <label className={`applicant-login-option${applicantLogin ? ' selected' : ''}`}>
+              <input type="checkbox" checked={applicantLogin} onChange={event => setApplicantLogin(event.target.checked)} />
+              <span className="applicant-login-icon"><i className="fas fa-file-circle-user" aria-hidden="true" /></span>
+              <span className="applicant-login-copy"><strong>Applicant login</strong><small>Use this if you registered without an NID.</small></span>
+              <span className="applicant-login-switch" aria-hidden="true"><span /></span>
+            </label>
             <FormField id="citizen-email" type="email" label="Email Address" icon="envelope" placeholder="citizen@bangladesh.gov.bd" value={citizen.email} onChange={event => setCitizen({ ...citizen, email: event.target.value })} required />
             <FormField id="citizen-password" type="password" label="Password" icon="lock" placeholder="Enter your password" value={citizen.password} onChange={event => setCitizen({ ...citizen, password: event.target.value })} required />
             <button className="btn-submit" disabled={submitting} type="submit">

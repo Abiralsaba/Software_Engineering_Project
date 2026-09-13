@@ -532,6 +532,107 @@ body {
     color: #fff;
 }
 
+/* ===== Applicant Login Mode ===== */
+.applicant-login-option {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    padding: 12px 13px;
+    color: #fff;
+    background: rgba(8, 20, 38, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.applicant-login-option:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(52, 211, 153, 0.42);
+}
+
+.applicant-login-option.selected {
+    background: linear-gradient(145deg, rgba(0, 166, 118, 0.2), rgba(0, 77, 56, 0.12));
+    border-color: rgba(52, 211, 153, 0.72);
+    box-shadow: 0 8px 24px rgba(0, 106, 78, 0.18);
+}
+
+.applicant-login-option > input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.applicant-login-option:focus-within {
+    outline: 3px solid rgba(52, 211, 153, 0.3);
+    outline-offset: 2px;
+}
+
+.applicant-login-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    color: #6ee7b7;
+    background: rgba(0, 166, 118, 0.16);
+    border-radius: 11px;
+}
+
+.applicant-login-copy,
+.applicant-login-copy strong,
+.applicant-login-copy small {
+    display: block;
+    min-width: 0;
+}
+
+.applicant-login-copy strong {
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.applicant-login-copy small {
+    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+.applicant-login-switch {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    transition: background 180ms ease, border-color 180ms ease;
+}
+
+.applicant-login-switch span {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 50%;
+    transition: transform 180ms ease, background 180ms ease;
+}
+
+.applicant-login-option.selected .applicant-login-switch {
+    background: var(--bd-green-light);
+    border-color: #34d399;
+}
+
+.applicant-login-option.selected .applicant-login-switch span {
+    background: #fff;
+    transform: translateX(16px);
+}
+
 .form-group {
     position: relative;
     margin-bottom: 5px;

@@ -23,6 +23,17 @@ function jsonResponse(data) {
 }
 
 describe('citizen login workflow', () => {
+  it('shows a readable applicant mode and allows it to be selected', async () => {
+    const user = userEvent.setup();
+    render(<MemoryRouter><AuthProvider><LoginPage /></AuthProvider></MemoryRouter>);
+
+    const applicantMode = screen.getByRole('checkbox', { name: /Applicant login/i });
+    expect(applicantMode).not.toBeChecked();
+    expect(screen.getByText('Use this if you registered without an NID.')).toBeVisible();
+    await user.click(applicantMode);
+    expect(applicantMode).toBeChecked();
+  });
+
   it('stores the sanitized citizen token and routes to the dashboard', async () => {
     const user = userEvent.setup();
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(jsonResponse({ token: '"signed-token"' })));
