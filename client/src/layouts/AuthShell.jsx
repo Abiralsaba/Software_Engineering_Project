@@ -1,6 +1,6 @@
 import { useStylesheets } from '../hooks/useStylesheets.js';
 
-export default function AuthShell({ children, icons = ['landmark', 'id-card', 'file-alt', 'university'] }) {
+export default function AuthShell({ children, icons = ['landmark', 'id-card', 'file-alt', 'university'], wide = false }) {
   useStylesheets(['/css/auth.css']);
 
   return (
@@ -15,7 +15,7 @@ export default function AuthShell({ children, icons = ['landmark', 'id-card', 'f
       <div className="floating-icons" aria-hidden="true">
         {icons.map(icon => <i className={`fas fa-${icon} floating-icon`} key={icon} />)}
       </div>
-      <div className="auth-container">
+      <div className={`auth-container${wide ? ' auth-container-wide' : ''}`}>
         <div className="auth-card">
           <div className="corner-decoration top-left" />
           <div className="corner-decoration bottom-right" />

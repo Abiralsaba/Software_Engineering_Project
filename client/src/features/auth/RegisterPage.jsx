@@ -51,12 +51,26 @@ export default function RegisterPage() {
   }
 
   return (
-    <AuthShell icons={['passport', 'id-card', 'user-shield', 'file-signature']}>
+    <AuthShell wide icons={['passport', 'id-card', 'user-shield', 'file-signature']}>
       <AuthHeader title="Citizen Registration" subtitle="Create your secure NationX identity" />
-      <fieldset className="auth-form"><legend>Do you already have an NID?</legend>
-        <label><input type="radio" name="identity-choice" checked={!applicant} onChange={() => setApplicant(false)} /> I already have an NID</label>
-        <label><input type="radio" name="identity-choice" checked={applicant} onChange={() => setApplicant(true)} /> I don’t have an NID — Apply as a new applicant</label>
-        {applicant && <p>Create a limited applicant account. You can apply for and track an NID; services requiring an NID remain locked. No NID number is assigned at registration.</p>}
+      <fieldset className="identity-choice">
+        <legend>Choose how you want to register</legend>
+        <p className="identity-choice-intro">Select the option that matches your current identity status.</p>
+        <div className="identity-choice-grid">
+          <label className={!applicant ? 'identity-option selected' : 'identity-option'}>
+            <input type="radio" name="identity-choice" checked={!applicant} onChange={() => setApplicant(false)} />
+            <span className="identity-option-icon"><i className="fas fa-id-card" /></span>
+            <span><strong>I already have an NID</strong><small>Register as a citizen using your existing National ID.</small></span>
+            <i className="fas fa-circle-check identity-option-check" aria-hidden="true" />
+          </label>
+          <label className={applicant ? 'identity-option selected' : 'identity-option'}>
+            <input type="radio" name="identity-choice" checked={applicant} onChange={() => setApplicant(true)} />
+            <span className="identity-option-icon"><i className="fas fa-file-circle-plus" /></span>
+            <span><strong>I don’t have an NID</strong><small>Create an applicant account and apply for your first NID.</small></span>
+            <i className="fas fa-circle-check identity-option-check" aria-hidden="true" />
+          </label>
+        </div>
+        {applicant && <div className="identity-applicant-note"><i className="fas fa-circle-info" aria-hidden="true" /><p><strong>Applicant access</strong><span>You can apply for and track your NID. Services requiring an approved NID remain locked, and no NID number is assigned during registration.</span></p></div>}
       </fieldset>
       {error && <div className="react-auth-error" role="alert">{error}</div>}
       <form className="auth-form" onSubmit={submit}>

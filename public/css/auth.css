@@ -182,6 +182,11 @@ body {
     perspective: 1000px;
 }
 
+.auth-container-wide {
+    max-width: 720px;
+    margin: 24px 0;
+}
+
 /* ===== Auth Card ===== */
 .auth-card {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
@@ -210,6 +215,7 @@ body {
             rgba(255, 255, 255, 0.1),
             transparent);
     animation: cardShine 3s infinite;
+    pointer-events: none;
 }
 
 @keyframes cardEntry {
@@ -353,6 +359,177 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+/* ===== Registration Identity Choice ===== */
+.identity-choice {
+    min-width: 0;
+    margin: 0 0 26px;
+    padding: 0;
+    color: #fff;
+    border: 0;
+}
+
+.identity-choice legend {
+    width: 100%;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.identity-choice-intro {
+    margin-bottom: 14px;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.identity-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.identity-option {
+    position: relative;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    min-height: 104px;
+    padding: 16px 38px 16px 15px;
+    background: rgba(8, 20, 38, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.identity-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(0, 166, 118, 0.55);
+    transform: translateY(-2px);
+}
+
+.identity-option.selected {
+    background: linear-gradient(145deg, rgba(0, 166, 118, 0.2), rgba(0, 77, 56, 0.14));
+    border-color: rgba(52, 211, 153, 0.78);
+    box-shadow: 0 10px 28px rgba(0, 106, 78, 0.2), inset 0 0 0 1px rgba(52, 211, 153, 0.08);
+}
+
+.identity-option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.identity-option:focus-within {
+    outline: 3px solid rgba(52, 211, 153, 0.3);
+    outline-offset: 2px;
+}
+
+.identity-option-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    color: #6ee7b7;
+    background: rgba(0, 166, 118, 0.16);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    border-radius: 12px;
+}
+
+.identity-option strong,
+.identity-option small {
+    display: block;
+}
+
+.identity-option strong {
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.identity-option small {
+    margin-top: 4px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.identity-option-check {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #34d399;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.identity-option.selected .identity-option-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.identity-applicant-note {
+    display: flex;
+    gap: 11px;
+    margin-top: 12px;
+    padding: 13px 14px;
+    color: #d1fae5;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.24);
+    border-radius: 13px;
+    animation: alertSlide 220ms ease;
+}
+
+.identity-applicant-note > i {
+    margin-top: 2px;
+    color: #34d399;
+}
+
+.identity-applicant-note p,
+.identity-applicant-note strong,
+.identity-applicant-note span {
+    display: block;
+    margin: 0;
+}
+
+.identity-applicant-note strong {
+    margin-bottom: 3px;
+    font-size: 12px;
+}
+
+.identity-applicant-note span {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    line-height: 1.55;
+    cursor: pointer;
+}
+
+.terms-checkbox input {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    accent-color: var(--bd-green-light);
+}
+
+.terms-checkbox:hover span {
+    color: #fff;
 }
 
 .form-group {
@@ -822,6 +999,14 @@ textarea.form-control {
     .corner-decoration {
         width: 60px;
         height: 60px;
+    }
+
+    .identity-choice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .identity-option {
+        min-height: 92px;
     }
 
     .role-tab {
