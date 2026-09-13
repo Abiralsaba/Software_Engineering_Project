@@ -10,14 +10,15 @@ usage() {
 NationX local launcher
 
 Usage:
-  ./start.sh               Build React and start NationX
+  ./start.sh               Build React, start local Whisper, and start NationX
   ./start.sh --no-browser  Start everything without opening a browser
   ./start.sh --help        Show this help
 
 Database connectivity is handled by the existing server configuration in `.env`.
 This script never starts, checks, or changes MySQL and never creates, imports,
 resets, or modifies a database schema.
-Press Ctrl+C to stop the NationX Node/Express server.
+When the voice assistant is enabled, Whisper is started from the paths in `.env`.
+Press Ctrl+C to stop NationX and any Whisper process started by this script.
 USAGE
 }
 
@@ -91,6 +92,61 @@ open_when_ready() {
     printf '[NationX] The browser was not opened because the server did not become ready within 20 seconds.\n' >&2
 }
 
+whisper_settings() {
+    node <<'NODE'
+require('dotenv').config({ quiet: true });
+
+if (process.env.VOICE_ASSISTANT_ENABLED === 'false') {
+    process.stdout.write('disabled');
+    process.exit(0);
+}
+
+try {
+    const url = new URL(process.env.WHISPER_BASE_URL || 'http://127.0.0.1:8081');
+    if (url.protocol !== 'http:' || url.hostname !== '127.0.0.1' || url.username || url.password || url.pathname !== '/' || url.search || url.hash) {
+        process.exit(2);
+    }
+    process.stdout.write(url.origin);
+} catch {
+    process.exit(2);
+}
+NODE
+}
+
+wait_for_whisper() {
+    local health_url="$1/health"
+    local attempt
+
+    for attempt in {1..120}; do
+        if curl -fsS "$health_url" >/dev/null 2>&1; then
+            return 0
+        fi
+
+        if [[ -n "${WHISPER_PID:-}" ]] && ! kill -0 "$WHISPER_PID" >/dev/null 2>&1; then
+            return 1
+        fi
+
+        sleep 0.5
+    done
+
+    return 1
+}
+
+WHISPER_PID=""
+
+cleanup() {
+    local exit_code=$?
+    trap - EXIT INT TERM
+
+    if [[ -n "$WHISPER_PID" ]] && kill -0 "$WHISPER_PID" >/dev/null 2>&1; then
+        log "Stopping local Whisper..."
+        kill "$WHISPER_PID" >/dev/null 2>&1 || true
+        wait "$WHISPER_PID" >/dev/null 2>&1 || true
+    fi
+
+    exit "$exit_code"
+}
+
 command -v node >/dev/null 2>&1 || fail "Node.js is not installed or is not available in PATH."
 command -v npm >/dev/null 2>&1 || fail "npm is not installed or is not available in PATH."
 command -v curl >/dev/null 2>&1 || fail "curl is required for the startup readiness check."
@@ -119,6 +175,25 @@ fi
 log "Building the React frontend..."
 npm run client:build
 
+WHISPER_URL="$(whisper_settings)" || fail "WHISPER_BASE_URL must be a local http://127.0.0.1 URL."
+
+if [[ "$WHISPER_URL" == "disabled" ]]; then
+    log "Voice assistant is disabled; skipping local Whisper."
+elif curl -fsS "$WHISPER_URL/health" >/dev/null 2>&1; then
+    log "Using the local Whisper server already running at $WHISPER_URL."
+else
+    log "Starting local Whisper at $WHISPER_URL..."
+    node scripts/assistant/whisper.js &
+    WHISPER_PID=$!
+    trap cleanup EXIT INT TERM
+
+    if ! wait_for_whisper "$WHISPER_URL"; then
+        fail "Local Whisper did not become ready. Check WHISPER_SERVER_BIN and WHISPER_MODEL_PATH in .env."
+    fi
+
+    log "Local Whisper is ready."
+fi
+
 log "Starting NationX in React mode. Press Ctrl+C to stop the application."
 open_when_ready "$APP_URL" &
-exec npm run start:react
+npm run start:react
