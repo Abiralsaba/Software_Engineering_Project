@@ -16,7 +16,10 @@ export function cameraAt(progress) {
   const p = clamp(progress);
   const index = Math.min(shots.length - 2, Math.max(0, shots.findIndex((shot, i) => i < shots.length - 1 && p <= shots[i + 1].at)));
   const a = shots[index], b = shots[index + 1];
-  const t = smooth(a.at, b.at, p);
+  // Zero velocity and acceleration at each composition: a deliberate pause
+  // without time-based lag that would desynchronise fast or reverse scrolling.
+  const u = clamp((p - a.at) / (b.at - a.at));
+  const t = u * u * u * (u * (u * 6 - 15) + 10);
   const mix = key => a[key].map((value, i) => value + (b[key][i] - value) * t);
   return { position: mix('position'), target: mix('target') };
 }

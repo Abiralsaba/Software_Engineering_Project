@@ -13,7 +13,7 @@ export default function Landscape({ timeline, compact, reduced, onStatus }) {
   const [ready, setReady] = useState(false);
   const [failure, setFailure] = useState('');
   useEffect(() => { setReady(false); }, [compact, reduced]);
-  useEffect(() => { onStatus(ready && !failure && !reduced); }, [ready, failure, reduced, onStatus]);
+  useEffect(() => { onStatus(ready && !failure && !reduced, Boolean(failure)); }, [ready, failure, reduced, onStatus]);
   function fail(reason) { console.warn(`[NationX landscape] ${reason}; showing the static composition.`); setFailure(reason); setReady(false); }
   const live = ready && !failure && !reduced;
   return <div className={`nx-landscape ${live ? 'nx-scene-ready' : ''}`} data-renderer={live ? 'webgl' : reduced ? 'reduced-motion' : failure || 'loading'}>

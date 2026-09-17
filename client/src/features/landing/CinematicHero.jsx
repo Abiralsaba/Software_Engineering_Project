@@ -1,13 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Landscape from './Landscape.jsx';
 import { attachTimeline } from './sceneTimeline.js';
 
 export default function CinematicHero({ anchor }) {
   const section = useRef(null), stage = useRef(null);
   const timeline = useRef({ progress: 0, motion: false, compact: false, listeners: new Set() });
-  const [ready, setReady] = useState(false);
+  const [unavailable, setUnavailable] = useState(false);
+  const receiveStatus = useCallback((_ready, failed) => setUnavailable(failed), []);
   const [preferences, setPreferences] = useState(() => ({ compact: typeof matchMedia === 'function' && matchMedia('(max-width: 900px)').matches, reduced: typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches }));
-  const motion = ready && !preferences.compact && !preferences.reduced;
+  // Reserve the scroll geometry while WebGL loads, preserving anchors and
+  // browser-restored positions. Collapse it only for a real static fallback.
+  const motion = !unavailable && !preferences.compact && !preferences.reduced;
   useEffect(() => {
     if (typeof matchMedia !== 'function') return;
     const small = matchMedia('(max-width: 900px)'), reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -22,7 +25,7 @@ export default function CinematicHero({ anchor }) {
   }, [motion, preferences.compact]);
   return <section ref={section} className="nx-cinematic" data-motion={motion} aria-label="Bangladesh, connected — a landscape journey">
     <div className="nx-stage" ref={stage} data-chapter="1">
-      <Landscape timeline={timeline.current} compact={preferences.compact} reduced={preferences.reduced} onStatus={setReady} />
+      <Landscape timeline={timeline.current} compact={preferences.compact} reduced={preferences.reduced} onStatus={receiveStatus} />
       <div className="nx-stage-shade" aria-hidden="true" /><div className="nx-stage-grain" aria-hidden="true" />
       <div className="nx-scene-panels">
         <div className="nx-scene-panel nx-arrival" data-scene-panel>

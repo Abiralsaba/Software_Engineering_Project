@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import CinematicHero from './CinematicHero.jsx';
 import './landing.css';
 import './cinematic.css';
@@ -19,6 +19,34 @@ export default function LandingPage() {
   const [menu, setMenu] = useState(false);
   const menuButton = useRef(null);
   const root = useRef(null);
+  useLayoutEffect(() => {
+    // The lazy entry can be shorter than the previous page at native restore
+    // time. Reapply this history entry only after the full landing DOM exists.
+    const savedTop = history.state?.nxLandingScroll;
+    const previousRestoration = history.scrollRestoration;
+    history.scrollRestoration = 'manual';
+    let restored = false, saveTimer = 0;
+    const frame = requestAnimationFrame(() => {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+      else if (Number.isFinite(savedTop)) window.scrollTo({ top: savedTop, behavior: 'instant' });
+      restored = true;
+    });
+    const remember = () => {
+      clearTimeout(saveTimer);
+      saveTimer = 0;
+      if (restored) history.replaceState({ ...history.state, nxLandingScroll: window.scrollY }, '');
+    };
+    const scheduleSave = () => { if (!saveTimer && restored) saveTimer = window.setTimeout(remember, 150); };
+    window.addEventListener('scroll', scheduleSave, { passive: true });
+    window.addEventListener('scrollend', remember);
+    window.addEventListener('pagehide', remember);
+    return () => {
+      cancelAnimationFrame(frame); clearTimeout(saveTimer);
+      window.removeEventListener('scroll', scheduleSave); window.removeEventListener('scrollend', remember); window.removeEventListener('pagehide', remember);
+      history.scrollRestoration = previousRestoration;
+    };
+  }, []);
   useEffect(() => {
     const oldTitle = document.title;
     document.title = 'NationX — Bangladesh, Connected.';
@@ -26,7 +54,7 @@ export default function LandingPage() {
     const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('nx-arrived'); observer.unobserve(entry.target); } });
     }, { threshold: 0.12 }) : null;
-    root.current?.querySelectorAll('[data-reveal]').forEach(el => observer?.observe(el));
+    root.current?.querySelectorAll('[data-reveal]').forEach(el => observer ? observer.observe(el) : el.classList.add('nx-arrived'));
     return () => { observer?.disconnect(); document.body.classList.remove('nx-landing-body'); document.title = oldTitle; };
   }, []);
   useEffect(() => {
@@ -37,12 +65,15 @@ export default function LandingPage() {
   function anchor(event, id) {
     event.preventDefault(); setMenu(false);
     const target = document.getElementById(id);
-    target?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    // A service shortcut bypasses the long pinned story. Nearby anchors can
+    // animate, but a multi-screen jump should remain immediate and interruptible.
+    const instant = matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(target?.getBoundingClientRect().top || 0) > window.innerHeight;
+    target?.scrollIntoView({ behavior: instant ? 'instant' : 'smooth', block: 'start' });
     target?.focus({ preventScroll: true });
     history.replaceState(history.state, '', `#${id}`);
   }
   return <div className="nx-landing" ref={root}>
-    <a className="nx-skip" href="#main">Skip to content</a>
+    <a className="nx-skip" href="#main" onClick={e => anchor(e, 'main')}>Skip to content</a>
     <header className="nx-navigation">
       <a href="/index.html" aria-label="NationX home"><Brand /></a>
       <button className="nx-menu-toggle" ref={menuButton} type="button" aria-label={menu ? 'Close navigation' : 'Open navigation'} aria-expanded={menu} aria-controls="nx-nav-links" onClick={() => setMenu(!menu)}>{menu ? 'Close −' : 'Menu +'}</button>

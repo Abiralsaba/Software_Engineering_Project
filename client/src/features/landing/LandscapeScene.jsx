@@ -14,13 +14,15 @@ export default function LandscapeScene({ timeline, compact, onReady, onFailure }
       if (!context) { callbacks.current.onFailure('webgl-unavailable'); return; }
       renderer = new THREE.WebGLRenderer({ canvas: element, context, alpha: true, antialias: !compact });
     } catch { callbacks.current.onFailure('webgl-initialization'); return; }
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, compact ? 1 : 1.5));
+    let pixelRatio = Math.min(devicePixelRatio || 1, compact ? 1 : 1.5);
+    renderer.setPixelRatio(pixelRatio);
     renderer.shadowMap.enabled = !compact; renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.shadowMap.autoUpdate = false;
     renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
-    const scene = new THREE.Scene(); scene.fog = new THREE.FogExp2('#173c35', .014);
+    const scene = new THREE.Scene(); scene.fog = new THREE.FogExp2('#173c35', .012);
     const camera = new THREE.PerspectiveCamera(compact ? 52 : 46, 1, .2, 250);
     scene.add(new THREE.HemisphereLight('#cad6cb', '#142e27', 2.5));
-    const sun = new THREE.DirectionalLight('#ffe3b8', 2.6); sun.position.set(-25, 38, -35); sun.castShadow = !compact;
+    const sun = new THREE.DirectionalLight('#ffe3b8', 3); sun.position.set(-25, 38, -35); sun.castShadow = !compact;
     sun.shadow.mapSize.set(1024, 1024); sun.shadow.normalBias = .15; sun.shadow.radius = 3;
     Object.assign(sun.shadow.camera, { left: -50, right: 50, top: 50, bottom: -50, near: .5, far: 160 });
     sun.target.position.set(0, 0, -20); scene.add(sun, sun.target);
@@ -28,15 +30,28 @@ export default function LandscapeScene({ timeline, compact, onReady, onFailure }
     catch { renderer.dispose(); callbacks.current.onFailure('scene-construction'); return; }
     const stage = element.closest('.nx-stage');
     const labels = [...stage.querySelectorAll('[data-place]')];
-    let frame = 0, visible = true, dead = false, first = true, previousProgress = -1, elapsed = 0, lastTime = 0;
+    let frame = 0, visible = true, dead = false, first = true, previousProgress = -1, elapsed = 0, lastTime = 0, layoutDirty = true;
+    let sampleTime = 0, sampleFrames = 0;
     const point = new THREE.Vector3();
     function draw(time) {
       frame = 0; if (dead || !visible || document.hidden) return;
+      if (!compact && lastTime && pixelRatio > .6) {
+        sampleTime += time - lastTime; sampleFrames++;
+        if(sampleFrames >= 24) {
+          if(sampleTime / sampleFrames > 38) {
+            pixelRatio = Math.max(.6, pixelRatio * .75);
+            renderer.setPixelRatio(pixelRatio); layoutDirty = true;
+          }
+          sampleTime = 0; sampleFrames = 0;
+        }
+      }
       if (lastTime) elapsed += Math.min((time - lastTime) / 1000, .05); lastTime = time;
       const p = timeline.motion ? timeline.progress : 0;
       const shot = compact ? { position: [20, 27, 31], target: [-3, 0, -24] } : cameraAt(p);
       camera.position.set(...shot.position); camera.lookAt(...shot.target); camera.updateMatrixWorld();
       world.update(p, compact ? 0 : elapsed);
+      const compositionChanged = layoutDirty || previousProgress !== p;
+      if(compositionChanged) renderer.shadowMap.needsUpdate = true;
       try { renderer.render(scene, camera); }
       catch { dead = true; callbacks.current.onFailure('render-error'); return; }
       if (first) { first = false; callbacks.current.onReady(); }
@@ -47,13 +62,20 @@ export default function LandscapeScene({ timeline, compact, onReady, onFailure }
         element.dataset.target = shot.target.map(n => n.toFixed(3)).join(',');
         element.dataset.progress = p.toFixed(4);
       }
+      // Labels and shadow geometry only change with the camera or viewport.
+      // Ambient water and boat motion never require a DOM layout measurement.
+      if (compositionChanged) {
+      layoutDirty = false;
+      element.dataset.drawCalls = String(renderer.info.render.calls);
+      element.dataset.triangles = String(renderer.info.render.triangles);
+      element.dataset.pixelRatio = pixelRatio.toFixed(2);
       const stageRect = stage.getBoundingClientRect();
       const activePanel = stage.querySelector('[data-scene-panel][aria-hidden="false"]')?.getBoundingClientRect();
       const placedLabels = [];
       labels.forEach((label, i) => {
         point.copy(world.locations[i]).project(camera);
         const alpha = timeline.motion ? smooth(.54 + i * .06, .62 + i * .06, p) : 0;
-        const show = alpha > .01 && point.z < 1 && Math.abs(point.x) < .96 && Math.abs(point.y) < .92;
+        let show = alpha > .01 && point.z > -1 && point.z < 1 && Math.abs(point.x) < .96 && Math.abs(point.y) < .92;
         const w = label.offsetWidth, h = label.offsetHeight;
         let x = (point.x * .5 + .5) * stageRect.width, y = (-point.y * .5 + .5) * stageRect.height;
         // Leave the editorial copy its negative space, even at intermediate camera angles.
@@ -61,6 +83,7 @@ export default function LandscapeScene({ timeline, compact, onReady, onFailure }
         x = Math.min(stageRect.width - w / 2 - 20, Math.max(w / 2 + 20, x));
         y = Math.max(h + 30, Math.min(stageRect.height - 120, y));
         for (const other of placedLabels) if (Math.abs(x - other.x) < (w + other.w) / 2 + 12 && Math.abs(y - other.y) < h + 12) y = other.y + h + 16;
+        if (y > stageRect.height - 120 || (activePanel && x-w/2 < activePanel.right-stageRect.left+12 && x+w/2 > activePanel.left-stageRect.left-12 && y > activePanel.top-stageRect.top && y-h < activePanel.bottom-stageRect.top)) show = false;
         if (show) placedLabels.push({ x, y, w });
         label.style.left = `${x}px`; label.style.top = `${y}px`;
         label.style.opacity = show ? alpha : 0;
@@ -68,14 +91,15 @@ export default function LandscapeScene({ timeline, compact, onReady, onFailure }
         label.tabIndex = show && alpha > .5 ? 0 : -1;
         label.setAttribute('aria-hidden', String(!show || alpha < .5));
       });
+      }
       if (!compact) frame = requestAnimationFrame(draw);
     }
     function resume() { if (!frame && !dead && visible && !document.hidden) frame = requestAnimationFrame(draw); }
-    function visibility() { cancelAnimationFrame(frame); frame = 0; lastTime = 0; resume(); }
+    function visibility() { cancelAnimationFrame(frame); frame = 0; lastTime = 0; sampleTime = 0; sampleFrames = 0; resume(); }
     const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; visibility(); }); observer.observe(element);
     const resize = new ResizeObserver(entries => {
       const { width, height } = entries[0].contentRect; if (!width || !height) return;
-      renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); resume();
+      renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); layoutDirty = true; resume();
     }); resize.observe(element);
     function contextLost(event) { event.preventDefault(); dead = true; cancelAnimationFrame(frame); callbacks.current.onFailure('webgl-context-lost'); }
     element.addEventListener('webglcontextlost', contextLost);

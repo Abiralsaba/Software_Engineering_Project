@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { smooth } from './sceneTimeline.js';
 
 export const riverX = z => Math.sin(z * .068) * 6 + Math.sin(z * .145) * 1.4;
@@ -33,7 +34,7 @@ export function createLandscape(scene, compact) {
       for (let col = 0; col <= 20; col++) {
         const x = riverX(z) + side * (riverWidth(z) + col / 20 * 95);
         positions.push(x, groundY(x, z), z);
-        const color = new THREE.Color().setHSL(.405 + Math.sin(z * .07) * .015, .30, .085 + Math.sin(x * .17 + z * .1) * .016);
+        const color = new THREE.Color().setHSL(.38 + Math.sin(z * .07) * .025, .26, .115 + Math.sin(x * .17 + z * .1) * .022);
         colors.push(color.r, color.g, color.b);
         if (row < segmentCount && col < 20) {
           const a = row * 21 + col;
@@ -59,6 +60,21 @@ export function createLandscape(scene, compact) {
     fragmentShader: `uniform float time;varying vec3 world;varying float depth;void main(){float wave=sin(world.z*5.+world.x*2.+time*.5)*sin(world.z*2.3-world.x*3.-time*.3);float glint=pow(max(0.,wave),14.);vec3 color=mix(vec3(.065,.24,.22),vec3(.15,.39,.35),.5+.25*sin(world.z*.17));color+=vec3(.32,.30,.18)*glint*.4;color=mix(color,vec3(.065,.16,.145),1.-exp(-depth*depth*.00008));gl_FragColor=vec4(color,1.);}`,
     side: THREE.DoubleSide
   }); materials.add(waterMat); mesh(waterGeo, waterMat).castShadow = false;
+  // Narrow alluvial shelves connect water to planted ground. Their width follows
+  // each bend, so they read as deposited silt rather than an outlined canal.
+  const silt = mat('#8b8564', { roughness: 1, side: THREE.DoubleSide });
+  for (const side of [-1, 1]) {
+    const points = [], indices = [];
+    for (let row = 0; row <= segmentCount; row++) {
+      const z = 70 - row / segmentCount * 220;
+      const bank = riverX(z) + side * riverWidth(z);
+      const shelf = .22 + .65 * (.5 + .5 * Math.sin(z * .13 + side * 1.4));
+      points.push(bank, .155, z, bank + side * shelf, groundY(bank + side * shelf, z) + .018, z);
+      if (row < segmentCount) { const n = row * 2; indices.push(n, n + 1, n + 2, n + 1, n + 3, n + 2); }
+    }
+    const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(points, 3)); geometry.setIndex(indices); geometry.computeVertexNormals();
+    mesh(geometry, silt);
+  }
   // Fine water-current lines describe the river direction without a glowing outline.
   for (let line = 0; line < 5; line++) {
     const pts = [];
@@ -66,14 +82,21 @@ export function createLandscape(scene, compact) {
     const g = new THREE.BufferGeometry().setFromPoints(pts); geometries.add(g);
     const m = new THREE.LineBasicMaterial({ color: '#88baa0', transparent: true, opacity: .12 }); materials.add(m); root.add(new THREE.Line(g, m));
   }
-  // Long, low rice terraces, laid over the terrain rather than a yellow checkerboard.
+  // Low paddy plots and narrow earthen bunds follow the floodplain surface.
+  const bund = mat('#7b7952');
+  const fieldMaterials = [mat('#65734b'), mat('#476348')];
   for (let field = 0; field < 14; field++) {
     const z = 16 - Math.floor(field / 2) * 10, x = riverX(z) - 11 - (field % 2) * 11;
     const width = 8.5, depth = 7.5;
     const geo = new THREE.PlaneGeometry(width, depth, 8, 8); geo.rotateX(-Math.PI / 2);
     const points = geo.attributes.position;
     for (let i = 0; i < points.count; i++) points.setY(i, groundY(points.getX(i) + x, points.getZ(i) + z) + .035);
-    geo.computeVertexNormals(); mesh(geo, mat(field % 3 ? '#476348' : '#65734b'), [x, 0, z]);
+    geo.computeVertexNormals(); mesh(geo, fieldMaterials[field % 3 ? 1 : 0], [x, 0, z]);
+    const bundPoints = Array.from({ length: 13 }, (_, i) => {
+      const px = x - width / 2 + i / 12 * width, pz = z + depth / 2;
+      return new THREE.Vector3(px, groundY(px, pz) + .045, pz);
+    });
+    mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(bundPoints), 12, .055, 4, false), bund);
     for (let row = 0; row < (compact ? 6 : 12); row++) {
       const lineZ = z - depth / 2 + row / (compact ? 6 : 12) * depth;
       const pts = Array.from({ length: 10 }, (_, i) => { const lineX = x - width / 2 + i / 9 * width; return new THREE.Vector3(lineX, groundY(lineX, lineZ) + .085, lineZ); });
@@ -99,13 +122,44 @@ export function createLandscape(scene, compact) {
     if (index === 2) { box([.9, 4.1, .9], body, [-2.2, 2.05, -1.3], building); box([1.1, .08, 1.1], brass, [-2.2, 4.15, -1.3], building); }
     for (let stair = 0; stair < 3; stair++) box([2.2, .07, .55], stone, [0, .1 - stair * .035, 2.5 + stair * .35], building);
   });
+  // A quiet landing on the east bank: a bamboo jetty, mooring posts and
+  // a path connecting river traffic to the existing courtyard architecture.
+  const bamboo = mat('#9a865b'), timber = mat('#806345');
+  const landingZ = -9, landingX = riverX(landingZ) + riverWidth(landingZ);
+  for (let plank = 0; plank < 11; plank++) box([.19, .065, 1.45], timber, [landingX - .6 + plank * .22, .34, landingZ]);
+  for (const x of [landingX - .55, landingX + 1.5]) for (const z of [landingZ - .68, landingZ + .68]) {
+    mesh(new THREE.CylinderGeometry(.045, .065, 1.05, 6), bamboo, [x, .3, z]);
+  }
+  const pathPoints = Array.from({length: 20}, (_, i) => {
+    const t = i / 19, x = landingX + 1.5 + t * (9 - landingX - 1.5), z = landingZ - t * 1.7;
+    return new THREE.Vector3(x, groundY(x, z) + .025, z);
+  });
+  mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pathPoints), 20, .16, 5, false), silt);
+  // Small pitched-roof homesteads sit beyond the civic pavilions. Roof slopes,
+  // raised plinths and shaded verandas are geometry, with no downloaded assets.
+  const roofGeo = new THREE.BufferGeometry();
+  roofGeo.setAttribute('position', new THREE.Float32BufferAttribute([-1.2,0,-1, 0,.65,-1, -1.2,0,1, 0,.65,-1, 0,.65,1, -1.2,0,1, 0,.65,-1, 1.2,0,-1, 0,.65,1, 1.2,0,-1, 1.2,0,1, 0,.65,1], 3));
+  roofGeo.computeVertexNormals();
+  const hutRoof = mat('#69766c', { side: THREE.DoubleSide, roughness: .72 });
+  for (const [x,z,turn] of [[17,-32,.18],[20,-35,-.35],[17,-52,.1],[-24,-16,.5]]) {
+    const home = new THREE.Group(); home.position.set(x, groundY(x,z), z); home.rotation.y = turn; root.add(home);
+    box([2.5,.16,2.3], silt, [0,.08,0], home);
+    box([1.9,1.2,1.5], clay, [0,.76,0], home);
+    mesh(roofGeo,hutRoof,[0,1.4,0],home);
+    box([.4,.83,.035],shadow,[0,.62,.765],home);
+    for(const side of [-1,1]) {
+      box([.055,1.3,.055],bamboo,[side*.92,.72,.95],home);
+      box([.3,.36,.025],shadow,[side*.63,.95,.765],home);
+    }
+  }
   // Seeded variation keeps screenshots/reverse playback reproducible.
   let seed = 31;
   const random = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
   const count = compact ? 55 : 105;
-  const leafGeo = new THREE.SphereGeometry(1, compact ? 8 : 14, compact ? 6 : 10), trunkGeo = new THREE.CylinderGeometry(.035, .075, 1, 5);
+  const leafGeo = new THREE.SphereGeometry(1, compact ? 7 : 10, compact ? 5 : 7), trunkGeo = new THREE.CylinderGeometry(.035, .075, 1, 5);
   geometries.add(leafGeo); geometries.add(trunkGeo);
-  const leaves = new THREE.InstancedMesh(leafGeo, mat('#86a58a'), count * 3), trunks = new THREE.InstancedMesh(trunkGeo, mat('#5b5940'), count);
+  const foliage = new THREE.MeshLambertMaterial({ color: '#86a58a' }); materials.add(foliage);
+  const leaves = new THREE.InstancedMesh(leafGeo, foliage, count * 3), trunks = new THREE.InstancedMesh(trunkGeo, mat('#5b5940'), count);
   leaves.castShadow = true; leaves.receiveShadow = true; root.add(leaves, trunks);
   const dummy = new THREE.Object3D();
   for (let i = 0; i < count; i++) {
@@ -123,9 +177,22 @@ export function createLandscape(scene, compact) {
     }
   }
   // Sparse foreground reed silhouettes give the opening shot a near plane.
+  const reedMaterial = mat('#4d694a', { side: THREE.DoubleSide });
   for (let i = 0; i < (compact ? 12 : 28); i++) {
     const z = 22 + random() * 14, x = riverX(z) + riverWidth(z) + 1 + random() * 3;
-    const blade = mesh(new THREE.PlaneGeometry(.05, .8 + random() * 1.2), mat('#4d694a', { side: THREE.DoubleSide }), [x, groundY(x, z) + .55, z]); blade.rotation.z = (random() - .5) * .45;
+    const blade = mesh(new THREE.PlaneGeometry(.05, .8 + random() * 1.2), reedMaterial, [x, groundY(x, z) + .55, z]); blade.rotation.z = (random() - .5) * .45;
+  }
+  // A few fan-shaped palms break up the rounded grove silhouettes.
+  const palmLeaf = mat('#506a44', { side: THREE.DoubleSide });
+  for (const [x,z] of [[16,-8],[18,-33],[-18,-20],[19,-52]]) {
+    const y = groundY(x,z);
+    mesh(new THREE.CylinderGeometry(.08,.15,3.7,7),timber,[x,y+1.85,z]);
+    for(let leaf=0;leaf<7;leaf++) {
+      const a=leaf/7*Math.PI*2;
+      const fan=new THREE.BufferGeometry();
+      fan.setAttribute('position',new THREE.Float32BufferAttribute([0,0,0, Math.cos(a-.38)*1.65,.2,Math.sin(a-.38)*1.65, Math.cos(a)*1.9,-.25,Math.sin(a)*1.9, 0,0,0, Math.cos(a)*1.9,-.25,Math.sin(a)*1.9, Math.cos(a+.38)*1.65,.2,Math.sin(a+.38)*1.65],3)); fan.computeVertexNormals();
+      mesh(fan,palmLeaf,[x,y+3.7,z]);
+    }
   }
   // A slender wooden riverboat with a curved fabric sail.
   const boat = new THREE.Group(); root.add(boat);
@@ -136,6 +203,12 @@ export function createLandscape(scene, compact) {
   const sailPoints = sailGeo.attributes.position;
   for (let i = 0; i < sailPoints.count; i++) { const x = sailPoints.getX(i), y = sailPoints.getY(i); sailPoints.setZ(i, Math.sin((x + .675) / 1.35 * Math.PI) * .3); sailPoints.setX(i, x * (.65 + (y + .975) * .18)); }
   sailGeo.computeVertexNormals(); const sail = mesh(sailGeo, mat('#d5c8a2', { side: THREE.DoubleSide }), [.55, 1.45, -.2], boat); sail.rotation.y = -.45;
+  for(let rib=0;rib<7;rib++) box([.5,.025,.04],timber,[0,.185,-.9+rib*.3],boat);
+  const wakeMaterial = new THREE.LineBasicMaterial({ color:'#b9c9b1', transparent:true, opacity:.22 }); materials.add(wakeMaterial);
+  for(const side of [-1,1]) {
+    const points=Array.from({length:20},(_,i)=>new THREE.Vector3(side*(.28+i*.018),.01,1.3+i*.1));
+    const geometry=new THREE.BufferGeometry().setFromPoints(points);geometries.add(geometry);boat.add(new THREE.Line(geometry,wakeMaterial));
+  }
   const sun = mesh(new THREE.SphereGeometry(4.5, 32, 16), new THREE.MeshBasicMaterial({ color: '#b8564b', fog: false, toneMapped: false }), [12, 19, -105]); materials.add(sun.material); sun.castShadow = false;
   const paths = [];
   for (let i = 0; i < 3; i++) {
@@ -145,6 +218,38 @@ export function createLandscape(scene, compact) {
     const material = new THREE.LineBasicMaterial({ color: '#d8be83', transparent: true, opacity: .85 }); materials.add(material);
     const line = new THREE.Line(geometry, material); root.add(line); paths.push(line);
   }
+  // Merge static opaque geometry by material. Added craftsmanship should not
+  // multiply per-frame draw calls. The boat, water and service paths stay live.
+  root.updateMatrixWorld(true);
+  const batches = new Map();
+  root.traverse(item => {
+    if (!item.isMesh || item.isInstancedMesh || !item.material.isMeshStandardMaterial) return;
+    for(let parent=item;parent;parent=parent.parent) if(parent===boat) return;
+    const transformed=item.geometry.clone().applyMatrix4(item.matrixWorld);
+    // Normalize attributes so mixed primitive geometries can share one batch.
+    if(transformed.getAttribute('uv')) transformed.deleteAttribute('uv');
+    const key=item.material;
+    if(!batches.has(key)) batches.set(key,[]);
+    batches.get(key).push({item,geometry:transformed});
+  });
+  batches.forEach((entries,material)=>{
+    if(entries.length<2) { entries.forEach(({geometry})=>geometry.dispose()); return; }
+    const flattened=entries.map(({geometry})=>geometry.index ? geometry.toNonIndexed() : geometry);
+    const merged=mergeGeometries(flattened);
+    if(merged) { mesh(merged,material); entries.forEach(({item})=>item.removeFromParent()); }
+    flattened.forEach(geometry=>geometry.dispose()); entries.forEach(({geometry})=>geometry.dispose());
+  });
+  const lineBatches = new Map();
+  [...root.children].filter(item=>item.isLine && !paths.includes(item)).forEach(line=>{
+    const key = `${line.material.color.getHex()}:${line.material.opacity}`;
+    if(!lineBatches.has(key)) lineBatches.set(key,{material:line.material,points:[]});
+    const batch=lineBatches.get(key), points=line.geometry.attributes.position;
+    for(let i=0;i<points.count-1;i++) for(const j of [i,i+1]) batch.points.push(points.getX(j),points.getY(j),points.getZ(j));
+    line.removeFromParent();
+  });
+  lineBatches.forEach(({material,points})=>{
+    const geometry=new THREE.BufferGeometry(); geometry.setAttribute('position',new THREE.Float32BufferAttribute(points,3)); geometries.add(geometry); root.add(new THREE.LineSegments(geometry,material));
+  });
   return {
     locations: locations.map(site => new THREE.Vector3(site.x, groundY(site.x, site.z) + 3, site.z)),
     update(progress, time) {
@@ -152,6 +257,8 @@ export function createLandscape(scene, compact) {
       const z = 9 - smooth(.05, .66, progress) * 45;
       boat.position.set(riverX(z) + .7, .15 + Math.sin(time * .6) * .025, z);
       boat.rotation.y = Math.atan2(riverX(z - .1) - riverX(z + .1), -.2);
+      boat.rotation.z = Math.sin(time * .55) * .018;
+      sail.rotation.y = -.45 + Math.sin(time * .4) * .025;
       highlights.forEach((m, i) => { m.emissiveIntensity = smooth(.54 + i * .065, .64 + i * .065, progress) * .45; });
       paths.forEach((line, i) => line.geometry.setDrawRange(0, Math.floor(smooth(.55 + i * .055, .77 + i * .055, progress) * 91)));
     },
