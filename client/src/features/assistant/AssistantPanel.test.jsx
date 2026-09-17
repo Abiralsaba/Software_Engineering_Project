@@ -25,7 +25,8 @@ describe('Applicant and accessible assistant UI',()=>{
     await userEvent.click(screen.getByRole('button',{name:'● Tap to speak'}));
     expect(await screen.findByRole('alert')).toHaveTextContent('Microphone is unavailable');expect(text).toHaveValue('Amar NID banai dao');
     await userEvent.click(screen.getByRole('button',{name:'Yes — confirm and send'}));
-    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenCalledTimes(3);
+    expect(fetch.mock.calls[2][0]).toBe('/api/assistant/speech');
     expect(JSON.parse(fetch.mock.calls[1][1].body)).toEqual({text:'Amar NID banai dao',confirmed:true});
   });
 });

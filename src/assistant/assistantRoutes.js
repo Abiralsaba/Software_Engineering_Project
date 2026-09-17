@@ -36,6 +36,14 @@ function createAssistantRouter({ provider = new GeminiIntentProvider(), transcri
     return { session_id: session.id, state: session.state, action: 'ASK_QUESTION', message_bn: 'আপনি কি নতুন NID আবেদন করতে চান, নাকি আবেদনের অবস্থা জানতে চান?', message_en: 'Would you like to start an NID application or check its status?' };
   }
   router.get('/health', async (req, res) => res.json(await whisper.health()));
+  router.post('/speech', async (req, res) => {
+    const { text } = z.object({ text: z.string().trim().min(1).max(600) }).strict().parse(req.body);
+    const controller = new AbortController();
+    const abort = () => { if (!res.writableEnded) controller.abort(); };
+    res.on('close', abort);
+    try { res.json(await require('./bengaliSpeech').synthesize(text, { signal: controller.signal })); }
+    finally { res.off('close', abort); }
+  });
   router.post('/sessions', async (req, res) => {
     const id = randomUUID();
     await db.query('INSERT INTO assistant_sessions (id,applicant_id,citizen_id,expires_at) VALUES (?,?,?,DATE_ADD(NOW(),INTERVAL 24 HOUR))', [id, req.principal.type === 'applicant' ? req.principal.id : null, req.principal.type === 'citizen' ? req.principal.id : null]);

@@ -12,6 +12,25 @@ function wav(seconds, silence = false) {
   if (!silence) for(let i=0;i<size/2;i++) b.writeInt16LE(Math.round(Math.sin(i*0.12)*10000),44+i*2);
   return {buffer:b,mimetype:'audio/wav'};
 }
+test('Bangla transcription disables detection and translation, and rejects Devanagari output', async () => {
+  const original = global.fetch;
+  let output = 'আমার এনআইডি বানাও';
+  global.fetch = async (_url, options) => {
+    assert.equal(options.body.get('language'), 'bn');
+    assert.equal(options.body.get('translate'), 'false');
+    assert.equal(options.body.get('detect_language'), 'false');
+    assert.equal(options.body.get('beam_size'), '5');
+    assert.equal(options.body.get('temperature_inc'), '0');
+    return { ok: true, text: async () => JSON.stringify({ text: output }) };
+  };
+  try {
+    assert.equal((await transcribe(wav(1), { language: 'bn' })).transcript, output);
+    output = 'अमर एनआईडी बनाओ';
+    await assert.rejects(transcribe(wav(1), { language: 'bn' }), { code: 'TRANSCRIPT_LANGUAGE_MISMATCH' });
+    output = 'amar naam abir';
+    await assert.rejects(transcribe(wav(1), { language: 'bn' }), { code: 'TRANSCRIPT_LANGUAGE_MISMATCH' });
+  } finally { global.fetch = original; }
+});
 test('Bangla, Banglish, English and deterministic conflicts', () => {
   for(const text of ['আমার NID বানাও','Amar NID banai dao','I want to apply for a new NID','I don’t have an NID']) assert.equal(keywordIntent(text),'CREATE_NID_APPLICATION');
   assert.equal(keywordIntent('আমার আবেদন কোথায় আছে?'),'CHECK_NID_STATUS');

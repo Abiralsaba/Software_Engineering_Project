@@ -83,6 +83,7 @@ app.use(helmet({
             styleSrc: ["'self'", "fonts.googleapis.com", "cdnjs.cloudflare.com", "cdn.jsdelivr.net", "'unsafe-inline'"],
             fontSrc: ["'self'", "fonts.gstatic.com", "cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "data:", "cdn.jsdelivr.net", "https://ui-avatars.com", "blob:"],
+            mediaSrc: ["'self'", "blob:"],
             connectSrc: ["'self'", "https://api.open-meteo.com", "https://power.larc.nasa.gov"],
             objectSrc: ["'none'"],
             upgradeInsecureRequests: null,

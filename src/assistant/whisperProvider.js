@@ -53,6 +53,12 @@ async function transcribe(file, { signal, language = 'bn', tempRoot = os.tmpdir(
     const form = new FormData();
     form.append('file', new Blob([wav], { type: 'audio/wav' }), 'speech.wav');
     form.append('language', language === 'en' ? 'en' : 'bn');
+    form.append('detect_language', 'false');
+    form.append('translate', 'false');
+    form.append('max_context', '0');
+    form.append('beam_size', '5');
+    form.append('temperature', '0');
+    form.append('temperature_inc', '0');
     form.append('response_format','json');
     let result;
     try {
@@ -62,8 +68,10 @@ async function transcribe(file, { signal, language = 'bn', tempRoot = os.tmpdir(
       if (body.length > 16000) throw new Error('oversized');
       result = JSON.parse(body);
     } catch { throw fail(503, 'WHISPER_UNAVAILABLE', 'Local speech recognition is unavailable. Please type your answer.'); }
-    const transcript = typeof result.text === 'string' ? result.text.trim().slice(0,1000) : '';
+    const transcript = typeof result.text === 'string' ? result.text.normalize('NFC').trim().slice(0,1000) : '';
     if (!transcript || /^\[.*\]$/.test(transcript)) throw fail(400, 'UNCLEAR_AUDIO', 'Please speak again or type.');
+    const unexpectedScript = [...transcript].some(char => /\p{L}/u.test(char) && !/[\p{Script=Bengali}\p{Script=Latin}]/u.test(char));
+    if (language !== 'en' && (unexpectedScript || (!/[\u0980-\u09ff]/u.test(transcript) && /[a-z]/i.test(transcript.replace(/\bNID\b/gi, ''))))) throw fail(422, 'TRANSCRIPT_LANGUAGE_MISMATCH', 'বাংলা ঠিকভাবে বোঝা যায়নি। আবার স্পষ্ট করে বলুন অথবা বাংলায় লিখুন।');
     return { transcript, requires_confirmation: true };
   } finally { await fs.rm(directory, { recursive: true, force: true }); }
 }
