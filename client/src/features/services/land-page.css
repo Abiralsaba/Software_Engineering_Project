@@ -1,0 +1,348 @@
+.nationx-land-page {
+  --land-surface: rgba(7, 25, 29, 0.97);
+  --land-surface-raised: rgba(12, 36, 37, 0.98);
+  --land-surface-soft: rgba(20, 49, 48, 0.72);
+  --land-border: rgba(139, 181, 175, 0.17);
+  --land-border-focus: rgba(56, 217, 169, 0.58);
+  --land-accent: #38d9a9;
+  --land-text: #edf8f6;
+  --land-muted: #91a7a7;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.nationx-land-page .react-page-header {
+  margin-bottom: 0;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(56, 217, 169, 0.12), transparent 34%),
+    linear-gradient(145deg, rgba(13, 47, 41, 0.96), rgba(6, 25, 29, 0.96));
+  border-color: rgba(105, 191, 169, 0.18);
+}
+
+.nationx-land-page .react-service-tabs {
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.45rem;
+  background: rgba(3, 18, 22, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 16px;
+}
+
+.nationx-land-page .react-service-tabs button {
+  min-height: 42px;
+  padding: 0.58rem 1rem;
+  color: #a7b9b9;
+  background: transparent;
+  border-color: transparent;
+  border-radius: 11px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.nationx-land-page .react-service-tabs button:hover,
+.nationx-land-page .react-service-tabs button:focus-visible {
+  color: #eafff9;
+  background: rgba(56, 217, 169, 0.08);
+  border-color: rgba(56, 217, 169, 0.18);
+  outline: none;
+}
+
+.nationx-land-page .react-service-tabs button.active {
+  color: #fff;
+  background: linear-gradient(135deg, #00a477, #007255);
+  border-color: rgba(100, 238, 196, 0.4);
+  box-shadow: 0 9px 22px rgba(0, 105, 78, 0.26), inset 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.nationx-land-page .react-two-column {
+  grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+.nationx-land-page .react-panel {
+  min-width: 0;
+  padding: clamp(1.15rem, 2.2vw, 1.55rem);
+  color: var(--land-text);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(56, 217, 169, 0.055), transparent 36%),
+    linear-gradient(145deg, var(--land-surface-raised), var(--land-surface));
+  border: 1px solid var(--land-border);
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.17), inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.nationx-land-page .react-panel > h2 {
+  position: relative;
+  margin: 0 0 1.2rem;
+  padding-bottom: 0.8rem;
+  color: var(--land-text);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 760;
+  letter-spacing: -0.025em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.nationx-land-page .react-panel > h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--land-accent), transparent);
+  border-radius: 999px;
+}
+
+.nationx-land-page .react-form-stack {
+  gap: 1.05rem;
+}
+
+.nationx-land-page .react-form-grid {
+  gap: 0.9rem 1rem;
+}
+
+.nationx-land-page .react-form-stack label,
+.nationx-land-page .react-form-grid label {
+  display: grid;
+  min-width: 0;
+  gap: 0.42rem;
+  margin: 0;
+  color: #c4d4d3;
+  font-size: 0.72rem;
+  font-weight: 690;
+  letter-spacing: 0.01em;
+}
+
+.nationx-land-page .react-form-stack input,
+.nationx-land-page .react-form-stack select,
+.nationx-land-page .react-form-stack textarea,
+.nationx-land-page .react-form-grid input,
+.nationx-land-page .react-form-grid select,
+.nationx-land-page .react-form-grid textarea {
+  width: 100%;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 0.72rem 0.82rem;
+  color: #f5fbfa;
+  background: rgba(2, 15, 19, 0.82);
+  border: 1px solid rgba(139, 177, 178, 0.2);
+  border-radius: 11px;
+  outline: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.nationx-land-page .react-form-stack textarea,
+.nationx-land-page .react-form-grid textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.nationx-land-page .react-form-stack input:hover,
+.nationx-land-page .react-form-stack select:hover,
+.nationx-land-page .react-form-stack textarea:hover,
+.nationx-land-page .react-form-grid input:hover,
+.nationx-land-page .react-form-grid select:hover,
+.nationx-land-page .react-form-grid textarea:hover {
+  border-color: rgba(139, 192, 186, 0.34);
+}
+
+.nationx-land-page .react-form-stack input:focus,
+.nationx-land-page .react-form-stack select:focus,
+.nationx-land-page .react-form-stack textarea:focus,
+.nationx-land-page .react-form-grid input:focus,
+.nationx-land-page .react-form-grid select:focus,
+.nationx-land-page .react-form-grid textarea:focus {
+  background: rgba(3, 22, 25, 0.94);
+  border-color: var(--land-border-focus);
+  box-shadow: 0 0 0 4px rgba(56, 217, 169, 0.09), inset 0 1px 2px rgba(0, 0, 0, 0.16);
+}
+
+.nationx-land-page .react-form-stack select,
+.nationx-land-page .react-form-grid select {
+  cursor: pointer;
+}
+
+.nationx-land-page .react-form-stack > .btn-primary {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 0.25rem;
+  color: #fff;
+  background: linear-gradient(135deg, #00a779, #007354);
+  border: 1px solid rgba(94, 234, 188, 0.32);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 106, 78, 0.22), inset 0 1px rgba(255, 255, 255, 0.14);
+  font-weight: 730;
+}
+
+.nationx-land-page .react-form-stack > .btn-primary:hover,
+.nationx-land-page .react-form-stack > .btn-primary:focus-visible {
+  background: linear-gradient(135deg, #10b989, #008260);
+  box-shadow: 0 15px 32px rgba(0, 106, 78, 0.3), 0 0 0 4px rgba(56, 217, 169, 0.08);
+}
+
+.nationx-land-page .react-card-list {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.25rem;
+}
+
+.nationx-land-page .react-card-list article {
+  align-items: center;
+  padding: 0.95rem;
+  color: var(--land-text);
+  background: rgba(3, 19, 22, 0.64);
+  border: 1px solid rgba(139, 177, 176, 0.12);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.nationx-land-page .react-card-list article:hover {
+  border-color: rgba(56, 217, 169, 0.24);
+  transform: none;
+}
+
+.nationx-land-page .react-card-list h3 {
+  margin: 0 0 0.3rem;
+  color: #eff8f7;
+  font-size: 0.86rem;
+}
+
+.nationx-land-page .react-card-list p {
+  margin: 0.15rem 0;
+  color: var(--land-muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.nationx-land-page .react-empty-state {
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 1.5rem;
+  color: #829797;
+  text-align: center;
+  background: rgba(3, 18, 21, 0.52);
+  border: 1px dashed rgba(139, 177, 176, 0.18);
+  border-radius: 14px;
+}
+
+.nationx-land-page .react-two-column > .react-panel:last-child .react-empty-state {
+  min-height: 250px;
+}
+
+.nationx-land-page .react-narrow-panel {
+  width: min(100%, 820px);
+  max-width: none;
+}
+
+.nationx-land-page .react-narrow-panel > p {
+  max-width: 68ch;
+  margin: -0.35rem 0 0;
+  color: var(--land-muted);
+  line-height: 1.65;
+}
+
+.nationx-land-page .react-narrow-panel + .react-panel {
+  margin-top: 0;
+}
+
+.nationx-land-page .react-payment-warning {
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 0 0 1rem;
+  padding: 1rem 1.05rem;
+  color: #fbe59a;
+  background: linear-gradient(135deg, rgba(126, 72, 14, 0.26), rgba(82, 47, 12, 0.2));
+  border: 1px solid rgba(245, 173, 52, 0.38);
+  border-radius: 13px;
+  line-height: 1.5;
+}
+
+.nationx-land-page .react-payment-warning i {
+  margin-top: 0.15rem;
+  color: #f7ca62;
+  font-size: 1.15rem;
+}
+
+.nationx-land-page .react-payment-warning strong {
+  color: #ffe888;
+}
+
+.nationx-land-page [aria-label$="payment demonstration"] > p {
+  max-width: 78ch;
+  margin: 0 0 1rem;
+  color: var(--land-muted);
+  line-height: 1.55;
+}
+
+.nationx-land-page [aria-label$="payment demonstration"] > .btn-secondary {
+  width: auto;
+  min-height: 46px;
+  padding-inline: 1.1rem;
+  color: #dff6ef;
+  background: rgba(56, 217, 169, 0.09);
+  border-color: rgba(56, 217, 169, 0.24);
+}
+
+.nationx-land-page .react-result-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  color: #dff8ef;
+  background: rgba(0, 116, 84, 0.14);
+  border: 1px solid rgba(56, 217, 169, 0.22);
+  border-radius: 12px;
+}
+
+.nationx-land-page .react-result-card h3,
+.nationx-land-page .react-result-card p {
+  margin: 0.25rem 0;
+}
+
+@media (max-width: 980px) {
+  .nationx-land-page .react-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .nationx-land-page .react-two-column > .react-panel:last-child .react-empty-state {
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 640px) {
+  .nationx-land-page {
+    gap: 1rem;
+  }
+
+  .nationx-land-page .react-service-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .nationx-land-page .react-service-tabs button {
+    flex: 0 0 auto;
+  }
+
+  .nationx-land-page .react-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nationx-land-page .react-panel {
+    padding: 1rem;
+    border-radius: 15px;
+  }
+
+  .nationx-land-page [aria-label$="payment demonstration"] > .btn-secondary {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nationx-land-page *,
+  .nationx-land-page *::before,
+  .nationx-land-page *::after {
+    transition: none !important;
+  }
+}

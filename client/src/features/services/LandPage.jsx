@@ -6,6 +6,7 @@ import { apiRequest } from '../../services/api.js';
 import { alerts } from '../../utils/alerts.js';
 import { useSubmissionLock } from '../../hooks/useSubmissionLock.js';
 import { dateText, formPayload, LocationIdFields, StatusBadge } from './ServiceUi.jsx';
+import './land-page.css';
 
 const API = '/api/departments';
 const sections = ['overview', 'records', 'mutation', 'status', 'tax'];
@@ -78,7 +79,7 @@ export default function LandPage() {
   const returnStatus = params.get('status');
   const returnTransaction = params.get('tid');
 
-  return <CitizenShell>
+  return <CitizenShell><div className="nationx-land-page">
     <header className="react-page-header"><div><h1>Land Services</h1><p>Owned records, mutation applications, and status tracking.</p></div></header>
     {(returnStatus || returnTransaction) && <div className="react-payment-warning" role="status"><i className="fas fa-shield-halved" /><span>Payment return parameters are unverified and are not proof of land-tax payment. Status: {returnStatus || 'unknown'}{returnTransaction ? ` · Transaction ${returnTransaction}` : ''}</span></div>}
     <nav className="react-service-tabs" aria-label="Land sections">{sections.map(value => <button type="button" className={section === value ? 'active' : ''} onClick={() => setSection(value)} key={value}>{value}</button>)}</nav>
@@ -94,5 +95,5 @@ export default function LandPage() {
 
       {section === 'tax' && <><section className="react-panel react-narrow-panel"><h2>Land development tax</h2><p>Residential: 10 BDT/decimal; commercial: 20 BDT/decimal; the legacy page describes agricultural holdings up to 825 decimals as tax free.</p></section><DemoPaymentPanel service="Land-tax" note="This isolated fallback is for presentation continuity only and does not create a land-tax receipt in the database." /></>}
     </>}
-  </CitizenShell>;
+  </div></CitizenShell>;
 }
