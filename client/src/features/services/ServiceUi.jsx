@@ -87,3 +87,7 @@ export function dateText(value) {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleDateString('en-GB');
 }
+
+export function bdt(value) {
+  return `BDT ${Number(value || 0).toLocaleString()}`;
+}

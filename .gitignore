@@ -99,6 +99,8 @@ Desktop.ini
 *.bak
 *.orig
 *.rej
+*.diff
+Screenshot*.png
 
 # Do not blanket-ignore SQL, JSON, HTML, images, or license notices:
 # schemas/migrations, package manifests/lockfiles, runtime assets and notices

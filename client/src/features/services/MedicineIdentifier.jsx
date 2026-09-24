@@ -7,6 +7,10 @@ const editableFields = [
   ['brand_name_candidate', 'Brand'], ['generic_name_candidate', 'Generic/ingredient'], ['strength_text', 'Strength'],
   ['dosage_form', 'Dosage form'], ['manufacturer_candidate', 'Manufacturer'], ['registration_reference_candidate', 'Registration-like reference']
 ];
+const prescriptionFields = [
+  ['dose_amount', 'Dose amount'], ['frequency_per_day', 'Times per day'],
+  ['duration_days', 'Duration days'], ['total_quantity', 'Total quantity']
+];
 
 function previewFor(file) {
   return typeof URL.createObjectURL === 'function' ? URL.createObjectURL(file) : '';
@@ -38,6 +42,13 @@ function CandidateCard({ candidate, selected, onSelect, itemId }) {
     <div><MedicineFacts medicine={candidate.medicine} /><p className="medicine-evidence"><strong>Matched:</strong> {candidate.matching_evidence.join(', ') || 'bounded catalogue retrieval'}</p>
       {!!candidate.conflicts_or_missing.length && <p className="medicine-warning"><i className="fas fa-triangle-exclamation" aria-hidden="true" /> <strong>Check:</strong> {candidate.conflicts_or_missing.join(', ')}</p>}
     </div>
+  </label>;
+}
+
+function ExtractedField({ field, label, value, uncertain, numeric = false }) {
+  return <label className={`medicine-extracted-field ${uncertain ? 'is-uncertain' : ''}`}>
+    <span className="medicine-field-heading"><span>{label}</span>{uncertain && <small>Uncertain</small>}</span>
+    <input name={field} type={numeric ? 'number' : 'text'} min={numeric ? '0' : undefined} step={numeric ? 'any' : undefined} defaultValue={value} />
   </label>;
 }
 
@@ -81,12 +92,20 @@ function ScanItem({ scan, item, onUpdated }) {
 
   const confirmedId = item.confirmation?.medicine_id;
   const confirmedCandidate = item.candidates.find(candidate => candidate.medicine.medicine_id === confirmedId)?.medicine;
+  const fieldValue = field => item.user_corrections?.[field] ?? extracted[field] ?? '';
+  const reviewFields = [
+    ...editableFields.map(([field, label]) => ({ field, label, value: fieldValue(field), numeric: false })),
+    ...(scan.scan_mode === 'prescription' ? prescriptionFields.map(([field, label]) => ({ field, label, value: fieldValue(field), numeric: true })) : [])
+  ];
+  const populatedFields = reviewFields.filter(({ value }) => String(value).trim() !== '');
+  const emptyFields = reviewFields.filter(({ value }) => String(value).trim() === '');
+  const renderField = ({ field, label, value, numeric }) => <ExtractedField key={field} field={field} label={label} value={value} numeric={numeric} uncertain={item.uncertain_fields?.includes(field)} />;
   return <article className="medicine-review-item">
     <header><div><span>Visible medicine line</span><h3>{item.raw_visible_text || 'No readable medicine line'}</h3></div><span className="medicine-confidence">{extracted.model_confidence == null ? 'Confidence unavailable' : `${Math.round(extracted.model_confidence * 100)}% extraction confidence`}</span></header>
     {!!item.uncertain_fields?.length && <p className="medicine-warning" role="note"><i className="fas fa-circle-question" aria-hidden="true" /> Uncertain fields: {item.uncertain_fields.join(', ')}</p>}
     <form className="medicine-review-form">
-      <fieldset><legend>Review and correct extracted fields</legend><div className="react-form-grid">{editableFields.map(([field, label]) => <label key={field}>{label}{item.uncertain_fields?.includes(field) && <span className="medicine-uncertain">Uncertain</span>}<input name={field} defaultValue={item.user_corrections?.[field] ?? extracted[field] ?? ''} /></label>)}</div>
-        {scan.scan_mode === 'prescription' && <div className="react-form-grid"><label>Dose amount<input name="dose_amount" type="number" min="0" step="any" defaultValue={item.user_corrections?.dose_amount ?? extracted.dose_amount ?? ''} /></label><label>Times per day<input name="frequency_per_day" type="number" min="0" step="any" defaultValue={item.user_corrections?.frequency_per_day ?? extracted.frequency_per_day ?? ''} /></label><label>Duration days<input name="duration_days" type="number" min="0" step="any" defaultValue={item.user_corrections?.duration_days ?? extracted.duration_days ?? ''} /></label><label>Total quantity<input name="total_quantity" type="number" min="0" step="any" defaultValue={item.user_corrections?.total_quantity ?? extracted.total_quantity ?? ''} /></label></div>}
+      <fieldset className="medicine-extracted-fields"><legend>Review extracted details</legend><p>Correct anything the scan read incorrectly before confirming.</p><div className="medicine-fields-grid">{populatedFields.map(renderField)}</div>
+        {!!emptyFields.length && <details className="medicine-optional-fields"><summary><span>Add missing details</span><small>{emptyFields.length} empty {emptyFields.length === 1 ? 'field' : 'fields'}</small></summary><div className="medicine-fields-grid">{emptyFields.map(renderField)}</div></details>}
       </fieldset>
       <fieldset><legend>Catalogue candidates — choose one yourself</legend>
         <div className="medicine-candidates">{item.candidates.map(candidate => <CandidateCard key={candidate.candidate_id} candidate={candidate} itemId={item.item_id} selected={selected === candidate.medicine.medicine_id} onSelect={() => setSelected(candidate.medicine.medicine_id)} />)}

@@ -4,9 +4,14 @@ import CitizenShell from '../../layouts/CitizenShell.jsx';
 import { apiRequest } from '../../services/api.js';
 import { alerts } from '../../utils/alerts.js';
 import { useSubmissionLock } from '../../hooks/useSubmissionLock.js';
-import { dateText, EmptyRow, formPayload, StatusBadge } from './ServiceUi.jsx';
+import { bdt, dateText, EmptyRow, formPayload, StatusBadge } from './ServiceUi.jsx';
+import './education-page.css';
 
-const sections = ['results', 'stipend'];
+const sections = [
+  { id: 'results', label: 'Exam results' },
+  { id: 'stipend', label: 'Stipends & grants' }
+];
+const SECTION_IDS = sections.map(section => section.id);
 
 export function stipendPayload(stipendId, form) {
   const values = formPayload(form);
@@ -19,10 +24,30 @@ export function stipendPayload(stipendId, form) {
   };
 }
 
+function StipendMeta({ row }) {
+  return (
+    <div className="react-stipend-meta">
+      <div><small>Amount</small><strong>{bdt(row.amount)}</strong></div>
+      <div><small>Deadline</small><strong>{dateText(row.deadline)}</strong></div>
+      {row.min_gpa && <div><small>Min. GPA</small><strong>{row.min_gpa}</strong></div>}
+      {row.max_income && <div><small>Max. income</small><strong>{bdt(row.max_income)}</strong></div>}
+    </div>
+  );
+}
+
+function ApplyGroup({ legend, children }) {
+  return (
+    <fieldset className="react-apply-section">
+      <legend>{legend}</legend>
+      <div className="react-form-stack">{children}</div>
+    </fieldset>
+  );
+}
+
 export default function EducationPage() {
   const [params, setParams] = useSearchParams();
   const requested = params.get('section');
-  const [section, setSectionState] = useState(sections.includes(requested) ? requested : 'results');
+  const [section, setSectionState] = useState(SECTION_IDS.includes(requested) ? requested : 'results');
   const [years, setYears] = useState([]);
   const [boards, setBoards] = useState([]);
   const [institutions, setInstitutions] = useState([]);
@@ -79,15 +104,188 @@ export default function EducationPage() {
   }
 
   return <CitizenShell>
-    <header className="react-page-header"><div><h1>Education Services</h1><p>Public examination results and authenticated stipend applications.</p></div><Link className="btn-secondary react-auto-width" to="/admission.html">University admission</Link></header>
-    <nav className="react-service-tabs" aria-label="Education sections">{sections.map(value => <button type="button" className={section === value ? 'active' : ''} onClick={() => setSection(value)} key={value}>{value}</button>)}</nav>
-    {error && <div className="react-dashboard-error" role="alert">{error}<button type="button" onClick={loadAll}>Retry lists</button></div>}
-    {loading ? <p className="react-empty-state">Loading education services…</p> : <>
-      {section === 'results' && <><section className="react-panel react-narrow-panel"><h2>Check examination result</h2><form className="react-form-stack" onSubmit={checkResult}><label>Exam type<select name="examType" required defaultValue=""><option value="">Select exam</option><option value="jsc">JSC</option><option value="ssc">SSC</option><option value="hsc">HSC</option></select></label><label>Exam year<select name="examYear" required defaultValue=""><option value="">Select year</option>{years.map(value => <option key={value}>{value}</option>)}</select></label><label>Roll number<input name="rollNumber" required /></label><button className="btn-primary" disabled={resultLoading} type="submit">{resultLoading ? 'Checking…' : 'Check result'}</button></form><p>{boards.length} education boards and {institutions.length} institutions are available in the directory data.</p></section>{result && <section className="react-panel react-service-spaced" aria-label="Exam result"><header className="react-result-header"><div><h2>{result.examType} Examination Result {result.examYear}</h2><p>{result.student.name} · Roll {result.student.rollNumber}</p></div><div><strong>{result.result.gpa}</strong><StatusBadge value={result.result.status} /></div></header><div className="react-detail-grid"><p><strong>Registration</strong>{result.student.registrationNumber || '—'}</p><p><strong>Institution</strong>{result.student.institution || '—'}</p><p><strong>Board</strong>{result.student.board || '—'}</p><p><strong>Group</strong>{result.student.group || 'General'}</p><p><strong>Father</strong>{result.student.fatherName || '—'}</p><p><strong>Mother</strong>{result.student.motherName || '—'}</p></div><div className="react-table-wrap"><table><thead><tr><th>#</th><th>Subject</th><th>Grade</th></tr></thead><tbody>{result.subjects.map((subject, index) => <tr key={`${subject.name}-${index}`}><td>{index + 1}</td><td>{subject.name}</td><td><strong>{subject.grade}</strong></td></tr>)}</tbody></table></div><button className="btn-secondary react-service-action" type="button" onClick={() => window.print()}>Print result</button></section>}</>}
+    <div className="nationx-education-page">
+      <header className="react-page-header">
+        <div>
+          <span className="react-kicker">Ministry of Education</span>
+          <h1>Education Services</h1>
+          <p>Public examination results, authenticated stipend applications, and university admission notices.</p>
+        </div>
+        <Link className="btn-secondary react-auto-width" to="/admission.html">University admission</Link>
+        <i className="fas fa-graduation-cap education-header-icon" aria-hidden="true" />
+      </header>
 
-      {section === 'stipend' && !selectedGrant && <><div className="react-service-stats"><article className="react-panel"><strong>{stipends.length}</strong><span>Active grants</span></article><article className="react-panel"><strong>{applications.length}</strong><span>My applications</span></article></div><section className="react-panel"><h2>Available stipends</h2><div className="react-service-card-grid">{stipends.map(row => <article key={row.id}><h3>{row.title}</h3><p>{row.description}</p><p>BDT {Number(row.amount || 0).toLocaleString()} · Deadline {dateText(row.deadline)}</p>{row.min_gpa && <p>Minimum GPA: {row.min_gpa}</p>}{row.max_income && <p>Maximum monthly income: BDT {Number(row.max_income).toLocaleString()}</p>}<button className="btn-primary" type="button" onClick={() => setSelectedGrant(row)}>Apply now</button></article>)}{!stipends.length && <p className="react-empty-state">No active grants.</p>}</div></section><section className="react-panel react-service-spaced"><h2>My stipend applications</h2><div className="react-table-wrap"><table><thead><tr><th>Application</th><th>Stipend</th><th>Amount</th><th>Submitted</th><th>Status</th></tr></thead><tbody>{applications.map(row => <tr key={row.id}><td>{row.application_no}</td><td>{row.stipend_title}</td><td>BDT {Number(row.stipend_amount || 0).toLocaleString()}</td><td>{dateText(row.submitted_at)}</td><td><StatusBadge value={row.status} /></td></tr>)}{!applications.length && <EmptyRow columns={5}>No stipend applications.</EmptyRow>}</tbody></table></div></section></>}
+      <nav className="react-service-tabs" aria-label="Education sections">
+        {sections.map(({ id, label }) => <button type="button" className={section === id ? 'active' : ''} onClick={() => setSection(id)} key={id}>{label}</button>)}
+      </nav>
 
-      {section === 'stipend' && selectedGrant && <section className="react-panel react-narrow-panel"><div className="react-section-heading"><div><h2>Apply: {selectedGrant.title}</h2><p>Eligibility is checked by the existing backend.</p></div><button className="btn-secondary" type="button" onClick={() => setSelectedGrant(null)}>Back</button></div><form className="react-form-stack" onSubmit={apply}><label>GPA<input name="gpa" type="number" min="0" max="5" step="0.01" required /></label><label>Institution<input name="institution" /></label><label>Monthly family income<input name="monthlyIncome" type="number" min="0" required /></label><label>Family members<input name="members" type="number" min="0" /></label><label>Land owned<input name="land" type="number" min="0" step="0.01" /></label><label>Payment method<select name="method" defaultValue="Mobile Banking"><option>Mobile Banking</option><option>Bank Account</option></select></label><label>Account number<input name="accountNo" /></label><button className="btn-primary" disabled={submitting} type="submit">{submitting ? 'Submitting…' : 'Submit application'}</button></form></section>}
-    </>}
+      {error && <div className="react-dashboard-error" role="alert">{error}<button type="button" onClick={loadAll}>Retry lists</button></div>}
+
+      {loading ? <p className="react-empty-state">Loading education services…</p> : <>
+
+        {section === 'results' && <>
+          <section className="react-panel react-narrow-panel">
+            <span className="react-kicker">Examination results</span>
+            <h2>Check examination result</h2>
+            <p>Pick your exam, year, and enter the roll number used at registration.</p>
+            <form className="react-form-stack" onSubmit={checkResult}>
+              <label>Exam type
+                <select name="examType" required defaultValue="">
+                  <option value="">Select exam</option>
+                  <option value="jsc">JSC</option>
+                  <option value="ssc">SSC</option>
+                  <option value="hsc">HSC</option>
+                </select>
+              </label>
+              <label>Exam year
+                <select name="examYear" required defaultValue="">
+                  <option value="">Select year</option>
+                  {years.map(value => <option key={value}>{value}</option>)}
+                </select>
+              </label>
+              <label>Roll number<input name="rollNumber" required /></label>
+              <button className="btn-primary" disabled={resultLoading} type="submit">{resultLoading ? 'Checking…' : 'Check result'}</button>
+            </form>
+            <p>{boards.length} education boards and {institutions.length} institutions are available in the directory data.</p>
+          </section>
+
+          {result && <section className="react-panel react-service-spaced" aria-label="Exam result">
+            <header className="react-result-header">
+              <div>
+                <span className="react-kicker">{result.examType} · {result.examYear}</span>
+                <h2>Examination Result</h2>
+                <p>{result.student.name} · Roll {result.student.rollNumber}</p>
+              </div>
+              <div>
+                <strong>{result.result.gpa}</strong>
+                <StatusBadge value={result.result.status} />
+              </div>
+            </header>
+            <div className="react-detail-grid">
+              <p><strong>Registration</strong>{result.student.registrationNumber || '—'}</p>
+              <p><strong>Institution</strong>{result.student.institution || '—'}</p>
+              <p><strong>Board</strong>{result.student.board || '—'}</p>
+              <p><strong>Group</strong>{result.student.group || 'General'}</p>
+              <p><strong>Father</strong>{result.student.fatherName || '—'}</p>
+              <p><strong>Mother</strong>{result.student.motherName || '—'}</p>
+            </div>
+            <div className="react-table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>Subject</th><th>Grade</th></tr></thead>
+                <tbody>
+                  {result.subjects.map((subject, index) => <tr key={`${subject.name}-${index}`}><td>{index + 1}</td><td>{subject.name}</td><td><strong>{subject.grade}</strong></td></tr>)}
+                </tbody>
+              </table>
+            </div>
+            <div className="react-result-meta">
+              <span>{result.subjects.length} subjects</span>
+              <span>GPA {result.result.gpa}</span>
+              <span>{result.result.status}</span>
+              <span>Verified by Education Board</span>
+            </div>
+            <button className="btn-secondary react-service-action" type="button" onClick={() => window.print()}>Print result</button>
+          </section>}
+        </>}
+
+        {section === 'stipend' && !selectedGrant && <>
+          <div className="react-service-stats">
+            <article className="react-panel">
+              <strong>{stipends.length}</strong>
+              <span>Active grants</span>
+            </article>
+            <article className="react-panel">
+              <strong>{applications.length}</strong>
+              <span>My applications</span>
+            </article>
+          </div>
+
+          <section className="react-panel">
+            <div className="react-section-heading">
+              <div>
+                <span className="react-kicker">Scholarship programmes</span>
+                <h2>Available stipends</h2>
+                <p>Browse active grants and submit an authenticated application in minutes.</p>
+              </div>
+              <span className="react-stipend-card-kicker">{stipends.length} open</span>
+            </div>
+            <div className="react-service-card-grid">
+              {stipends.map(row => <article key={row.id}>
+                <span className="react-stipend-card-kicker">Stipend</span>
+                <h3>{row.title}</h3>
+                <p>{row.description}</p>
+                <StipendMeta row={row} />
+                <footer>
+                  <small>Deadline {dateText(row.deadline)}</small>
+                  <button className="btn-primary react-service-action" type="button" onClick={() => setSelectedGrant(row)}>Apply now</button>
+                </footer>
+              </article>)}
+              {!stipends.length && <div className="react-stipend-empty">
+                <i className="fas fa-hand-holding-usd" aria-hidden="true" />
+                <strong>No active grants</strong>
+                <p>Check back later — new programmes are announced regularly.</p>
+              </div>}
+            </div>
+          </section>
+
+          <section className="react-panel react-service-spaced">
+            <div className="react-section-heading">
+              <div>
+                <span className="react-kicker">Application history</span>
+                <h2>My stipend applications</h2>
+                <p>Track the status of every stipend application you have submitted.</p>
+              </div>
+            </div>
+            <div className="react-table-wrap">
+              <table>
+                <thead><tr><th>Application</th><th>Stipend</th><th>Amount</th><th>Submitted</th><th>Status</th></tr></thead>
+                <tbody>
+                  {applications.map(row => <tr key={row.id}>
+                    <td>{row.application_no}</td>
+                    <td>{row.stipend_title}</td>
+                    <td>{bdt(row.stipend_amount)}</td>
+                    <td>{dateText(row.submitted_at)}</td>
+                    <td><StatusBadge value={row.status} /></td>
+                  </tr>)}
+                  {!applications.length && <EmptyRow columns={5}>No stipend applications.</EmptyRow>}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>}
+
+        {section === 'stipend' && selectedGrant && <section className="react-panel react-narrow-panel">
+          <div className="react-section-heading">
+            <div>
+              <span className="react-kicker">Stipend application</span>
+              <h2>Apply: {selectedGrant.title}</h2>
+              <p>Eligibility is checked by the existing backend. Submit authentic information only.</p>
+            </div>
+            <button className="btn-secondary" type="button" onClick={() => setSelectedGrant(null)}>Back</button>
+          </div>
+          <form className="react-form-stack" onSubmit={apply}>
+            <ApplyGroup legend="Student details">
+              <label>GPA<input name="gpa" type="number" min="0" max="5" step="0.01" required /></label>
+              <label>Institution<input name="institution" /></label>
+            </ApplyGroup>
+            <ApplyGroup legend="Financial information">
+              <label>Monthly family income<input name="monthlyIncome" type="number" min="0" required /></label>
+              <label>Family members<input name="members" type="number" min="0" /></label>
+              <label>Land owned<input name="land" type="number" min="0" step="0.01" /></label>
+            </ApplyGroup>
+            <ApplyGroup legend="Bank details">
+              <label>Payment method
+                <select name="method" defaultValue="Mobile Banking">
+                  <option>Mobile Banking</option>
+                  <option>Bank Account</option>
+                </select>
+              </label>
+              <label>Account number<input name="accountNo" /></label>
+            </ApplyGroup>
+            <button className="btn-primary" disabled={submitting} type="submit">{submitting ? 'Submitting…' : 'Submit application'}</button>
+          </form>
+        </section>}
+
+      </>}
+    </div>
   </CitizenShell>;
 }
