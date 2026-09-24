@@ -28,7 +28,7 @@ describe('admission listing React page', () => {
     expect(await screen.findByText(malicious)).toBeInTheDocument();
     expect(document.querySelector('[onerror]')).toBeNull();
     await user.type(screen.getByLabelText('Search admissions'), 'nothing');
-    expect(screen.getByText('No matching admission notices.')).toBeInTheDocument();
+    expect(screen.getByText('No matching admission notices')).toBeInTheDocument();
   });
 
   it('preserves public roll/year application lookup and Pending status', async () => {
@@ -39,10 +39,12 @@ describe('admission listing React page', () => {
     });
     const user = userEvent.setup();
     render(<MemoryRouter initialEntries={['/admission.html']}><AdmissionPage /></MemoryRouter>);
-    await screen.findByText('No matching admission notices.');
-    await user.type(screen.getByPlaceholderText('HSC roll'), '345678');
-    await user.click(screen.getByRole('button', { name: 'Find' }));
-    expect(await screen.findByText(/Payment: Pending/)).toHaveTextContent('Application: Draft');
+    await screen.findByText('No matching admission notices');
+    await user.type(screen.getByRole('textbox', { name: 'HSC roll number' }), '345678');
+    await user.click(screen.getByRole('button', { name: /Find my application/i }));
+    const result = (await screen.findByText('Pending')).closest('article');
+    expect(result).toHaveTextContent(/Payment\s*Pending/);
+    expect(result).toHaveTextContent(/Application\s*Draft/);
     expect(apiRequest).toHaveBeenCalledWith('/api/university/my-applications/345678/2024', { auth: false });
   });
 });
