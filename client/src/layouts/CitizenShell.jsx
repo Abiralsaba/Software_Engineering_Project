@@ -17,6 +17,17 @@ const navigation = [
   ['contact.html', 'envelope', 'Contact']
 ];
 
+const ministryPaths = new Set([
+  '/agriculture.html',
+  '/land.html',
+  '/tax.html',
+  '/passport.html',
+  '/nid.html',
+  '/health.html',
+  '/water.html',
+  '/education.html'
+]);
+
 export function resolveAssetUrl(value) {
   if (!value) return '';
   if (/^(https?:|data:|blob:|\/)/.test(value)) return value;
@@ -26,6 +37,7 @@ export function resolveAssetUrl(value) {
 export default function CitizenShell({ children, pageStyles = [] }) {
   useStylesheets(['/css/style.css', '/css/sidebar.css', ...pageStyles, '/css/dashboard.css', '/css/citizen-pages.css']);
   const location = useLocation();
+  const isMinistryPage = ministryPaths.has(location.pathname);
   const navigate = useNavigate();
   const { clearCitizenSession } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -46,7 +58,7 @@ export default function CitizenShell({ children, pageStyles = [] }) {
   }
 
   return (
-    <div className="nationx-dashboard nationx-citizen-pages">
+    <div className={`nationx-dashboard nationx-citizen-pages${isMinistryPage ? ' nationx-ministry-page' : ''}`}>
       <button className="nx-assistant-launch" onClick={() => setAssistantOpen(v => !v)} aria-expanded={assistantOpen}>{assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}</button>
       {assistantOpen && <aside className="nx-assistant-drawer"><AssistantPanel accountKey={`citizen-${profile.id || ''}`} /></aside>}
       <div className="dashboard-ambient" aria-hidden="true">
