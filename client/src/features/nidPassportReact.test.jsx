@@ -131,7 +131,7 @@ describe('passport React service page', () => {
     renderCitizen(<PassportPage />, '/passport.html?section=payment&status=success&tid=DEMO-TXN');
     expect(await screen.findByRole('status')).toHaveTextContent('Unverified payment return');
     expect(screen.getByRole('heading', { name: 'Passport payment demonstration' })).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveTextContent('SIMULATED — NOT GATEWAY VERIFIED');
+    expect(screen.getByText('SSLCommerz-style checkout · Local demo')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /pay now|initiate payment|continue to payment/i })).not.toBeInTheDocument();
   });
 

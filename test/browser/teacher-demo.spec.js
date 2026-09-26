@@ -66,7 +66,9 @@ test.describe.serial('NationX teacher demonstration in Chromium', () => {
         await expect(page.getByText(taskTitle)).toHaveCount(0);
 
         await page.goto('/passport.html?section=payment&status=success&tid=BROWSER-DEMO');
-        await expect(page.getByText('SIMULATED — NOT GATEWAY VERIFIED.')).toBeVisible();
+        await expect(page.getByText('SSLCommerz-style checkout · Local demo')).toBeVisible();
+        await page.getByLabel('Demo amount (BDT)').fill('5750');
+        await page.getByRole('button', { name: 'Open demo checkout' }).click();
         await page.getByRole('button', { name: 'Simulate presentation payment' }).click();
         await expect(page.getByText('No gateway verification or server-side payment update occurred.')).toBeVisible();
         const denied = await page.evaluate(async token => fetch('/api/water/admin/stats', { headers: { Authorization: `Bearer ${token}` } }).then(response => response.status), citizenToken);

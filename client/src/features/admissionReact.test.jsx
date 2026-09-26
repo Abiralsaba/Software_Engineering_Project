@@ -106,7 +106,7 @@ describe('university application React page', () => {
     apiRequest.mockImplementation(path => path === '/api/university/admissions/7' ? Promise.resolve(admission) : Promise.resolve({}));
     render(<MemoryRouter initialEntries={['/apply.html?id=7']}><ApplyPage /></MemoryRouter>);
     expect(await screen.findByRole('heading', { name: 'Admission fee payment demonstration' })).toBeInTheDocument();
-    expect(screen.getByRole('alert')).toHaveTextContent('SIMULATED — NOT GATEWAY VERIFIED');
+    expect(screen.getByText('SSLCommerz-style checkout · Local demo')).toBeInTheDocument();
     expect(apiRequest.mock.calls.some(([path]) => path === '/api/university/payment/init')).toBe(false);
   });
 });

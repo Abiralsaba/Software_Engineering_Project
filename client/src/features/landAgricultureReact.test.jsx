@@ -48,7 +48,7 @@ describe('land React service page', () => {
     apiRequest.mockImplementation(emptyLand);
     renderCitizen(<LandPage />, '/land.html?section=tax&status=success&tid=DEMO-TXN');
     expect(await screen.findByRole('status')).toHaveTextContent('unverified');
-    expect(screen.getByRole('alert')).toHaveTextContent('SIMULATED — NOT GATEWAY VERIFIED');
+    expect(screen.getByText('SSLCommerz-style checkout · Local demo')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /Pay now|initiate payment/i })).not.toBeInTheDocument();
   });
 

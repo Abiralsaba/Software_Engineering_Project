@@ -89,7 +89,7 @@ describe('water React service page', () => {
   it('keeps bill history visible and labels the non-writing presentation simulation', async () => {
     apiRequest.mockImplementation(emptyService);
     renderCitizen(<WaterPage />, '/water.html?section=bill&return=preserved');
-    expect(await screen.findByText(/SIMULATED — NOT GATEWAY VERIFIED/)).toBeInTheDocument();
+    expect(await screen.findByText('SSLCommerz-style checkout · Local demo')).toBeInTheDocument();
     expect(screen.getByText('No bill records.')).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /Pay Bill|submit bill/i })).not.toBeInTheDocument();
   });
