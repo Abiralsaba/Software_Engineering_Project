@@ -16,6 +16,7 @@ const nidRoutes = require('../../src/routes/nidRoutes');
 const passportRoutes = require('../../src/routes/passportRoutes');
 const secret = process.env.JWT_SECRET || 'your-secret-key';
 const marker = 'TST React NID Passport';
+const secondaryEmail = 'nid-passport.regression@nationx.test';
 let server;
 let baseUrl;
 let alice;
@@ -67,8 +68,17 @@ async function cleanup() {
 
 test('React NID/passport API regression', async t => {
     try {
-        [[alice]] = await db.query("SELECT id,name,nid FROM reg_info WHERE email='alice.demo@nationx.test'");
-        [[bob]] = await db.query("SELECT id,name,nid FROM reg_info WHERE email='bob.demo@nationx.test'");
+        // The primary demo account intentionally has a complete NID/passport
+        // history, so regression mutations use isolated synthetic identities.
+        [[alice]] = await db.query("SELECT id,name,nid FROM reg_info WHERE email='bob.demo@nationx.test'");
+        await db.query(
+            `INSERT INTO reg_info (name,address,nid,mobile,email,password,dob,gender)
+             SELECT 'NID Passport Regression Citizen','DEMO DATA — regression address','99900000000000993','01990000993',?,password,'1992-03-04','Male'
+             FROM reg_info WHERE email='bob.demo@nationx.test'
+             ON DUPLICATE KEY UPDATE name=VALUES(name)`,
+            [secondaryEmail]
+        );
+        [[bob]] = await db.query('SELECT id,name,nid FROM reg_info WHERE email=?', [secondaryEmail]);
         [[geo]] = await db.query("SELECT v.id division_id,v.name division,d.id district_id,d.name district,u.id upazila_id,u.name upazila FROM divisions v JOIN districts d ON d.division_id=v.id JOIN upazilas u ON u.district_id=d.id WHERE v.name='DEMO DATA — Test Division' LIMIT 1");
         [[center]] = await db.query('SELECT id FROM nid_collection_centers WHERE is_active = 1 ORDER BY id LIMIT 1');
         [[office]] = await db.query('SELECT office_code FROM passport_offices WHERE is_active = 1 ORDER BY id LIMIT 1');
@@ -176,6 +186,8 @@ test('React NID/passport API regression', async t => {
         });
     } finally {
         await cleanup();
+        await db.query('DELETE FROM user_info WHERE email=?', [secondaryEmail]);
+        await db.query('DELETE FROM reg_info WHERE email=?', [secondaryEmail]);
         if (server) await new Promise(resolve => server.close(resolve));
         await db.end();
     }

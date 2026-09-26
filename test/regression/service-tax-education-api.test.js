@@ -51,8 +51,10 @@ async function cleanup() {
 }
 
 test('React tax/education API regression', async t => {
-    [[alice]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email='alice.demo@nationx.test'");
-    [[bob]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email='bob.demo@nationx.test'");
+    // Keep the seeded primary tax history visible; exercise new applications
+    // with the clean secondary synthetic identity.
+    [[alice]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email='bob.demo@nationx.test'");
+    [[bob]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email='alice.demo@nationx.test'");
     [[stipend]] = await db.query('SELECT id, min_gpa, max_income FROM stipends WHERE is_active = TRUE ORDER BY id LIMIT 1');
     assert.ok(alice && bob && stipend, 'synthetic identities and an active stipend must exist');
     aliceToken = tokenFor(alice); bobToken = tokenFor(bob);
