@@ -144,6 +144,20 @@ function runSql(mysqlBinary, relativePath, replacements = {}) {
     console.log(`applied ${relativePath}`);
 }
 
+function runNodeScript(relativePath, scriptArgs = []) {
+    const result = spawnSync(process.execPath, [path.join(PROJECT_ROOT, relativePath), ...scriptArgs], {
+        cwd: PROJECT_ROOT,
+        env: process.env,
+        encoding: 'utf8',
+        maxBuffer: 10 * 1024 * 1024
+    });
+    if (result.status !== 0) {
+        const details = (result.stderr || result.stdout || '').trim();
+        throw new Error(`Script failed in ${relativePath}${details ? `:\n${details}` : ''}`);
+    }
+    if (result.stdout.trim()) console.log(result.stdout.trim());
+}
+
 async function prepareDatabase() {
     const connection = await mysql.createConnection(connectionOptions);
     try {
@@ -336,6 +350,8 @@ async function main() {
     }
     databaseFeatures.push('src/database/seeds/002_synthetic_demo_data.sql');
     for (const file of databaseFeatures) runSql(mysqlBinary, file);
+
+    runNodeScript('scripts/database/seed-demo.js', ['--target', target]);
 
     await validateDatabase();
 }

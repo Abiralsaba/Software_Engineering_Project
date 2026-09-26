@@ -15,8 +15,8 @@ VALUES (
 INSERT INTO reg_info (name, address, nid, mobile, email, password, dob, gender)
 VALUES
 (
-    'Synthetic Citizen Alice',
-    'DEMO DATA — Test Address A',
+    'আয়েশা রহমান (ডেমো)',
+    'বাড়ি ১২, সড়ক ৪, মিরপুর, ঢাকা — ডেমো ঠিকানা',
     '99900000000000001',
     '01990000001',
     'alice.demo@nationx.test',
@@ -25,8 +25,8 @@ VALUES
     'Female'
 ),
 (
-    'Synthetic Citizen Bob',
-    'DEMO DATA — Test Address B',
+    'আরিফ হোসেন (ডেমো)',
+    'বাড়ি ৮, কলেজ রোড, রাজশাহী — ডেমো ঠিকানা',
     '99900000000000002',
     '01990000002',
     'bob.demo@nationx.test',

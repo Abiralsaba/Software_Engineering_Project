@@ -13,6 +13,8 @@
     "db:install:test": "node scripts/database/install.js --target central_govt_db_test",
     "db:reset:test": "node scripts/database/install.js --target central_govt_db_test --reset",
     "db:install:dev": "node scripts/database/install.js --target central_govt_db",
+    "db:seed-demo": "node scripts/database/seed-demo.js --target central_govt_db",
+    "db:seed-demo:test": "node scripts/database/seed-demo.js --target central_govt_db_test",
     "test": "node --test --test-concurrency=1 test/regression/*.test.js",
     "test:baseline": "node --test --test-concurrency=1 test/regression/database-baseline.test.js",
     "client:install": "npm install --prefix client",
