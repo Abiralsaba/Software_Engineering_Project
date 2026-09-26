@@ -1,0 +1,14 @@
+Bangladesh administrative hierarchy seed
+
+Source: Open Admin Data Bangladesh
+URL: https://github.com/open-admin-data/bangladesh-administrative-divisions
+Snapshot: 1731ee8585a32ad62f5c898f8e8e3f7659b1aa5a
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Adaptation: NationX retains only the source code, English name, Bengali name,
+and parent hierarchy for 8 divisions, 64 districts, and 495 upazilas.
+
+All citizen, student, application, payment, community, and ministry records
+created by scripts/database/seed-demo.js are synthetic local demonstration
+records. Registration/reference values containing DEMO are not official data.
+Generated images contain no real citizen identity data.

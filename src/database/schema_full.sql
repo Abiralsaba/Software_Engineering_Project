@@ -215,6 +215,8 @@ CREATE TABLE IF NOT EXISTS districts (
   id int(11) NOT NULL AUTO_INCREMENT,
   division_id int(11) NOT NULL,
   name varchar(100) NOT NULL,
+  name_bn varchar(100) DEFAULT NULL,
+  geo_code varchar(20) DEFAULT NULL,
   PRIMARY KEY (id),
   KEY division_id (division_id),
   CONSTRAINT districts_ibfk_1 FOREIGN KEY (division_id) REFERENCES divisions (id) ON DELETE CASCADE
@@ -224,6 +226,8 @@ CREATE TABLE IF NOT EXISTS districts (
 CREATE TABLE IF NOT EXISTS divisions (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(100) NOT NULL,
+  name_bn varchar(100) DEFAULT NULL,
+  geo_code varchar(20) DEFAULT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY name (name)
 );
@@ -990,6 +994,8 @@ CREATE TABLE IF NOT EXISTS upazilas (
   id int(11) NOT NULL AUTO_INCREMENT,
   district_id int(11) NOT NULL,
   name varchar(100) NOT NULL,
+  name_bn varchar(100) DEFAULT NULL,
+  geo_code varchar(20) DEFAULT NULL,
   PRIMARY KEY (id),
   KEY district_id (district_id),
   CONSTRAINT upazilas_ibfk_1 FOREIGN KEY (district_id) REFERENCES districts (id) ON DELETE CASCADE
