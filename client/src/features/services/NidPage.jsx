@@ -60,15 +60,20 @@ export default function NidPage() {
 
   async function loadAll() {
     setLoading(true); setError('');
-    try {
-      const [dashboard, profile, fees, centers, corrections, reissues, smartCards, addresses, verifications, appointments, family, applications, divisions] = await Promise.all([
+    const results = await Promise.allSettled([
         apiRequest(`${API}/dashboard`), apiRequest(`${API}/profile`), apiRequest(`${API}/fees`, { auth: false }), apiRequest(`${API}/centers`, { auth: false }),
         apiRequest(`${API}/corrections`), apiRequest(`${API}/reissue`), apiRequest(`${API}/smart-card`), apiRequest(`${API}/address-change`),
         apiRequest(`${API}/verifications`), apiRequest(`${API}/appointments`), apiRequest(`${API}/family`), apiRequest(`${API}/all-applications`), apiRequest(`${API}/locations/divisions`)
-      ]);
-      setData({ dashboard: dashboard || {}, profile: profile || {}, fees: rows(fees), centers: rows(centers), corrections: rows(corrections), reissues: rows(reissues), smartCards: rows(smartCards), addresses: rows(addresses), verifications: rows(verifications), appointments: rows(appointments), family: rows(family), applications: rows(applications), divisions: rows(divisions) });
-    } catch (requestError) { setError(requestError.message); }
-    finally { setLoading(false); }
+    ]);
+    const value = (index, fallback) => results[index].status === 'fulfilled' ? results[index].value : fallback;
+    setData({
+      dashboard: value(0, {}), profile: value(1, {}), fees: rows(value(2, [])), centers: rows(value(3, [])),
+      corrections: rows(value(4, [])), reissues: rows(value(5, [])), smartCards: rows(value(6, [])), addresses: rows(value(7, [])),
+      verifications: rows(value(8, [])), appointments: rows(value(9, [])), family: rows(value(10, [])), applications: rows(value(11, [])), divisions: rows(value(12, []))
+    });
+    const failures = results.filter(result => result.status === 'rejected');
+    if (failures.length) setError(failures[0].reason?.message || 'Some NID information could not be loaded.');
+    setLoading(false);
   }
   useEffect(() => { loadAll(); }, []);
 

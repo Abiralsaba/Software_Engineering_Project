@@ -98,7 +98,10 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded form data
 // Rate Limiting to prevent brute force
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: Number(process.env.API_RATE_LIMIT_MAX) || 100, // browser regression may explicitly raise this; normal default remains 100
+    // A single React ministry screen intentionally loads several independent
+    // dashboard resources. Keep this high enough for normal local navigation;
+    // sensitive actions retain their own domain-specific safeguards.
+    max: Number(process.env.API_RATE_LIMIT_MAX) || 2000,
     message: 'Too many requests from this IP, please try again later.'
 });
 app.use('/api/', limiter);

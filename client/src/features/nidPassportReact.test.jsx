@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -36,6 +36,35 @@ function emptyPassport(path) {
 beforeEach(() => apiRequest.mockReset());
 
 describe('NID React service page', () => {
+  it('loads the complete division, district, and upazila selector chain', async () => {
+    apiRequest.mockImplementation(path => {
+      if (path === '/api/nid/dashboard') return Promise.reject(new Error('Optional dashboard unavailable'));
+      if (path === '/api/nid/locations/divisions') return Promise.resolve([{ id: 12, name: 'Dhaka', name_bn: 'ঢাকা', geo_code: 'BD30' }]);
+      if (path === '/api/nid/locations/districts/12') return Promise.resolve([{ id: 83, name: 'Dhaka', name_bn: 'ঢাকা', geo_code: 'BD3026' }]);
+      if (path === '/api/nid/locations/upazilas/83') return Promise.resolve([{ id: 643, name: 'Savar', name_bn: 'সাভার', geo_code: 'BD30260072' }]);
+      return emptyNid(path);
+    });
+    const user = userEvent.setup();
+    renderCitizen(<NidPage />, '/nid.html?section=profile');
+
+    const address = await screen.findByRole('group', { name: 'Present address' });
+    const division = within(address).getByLabelText('Division');
+    const district = within(address).getByLabelText('District');
+    const upazila = within(address).getByLabelText('Upazila');
+    expect(division).toHaveTextContent('ঢাকা (Dhaka)');
+    expect(district).toBeDisabled();
+
+    await user.selectOptions(division, '12');
+    await waitFor(() => expect(district).toHaveTextContent('ঢাকা (Dhaka)'));
+    await user.selectOptions(district, '83');
+    await waitFor(() => expect(upazila).toHaveTextContent('সাভার (Savar)'));
+    await user.selectOptions(upazila, '643');
+
+    expect(division).toHaveValue('12');
+    expect(district).toHaveValue('83');
+    expect(upazila).toHaveValue('643');
+  });
+
   it('preserves correction multipart fields and locks duplicate submissions', async () => {
     let resolveSubmit;
     apiRequest.mockImplementation((path, options) => {
