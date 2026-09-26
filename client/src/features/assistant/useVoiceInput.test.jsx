@@ -23,9 +23,26 @@ describe('voice input lifecycle',()=>{
   it('discards permission results after cancellation',async()=>{
     let resolve;const stop=vi.fn(),onTranscript=vi.fn();microphone(()=>new Promise(r=>{resolve=r;}));
     const {result}=renderHook(()=>useVoiceInput({language:'bn',onTranscript,onError:vi.fn()}));
-    let pending;act(()=>{pending=result.current.toggle();});act(()=>result.current.cancel());
+    let pending;act(()=>{pending=result.current.toggle();});
+    await new Promise(r=>setTimeout(r,220));
+    act(()=>result.current.cancel());
     await act(async()=>{resolve({getTracks:()=>[{stop}]});await pending;});
     expect(stop).toHaveBeenCalled();expect(apiRequest).not.toHaveBeenCalled();expect(result.current.state).toBe('idle');
+  });
+  it('does not request the microphone when cancelled during the speaker handoff',async()=>{
+    const stop=vi.fn();microphone(async()=>({getTracks:()=>[{stop}]}));
+    const getUserMedia=navigator.mediaDevices.getUserMedia;
+    const {result}=renderHook(()=>useVoiceInput({language:'bn',onTranscript:vi.fn(),onError:vi.fn()}));
+    let pending;act(()=>{pending=result.current.toggle();result.current.cancel();});
+    await act(async()=>pending);
+    expect(getUserMedia).not.toHaveBeenCalled();expect(result.current.state).toBe('idle');
+  });
+  it('shows the server transcription error instead of discarding its message',async()=>{
+    const onError=vi.fn();microphone(async()=>({getTracks:()=>[{stop:vi.fn()}]}));
+    apiRequest.mockRejectedValue(Object.assign(new Error('UNCLEAR_AUDIO'),{data:{message:'No clear speech was heard. Please try again or type.'}}));
+    const {result}=renderHook(()=>useVoiceInput({language:'bn',onTranscript:vi.fn(),onError}));
+    await act(async()=>result.current.toggle());await act(async()=>result.current.toggle());
+    expect(onError).toHaveBeenCalledWith('No clear speech was heard. Please try again or type.');
   });
   it('discards a late transcript after cancellation',async()=>{
     let resolve;const onTranscript=vi.fn();microphone(async()=>({getTracks:()=>[{stop:vi.fn()}]}));

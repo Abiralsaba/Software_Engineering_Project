@@ -18,6 +18,9 @@ export function useVoiceInput({ language, onTranscript, onError }) {
     if(!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) { onError('Microphone unavailable. You can type your answer.'); return; }
     const generation=++value.generation; setState('permission');
     try {
+      // Let the assistant's speaker output finish before opening the mic.
+      await new Promise(resolve=>setTimeout(resolve,180));
+      if(generation!==value.generation)return;
       const stream=await navigator.mediaDevices.getUserMedia({audio:true});
       if(generation!==value.generation) { stream.getTracks().forEach(track=>track.stop()); return; }
       value.stream=stream;
@@ -35,7 +38,7 @@ export function useVoiceInput({ language, onTranscript, onError }) {
           value.controller=new AbortController();
           const result=await apiRequest('/api/assistant/audio',{method:'POST',body,signal:value.controller.signal});
           if(generation===value.generation) onTranscript(result.transcript || '');
-        } catch(error) { if(generation===value.generation) onError(error.data?.message || 'Transcription unavailable. Please type your answer.'); }
+        } catch(error) { if(generation===value.generation) onError(error.data?.message || error.message || 'Transcription unavailable. Please type your answer.'); }
         finally { if(generation===value.generation) setState('idle'); }
       };
       recorder.start(); setState('listening'); value.timer=setTimeout(()=>{if(recorder.state==='recording')recorder.stop();},15000);

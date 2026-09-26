@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { formFields, prefillProfile, writeField } from './formGuide.js';
+import { formFields, optionForAnswer, plausibleTranscript, prefillProfile, spokenNumber, writeField } from './formGuide.js';
 import { ministries, workflows, understand } from './workflows.js';
 let form;
 beforeEach(()=>{document.body.innerHTML='<form><label>Name<input name="full_name" required></label><label>NID<input name="nid_number"></label><label>Father<input name="father_name"></label><label>Gender<select name="gender"><option value="">Choose</option><option>Male</option><option>Female</option></select></label><label>Amount<input type="number" name="amount" min="1"></label><label>Photo<input type="file" name="photo"></label><label>Consent<input type="checkbox" name="consent"></label><input name="secret" type="hidden" value="unchanged"></form>';form=document.querySelector('form');});
@@ -40,5 +40,47 @@ describe('citizen workflow boundaries',()=>{
     expect(()=>writeField(formFields(form).find(f=>f.key==='amount'),'0')).toThrow();
     for(const key of ['photo','consent'])expect(()=>writeField(formFields(form).find(f=>f.key===key),'yes')).toThrow();
     expect(form.elements.amount.value).toBe('');
+  });
+  it('turns clear Bangla spoken numbers into validated numeric form values',()=>{
+    const amount=formFields(form).find(f=>f.key==='amount');
+    expect(spokenNumber('দশ।')).toBe('10');
+    expect(spokenNumber('১০ acres')).toBe('10');
+    expect(plausibleTranscript(amount,'নিজের স্ত্রীর স্বাস্থ্যের সাথে সংযোগ')).toBe(false);
+    writeField(amount,'দশ');
+    expect(form.elements.amount.value).toBe('10');
+    expect(()=>writeField(amount,'random words')).toThrow(/number/);
+    expect(form.elements.amount.value).toBe('10');
+  });
+  it('rejects a rambling hallucinated answer for a short field before it reaches the form',()=>{
+    const crop=document.createElement('input');crop.name='crop_name';form.append(crop);
+    const field=formFields(form).find(f=>f.key==='crop_name');
+    expect(plausibleTranscript(field,'নিজের স্ত্রীর নিজের স্বাস্থ্যের সাথে স্বাস্থ্যের সাথে সংযোগ প্রদান করি')).toBe(false);
+    expect(crop.value).toBe('');
+    const nid=formFields(form).find(f=>f.key==='nid_number');
+    expect(plausibleTranscript(nid,'আপনার নাম কি')).toBe(false);
+    expect(plausibleTranscript(nid,'১২৩৪৫৬৭৮৯০')).toBe(true);
+  });
+  it('offers live select options and accepts a clicked option or a spoken option number',()=>{
+    const season=document.createElement('select');season.name='season';season.innerHTML='<option value="">Select</option><option>Aman</option><option>Aus</option><option>Boro</option>';form.append(season);
+    const field=formFields(form).find(f=>f.key==='season');
+    expect(field.options.map(o=>o.label)).toEqual(['Aman','Aus','Boro']);
+    expect(optionForAnswer(field,'আমন।')?.value).toBe('Aman');
+    expect(optionForAnswer(field,'option two')?.value).toBe('Aus');
+    expect(plausibleTranscript(field,'completely unrelated sentence')).toBe(false);
+    writeField(field,'দুই');expect(season.value).toBe('Aus');
+    writeField(formFields(form).find(f=>f.key==='season'),'আমন');expect(season.value).toBe('Aman');
+  });
+  it('uses the same live choice logic for a second ministry’s geographic select',()=>{
+    const district=document.createElement('select');district.name='district_id';district.innerHTML='<option value="">Select district</option><option value="13">Dhaka / ঢাকা</option><option value="23">Cumilla / কুমিল্লা</option>';form.append(district);
+    const field=formFields(form).find(f=>f.key==='district_id');
+    expect(field.options).toHaveLength(2);
+    writeField(field,'কুমিল্লা');
+    expect(district.value).toBe('23');
+  });
+  it('keeps dependent location selects in the guide while their options load',()=>{
+    const district=document.createElement('select');district.name='district_id';district.disabled=true;district.innerHTML='<option value="">Loading districts…</option>';form.append(district);
+    const fields=formFields(form);
+    expect(fields.find(f=>f.key==='district_id')?.options).toEqual([]);
+    expect(()=>writeField(fields.find(f=>f.key==='district_id'),'ঢাকা')).toThrow(/service form/);
   });
 });

@@ -31,6 +31,19 @@ test('Bangla transcription disables detection and translation, and rejects Devan
     await assert.rejects(transcribe(wav(1), { language: 'bn' }), { code: 'TRANSCRIPT_LANGUAGE_MISMATCH' });
   } finally { global.fetch = original; }
 });
+test('speech recognition rejects silent-confidence and implausibly long transcripts', async () => {
+  const original = global.fetch;
+  let response = { text: 'দশ', no_speech_prob: 0.9 };
+  global.fetch = async () => ({ ok: true, text: async () => JSON.stringify(response) });
+  try {
+    await assert.rejects(transcribe(wav(1), { language: 'bn' }), { code: 'UNCLEAR_AUDIO' });
+    response = { text: 'এক দুই তিন চার পাঁচ ছয় সাত আট নয় দশ এগারো বারো' };
+    await assert.rejects(transcribe(wav(1), { language: 'bn' }), { code: 'UNCLEAR_AUDIO' });
+    response = { text: 'দশ', no_speech_prob: 0.1 };
+    assert.equal((await transcribe(wav(1), { language: 'bn' })).transcript, 'দশ');
+    await assert.rejects(transcribe(wav(0.2), { language: 'bn' }), { code: 'AUDIO_DURATION_INVALID' });
+  } finally { global.fetch = original; }
+});
 test('Bangla, Banglish, English and deterministic conflicts', () => {
   for(const text of ['আমার NID বানাও','Amar NID banai dao','I want to apply for a new NID','I don’t have an NID']) assert.equal(keywordIntent(text),'CREATE_NID_APPLICATION');
   assert.equal(keywordIntent('আমার আবেদন কোথায় আছে?'),'CHECK_NID_STATUS');

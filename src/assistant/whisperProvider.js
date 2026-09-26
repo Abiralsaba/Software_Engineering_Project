@@ -47,7 +47,7 @@ async function transcribe(file, { signal, language = 'bn', tempRoot = os.tmpdir(
       if (wav.toString('ascii',offset,offset+4) === 'data') { data = wav.subarray(offset+8,offset+8+size); break; }
       offset += 8 + size + (size % 2);
     }
-    if (!data || data.length < 3200 || data.length > 15.2 * 32000) throw fail(400, 'AUDIO_DURATION_INVALID', 'Record between 0.1 and 15 seconds.');
+    if (!data || data.length < 16000 || data.length > 15.2 * 32000) throw fail(400, 'AUDIO_DURATION_INVALID', 'Speak for at least half a second, up to 15 seconds.');
     let energy = 0; for (let i=0;i+1<data.length;i+=2) energy += data.readInt16LE(i) ** 2;
     if (Math.sqrt(energy / (data.length / 2)) < 40) throw fail(400, 'SILENT_AUDIO', 'No speech was heard. Please try again or type.');
     const form = new FormData();
@@ -70,6 +70,11 @@ async function transcribe(file, { signal, language = 'bn', tempRoot = os.tmpdir(
     } catch { throw fail(503, 'WHISPER_UNAVAILABLE', 'Local speech recognition is unavailable. Please type your answer.'); }
     const transcript = typeof result.text === 'string' ? result.text.normalize('NFC').trim().slice(0,1000) : '';
     if (!transcript || /^\[.*\]$/.test(transcript)) throw fail(400, 'UNCLEAR_AUDIO', 'Please speak again or type.');
+    const noSpeechScores = [result.no_speech_prob, ...(Array.isArray(result.segments) ? result.segments.map(segment => segment.no_speech_prob) : [])]
+      .filter(score => typeof score === 'number' && Number.isFinite(score));
+    if (noSpeechScores.length && noSpeechScores.every(score => score >= 0.65)) throw fail(400, 'UNCLEAR_AUDIO', 'No clear speech was heard. Please try again or type.');
+    const seconds = data.length / 32000;
+    if (transcript.split(/\s+/).length > Math.max(8, Math.ceil(seconds * 5))) throw fail(400, 'UNCLEAR_AUDIO', 'The recording did not match a clear short answer. Please try again or type.');
     const unexpectedScript = [...transcript].some(char => /\p{L}/u.test(char) && !/[\p{Script=Bengali}\p{Script=Latin}]/u.test(char));
     if (language !== 'en' && (unexpectedScript || (!/[\u0980-\u09ff]/u.test(transcript) && /[a-z]/i.test(transcript.replace(/\bNID\b/gi, ''))))) throw fail(422, 'TRANSCRIPT_LANGUAGE_MISMATCH', 'বাংলা ঠিকভাবে বোঝা যায়নি। আবার স্পষ্ট করে বলুন অথবা বাংলায় লিখুন।');
     return { transcript, requires_confirmation: true };

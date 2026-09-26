@@ -34,6 +34,14 @@
 .nx-assistant.nx-guide .nx-guide-hint { font-size:12px; line-height:1.6; color:#abcab9; margin:10px 0; }
 .nx-assistant.nx-guide .nx-guide-field-label { display:block; margin-top:12px; font-size:14px; }
 .nx-assistant.nx-guide .nx-guide-field-label small { display:inline; font-weight:400; font-size:11px; margin-left:5px; }
+.nx-assistant.nx-guide .nx-guide-option-panel { display:grid; gap:10px; margin-top:12px; padding:12px; border:1px solid #76b99640; border-radius:14px; background:#0f382a; }
+.nx-assistant.nx-guide .nx-guide-option-panel > small { color:#b1d5bd; font-size:11px; line-height:1.5; }
+.nx-assistant.nx-guide .nx-guide-option-panel input[type='search'] { width:100%; min-height:40px; padding:8px 10px; border:1px solid #81bc9966; border-radius:9px; background:#08271c; color:#effbf3; font:inherit; }
+.nx-assistant.nx-guide .nx-guide-option-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; max-height:220px; overflow:auto; overscroll-behavior:contain; }
+.nx-assistant.nx-guide .nx-guide-option-list button { justify-content:flex-start; width:100%; min-width:0; padding:8px 10px; background:#174b35; border-color:#8ecaa052; font-size:12px; overflow-wrap:anywhere; }
+.nx-assistant.nx-guide .nx-guide-option-list button:hover { background:#246449; border-color:#a9e8be; }
+.nx-assistant.nx-guide .nx-guide-option-list button span { flex:0 0 auto; color:#9ee0b0; font-variant-numeric:tabular-nums; }
+.nx-assistant.nx-guide .nx-guide-option-list p { grid-column:1/-1; margin:0; color:#bfd5c7; font-size:12px; }
 .nx-assistant.nx-guide .nx-guide-progress { font-size:11px; color:#a8d0b8; }
 .nx-assistant.nx-guide .nx-guide-progress progress { height:4px; display:block; width:100%; margin-top:8px; accent-color:#9de0b9; }
 .nx-assistant.nx-guide .nx-guide-composer { padding:12px 20px; border-top:1px solid #8fc3a91c; background:#09271e; flex-shrink:0; }
