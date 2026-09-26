@@ -92,13 +92,36 @@ describe('Medicine Identifier React workflow', () => {
     expect(screen.queryByAltText('Selected medicine image 1')).not.toBeInTheDocument();
   });
 
-  it('reviews corrections, explicitly confirms a candidate, and displays alternatives and savings', async () => {
+  it('opens one detected medicine at a time for a multi-line scan', async () => {
+    const second = { ...scan.items[0], item_id: 'e6f84022-438e-4f67-83ad-185a5c41d298', raw_visible_text: 'Napa 500 mg tablet', structured_extraction: { brand_name_candidate: 'Napa', generic_name_candidate: 'Paracetamol', strength_text: '500 mg', dosage_form: 'Tablet' }, candidates: [] };
+    apiRequest.mockImplementation((path, options) => path === '/api/medicine-scans' && options?.method === 'POST'
+      ? Promise.resolve({ ...scan, items: [scan.items[0], second] })
+      : baseResponse(path));
+    renderPage();
+    await screen.findByRole('heading', { name: 'Medicine Identifier' });
+    await userEvent.upload(screen.getByLabelText('Choose medicine images'), new File(['synthetic'], 'rx.png', { type: 'image/png' }));
+    await userEvent.click(screen.getByRole('checkbox'));
+    await userEvent.click(screen.getByRole('button', { name: 'Analyze visible text' }));
+    const result = await screen.findByRole('region', { name: 'Medicines read from image' });
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Analyze visible text' })).toBeEnabled());
+    expect(within(result).getByText('2 medicines')).toBeInTheDocument();
+    expect(within(result).getAllByRole('button', { name: /Show low-cost options for/i })).toHaveLength(2);
+    expect(within(result).queryByRole('article', { name: 'Selected medicine details' })).not.toBeInTheDocument();
+    await userEvent.click(within(result).getByRole('button', { name: 'Show low-cost options for A-Pak' }));
+    expect(screen.getByText(/confirm the matching catalogue medicine first/i)).toBeInTheDocument();
+    expect(apiRequest.mock.calls.some(([path]) => path.endsWith('/low-cost-options'))).toBe(false);
+    expect(within(within(result).getByRole('article', { name: 'Selected medicine details' })).getByRole('heading', { name: 'A-Pak 100 mg tablet' })).toBeInTheDocument();
+    await userEvent.click(within(result).getByRole('button', { name: /^02\s*Napa/ }));
+    expect(within(within(result).getByRole('article', { name: 'Selected medicine details' })).getByRole('heading', { name: 'Napa 500 mg tablet' })).toBeInTheDocument();
+  });
+
+  it('shows only read medicines first, then a selected medicine with verified prices and savings', async () => {
     const confirmed = { ...scan, status: 'CONFIRMED', items: [{ ...scan.items[0], user_corrections: { brand_name_candidate: 'A-Pak', total_quantity: 10 }, confirmation: { selection_type: 'CATALOGUE', medicine_id: medicine.medicine_id } }] };
     apiRequest.mockImplementation((path, options) => {
       if (path === '/api/medicine-scans' && options?.method === 'POST') return Promise.resolve(scan);
       if (path.includes('/confirm') && options?.method === 'POST') return Promise.resolve(confirmed);
       if (path === `/api/medicines/${medicine.medicine_id}`) return Promise.resolve({ ...medicine, packages: [{ package_id: 'p1', price_id: 'r1', package_original: "10's pack", amount: '40.0000', currency: 'BDT' }] });
-      if (path.endsWith('/alternatives')) return Promise.resolve({ warnings: ['Dataset-derived estimated price', 'Current pharmacy price may differ', 'Professional confirmation is required'], alternatives: [{
+      if (path.endsWith('/low-cost-options')) return Promise.resolve({ source: 'catalogue', basis: 'purchase_cost', gemini: { status: 'not_used', brands: [] }, warnings: ['Dataset-derived estimated price', 'Current pharmacy price may differ', 'Professional confirmation is required'], original_package_comparison: { currency: 'BDT', estimated_per_unit: '4.0000' }, original_purchase_estimate: { currency: 'BDT', estimated_cost: '40.0000', required_quantity: 10 }, alternatives: [{
         medicine: { ...medicine, medicine_id: 'MED-67683973e179be21322ec808', brand_name: 'Acenac' },
         matching_specifications: ['Complete ingredient set', 'Strength/concentration', 'Dosage form'],
         package_comparison: { currency: 'BDT', estimated_per_unit: '2.7300' },
@@ -113,35 +136,67 @@ describe('Medicine Identifier React workflow', () => {
     await userEvent.upload(screen.getByLabelText('Choose medicine images'), new File(['synthetic'], 'rx.png', { type: 'image/png' }));
     await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: 'Analyze visible text' }));
-    expect(await screen.findByText('A-Pak 100 mg tablet')).toBeInTheDocument();
+    const result = await screen.findByRole('region', { name: 'Medicines read from image' });
+    expect(within(result).getByRole('button', { name: /^01\s*A-Pak/ })).toBeInTheDocument();
+    expect(within(result).queryByLabelText('Brand')).not.toBeInTheDocument();
+    await userEvent.click(within(result).getByRole('button', { name: /^01\s*A-Pak/ }));
+    expect(screen.getByRole('article', { name: 'Selected medicine details' })).toBeInTheDocument();
     expect(screen.getByText('Uncertain')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Confirm selected medicine' })).toBeDisabled();
     await userEvent.click(screen.getByRole('radio', { name: /A-Pak/ }));
     await userEvent.clear(screen.getByLabelText('Brand'));
     await userEvent.type(screen.getByLabelText('Brand'), 'A-Pak');
     await userEvent.click(screen.getByRole('button', { name: 'Confirm selected medicine' }));
-    expect(await screen.findByRole('heading', { name: 'Confirmed by you' })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Show low-cost options for A-Pak' }));
+    expect(await screen.findByRole('heading', { name: 'Lower-cost catalogue options' })).toBeInTheDocument();
     const confirmCall = apiRequest.mock.calls.find(([path]) => path.includes('/confirm'));
     expect(confirmCall[1].body.selection_type).toBe('CATALOGUE');
     expect(confirmCall[1].body.corrections.total_quantity).toBe(10);
-    await userEvent.click(screen.getByRole('button', { name: 'View possible lower-cost products' }));
-    expect(await screen.findByText('Estimated saving:')).toBeInTheDocument();
-    expect(screen.getByText('BDT 12.7000')).toBeInTheDocument();
+    expect(screen.getByText('Save ৳12.70')).toBeInTheDocument();
+    expect(screen.getByText('৳40.00')).toBeInTheDocument();
+    expect(screen.getByText('৳27.30')).toBeInTheDocument();
     expect(screen.getAllByText(/Professional confirmation is required/).length).toBeGreaterThan(0);
+  });
+
+  it('labels Gemini fallback names as unverified and never invents prices', async () => {
+    const confirmed = { ...scan, status: 'CONFIRMED', items: [{ ...scan.items[0], confirmation: { selection_type: 'CATALOGUE', medicine_id: medicine.medicine_id } }] };
+    apiRequest.mockImplementation((path, options) => {
+      if (path === '/api/medicine-scans' && options?.method === 'POST') return Promise.resolve(confirmed);
+      if (path === `/api/medicines/${medicine.medicine_id}`) return Promise.resolve({ ...medicine, packages: [] });
+      if (path.endsWith('/low-cost-options')) return Promise.resolve({ source: 'catalogue', basis: 'unit_price', alternatives: [], limitation: null, original_package_comparison: { estimated_per_unit: '4.0000' }, original_purchase_estimate: null, gemini: { status: 'unverified_leads', brands: ['Possible brand'] } });
+      return baseResponse(path);
+    });
+    renderPage();
+    await screen.findByRole('heading', { name: 'Medicine Identifier' });
+    await userEvent.upload(screen.getByLabelText('Choose medicine images'), new File(['synthetic'], 'rx.png', { type: 'image/png' }));
+    await userEvent.click(screen.getByRole('checkbox'));
+    await userEvent.click(screen.getByRole('button', { name: 'Analyze visible text' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Show low-cost options for A-Pak' }));
+    const leads = await screen.findByRole('region', { name: 'Unverified Gemini search leads' });
+    expect(within(leads).getByText('Possible brand')).toBeInTheDocument();
+    expect(within(leads).getByText(/Price, availability, registration and interchangeability are unknown/)).toBeInTheDocument();
+    expect(screen.getByText(/No lower-cost product with a comparable recorded specification/)).toBeInTheDocument();
+    expect(within(leads).queryByText(/Save ৳/)).not.toBeInTheDocument();
   });
 
   it('supports manual search, none/manual confirmation controls, and keyboard-accessible history deletion', async () => {
     apiRequest.mockImplementation((path, options) => {
       if (path === '/api/medicine-scans?limit=10') return Promise.resolve({ scans: [{ scan_id: scan.scan_id, scan_mode: 'package', status: 'NO_MATCH' }] });
       if (path.startsWith('/api/medicines/search?')) return Promise.resolve({ medicines: [medicine] });
+      if (path === `/api/medicines/${medicine.medicine_id}`) return Promise.resolve({ ...medicine, packages: [{ package_id: 'p1', price_id: 'r1', package_original: "10's pack", amount: '40.0000', currency: 'BDT' }] });
+      if (path === `/api/medicines/${medicine.medicine_id}/alternatives?quantity=10`) return Promise.resolve({ original_package_comparison: { estimated_per_unit: '4.0000' }, original_purchase_estimate: { estimated_cost: '40.0000' }, alternatives: [], limitation: null });
       if (path === `/api/medicine-scans/${scan.scan_id}` && options?.method === 'DELETE') return Promise.resolve({ success: true });
       return baseResponse(path);
     });
     renderPage();
     await screen.findByRole('heading', { name: 'Medicine Identifier' });
+    await userEvent.click(screen.getByText('Search the catalogue manually'));
     await userEvent.type(screen.getByLabelText('Brand, ingredient, or registration-like reference'), 'A-Pak');
+    await userEvent.type(screen.getByLabelText('Quantity (optional)'), '10');
     await userEvent.click(screen.getByRole('button', { name: 'Search catalogue' }));
-    expect(await screen.findByText('Synthetic Manufacturer')).toBeInTheDocument();
+    await userEvent.click(await screen.findByRole('button', { name: /View prices and alternatives/ }));
+    expect(await screen.findByText('৳40.00')).toBeInTheDocument();
+    expect(apiRequest).toHaveBeenCalledWith(`/api/medicines/${medicine.medicine_id}/alternatives?quantity=10`);
     const deleteButton = screen.getByRole('button', { name: 'Delete scan' });
     deleteButton.focus();
     expect(deleteButton).toHaveFocus();
