@@ -3,7 +3,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useStylesheets } from '../hooks/useStylesheets.js';
 import { apiRequest } from '../services/api.js';
-import AssistantPanel from '../features/assistant/AssistantPanel.jsx';
+import CitizenGuide, { GUIDE_ROUTE_KEY } from '../features/assistant/CitizenGuide.jsx';
+import '../features/assistant/assistant.css';
+
+import { ministryDesigns, ministryService } from './ministryDesigns.js';
+import { MinistryBanner } from './MinistryPresentation.jsx';
 
 const navigation = [
   ['dashboard.html', 'home', 'Dashboard'],
@@ -34,45 +38,75 @@ export function resolveAssetUrl(value) {
   return `/${value}`;
 }
 
-export default function CitizenShell({ children, pageStyles = [] }) {
-  useStylesheets(['/css/style.css', '/css/sidebar.css', ...pageStyles, '/css/dashboard.css', '/css/citizen-pages.css']);
+export default function CitizenShell({ children, pageStyles = [], ministry, sections = [], activeSection, onSectionChange }) {
+  useStylesheets(['/css/style.css', '/css/sidebar.css', ...pageStyles, ...(!ministry ? ['/css/dashboard.css', '/css/citizen-pages.css'] : [])]);
   const location = useLocation();
   const isMinistryPage = ministryPaths.has(location.pathname);
   const navigate = useNavigate();
+  const design = ministryDesigns[ministry];
   const { clearCitizenSession } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile, setProfile] = useState({});
-  const [assistantOpen, setAssistantOpen] = useState(false);
+  const [profileReady, setProfileReady] = useState(false);
+  const [assistantOpen, setAssistantOpen] = useState(() => Boolean(sessionStorage.getItem(GUIDE_ROUTE_KEY)));
+  const [assistantStarted, setAssistantStarted] = useState(() => Boolean(sessionStorage.getItem(GUIDE_ROUTE_KEY)));
 
   useEffect(() => {
     let active = true;
     apiRequest('/api/user/profile')
       .then(data => active && setProfile(data))
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => { if (active) setProfileReady(true); });
     return () => { active = false; };
   }, []);
 
+  useEffect(() => {
+    if (!design) return;
+    document.body.classList.add('nx-ministry-body');
+    return () => document.body.classList.remove('nx-ministry-body');
+  }, [design]);
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    const close = event => { if (event.key === 'Escape') setSidebarOpen(false); };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [sidebarOpen]);
   function logout() {
     clearCitizenSession();
     navigate('/index.html', { replace: true });
   }
 
   return (
-    <div className={`nationx-dashboard nationx-citizen-pages${isMinistryPage ? ' nationx-ministry-page' : ''}`}>
-      <button className="nx-assistant-launch" onClick={() => setAssistantOpen(v => !v)} aria-expanded={assistantOpen}>{assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}</button>
-      {assistantOpen && <aside className="nx-assistant-drawer"><AssistantPanel accountKey={`citizen-${profile.id || ''}`} /></aside>}
-      <div className="dashboard-ambient" aria-hidden="true">
+    <div className={design ? `nationx-ministry-page nx-ministry-${ministry}` : `nationx-dashboard nationx-citizen-pages${isMinistryPage ? ' nationx-ministry-page' : ''}`} style={design ? { '--ministry-accent': design.accent, '--ministry-light': design.light } : undefined}>
+      <button className="nx-assistant-launch" onClick={() => {setAssistantStarted(true);setAssistantOpen(v => !v);}} aria-expanded={assistantOpen}>{assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}</button>
+      {assistantStarted && <aside hidden={!assistantOpen} className="nx-assistant-drawer nx-guide-drawer"><CitizenGuide visible={assistantOpen} ministry={ministry} activeSection={activeSection} onSectionChange={onSectionChange} profile={profile} profileReady={profileReady} onClose={() => setAssistantOpen(false)} /></aside>}
+      {design && <div className="nx-ministry-decoration" aria-hidden="true"><div className="bg-shape shape-1" /><div className="bg-shape shape-2" /></div>}
+      {!design && <div className="dashboard-ambient" aria-hidden="true">
         <span className="dashboard-orb dashboard-orb-green" />
         <span className="dashboard-orb dashboard-orb-red" />
         <span className="dashboard-orb dashboard-orb-gold" />
         <span className="dashboard-grid-pattern" />
         <span className="dashboard-wave dashboard-wave-one" />
         <span className="dashboard-wave dashboard-wave-two" />
-      </div>
-      <button className={`react-sidebar-toggle ${sidebarOpen ? 'is-open' : ''}`} type="button" aria-label={sidebarOpen ? 'Close menu' : 'Toggle navigation'} onClick={() => setSidebarOpen(value => !value)}><i className={`fas ${sidebarOpen ? 'fa-xmark' : 'fa-bars'}`} /></button>
+      </div>}
+      <button className={`react-sidebar-toggle ${sidebarOpen ? 'is-open' : ''}`} type="button" aria-controls="citizen-sidebar" aria-expanded={sidebarOpen} aria-label={sidebarOpen ? 'Close menu' : 'Toggle navigation'} onClick={() => setSidebarOpen(value => !value)}><i className={`fas ${sidebarOpen ? 'fa-xmark' : 'fa-bars'}`} /></button>
       {sidebarOpen && <button className="react-sidebar-overlay" type="button" aria-label="Close navigation" onClick={() => setSidebarOpen(false)} />}
       <div className="dashboard-container">
-        <aside className={`sidebar ${sidebarOpen ? 'react-sidebar-open' : ''}`}>
+        <aside id="citizen-sidebar" className={`sidebar ${sidebarOpen ? 'react-sidebar-open' : ''}`}>
+          {design ? <>
+            <div className="user-profile nx-ministry-identity">
+              <div className="user-avatar"><i className={`fas fa-${design.icon}`} aria-hidden="true" /></div>
+              <h3>{design.bn}</h3><p>{design.title}</p>
+            </div>
+            <nav className="nav-links" aria-label={`${ministry} services`}>
+              <Link to="/dashboard.html"><i className="fas fa-arrow-left" aria-hidden="true" /> Back to Dashboard</Link>
+              {sections.map(section => {
+                const item = ministryService(section);
+                return <a key={item.id} href={`?section=${item.id}`} className={activeSection === item.id ? 'active' : ''} aria-current={activeSection === item.id ? 'page' : undefined} onClick={event => { event.preventDefault(); onSectionChange(item.id); setSidebarOpen(false); }}><i className={`fas fa-${item.icon}`} aria-hidden="true" />{item.label}</a>;
+              })}
+              {ministry === 'education' && <Link to="/admission.html"><i className="fas fa-university" aria-hidden="true" /> University Admission</Link>}
+            </nav>
+          </> : <>
           <Link className="dashboard-brand" to="/dashboard.html" aria-label="NationX citizen portal">
             <span className="dashboard-brand-mark"><span /></span>
             <span><strong>NationX</strong><small>Citizen Portal</small></span>
@@ -88,8 +122,9 @@ export default function CitizenShell({ children, pageStyles = [] }) {
             ))}
             <button className="react-nav-button dashboard-logout" type="button" onClick={logout}><i className="fas fa-sign-out-alt" /> Logout</button>
           </nav>
+          </>}
         </aside>
-        <main className="main-content react-page-content"><div className="dashboard-content-shell citizen-content-shell">{children}</div></main>
+        <main className="main-content react-page-content"><div className={design ? 'nx-ministry-content' : 'dashboard-content-shell citizen-content-shell'}>{design && <MinistryBanner design={design} id={ministry} />}{children}</div></main>
       </div>
     </div>
   );

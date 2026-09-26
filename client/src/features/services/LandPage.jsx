@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import CitizenShell from '../../layouts/CitizenShell.jsx';
+import { MinistryActions } from '../../layouts/MinistryPresentation.jsx';
 import DemoPaymentPanel from '../../components/DemoPaymentPanel.jsx';
 import { apiRequest } from '../../services/api.js';
 import { alerts } from '../../utils/alerts.js';
 import { useSubmissionLock } from '../../hooks/useSubmissionLock.js';
 import { dateText, formPayload, LocationIdFields, StatusBadge } from './ServiceUi.jsx';
-import './land-page.css';
+
 
 const API = '/api/departments';
 const sections = ['overview', 'records', 'mutation', 'status', 'tax'];
@@ -79,13 +80,13 @@ export default function LandPage() {
   const returnStatus = params.get('status');
   const returnTransaction = params.get('tid');
 
-  return <CitizenShell><div className="nationx-land-page">
-    <header className="react-page-header"><div><h1>Land Services</h1><p>Owned records, mutation applications, and status tracking.</p></div></header>
+  return <CitizenShell ministry="land" sections={sections} activeSection={section} onSectionChange={setSection}><div className="nationx-land-page">
+
     {(returnStatus || returnTransaction) && <div className="react-payment-warning" role="status"><i className="fas fa-shield-halved" /><span>Payment return parameters are unverified and are not proof of land-tax payment. Status: {returnStatus || 'unknown'}{returnTransaction ? ` · Transaction ${returnTransaction}` : ''}</span></div>}
-    <nav className="react-service-tabs" aria-label="Land sections">{sections.map(value => <button type="button" className={section === value ? 'active' : ''} onClick={() => setSection(value)} key={value}>{value}</button>)}</nav>
+    <nav className="react-service-tabs nx-section-tabs" aria-label="Land sections">{sections.map(value => <button type="button" className={section === value ? 'active' : ''} onClick={() => setSection(value)} key={value}>{value}</button>)}</nav>
     {error && <div className="react-dashboard-error" role="alert">{error}<button type="button" onClick={loadAll}>Retry</button></div>}
     {loading ? <p className="react-empty-state">Loading land services…</p> : <>
-      {section === 'overview' && <><div className="react-service-stats"><article className="react-panel"><strong>{records.length}</strong><span>My records</span></article><article className="react-panel"><strong>{approved.length}</strong><span>Verified records</span></article><article className="react-panel"><strong>{applications.length}</strong><span>Recent mutations</span></article></div><section className="react-panel"><h2>Recent mutation applications</h2><div className="react-card-list">{applications.map(row => <article key={row.id}><div><h3>Khatian {row.khatian_no}</h3><p>{dateText(row.created_at)}</p></div><StatusBadge value={row.status} /></article>)}{!applications.length && <p className="react-empty-state">No mutation applications.</p>}</div></section></>}
+      {section === 'overview' && <><div className="react-service-stats"><article className="react-panel"><strong>{records.length}</strong><span>My records</span></article><article className="react-panel"><strong>{approved.length}</strong><span>Verified records</span></article><article className="react-panel"><strong>{applications.length}</strong><span>Recent mutations</span></article></div><MinistryActions ministry="land" onSectionChange={setSection} /><section className="react-panel"><h2>Recent mutation applications</h2><div className="react-card-list">{applications.map(row => <article key={row.id}><div><h3>Khatian {row.khatian_no}</h3><p>{dateText(row.created_at)}</p></div><StatusBadge value={row.status} /></article>)}{!applications.length && <p className="react-empty-state">No mutation applications.</p>}</div></section></>}
 
       {section === 'records' && <div className="react-two-column"><section className="react-panel"><h2>Add land record</h2><form className="react-form-stack" onSubmit={event => submit(event, 'record', '/land/records')}><div className="react-form-grid"><LocationIdFields apiBase={API} divisions={divisions} /><label>Mouza<input name="mouza" required /></label><label>Owner NID<input name="nid" required /></label><label>Khatian number<input name="khatian" required /></label><label>Dag number<input name="dag" required /></label><label>Deed number<input name="deed_no" required /></label><label>Land size<input name="land_size" type="number" min="0" step="0.0001" required /></label><label>Estimated price<input name="land_price" type="number" min="0" /></label><label>Description<input name="description" defaultValue="My Own Land" /></label></div><button className="btn-primary" disabled={submitting} type="submit">Verify and save record</button></form></section><section className="react-panel"><h2>My land records</h2><div className="react-card-list">{records.map((row, index) => <article key={`${row.source}-${row.id}-${index}`}><div><h3>Khatian {row.khatian_no} · Dag {row.dag_no}</h3><p>{row.mouza} · {row.land_size} decimals/acres</p><p>{row.upazila}, {row.district}, {row.division} · {row.source}</p></div><StatusBadge value={row.status} /></article>)}{!records.length && <p className="react-empty-state">No land records.</p>}</div></section></div>}
 

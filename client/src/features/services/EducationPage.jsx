@@ -5,7 +5,7 @@ import { apiRequest } from '../../services/api.js';
 import { alerts } from '../../utils/alerts.js';
 import { useSubmissionLock } from '../../hooks/useSubmissionLock.js';
 import { bdt, dateText, EmptyRow, formPayload, StatusBadge } from './ServiceUi.jsx';
-import './education-page.css';
+
 
 const sections = [
   { id: 'results', label: 'Exam results' },
@@ -103,19 +103,10 @@ export default function EducationPage() {
     });
   }
 
-  return <CitizenShell>
+  return <CitizenShell ministry="education" sections={sections} activeSection={section} onSectionChange={setSection}>
     <div className="nationx-education-page">
-      <header className="react-page-header">
-        <div>
-          <span className="react-kicker">Ministry of Education</span>
-          <h1>Education Services</h1>
-          <p>Public examination results, authenticated stipend applications, and university admission notices.</p>
-        </div>
-        <Link className="btn-secondary react-auto-width" to="/admission.html">University admission</Link>
-        <i className="fas fa-graduation-cap education-header-icon" aria-hidden="true" />
-      </header>
 
-      <nav className="react-service-tabs" aria-label="Education sections">
+      <nav className="react-service-tabs nx-section-tabs" aria-label="Education sections">
         {sections.map(({ id, label }) => <button type="button" className={section === id ? 'active' : ''} onClick={() => setSection(id)} key={id}>{label}</button>)}
       </nav>
 
@@ -128,7 +119,7 @@ export default function EducationPage() {
             <span className="react-kicker">Examination results</span>
             <h2>Check examination result</h2>
             <p>Pick your exam, year, and enter the roll number used at registration.</p>
-            <form className="react-form-stack" onSubmit={checkResult}>
+            <form className="react-form-stack nx-exam-form" onSubmit={checkResult}>
               <label>Exam type
                 <select name="examType" required defaultValue="">
                   <option value="">Select exam</option>

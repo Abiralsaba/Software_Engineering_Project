@@ -1,0 +1,18 @@
+.nx-demo-payment { color: #e6f4ec; }
+.nx-demo-payment .nx-demo-label { color: #b8d9ca; font-size: .75rem; font-weight: 600; letter-spacing: .05em; margin-bottom: .75rem; }
+.nx-demo-payment .react-payment-warning { margin-bottom: 1.5rem; line-height: 1.6; }
+.nx-demo-payment .nx-checkout-summary { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 1.25rem; border: 1px solid #6cac9050; border-radius: 12px; background: #0c392b; }
+.nx-demo-payment .nx-checkout-summary small { display: block; color: #b3cfc1; }
+.nx-demo-payment .nx-checkout-summary strong { font-size: 1.5rem; }
+.nx-demo-payment fieldset { border: 0; padding: 0; min-width: 0; }
+.nx-demo-payment legend { margin-bottom: .75rem; }
+.nx-demo-payment .nx-payment-methods { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(180px,100%),1fr)); gap: .75rem; }
+.nationx-ministry-page.nationx-ministry-page .nx-demo-payment .nx-payment-methods label.nx-payment-method, .nx-demo-payment .nx-payment-methods .nx-payment-method { display: flex; flex-direction: row; align-items: center; gap: .75rem; border: 1px solid #638c7955; border-radius: 10px; padding: 1rem; background: #102c23; cursor: pointer; }
+.nx-demo-payment .nx-payment-method:has(:checked) { border-color: #8ce2bb; background: #134a35; }
+.nx-demo-payment .nx-payment-method input { width: 18px; height: 18px; min-height: 18px; flex: 0 0 18px; accent-color: #58c695; }
+.nx-demo-payment .nx-payment-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.nx-demo-payment .nx-demo-receipt { padding: 1.5rem; border-radius: 12px; background: #0d3427; border: 1px solid #78b89866; overflow-wrap: anywhere; }
+.nx-demo-payment .nx-demo-failed { border-color: #e08090; }
+.nx-demo-payment .nx-demo-cancelled { border-color: #c9ae77; }
+.nx-demo-payment .nx-demo-receipt > p { margin: .75rem 0 1rem; }
+@media (max-width: 600px) { .nx-demo-payment .nx-payment-actions > button { width: 100%; } }

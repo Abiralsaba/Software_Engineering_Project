@@ -108,6 +108,14 @@ function createAssistantRouter({ provider = new GeminiIntentProvider(), transcri
     res.json(output);
   });
   const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: whisper.MAX_BYTES, files: 1, fields: 1, parts: 3 } });
+  // Citizen form guidance does not need to create a first-time NID session.
+  router.post('/audio', upload.single('audio'), async (req, res) => {
+    const controller = new AbortController();
+    const abort = () => { if (!res.writableEnded) controller.abort(); };
+    res.on('close', abort);
+    try { res.json(await transcribe(req.file, { signal: controller.signal, language: req.body.language })); }
+    finally { res.off('close', abort); req.file?.buffer?.fill(0); }
+  });
   router.post('/sessions/:sessionId/audio', async (req, res, next) => { const session = await owned(db, req); if (session.state === 'CANCELLED') throw fail(409,'SESSION_CANCELLED'); next(); }, upload.single('audio'), async (req, res) => {
     const controller = new AbortController();
     const abort = () => { if (!res.writableEnded) controller.abort(); };
