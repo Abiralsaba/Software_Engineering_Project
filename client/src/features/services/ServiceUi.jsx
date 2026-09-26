@@ -9,6 +9,16 @@ export function EmptyRow({ columns, children }) {
   return <tr><td className="react-empty-state" colSpan={columns}>{children}</td></tr>;
 }
 
+export function locationLabel(row) {
+  if (!row) return '';
+  return row.name_bn ? `${row.name_bn} (${row.name})` : row.name;
+}
+
+export function officialLocations(rows = []) {
+  const official = rows.filter(row => row.geo_code);
+  return official.length ? official : rows;
+}
+
 export function LocationFields({ apiBase, divisions, names = { division: 'division', district: 'district', upazila: 'upazila' }, required = true, requireUpazila = true }) {
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
@@ -43,9 +53,9 @@ export function LocationFields({ apiBase, divisions, names = { division: 'divisi
 
   return (
     <>
-      <label>Division<select name={names.division} required={required} defaultValue="" onChange={divisionChanged}><option value="">Select division</option>{divisions.map(row => <option value={row.name} key={row.id}>{row.name}</option>)}</select></label>
-      <label>District<select name={names.district} required={required} defaultValue="" onChange={districtChanged}><option value="">Select district</option>{districts.map(row => <option value={row.name} key={row.id}>{row.name}</option>)}</select></label>
-      {requireUpazila && <label>Upazila<select name={names.upazila} required={required} defaultValue=""><option value="">Select upazila</option>{upazilas.map(row => <option value={row.name} key={row.id}>{row.name}</option>)}</select></label>}
+      <label>Division<select name={names.division} required={required} defaultValue="" onChange={divisionChanged}><option value="">Select division</option>{officialLocations(divisions).map(row => <option value={row.name} key={row.id}>{locationLabel(row)}</option>)}</select></label>
+      <label>District<select name={names.district} required={required} defaultValue="" onChange={districtChanged}><option value="">Select district</option>{districts.map(row => <option value={row.name} key={row.id}>{locationLabel(row)}</option>)}</select></label>
+      {requireUpazila && <label>Upazila<select name={names.upazila} required={required} defaultValue=""><option value="">Select upazila</option>{upazilas.map(row => <option value={row.name} key={row.id}>{locationLabel(row)}</option>)}</select></label>}
       {error && <p className="react-inline-error" role="alert">Location error: {error}</p>}
     </>
   );
@@ -71,9 +81,9 @@ export function LocationIdFields({ apiBase, divisions, names = { division: 'divi
   }
 
   return <>
-    <label>Division<select name={names.division} required={required} defaultValue="" onChange={divisionChanged}><option value="">Select division</option>{divisions.map(row => <option value={row.id} key={row.id}>{row.name}</option>)}</select></label>
-    <label>District<select name={names.district} required={required} defaultValue="" onChange={districtChanged}><option value="">Select district</option>{districts.map(row => <option value={row.id} key={row.id}>{row.name}</option>)}</select></label>
-    <label>Upazila<select name={names.upazila} required={required} defaultValue=""><option value="">Select upazila</option>{upazilas.map(row => <option value={row.id} key={row.id}>{row.name}</option>)}</select></label>
+    <label>Division<select name={names.division} required={required} defaultValue="" onChange={divisionChanged}><option value="">Select division</option>{officialLocations(divisions).map(row => <option value={row.id} key={row.id}>{locationLabel(row)}</option>)}</select></label>
+    <label>District<select name={names.district} required={required} defaultValue="" onChange={districtChanged}><option value="">Select district</option>{districts.map(row => <option value={row.id} key={row.id}>{locationLabel(row)}</option>)}</select></label>
+    <label>Upazila<select name={names.upazila} required={required} defaultValue=""><option value="">Select upazila</option>{upazilas.map(row => <option value={row.id} key={row.id}>{locationLabel(row)}</option>)}</select></label>
     {error && <p className="react-inline-error" role="alert">Location error: {error}</p>}
   </>;
 }
