@@ -11,6 +11,7 @@ const { MAX_IMAGE_BYTES, processImage } = require('../services/medicineIdentifie
 const { CONSENT_TEXT, configuredProvider } = require('../services/medicineIdentifier/provider');
 const catalogue = require('../services/medicineIdentifier/catalogue');
 const { requiredQuantity } = require('../services/medicineIdentifier/savings');
+const { GeminiAlternativeDiscovery, discoverLowerCost } = require('../services/medicineIdentifier/alternativeDiscovery');
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: MAX_IMAGE_BYTES, files: 3, fields: 10 } });
 const scanIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -77,6 +78,7 @@ function uploadImages(req, res, next) {
 function createMedicineScanRouter(options = {}) {
     const db = options.db || defaultDb;
     const provider = options.provider || configuredProvider();
+    const discoveryProvider = options.discoveryProvider || new GeminiAlternativeDiscovery();
     const router = express.Router();
     router.use(verifyToken);
     const scanLimiter = rateLimit({
@@ -84,6 +86,12 @@ function createMedicineScanRouter(options = {}) {
         standardHeaders: true, legacyHeaders: false,
         keyGenerator: req => `citizen-${req.user.id}`,
         message: { error: 'Too many Medicine Identifier requests. Please try again later.' }
+    });
+    const discoveryLimiter = rateLimit({
+        windowMs: 15 * 60 * 1000, max: options.discoveryLimit || Number(process.env.MEDICINE_DISCOVERY_RATE_LIMIT || 20),
+        standardHeaders: true, legacyHeaders: false,
+        keyGenerator: req => `citizen-${req.user.id}`,
+        message: { error: 'Too many alternative searches. Please try again later.' }
     });
 
     router.post('/', scanLimiter, uploadImages, async (req, res) => {
@@ -233,6 +241,26 @@ function createMedicineScanRouter(options = {}) {
                 await connection.commit();
             } catch (error) { await connection.rollback(); throw error; } finally { connection.release(); }
             res.json(result);
+        } catch (error) { sendError(error, res); }
+    });
+
+    router.get('/:scanId/items/:itemId/low-cost-options', discoveryLimiter, async (req, res) => {
+        try {
+            const session = await ownedSession(db, req.params.scanId, req.user.id);
+            const [rows] = await db.query(`SELECT i.structured_extraction,i.user_corrections,c.medicine_id,c.selection_type
+                FROM medicine_scan_items i LEFT JOIN medicine_scan_confirmations c ON c.item_id=i.item_id
+                WHERE i.item_id=? AND i.scan_id=? LIMIT 1`, [req.params.itemId, session.scan_id]);
+            if (!rows.length) return res.status(404).json({ error: 'Scan item not found.' });
+            if (rows[0].selection_type !== 'CATALOGUE' || !rows[0].medicine_id) {
+                return res.status(409).json({ error: 'Confirm the catalogue medicine before searching for lower-cost options.' });
+            }
+            const combined = { ...json(rows[0].structured_extraction, {}), ...json(rows[0].user_corrections, {}) };
+            const quantity = requiredQuantity({
+                doseAmount: combined.dose_amount, frequencyPerDay: combined.frequency_per_day,
+                durationDays: combined.duration_days, totalQuantity: combined.total_quantity,
+                dosageForm: combined.dosage_form, doseUnit: combined.dose_unit
+            });
+            res.json(await discoverLowerCost(rows[0].medicine_id, quantity, { catalogue, db, provider: discoveryProvider }));
         } catch (error) { sendError(error, res); }
     });
 

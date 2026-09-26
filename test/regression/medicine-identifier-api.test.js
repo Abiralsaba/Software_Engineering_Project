@@ -129,6 +129,7 @@ test('Medicine Identifier catalogue and scan API regression', async t => {
             const item = created.data.items[0];
             const foreignRead = await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}`, bobToken);
             assert.equal(foreignRead.status, 403);
+            assert.equal((await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/low-cost-options`, aliceToken)).status, 409);
             const confirmed = await jsonRequest('POST', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/confirm`, aliceToken, {
                 selection_type: 'CATALOGUE', medicine_id: item.candidates[0].medicine.medicine_id,
                 corrections: { total_quantity: 10, brand_name_candidate: 'A-Pak' }
@@ -140,6 +141,11 @@ test('Medicine Identifier catalogue and scan API regression', async t => {
             const alternatives = await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/alternatives`, aliceToken);
             assert.equal(alternatives.status, 200);
             assert.ok(alternatives.data.warnings.includes('Professional confirmation is required'));
+            const lowerCost = await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/low-cost-options`, aliceToken);
+            assert.equal(lowerCost.status, 200);
+            assert.equal(lowerCost.data.source, 'catalogue');
+            assert.ok(lowerCost.data.alternatives.every(row => Number(row.estimated_saving) > 0));
+            assert.equal((await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/low-cost-options`, bobToken)).status, 403);
             assert.equal((await jsonRequest('DELETE', `/api/medicine-scans/${created.data.scan_id}`, bobToken)).status, 403);
             assert.equal((await jsonRequest('DELETE', `/api/medicine-scans/${created.data.scan_id}`, aliceToken)).status, 200);
             assert.equal((await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}`, aliceToken)).status, 404);

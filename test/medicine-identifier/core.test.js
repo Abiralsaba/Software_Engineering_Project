@@ -72,7 +72,7 @@ test('Gemini provider rejects missing keys, retries one transient 429/5xx, and r
         const client = { interactions: { create: async request => {
             calls += 1;
             assert.equal(request.store, false);
-            assert.equal(request.model, 'gemini-3.5-flash');
+            assert.equal(request.model, process.env.GEMINI_MODEL || 'gemini-3.5-flash');
             assert.equal(request.response_format.mime_type, 'application/json');
             if (calls === 1) throw Object.assign(new Error('limited'), { status: 429 });
             return { output_text: JSON.stringify({
