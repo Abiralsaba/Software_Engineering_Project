@@ -61,8 +61,10 @@ async function cleanup() {
 }
 
 test('React health/water API regression', async t => {
-    [[alice]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email = 'alice.demo@nationx.test'");
-    [[bob]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email = 'bob.demo@nationx.test'");
+    // The primary demo account intentionally owns seeded service history. Use
+    // the secondary identity as the clean mutation subject for duplicate tests.
+    [[alice]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email = 'bob.demo@nationx.test'");
+    [[bob]] = await db.query("SELECT id, name, nid FROM reg_info WHERE email = 'alice.demo@nationx.test'");
     assert.ok(alice && bob, 'synthetic citizen fixtures must exist');
     aliceToken = tokenFor(alice);
     bobToken = tokenFor(bob);

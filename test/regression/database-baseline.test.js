@@ -98,7 +98,10 @@ async function cleanSyntheticTestWrites() {
                  '99900000000000003'
              )`
         );
-        await db.query('DELETE FROM land_mutations_v2 WHERE user_id IN (?)', [userIds]);
+        await db.query(
+            "DELETE FROM land_mutations_v2 WHERE user_id IN (?) AND (tracking_number LIKE 'TST-%' OR khatian_no LIKE 'TST-%')",
+            [userIds]
+        );
         await db.query(
             "DELETE FROM my_land_record WHERE user_id IN (?) AND khatian_no LIKE 'TST-%'",
             [userIds]
