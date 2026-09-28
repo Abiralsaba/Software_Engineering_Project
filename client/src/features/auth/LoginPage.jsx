@@ -6,7 +6,9 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import { alerts } from '../../utils/alerts.js';
 
 const emptyAdminRegistration = {
-  name: '', nid: '', email: '', mobile: '', password: '', confirmPassword: ''
+  name: '', nid: '', email: '', mobile: '', password: '', confirmPassword: '',
+  requested_domain_code: '', requested_scope_level: 'central', requested_division_id: '',
+  access_request_note: ''
 };
 
 export default function LoginPage() {
@@ -22,12 +24,20 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [applicantLogin, setApplicantLogin] = useState(false);
+  const [adminOptions, setAdminOptions] = useState({ domains: [], divisions: [] });
 
   useEffect(() => {
     setAudience(location.hash === '#admin' ? 'admin' : 'citizen');
     setPendingNotice(false);
     setError('');
   }, [location.hash]);
+
+  useEffect(() => {
+    if (audience !== 'admin' || adminMode !== 'register' || adminOptions.domains.length) return;
+    apiRequest('/api/admin/access/options', { auth: false })
+      .then(setAdminOptions)
+      .catch(requestError => setError(requestError.message));
+  }, [audience, adminMode, adminOptions.domains.length]);
 
   function selectAudience(nextAudience) {
     setAudience(nextAudience);
@@ -97,8 +107,22 @@ export default function LoginPage() {
   }
 
   const updateAdminRegistration = event => {
-    setAdminRegistration(current => ({ ...current, [event.target.name]: event.target.value }));
+    const { name, value } = event.target;
+    setAdminRegistration(current => {
+      const next = { ...current, [name]: value };
+      if (name === 'requested_domain_code') {
+        const domain = adminOptions.domains.find(item => item.code === value);
+        if (domain && !domain.supports_division_scope) {
+          next.requested_scope_level = 'central';
+          next.requested_division_id = '';
+        }
+      }
+      if (name === 'requested_scope_level' && value === 'central') next.requested_division_id = '';
+      return next;
+    });
   };
+
+  const selectedAdminDomain = adminOptions.domains.find(domain => domain.code === adminRegistration.requested_domain_code);
 
   return (
     <AuthShell>
@@ -156,6 +180,21 @@ export default function LoginPage() {
               <FormField id="admin-reg-nid" name="nid" type="text" label="NID Number" icon="id-card" value={adminRegistration.nid} onChange={updateAdminRegistration} required />
               <FormField id="admin-reg-email" name="email" type="email" label="Email Address" icon="envelope" value={adminRegistration.email} onChange={updateAdminRegistration} required />
               <FormField id="admin-reg-mobile" name="mobile" type="tel" label="Mobile Number (Optional)" icon="phone" value={adminRegistration.mobile} onChange={updateAdminRegistration} />
+              <FormField id="admin-reg-domain" name="requested_domain_code" as="select" label="Service Responsibility" icon="building-columns" value={adminRegistration.requested_domain_code} onChange={updateAdminRegistration} required>
+                <option value="">Select service authority</option>
+                {adminOptions.domains.map(domain => <option value={domain.code} key={domain.code}>{domain.name} — {domain.parent_authority}</option>)}
+              </FormField>
+              <FormField id="admin-reg-scope" name="requested_scope_level" as="select" label="Requested Jurisdiction" icon="map-location-dot" value={adminRegistration.requested_scope_level} onChange={updateAdminRegistration} required>
+                <option value="central">Central authority — nationwide</option>
+                <option value="division" disabled={selectedAdminDomain && !selectedAdminDomain.supports_division_scope}>Divisional authority — one division</option>
+              </FormField>
+              {adminRegistration.requested_scope_level === 'division' && (
+                <FormField id="admin-reg-division" name="requested_division_id" as="select" label="Division" icon="location-dot" value={adminRegistration.requested_division_id} onChange={updateAdminRegistration} required>
+                  <option value="">Select division</option>
+                  {adminOptions.divisions.map(division => <option value={division.id} key={division.id}>{division.name} · {division.name_bn}</option>)}
+                </FormField>
+              )}
+              <FormField id="admin-reg-note" name="access_request_note" as="textarea" rows="3" label="Official Role / Designation (Optional)" icon="briefcase" value={adminRegistration.access_request_note} onChange={updateAdminRegistration} placeholder="Department, office and designation for verification" />
               <FormField id="admin-reg-password" name="password" type="password" label="Password" icon="lock" minLength="6" value={adminRegistration.password} onChange={updateAdminRegistration} required />
               <FormField id="admin-reg-confirm" name="confirmPassword" type="password" label="Confirm Password" icon="check-circle" value={adminRegistration.confirmPassword} onChange={updateAdminRegistration} required />
               <button className="btn-submit admin-btn" disabled={submitting} type="submit"><span>{submitting ? 'Registering…' : 'Register as Admin'}</span><i className="fas fa-user-plus" /></button>

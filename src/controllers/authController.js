@@ -13,33 +13,41 @@ exports.register = async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { username, email, password, nid, mobile, dob, address, gender } = req.body;
+    const { username, password, dob, address, gender } = req.body;
+    const email = req.body.email.trim().toLowerCase();
+    const nid = req.body.nid.trim();
+    const mobile = req.body.mobile.trim();
+    const connection = await db.getConnection();
 
     try {
+        await connection.beginTransaction();
         // check if NID or Email exists in reg_info
-        const [existing] = await db.query(
-            'SELECT id FROM reg_info WHERE email = ? OR nid = ?',
+        const [existing] = await connection.query(
+            'SELECT id FROM reg_info WHERE email = ? OR nid = ? FOR UPDATE',
             [email, nid]
         );
 
         if (existing.length > 0) {
-            return res.status(400).json({ error: 'User with this Email or NID already exists in REG INFO' });
+            await connection.rollback();
+            return res.status(409).json({ error: 'ACCOUNT_EXISTS', message: 'An account already uses this email or NID.' });
         }
 
         // Hash Password
         const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
         // Insert into reg_info
-        const [result] = await db.query(
+        const [result] = await connection.query(
             'INSERT INTO reg_info (name, email, password, nid, mobile, dob, address, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [username, email, passwordHash, nid, mobile, dob, address, gender]
         );
 
         // Insert into user_info (Mirroring initial data)
-        await db.query(
+        await connection.query(
             'INSERT INTO user_info (user_id, name, email, nid, mobile, dob, address, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [result.insertId, username, email, nid, mobile, dob, address, gender]
         );
+
+        await connection.commit();
 
         // Generate Token immediately
         const token = jwt.sign(
@@ -59,8 +67,12 @@ exports.register = async (req, res) => {
             }
         });
     } catch (error) {
+        await connection.rollback();
         console.error('Registration Error:', error);
-        res.status(500).json({ error: 'Server error during registration' });
+        if (error.code === 'ER_DUP_ENTRY') return res.status(409).json({ error: 'ACCOUNT_EXISTS', message: 'An account already uses this email or NID.' });
+        res.status(500).json({ error: 'REGISTRATION_UNAVAILABLE', message: 'Registration could not be completed. No partial account was saved.' });
+    } finally {
+        connection.release();
     }
 };
 
