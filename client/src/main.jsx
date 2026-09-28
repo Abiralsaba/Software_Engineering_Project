@@ -17,6 +17,7 @@ import './styles/react-workflow.css';
 import './styles/low-risk-pages.css';
 import './styles/batch-one-pages.css';
 import './styles/service-pages.css';
+import './styles/admin-access.css';
 import 'virtual:legacy-ministry.css';
 import './styles/ministry-bridge.css';
 

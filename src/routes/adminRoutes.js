@@ -4,9 +4,31 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { hasDomainAccess, isSuperAdmin } = require('../admin/accessControl');
 
 // Apply admin middleware to all routes
 router.use(adminMiddleware);
+
+const ADMIN_PATH_DOMAINS = [
+    [/^\/land-mutations(?:\/|$)/, 'land'],
+    [/^\/community-/, 'community'],
+    [/^\/(?:shop-items|orders|complaints)(?:\/|$)/, 'commerce'],
+    [/^\/(?:stipends|stipend-applications|education|universities|admission-posts|university-applications|admission-stats)(?:\/|$)/, 'education'],
+    [/^\/market-prices(?:\/|$)/, 'agriculture'],
+    [/^\/tax(?:\/|$)/, 'tax']
+];
+
+router.use((req, res, next) => {
+    if (isSuperAdmin(req.admin)) return next();
+    const match = ADMIN_PATH_DOMAINS.find(([pattern]) => pattern.test(req.path));
+    if (match && hasDomainAccess(req.admin, match[1], { allowDivision: false })) return next();
+    return res.status(403).json({
+        error: req.admin.assignment.role === 'DIVISION_ADMIN'
+            ? 'Use the scoped work queue for divisional administration.'
+            : 'You do not have access to this administration area.',
+        code: 'ADMIN_SCOPE_DENIED'
+    });
+});
 
 // ==========================================
 // USERS MANAGEMENT

@@ -4,10 +4,11 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { requireSuperAdmin } = require('../admin/accessControl');
 
 // admin-only routes
 console.log('Reports Routes Loaded - Fixed Version');
-router.use(adminMiddleware);
+router.use(adminMiddleware, requireSuperAdmin);
 
 // GET citizen profile by userId
 router.get('/citizen-profile/:userId', async (req, res) => {

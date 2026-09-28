@@ -3,24 +3,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
-const jwt = require('jsonwebtoken');
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-
-// Admin auth middleware
-function adminAuth(req, res, next) {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) return res.status(401).json({ error: 'No token provided' });
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET);
-        if (!decoded.isAdmin) return res.status(403).json({ error: 'Admin access required' });
-        req.admin = decoded;
-        next();
-    } catch (err) {
-        return res.status(401).json({ error: 'Invalid token' });
-    }
-}
+const adminAuth = require('../middleware/adminMiddleware');
+const { requireSuperAdmin } = require('../admin/accessControl');
+const platformAdmin = [adminAuth, requireSuperAdmin];
 
 // =====================
 // PUBLIC ROUTES
@@ -104,7 +89,7 @@ router.get('/', async (req, res) => {
 });
 
 // admin: list all notices including drafts
-router.get('/admin/all', adminAuth, async (req, res) => {
+router.get('/admin/all', platformAdmin, async (req, res) => {
     try {
         const [notices] = await db.query(
             `SELECT n.*, a.name AS created_by_name 
@@ -138,7 +123,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // admin: create notice
-router.post('/', adminAuth, async (req, res) => {
+router.post('/', platformAdmin, async (req, res) => {
     try {
         const {
             title, title_bn, department, category, priority,
@@ -172,7 +157,7 @@ router.post('/', adminAuth, async (req, res) => {
 });
 
 // admin: delete notice
-router.delete('/:id', adminAuth, async (req, res) => {
+router.delete('/:id', platformAdmin, async (req, res) => {
     try {
         const [result] = await db.query('DELETE FROM govt_notices WHERE id = ?', [req.params.id]);
         if (result.affectedRows === 0) {
@@ -186,7 +171,7 @@ router.delete('/:id', adminAuth, async (req, res) => {
 });
 
 // admin: update/edit notice
-router.put('/:id', adminAuth, async (req, res) => {
+router.put('/:id', platformAdmin, async (req, res) => {
     try {
         const {
             title, title_bn, department, category, priority,

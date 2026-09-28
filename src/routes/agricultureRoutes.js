@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 const verifyToken = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { requireDomain } = require('../admin/accessControl');
 
 // ==============================
 // PUBLIC ROUTES (No auth needed)
@@ -390,7 +391,7 @@ router.get('/recent-activity', async (req, res) => {
 // ADMIN ROUTES
 // ===========================
 
-router.use('/admin', adminMiddleware);
+router.use('/admin', adminMiddleware, requireDomain('agriculture', { allowDivision: false }));
 
 // Admin: Get all expert queries (pending first)
 router.get('/admin/queries', async (req, res) => {

@@ -5,6 +5,7 @@ const router = express.Router();
 const db = require('../config/db');
 const verifyToken = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { requireDomain } = require('../admin/accessControl');
 
 // ==============================
 // PUBLIC ROUTES (No auth needed)
@@ -387,7 +388,7 @@ router.get('/complaint/my', async (req, res) => {
 // ==============================================
 // ADMIN ROUTES
 // ==============================================
-router.use('/admin', adminMiddleware);
+router.use('/admin', adminMiddleware, requireDomain('health', { allowDivision: false }));
 
 // ---------- ADMIN STATS ----------
 router.get('/admin/stats', async (req, res) => {

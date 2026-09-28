@@ -276,6 +276,8 @@
 .nationx-ministry-page.nationx-ministry-page .nx-ministry-content .medicine-identifier .medicine-text-button { background: transparent; border-color: transparent; color: #a9e8c5; }
 .medicine-detail-note { display: flex; align-items: start; gap: 0.5rem; margin: 1rem 0 0; color: #cfbea0; font-size: 0.72rem; line-height: 1.5; }
 .medicine-savings-guidance { margin: 0; padding: 0.85rem 1rem; color: #e7d8a8; background: rgba(112, 83, 28, 0.2); border: 1px solid rgba(210, 164, 80, 0.28); border-radius: 11px; font-size: 0.78rem; line-height: 1.55; }
+.medicine-catalogue-notice { display: flex; align-items: flex-start; gap: 0.6rem; margin: 0; padding: 0.85rem 0.95rem; color: #c6ddd1; background: rgba(44, 104, 82, 0.16); border: 1px solid rgba(113, 184, 151, 0.25); border-radius: 11px; font-size: 0.78rem; line-height: 1.55; }
+.medicine-catalogue-notice i { margin-top: 0.2rem; color: #8bd2ac; }
 .medicine-gemini-leads { padding: 1rem; background: rgba(105, 77, 28, 0.16); border: 1px solid rgba(218, 168, 77, 0.36); border-radius: 13px; }
 .medicine-gemini-leads h3 { margin: 0.2rem 0; color: #f7e7c0; font-size: 0.96rem; }
 .medicine-gemini-leads p { margin: 0.3rem 0 0.65rem; color: #e1ceb0; font-size: 0.77rem; line-height: 1.55; }

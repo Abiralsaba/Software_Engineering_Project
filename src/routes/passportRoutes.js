@@ -4,6 +4,7 @@ const SSLCommerz = require('sslcommerz-lts');
 const db = require('../config/db');
 const verifyToken = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { requireDomain } = require('../admin/accessControl');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -731,7 +732,7 @@ router.get('/recent-activity', async (req, res) => {
 // =============================================
 // ADMIN ROUTES (Protected by Admin Middleware)
 // =============================================
-router.use('/admin', adminMiddleware);
+router.use('/admin', adminMiddleware, requireDomain('passport', { allowDivision: false }));
 
 // Admin: Get all applications with filters
 router.get('/admin/applications', async (req, res) => {

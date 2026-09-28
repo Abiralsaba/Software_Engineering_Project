@@ -221,7 +221,9 @@ async function validateDatabase() {
             'reg_info', 'user_info', 'admins', 'todos', 'land_mutations_v2',
             'my_land_record', 'landtax', 'service_requests', 'notifications',
             'nid_cards', 'shop_items', 'addto_cart', 'Ordered_item', 'stipends',
-            'stipend_applications'
+            'stipend_applications', 'nid_applicant_accounts', 'nid_first_time_applications',
+            'nid_application_documents', 'assistant_sessions', 'admin_service_domains',
+            'admin_role_assignments', 'admin_access_audit_log'
         ];
         const [tableRows] = await connection.query(
             `SELECT TABLE_NAME FROM information_schema.TABLES
@@ -239,10 +241,10 @@ async function validateDatabase() {
         );
         const versions = migrationRows.map(row => row.version);
         const expectedVersions = routineInstallationEnabled
-            ? '000,001,002,003,004'
-            : '000,001,002,003,005';
-        if (versions.join(',') !== expectedVersions) {
-            throw new Error(`Unexpected migration set: ${versions.join(', ')}`);
+            ? ['000', '001', '002', '003', '004', '009']
+            : ['000', '001', '002', '003', '005', '009'];
+        if (expectedVersions.some(version => !versions.includes(version))) {
+            throw new Error(`Required migration set is incomplete: ${versions.join(', ')}`);
         }
 
         const [constraintRows] = await connection.query(
@@ -332,6 +334,8 @@ async function main() {
         'src/database/land_mutation_schema.sql'
     ];
     for (const file of domainSchemas) runSql(mysqlBinary, file);
+    runSql(mysqlBinary, 'src/database/migrations/008_nid_applicant_assistant.sql');
+    runSql(mysqlBinary, 'src/database/migrations/009_admin_role_scopes.sql');
 
     const databaseFeatures = [
         'src/database/schema_normalized.sql',

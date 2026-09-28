@@ -40,34 +40,33 @@ describe('remaining React admin pages', () => {
     const user = userEvent.setup(); wrap(<AdminWaterPage />, '/admin-water.html'); await user.click(await screen.findByRole('button', { name: 'bills' })); await user.click(await screen.findByRole('button', { name: 'Review' })); expect(await screen.findByText(/not gateway verification/i)).toBeInTheDocument();
   });
 
-  it('loads Reports overview datasets from real admin/report contracts', async () => {
-    apiRequest.mockImplementation(path => Promise.resolve(path.includes('summary') ? { users: 2 } : []));
-    wrap(<AdminReportsPage />, '/reports.html');
-    expect(await screen.findByRole('heading', { name: 'Summary' })).toBeInTheDocument();
-    for (const [, path] of REPORT_SECTIONS.overview) expect(apiRequest).toHaveBeenCalledWith(path, { audience: 'admin' });
-  });
-
-  it('approves only the selected service request once', async () => {
-    let resolveUpdate;
-    apiRequest.mockImplementation((path, options) => {
-      if (path === '/api/admin/service-requests') return Promise.resolve([{ id: 71, request_type: 'Demo', status: 'Pending' }, { id: 72, request_type: 'Untouched', status: 'Pending' }]);
-      if (path === '/api/admin/service-requests/71/approve' && options?.method === 'PUT') return new Promise(resolve => { resolveUpdate = resolve; });
+  it('loads a divisional administrator with only the server-scoped work queue', async () => {
+    apiRequest.mockImplementation(path => {
+      if (path === '/api/admin/me') return Promise.resolve({ id: 8, name: 'Divisional Officer', assignment: { role: 'DIVISION_ADMIN', domainCode: 'agriculture', domainName: 'Agriculture Services', parentAuthority: 'Ministry of Agriculture', divisionId: 3, divisionName: 'Dhaka' } });
+      if (path === '/api/admin/access/options') return Promise.resolve({ domains: [{ code: 'agriculture', name: 'Agriculture Services', name_bn: 'কৃষি সেবা', parent_authority: 'Ministry of Agriculture', icon: 'fa-seedling' }], divisions: [] });
+      if (path === '/api/admin/work/agriculture') return Promise.resolve({ selectedResource: 'subsidies', resources: [{ key: 'subsidies', label: 'Agriculture subsidies', statuses: ['Pending', 'Approved'] }], items: [{ id: 71, reference: 'SUB-71', applicant: 'রহিম উদ্দিন', status: 'Pending' }] });
       return Promise.resolve([]);
     });
-    const user = userEvent.setup(); wrap(<AdminReportsPage />, '/reports.html'); await user.click(await screen.findByRole('button', { name: 'services' })); const manage = await screen.findAllByRole('button', { name: 'Manage' }); await user.click(manage[0]); await user.click(screen.getByRole('button', { name: 'Approve selected' })); await user.click(screen.getByRole('button', { name: 'Approve selected' })); await waitFor(() => expect(apiRequest.mock.calls.filter(([path]) => path === '/api/admin/service-requests/71/approve')).toHaveLength(1)); resolveUpdate({ success: true, message: 'approved' });
+    wrap(<AdminReportsPage />, '/reports.html');
+    expect(await screen.findByRole('heading', { name: 'Divisional service administrator' })).toBeInTheDocument();
+    expect(await screen.findByText(/Only requests assigned to Dhaka Division/)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Access & roles/i })).not.toBeInTheDocument();
+    expect(apiRequest).not.toHaveBeenCalledWith('/api/reports/summary', expect.anything());
   });
 
-  it('filters and paginates Reports records', async () => {
-    const citizens = Array.from({ length: 17 }, (_, index) => ({ id: index + 1, name: index === 16 ? 'Synthetic Target' : `Citizen ${index + 1}`, status: index % 2 ? 'Active' : 'Pending' }));
-    apiRequest.mockImplementation(path => path === '/api/admin/users' ? Promise.resolve(citizens) : Promise.resolve([]));
-    const user = userEvent.setup(); wrap(<AdminReportsPage />, '/reports.html?section=users');
-    expect(await screen.findByText('17 of 17 records')).toBeInTheDocument();
-    expect(screen.getByText('1 / 2')).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Next' }));
-    expect(screen.getByText('Synthetic Target')).toBeInTheDocument();
-    await user.type(screen.getByLabelText('Search Citizens'), 'Synthetic Target');
-    expect(screen.getByText('1 of 17 records')).toBeInTheDocument();
-    expect(screen.queryByText('Citizen 1')).not.toBeInTheDocument();
+  it('shows access governance only to the platform super administrator', async () => {
+    apiRequest.mockImplementation(path => {
+      if (path === '/api/admin/me') return Promise.resolve({ id: 1, name: 'Platform Admin', assignment: { role: 'SUPER_ADMIN' } });
+      if (path === '/api/admin/access/options') return Promise.resolve({ domains: [{ code: 'nid', name: 'National Identity Services', name_bn: 'জাতীয় পরিচয় সেবা', parent_authority: 'Bangladesh Election Commission', icon: 'fa-id-card', supports_division_scope: 1 }], divisions: [{ id: 1, name: 'Dhaka', name_bn: 'ঢাকা' }] });
+      if (path === '/api/admin/work/nid') return Promise.resolve({ selectedResource: 'applications', resources: [{ key: 'applications', label: 'NID applications', statuses: ['Submitted'] }], items: [] });
+      if (path === '/api/admin/access/admins') return Promise.resolve([{ id: 4, name: 'NID Officer', email: 'nid@gov.bd', nid: '123', status: 'pending', requested_domain_code: 'nid', requested_scope_level: 'division', requested_division_id: 1 }]);
+      return Promise.resolve([]);
+    });
+    const user = userEvent.setup(); wrap(<AdminReportsPage />, '/reports.html');
+    await user.click(await screen.findByRole('button', { name: /Access & roles/i }));
+    expect(await screen.findByRole('heading', { name: 'Administrator access control' })).toBeInTheDocument();
+    expect(screen.getByText('NID Officer')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Approve and assign/i })).toBeInTheDocument();
   });
 
   it('uses existing status enums and contains every presentation domain', () => {

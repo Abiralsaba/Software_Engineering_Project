@@ -169,7 +169,11 @@ app.use('/api/water', waterRoutes);
 // Admin Routes
 const adminAuthRoutes = require('./routes/adminAuthRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const adminAccessRoutes = require('./routes/adminAccessRoutes');
+const adminWorkRoutes = require('./routes/adminWorkRoutes');
 app.use('/api/admin', adminAuthRoutes);
+app.use('/api/admin/access', adminAccessRoutes);
+app.use('/api/admin/work', adminWorkRoutes);
 app.use('/api/admin', adminRoutes);
 
 

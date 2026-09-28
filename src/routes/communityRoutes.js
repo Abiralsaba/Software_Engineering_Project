@@ -5,6 +5,7 @@ const router = express.Router();
 const db = require('../config/db');
 const verifyToken = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { requireDomain } = require('../admin/accessControl');
 const upload = require('../middleware/uploadMiddleware');
 
 // All routes require authentication
@@ -529,7 +530,7 @@ router.delete('/comments/:id', async (req, res) => {
 // ADMIN ENDPOINTS
 // ==========================================
 
-router.use('/admin', adminMiddleware);
+router.use('/admin', adminMiddleware, requireDomain('community', { allowDivision: false }));
 
 // GET /admin/groups
 router.get('/admin/groups', async (req, res) => {

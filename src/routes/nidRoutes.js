@@ -5,6 +5,7 @@ const router = express.Router();
 const db = require('../config/db');
 const verifyToken = require('../middleware/authMiddleware');
 const adminMiddleware = require('../middleware/adminMiddleware');
+const { requireDomain } = require('../admin/accessControl');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -1099,9 +1100,10 @@ router.get('/track/:refNo', async (req, res) => {
 // ==============================
 // ADMIN ROUTES
 // ==============================
+router.use('/admin', adminMiddleware, requireDomain('nid', { allowDivision: false }));
 
 // Admin: Get Dashboard Stats
-router.get('/admin/stats', adminMiddleware, async (req, res) => {
+router.get('/admin/stats', async (req, res) => {
     try {
         const [[totalApps]] = await db.query('SELECT COUNT(*) as cnt FROM nid_applications');
         const [[corrections]] = await db.query('SELECT COUNT(*) as cnt FROM nid_correction_requests');
@@ -1126,7 +1128,7 @@ router.get('/admin/stats', adminMiddleware, async (req, res) => {
 });
 
 // Admin: Get All Applications (Unified) — JOINs reg_info for names
-router.get('/admin/applications', adminMiddleware, async (req, res) => {
+router.get('/admin/applications', async (req, res) => {
     try {
         const [apps] = await db.query(`
             SELECT 'New NID' as type, a.application_no as ref_no, a.status, a.created_at, 
@@ -1154,7 +1156,7 @@ router.get('/admin/applications', adminMiddleware, async (req, res) => {
 });
 
 // Admin: Get Single Application Details (with user info)
-router.get('/admin/application/:refNo', adminMiddleware, async (req, res) => {
+router.get('/admin/application/:refNo', async (req, res) => {
     const { refNo } = req.params;
     const { table } = req.query; 
     
@@ -1183,7 +1185,7 @@ router.get('/admin/application/:refNo', adminMiddleware, async (req, res) => {
 });
 
 // Admin: Update Status
-router.post('/admin/update-status', adminMiddleware, async (req, res) => {
+router.post('/admin/update-status', async (req, res) => {
     const { refNo, sourceTable, status, remarks } = req.body;
     
     if (!status) return res.status(400).json({ error: 'Status is required' });

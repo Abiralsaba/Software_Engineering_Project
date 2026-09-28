@@ -9,6 +9,8 @@
     "assistant:whisper": "node scripts/assistant/whisper.js",
     "assistant:check": "node scripts/assistant/check.js",
     "assistant:test": "node --test --test-concurrency=1 test/assistant/*.test.js",
+    "admin:migrate:dev": "node scripts/admin/migrate.js central_govt_db",
+    "admin:migrate:test": "node scripts/admin/migrate.js central_govt_db_test",
     "start": "node src/app.js",
     "db:install:test": "node scripts/database/install.js --target central_govt_db_test",
     "db:reset:test": "node scripts/database/install.js --target central_govt_db_test --reset",
