@@ -6,6 +6,27 @@ import AssistantPanel from './AssistantPanel.jsx';
 import { useSpeech } from './useSpeech';
 import './assistant.css';
 const root = '/api/nid/first-time-applications';
+function DraftField({ fieldKey, application, values, onChange }) {
+  const [locationOptions, setLocationOptions] = useState([]);
+  const type = application.rules.field_types?.[fieldKey];
+  const staticOptions = application.rules.options?.[fieldKey];
+  const location = /^(present|permanent)_(division|district|upazila)_id$/.exec(fieldKey);
+  const parent = location?.[2] === 'district' ? values[`${location[1]}_division_id`] : location?.[2] === 'upazila' ? values[`${location[1]}_district_id`] : null;
+  useEffect(() => {
+    if (!location) return;
+    if (location[2] !== 'division' && !parent) { setLocationOptions([]); return; }
+    let active = true;
+    const endpoint = location[2] === 'division' ? '/api/applicants/locations/divisions' : `/api/applicants/locations/${location[2]}s/${parent}`;
+    apiRequest(endpoint, { auth: false }).then(rows => active && setLocationOptions(rows)).catch(() => active && setLocationOptions([]));
+    return () => { active = false; };
+  }, [fieldKey, parent]);
+  const label = application.rules.labels[fieldKey]; const required = application.rules.fields.includes(fieldKey);
+  return <label>{label[0]}<small>{label[1]}{required ? ' · required' : ' · optional'}</small>
+    {staticOptions ? <select required={required} value={values[fieldKey] || ''} onChange={event => onChange(fieldKey, event.target.value)}><option value="">Select</option>{staticOptions.map(option => <option key={option}>{option}</option>)}</select>
+      : location ? <select required={required} disabled={location[2] !== 'division' && !parent} value={values[fieldKey] || ''} onChange={event => onChange(fieldKey, event.target.value)}><option value="">Select {location[2]}</option>{locationOptions.map(option => <option value={option.id} key={option.id}>{option.name_bn ? `${option.name_bn} · ${option.name}` : option.name}</option>)}</select>
+        : <input required={required} type={type === 'date' ? 'date' : type === 'year' ? 'number' : 'text'} inputMode={type === 'digits' || type === 'year' ? 'numeric' : type === 'tel' ? 'tel' : undefined} maxLength={type === 'digits' ? 17 : 500} value={values[fieldKey] || ''} onChange={event => onChange(fieldKey, event.target.value)} />}
+  </label>;
+}
 export default function ApplicantPage() {
   const { citizenToken, clearCitizenSession } = useAuth();
   const location = useLocation();
@@ -62,7 +83,7 @@ export default function ApplicantPage() {
         {!application && loaded && <button disabled={busy || !account} onClick={() => run(async () => apply(await apiRequest(root, { method: 'POST', body: {} })))}>Start first-time application</button>}
         {application && <><p className="nx-notice">{application.rules.notice}</p><p role="status">Status: <strong>{application.status}</strong> · Draft version {application.version}</p><progress max={application.rules.fields.length + application.rules.documents.length} value={application.rules.fields.length + application.rules.documents.length - application.missing_fields.length - application.missing_documents.length} aria-label="Application progress" />
           {application.tracking_number && <section className="nx-receipt"><h3>Stored NationX tracking number</h3><output>{application.tracking_number}</output><p>This is a genuine stored NationX demo application reference—not an NID number.</p><button onClick={() => speech.speak(`ট্র্যাকিং নম্বর ${application.tracking_number}`, `Tracking number ${application.tracking_number}`)}>Read tracking number</button><button onClick={speech.stop}>Stop speech</button></section>}
-          {editable && <><form className="nx-field-grid" onSubmit={save}>{application.rules.fields.map(key => <label key={key}>{application.rules.labels[key][0]}<small>{application.rules.labels[key][1]}</small>{key === 'gender' ? <select required value={values[key] || ''} onChange={e => { setValues({ ...values,[key]:e.target.value }); setReview(null); }}><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select> : <input type={key === 'date_of_birth' ? 'date' : 'text'} maxLength={200} value={values[key] || ''} onChange={e => { setValues({ ...values,[key]:e.target.value }); setReview(null); }} />}</label>)}<button disabled={busy}>Confirm and save entered fields</button></form>
+          {editable && <><form className="nx-field-grid" onSubmit={save}>{[...application.rules.fields, ...(application.rules.optional_fields || [])].map(key => <DraftField key={key} fieldKey={key} application={application} values={values} onChange={(changedKey, value) => { setValues(current => ({ ...current, [changedKey]: value })); setReview(null); }} />)}<button disabled={busy}>Confirm and save entered fields</button></form>
             <p>Profile suggestions (not saved until you confirm): <button disabled={busy} onClick={() => { setValues(v => ({ ...v,name_en:account.name,mobile:account.mobile })); setReview(null); }}>Use my account name and mobile</button></p>
             <h3>Required demonstration documents</h3><p>Use synthetic PNG/JPEG images only, up to 5 MB. Files are private and never sent to Gemini.</p>
             <div className="nx-field-grid">{application.rules.documents.map(kind => <label key={kind}>{kind.replaceAll('_',' ')}{application.documents.some(d => d.kind === kind) ? ' — uploaded ✓' : ' — required'}<input type="file" accept="image/png,image/jpeg" disabled={busy} onChange={e => upload(e,kind)} /></label>)}</div>

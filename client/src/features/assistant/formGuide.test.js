@@ -17,6 +17,10 @@ describe('citizen workflow boundaries',()=>{
     expect(understand('land tax').ministry).toBe('land');
     expect(understand('water and passport').ministry).toBeNull();
     expect(understand('cancel').command).toBe('cancel');
+    for(const phrase of ['submit','submit form','joma dao','জমা দাও','জমা দিন','আবেদন জমা দিন']) {
+      expect(understand(phrase).command).toBe('submit');
+    }
+    expect(understand('submit a crop report').command).not.toBe('submit');
   });
   it('prefills only blank, explicitly mapped fields and leaves consent and relatives untouched',()=>{
     form.elements.full_name.value='Already entered';

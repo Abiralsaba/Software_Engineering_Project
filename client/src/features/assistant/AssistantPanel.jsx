@@ -11,6 +11,7 @@ export default function AssistantPanel({ onApplication, application, accountKey 
   const [busy, setBusy] = useState(false);
   const [listening, setListening] = useState(false);
   const [field, setField] = useState('');
+  const [dynamicOptions, setDynamicOptions] = useState([]);
   const recorder = useRef(null); const stream = useRef(null); const timer = useRef(null); const abort = useRef(null); const alive = useRef(true);
   const speech = useSpeech(language);
   const storageKey = `nationx-assistant-${accountKey}`;
@@ -26,6 +27,16 @@ export default function AssistantPanel({ onApplication, application, accountKey 
     if (id) apiRequest(`/api/assistant/sessions/${id}`).then(apply).catch(() => sessionStorage.removeItem(storageKey));
     return () => { alive.current = false; clearTimeout(timer.current); abort.current?.abort(); if (recorder.current?.state === 'recording') recorder.current.stop(); stream.current?.getTracks().forEach(t => t.stop()); };
   }, [storageKey]);
+  useEffect(() => {
+    const location = /^(present|permanent)_(division|district|upazila)_id$/.exec(field);
+    if (!location || !session?.application) { setDynamicOptions([]); return; }
+    const parent = location[2] === 'district' ? session.application.fields[`${location[1]}_division_id`] : location[2] === 'upazila' ? session.application.fields[`${location[1]}_district_id`] : null;
+    if (location[2] !== 'division' && !parent) { setDynamicOptions([]); return; }
+    let active = true;
+    const endpoint = location[2] === 'division' ? '/api/applicants/locations/divisions' : `/api/applicants/locations/${location[2]}s/${parent}`;
+    apiRequest(endpoint, { auth: false }).then(rows => active && setDynamicOptions(rows)).catch(() => active && setDynamicOptions([]));
+    return () => { active = false; };
+  }, [field, session?.application]);
   function apply(value) {
     if (!alive.current) return;
     setSession(value); setField(value.expected_field || '');
@@ -89,9 +100,9 @@ export default function AssistantPanel({ onApplication, application, accountKey 
     <div className="nx-actions"><button type="button" className="nx-mic" onClick={record} disabled={busy}>{listening ? '■ Stop recording' : '● Tap to speak'}</button><button type="button" onClick={() => speech.speak(session?.message_bn || 'কী সেবা প্রয়োজন?',session?.message_en || 'What service do you need?')}>Replay</button><button type="button" onClick={speech.stop}>Stop speech</button></div>
     {!speech.available && <small role="status">{language === 'bn' ? 'এই ব্রাউজারে বাংলা কণ্ঠ পাওয়া যায়নি। বাংলা লেখা ব্যবহার করুন অথবা আপনার ডিভাইসে বাংলা কণ্ঠ সক্রিয় করুন।' : 'No English speech voice is available. You can continue using text.'}</small>}
     <form onSubmit={send}>
-      {session?.application && <label>Answer or correct a field<select value={field} onChange={e => { setField(e.target.value); setText(session.application.fields[e.target.value] || ''); }}><option value="">Service command</option>{session.application.rules.fields.map(key => <option value={key} key={key}>{session.application.rules.labels[key][1]}</option>)}</select></label>}
+      {session?.application && <label>Answer or correct a field<select value={field} onChange={e => { setField(e.target.value); setText(String(session.application.fields[e.target.value] || '')); }}><option value="">Service command</option>{[...session.application.rules.fields, ...(session.application.rules.optional_fields || [])].map(key => <option value={key} key={key}>{session.application.rules.labels[key][1]}</option>)}</select></label>}
       <label htmlFor="assistant-transcript">{field ? session?.application?.rules.labels[field][1] : 'Transcript / typed message'}</label>
-      {field === 'gender' ? <select id="assistant-transcript" value={text} onChange={e => setText(e.target.value)} required><option value="">Choose</option><option>Male</option><option>Female</option><option>Other</option></select> : <textarea id="assistant-transcript" lang={language === 'bn' ? 'bn-BD' : 'en'} maxLength={1000} value={text} onChange={e => setText(e.target.value)} required placeholder="আমার NID বানাও" />}
+      {session?.application?.rules.options?.[field] ? <select id="assistant-transcript" value={text} onChange={e => setText(e.target.value)} required><option value="">Choose</option>{session.application.rules.options[field].map(option => <option key={option}>{option}</option>)}</select> : dynamicOptions.length ? <select id="assistant-transcript" value={text} onChange={e => setText(e.target.value)} required><option value="">Choose</option>{dynamicOptions.map(option => <option value={option.id} key={option.id}>{option.name_bn ? `${option.name_bn} · ${option.name}` : option.name}</option>)}</select> : <textarea id="assistant-transcript" lang={language === 'bn' ? 'bn-BD' : 'en'} maxLength={1000} value={text} onChange={e => setText(e.target.value)} required placeholder="আমার NID বানাও" />}
       <div className="nx-actions"><button disabled={busy || listening || !text.trim()} type="submit">Yes — confirm and send</button><button type="button" onClick={() => setText('')}>No — clear answer</button></div>
     </form>
     <div className="nx-actions"><button disabled={busy} onClick={e => send(e,'আমার NID বানাও')}>New application</button><button disabled={busy} onClick={e => send(e,'আমার আবেদন কোথায় আছে?')}>Application status</button><button disabled={busy} onClick={e => send(e,'back')}>Back / Correct</button><button type="button" onClick={cancel}>Cancel assistant</button></div>

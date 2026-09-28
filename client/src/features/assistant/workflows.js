@@ -32,8 +32,13 @@ export const ministries = Object.entries(definitions).map(([id,[en,bn,icon,keywo
 export const workflows = ministries.flatMap(m => m.services);
 export const getWorkflow = id => workflows.find(w => w.id === id);
 export const normalize = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[০-৯]/g, digit => String('০১২৩৪৫৬৭৮৯'.indexOf(digit))).trim();
+export function isSubmitCommand(text) {
+  const q=normalize(text).replace(/[।.!?]+$/g,'').replace(/\s+/g,' ');
+  return /^(?:submit(?: the)?(?: form| application)?|j[ao]ma (?:dao|din)|জমা (?:দাও|দিন)|(?:আবেদন|ফর্ম) জমা (?:দাও|দিন)|সাবমিট(?: কর| করুন)?)$/.test(q);
+}
 export function understand(text, currentMinistry) {
   const q = normalize(text).replace(/এন\s+আই\s+ডি/g,'এনআইডি');
+  if (isSubmitCommand(q)) return { command: 'submit' };
   if (/^(cancel|stop|বাতিল|বন্ধ)( assistant)?$/.test(q)) return { command: 'cancel' };
   if (/^(back|পেছনে|আগের)$/.test(q)) return { command:'back' };
   if (/^(repeat|আবার|আবার বলুন)$/.test(q)) return { command:'repeat' };

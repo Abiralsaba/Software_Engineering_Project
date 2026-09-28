@@ -34,9 +34,12 @@ export default function CitizenGuide({ visible=true, ministry, activeSection, on
   const [records,setRecords]=useState([]);
   const [busy,setBusy]=useState(false);
   const [checkedAt,setCheckedAt]=useState(null);
-  const formRef=useRef(null), request=useRef(null), statusGeneration=useRef(0), alive=useRef(true);
+  const formRef=useRef(null), request=useRef(null), statusGeneration=useRef(0), alive=useRef(true), submittingRef=useRef(false);
   const speech=useSpeech(language);
   const voice=useVoiceInput({language,onTranscript:value=>{
+    if(phase==='review'&&understand(value,department||ministry).command==='submit'){
+      setText(value);submitReviewedForm();return;
+    }
     if(phase==='collect'&&current&&!plausibleTranscript(current,value)){
       setText('');setError(language==='bn'
         ? current.el.tagName==='SELECT'
@@ -58,7 +61,7 @@ export default function CitizenGuide({ visible=true, ministry, activeSection, on
   const available=workflows.filter(w=>!department || w.ministry===department);
   const missing=fields.filter(f=>!f.value&&!skipped.includes(f.key));
   const current=editing?fields.find(f=>f.key===editing):missing[0];
-  const prompt=message || (phase==='collect' && current ? {bn:`${current.bnLabel} — এই তথ্যটি বলুন অথবা লিখুন।`,en:`What is your ${current.label.toLowerCase()}? Say it or type below.`} : phase==='review' ? {bn:'সব তথ্য যাচাই করুন। পরিবর্তন করতে সংশ্লিষ্ট তথ্যটি চাপুন।',en:'Check every detail. Select a field to correct it.'} : phase==='prepare' ? {bn:'সেবার ফর্ম প্রস্তুত হচ্ছে…',en:'Preparing the service form…'} : phase==='ready' ? {bn:'ধাপে ধাপে ফর্ম পূরণ অথবা আবেদনের অবস্থা দেখতে পারেন।',en:'I can guide the form or check your existing records.'} : phase==='status' ? {bn:'আপনার অ্যাকাউন্টের সর্বশেষ তথ্য।',en:'Latest records for your signed-in account.'} : phase==='manual' ? {bn:'সেবার পাতায় একটি বিকল্প বা ফাইল নির্বাচন করুন, তারপর এখানে ফিরে আসুন।',en:'Choose an option or upload a file on the service page, then return here.'} : {bn:'কোন সেবা দরকার? বলুন অথবা লিখুন।',en:'What can I help you with? Speak or type.'});
+  const prompt=message || (phase==='collect' && current ? {bn:`${current.bnLabel} — এই তথ্যটি বলুন অথবা লিখুন।`,en:`What is your ${current.label.toLowerCase()}? Say it or type below.`} : phase==='review' ? {bn:'সব তথ্য যাচাই করুন। ঠিক থাকলে “জমা দাও” বলুন; পরিবর্তনের জন্য সংশ্লিষ্ট তথ্য চাপুন।',en:'Check every detail. Say “submit” when it is correct, or select a field to edit it.'} : phase==='prepare' ? {bn:'সেবার ফর্ম প্রস্তুত হচ্ছে…',en:'Preparing the service form…'} : phase==='ready' ? {bn:'ধাপে ধাপে ফর্ম পূরণ অথবা আবেদনের অবস্থা দেখতে পারেন।',en:'I can guide the form or check your existing records.'} : phase==='status' ? {bn:'আপনার অ্যাকাউন্টের সর্বশেষ তথ্য।',en:'Latest records for your signed-in account.'} : phase==='manual' ? {bn:'সেবার পাতায় একটি বিকল্প বা ফাইল নির্বাচন করুন, তারপর এখানে ফিরে আসুন।',en:'Choose an option or upload a file on the service page, then return here.'} : {bn:'কোন সেবা দরকার? বলুন অথবা লিখুন।',en:'What can I help you with? Speak or type.'});
 
   const guidedPrompt=phase==='collect'&&current?.el.disabled
     ? {bn:current.bnLabel+' — বিকল্প লোড হচ্ছে। একটু অপেক্ষা করুন।',en:'Loading choices for '+current.label.toLowerCase()+'…'}
@@ -76,7 +79,7 @@ export default function CitizenGuide({ visible=true, ministry, activeSection, on
     window.addEventListener('keydown',close);
     return()=>window.removeEventListener('keydown',close);
   },[visible,onClose]);
-  useEffect(()=>{if(!visible){voice.cancel();speech.stop();request.current?.abort();statusGeneration.current++;setBusy(false);}},[visible]);
+  useEffect(()=>{if(!visible){voice.cancel();speech.stop();request.current?.abort();statusGeneration.current++;submittingRef.current=false;setBusy(false);}},[visible]);
   useEffect(()=>{sessionStorage.setItem('nationx-guide-preferences',JSON.stringify({language,spoken}));},[language,spoken]);
   useEffect(()=>setOptionSearch(''),[current?.key]);
   // Speak only after an explicit user interaction has started a service. Field
@@ -157,6 +160,7 @@ export default function CitizenGuide({ visible=true, ministry, activeSection, on
     const control=understand(text,department||ministry).command;
     if(control==='cancel'){clearActivity();setPhase('choose');setSelected(null);formRef.current=null;setMessage({bn:'সহায়তা বন্ধ। ফর্মের তথ্য অপরিবর্তিত আছে।',en:'Guidance cancelled. Existing form values are unchanged.'});return;}
     if(control==='repeat'){speech.speak(guidedPrompt.bn,guidedPrompt.en);setText('');return;}
+    if(control==='submit'&&phase==='review'){setText('');submitReviewedForm();return;}
     if(control==='back'&&phase==='collect'){
       const previous=fields.slice(0,fields.findIndex(f=>f.key===current?.key)).filter(f=>f.value).at(-1);
       if(previous){setEditing(previous.key);setText(controlKinds.has(previous.type)?'':previous.el.value);}else{setPhase('review');setText('');}
@@ -197,6 +201,22 @@ export default function CitizenGuide({ visible=true, ministry, activeSection, on
     // The user submits on the original form. Its validation, confirmation,
     // duplicate-submit lock and server response remain authoritative.
   }
+  function submitReviewedForm(){
+    if(phase!=='review'||submittingRef.current)return;
+    const form=formRef.current;
+    if(!form?.isConnected){setError(t('ফর্মটি পরিবর্তিত হয়েছে। আবার নির্দেশনা শুরু করুন।','The form changed. Start guidance again.'));return;}
+    const invalid=[...form.elements].find(el=>el.willValidate&&!el.checkValidity());
+    if(invalid){setPhase('collect');setEditing(formFields(form).find(f=>f.el===invalid)?.key||null);setError(invalid.validationMessage);invalid.focus?.();return;}
+    const submitter=form.querySelector('button[type="submit"],button:not([type]),input[type="submit"]');
+    if(!submitter||submitter.disabled){setError(t('এই ফর্মটি এখন জমা দেওয়া যাচ্ছে না। মূল ফর্মের নির্দেশনা দেখুন।','This form cannot be submitted yet. Check the original form for instructions.'));return;}
+    submittingRef.current=true;setBusy(true);setError('');voice.cancel();speech.stop();
+    try {
+      form.requestSubmit(submitter);
+      onClose?.();
+    } catch(error) {
+      submittingRef.current=false;setBusy(false);setError(error.message||t('ফর্ম জমা দেওয়া যায়নি। আবার চেষ্টা করুন।','The form could not be submitted. Please try again.'));
+    }
+  }
   const inField=phase==='collect'&&current;
   return <section className="nx-assistant nx-guide" aria-label="NationX voice assistant">
     <header className="nx-guide-header"><div className={`nx-guide-orb ${voice.state==='listening'||speech.speaking?'is-active':''}`} aria-hidden="true"><i className="fas fa-wave-square" /></div><div><h2>NationX Assistant</h2><small>{t('আপনার সেবা, ধাপে ধাপে','Your services, step by step')}</small></div><button type="button" className="nx-guide-icon" onClick={()=>{voice.cancel();speech.stop();onClose?.();}} aria-label="Close assistant panel"><i className="fas fa-xmark" aria-hidden="true" /></button></header>
@@ -225,17 +245,17 @@ export default function CitizenGuide({ visible=true, ministry, activeSection, on
         {controlKinds.has(current.type)&&<div className='nx-guide-actions'><p>{t('ফাইল বা সম্মতির ঘর নিজে সেবার ফর্মে পূরণ করুন।','Choose files and consent options yourself on the service form.')}</p><button type='button' onClick={()=>{current.el.scrollIntoView({block:'center'});current.el.focus();onClose?.();}}>{t('ফর্মে পূরণ করুন','Complete on form')}</button><button type='button' onClick={refresh}>{t('পূরণ করেছি','I have completed it')}</button></div>}
         <div className='nx-guide-actions nx-guide-secondary'>{!current.required&&<button type='button' onClick={()=>{setSkipped(v=>[...v,current.key]);setEditing(null);setText('');setMessage(null);}}>{t('এখন বাদ দিন','Skip optional field')}</button>}<button type='button' onClick={()=>{setPhase('review');setMessage(null);}}>{t('তথ্য দেখুন','Review details')}</button></div>
       </>}
-      {phase==='review'&&<><dl className="nx-guide-review">{fields.map(f=><div key={f.key}><dt>{t(f.bnLabel,f.label)}</dt><dd><button type="button" onClick={()=>{setEditing(f.key);setText(controlKinds.has(f.type)?'':f.el.value);setPhase('collect');setMessage(null);}}>{f.options.find(o=>o.value===f.value)?.label||f.value||t('পূরণ হয়নি','Not provided')}</button></dd></div>)}</dl><p className="nx-guide-hint">{t('এখনও কিছু জমা দেওয়া হয়নি। মূল ফর্মে চূড়ান্ত যাচাই ও জমা দিন।','Nothing has been submitted. Finish with the original form’s validation and submit button.')}</p><button type="button" className="nx-guide-primary" onClick={handoff}>{t('মূল ফর্মে যাচাই ও জমা দিন','Review and submit on the form')}</button></>}
+      {phase==='review'&&<><dl className="nx-guide-review">{fields.map(f=><div key={f.key}><dt>{t(f.bnLabel,f.label)}</dt><dd><button type="button" onClick={()=>{setEditing(f.key);setText(controlKinds.has(f.type)?'':f.el.value);setPhase('collect');setMessage(null);}}>{f.options.find(o=>o.value===f.value)?.label||f.value||t('পূরণ হয়নি','Not provided')}</button></dd></div>)}</dl><p className="nx-guide-hint">{t('সব তথ্য ঠিক থাকলে “জমা দাও” বলুন অথবা লিখুন। মূল ফর্মের যাচাই ও জমা দেওয়ার প্রক্রিয়াই ব্যবহার হবে।','If every detail is correct, say or type “submit”. The original form’s validation and submission process will be used.')}</p><button type="button" className="nx-guide-primary" onClick={handoff}>{t('মূল ফর্মে আরেকবার দেখুন','Review once more on the form')}</button></>}
       {phase==='manual'&&<div className="nx-guide-actions"><button type="button" className="nx-guide-primary" onClick={()=>{openService();onClose?.();}}>{t('সেবার পাতা দেখুন','View service page')}</button><button type="button" onClick={()=>{setMessage(null);setPhase('prepare');}}>{t('ফর্ম নিয়ে চালিয়ে যান','Continue with form')}</button>{selected?.statusPath&&<button type="button" onClick={()=>loadStatus()}>{t('আমার অবস্থা দেখুন','Check my status')}</button>}</div>}
       {phase==='status'&&<div className="nx-guide-status">{busy?<p>{t('সর্বশেষ তথ্য আনা হচ্ছে…','Checking your latest records…')}</p>:<>{checkedAt&&<small>{t('সর্বশেষ দেখা','Checked at')} {checkedAt}</small>}{!error&&checkedAt&&!records.length&&<p>{t('এই সেবায় আপনার কোনো রেকর্ড পাওয়া যায়নি।','No records found for this service.')}</p>}{records.slice(0,20).map((row,i)=><article key={`${row.reference}-${i}`}><strong>{row.reference||t('রেফারেন্স দেওয়া নেই','No reference supplied')}</strong><span>{row.status||t('অবস্থা দেওয়া নেই','Status not supplied')}</span>{row.date&&<small>{String(row.date).slice(0,10)}</small>}</article>)}{records.length>20&&<p>{t('আরও রেকর্ড সেবার পাতায় দেখুন।','See the service page for the remaining records.')}</p>}<button type="button" onClick={()=>loadStatus()}>{t('আবার দেখুন','Refresh status')}</button><button type="button" onClick={()=>{openService();onClose?.();}}>{t('বিস্তারিত দেখুন','View full details')}</button></>}</div>}
     </div>
-    {!['prepare','review','forms','status'].includes(phase)&&!(inField&&(controlKinds.has(current.type)||current.el.disabled))&&<form className='nx-guide-composer' onSubmit={answer}>
+    {!['prepare','forms','status'].includes(phase)&&!(inField&&(controlKinds.has(current.type)||current.el.disabled))&&<form className='nx-guide-composer' onSubmit={answer}>
       <label htmlFor='citizen-guide-answer' className='nx-visually-hidden'>{inField?current.label:'Message to assistant'}</label>
       <textarea id='citizen-guide-answer' rows={2} maxLength={1000} value={text} onChange={event=>{setText(event.target.value);setError('');}}
-        placeholder={inField&&current.el.tagName==='SELECT'?t('বিকল্পের নাম বা নম্বর বলুন অথবা লিখুন…','Say or type an option name or number…'):inField&&current.type==='number'?t('যেমন ১০ বা দশ…','For example, 10 or ten…'):t('বলুন অথবা লিখুন…','Speak or type…')}
+        placeholder={phase==='review'?t('“জমা দাও” বলুন অথবা লিখুন…','Say or type “submit”…'):inField&&current.el.tagName==='SELECT'?t('বিকল্পের নাম বা নম্বর বলুন অথবা লিখুন…','Say or type an option name or number…'):inField&&current.type==='number'?t('যেমন ১০ বা দশ…','For example, 10 or ten…'):t('বলুন অথবা লিখুন…','Speak or type…')}
         lang={language==='bn'?'bn-BD':'en'} />
       {inField && current.options.length>0 && text && <small className="nx-guide-hint">{t('আপনার উত্তর','Your answer')}: {current.options.find(o=>o.value===text)?.label||text}</small>}<div className="nx-guide-compose-actions"><button type="button" className={`nx-guide-mic ${voice.state==='listening'?'is-listening':''}`} onClick={()=>{speech.stop();setError('');voice.toggle();}} disabled={busy||['permission','transcribing'].includes(voice.state)} aria-label={voice.state==='listening'?'Stop recording':'Speak your answer'}><i className={`fas fa-${voice.state==='listening'?'stop':'microphone'}`} aria-hidden="true" /></button><small>{t('শোনা কথা যাচাই করে পাঠান','Review your words before sending')}</small><button type="submit" className="nx-guide-primary" disabled={!text.trim()||busy||voice.state!=='idle'}>{t('পাঠান','Send')}<i className="fas fa-arrow-up" aria-hidden="true" /></button></div>
     </form>}
-    <footer className="nx-guide-footer"><span>{t('তথ্য নিজে থেকে জমা দেওয়া হয় না','Never submits without your review')}</span><button type="button" className="nx-guide-quiet" onClick={()=>{clearActivity();formRef.current=null;setSelected(null);setPhase('choose');setFields([]);setMessage({bn:'সহায়তা বন্ধ। ফর্মের তথ্য অপরিবর্তিত আছে।',en:'Guidance cancelled. Existing form values are unchanged.'});}}>{t('বাতিল','Cancel guidance')}</button></footer>
+    <footer className="nx-guide-footer"><span>{t('চূড়ান্ত যাচাইয়ের পর আপনার নির্দেশেই জমা হয়','Submits only on your command after final review')}</span><button type="button" className="nx-guide-quiet" onClick={()=>{clearActivity();formRef.current=null;setSelected(null);setPhase('choose');setFields([]);setMessage({bn:'সহায়তা বন্ধ। ফর্মের তথ্য অপরিবর্তিত আছে।',en:'Guidance cancelled. Existing form values are unchanged.'});}}>{t('বাতিল','Cancel guidance')}</button></footer>
   </section>;
 }

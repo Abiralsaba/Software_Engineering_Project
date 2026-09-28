@@ -83,4 +83,36 @@ describe('shared ministry assistant choices', () => {
     fireEvent.click(screen.getByRole('button', { name: /Send/i }));
     await waitFor(() => expect(form.elements.land_area_acres.value).toBe('10'));
   });
+  it('submits the original validated form when the user says a submit command at final review', async () => {
+    const submitted = vi.fn(event => event.preventDefault());
+    const closed = vi.fn();
+    const form = document.createElement('form');
+    form.innerHTML = '<label>Farmer name<input name="farmer_name" required value="Abir"></label><button type="submit">Submit crop report</button>';
+    form.addEventListener('submit', submitted);
+    form.getClientRects = () => [{}];
+    const main = document.createElement('main'); main.append(form); document.body.append(main);
+    render(<MemoryRouter><CitizenGuide ministry='agriculture' activeSection='crop-reports' onSectionChange={vi.fn()} onClose={closed} /></MemoryRouter>);
+    fireEvent.click(screen.getByRole('button', { name: /Help with this service/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Guide me step by step/i }));
+    await screen.findByText(/Say “submit” when it is correct/i);
+    act(() => voiceHandlers.onTranscript('জমা দাও'));
+    expect(submitted).toHaveBeenCalledTimes(1);
+    expect(closed).toHaveBeenCalledTimes(1);
+  });
+  it('does not submit an invalid reviewed form and returns to the missing field', async () => {
+    const submitted = vi.fn(event => event.preventDefault());
+    const form = document.createElement('form');
+    form.innerHTML = '<label>Farmer name<input name="farmer_name" required></label><button type="submit">Submit crop report</button>';
+    form.addEventListener('submit', submitted);
+    form.getClientRects = () => [{}];
+    const main = document.createElement('main'); main.append(form); document.body.append(main);
+    render(<MemoryRouter><CitizenGuide ministry='agriculture' activeSection='crop-reports' onSectionChange={vi.fn()} /></MemoryRouter>);
+    fireEvent.click(screen.getByRole('button', { name: /Help with this service/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Guide me step by step/i }));
+    fireEvent.click(await screen.findByRole('button', { name: /Review details/i }));
+    await screen.findByText(/Say “submit” when it is correct/i);
+    act(() => voiceHandlers.onTranscript('submit'));
+    expect(submitted).not.toHaveBeenCalled();
+    expect(screen.getByRole('alert')).toBeTruthy();
+  });
 });
