@@ -59,8 +59,9 @@ router.use(safeError);
 
 const adminRouter = express.Router();
 adminRouter.use(require('../middleware/adminMiddleware'));
+adminRouter.use(require('../admin/accessControl').requireDomain('nid', { allowDivision: false }));
 adminRouter.use(async (req, res, next) => {
-  // Repository has no department-scoped admin roles. Recheck its approved-admin rule in DB.
+  // Keep the account-status check close to this sensitive document workflow.
   const [[admin]] = await db.query("SELECT id FROM admins WHERE id=? AND status='approved'", [req.admin.id]);
   if (!admin) throw fail(403, 'APPROVED_ADMIN_REQUIRED');
   res.set('Cache-Control', 'no-store'); next();

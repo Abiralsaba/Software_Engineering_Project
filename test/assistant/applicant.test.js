@@ -35,17 +35,37 @@ test('Applicant registration, isolation, draft, confirmation and assistant integ
   try {
     const suffix = Date.now();
     let alice, bob;
-    await t.test('No-NID registration creates separate accounts, and login returns an applicant audience', async () => {
+    const [[location]] = await db.query('SELECT d.division_id,d.id district_id,u.id upazila_id FROM upazilas u JOIN districts d ON d.id=u.district_id ORDER BY u.id LIMIT 1');
+    const completeProfile = {
+      name_bn:'সিন্থেটিক আবেদনকারী',name_en:'Synthetic Alice',father_name_bn:'সিন্থেটিক পিতা',mother_name_bn:'সিন্থেটিক মাতা',
+      date_of_birth:'1990-01-01',birth_registration_number:'19901234567890123',birth_place:'Dhaka',gender:'Other',marital_status:'Unmarried',
+      education:'Graduate',occupation:'Service',mobile:'01700000000',present_division_id:location.division_id,present_district_id:location.district_id,
+      present_upazila_id:location.upazila_id,present_address:'DEMO DATA — present address',present_post_office:'Demo Post Office',present_post_code:'1207',
+      permanent_division_id:location.division_id,permanent_district_id:location.district_id,permanent_upazila_id:location.upazila_id,
+      permanent_address:'DEMO DATA — permanent address',permanent_post_office:'Demo Post Office',permanent_post_code:'1207',disability:'None',blood_group:'Unknown'
+    };
+    await t.test('No-NID registration atomically creates a separate account and reusable draft', async () => {
+      const divisions = await request('/api/applicants/locations/divisions');
+      assert.equal(divisions.status,200); assert.ok(divisions.data.length >= 8);
       for (const name of ['Alice','Bob']) {
         const email = `voice-${name}-${suffix}@nationx.test`;
-        const r = await request('/api/applicants/register', null, 'POST', { username: `Synthetic ${name}`, email, password: 'Synthetic-demo-2026!', mobile: '01700000000' });
+        const body = { username: `Synthetic ${name}`, email, password: 'Synthetic-demo-2026!', mobile: '01700000000', ...(name === 'Alice' ? { profile: completeProfile } : {}) };
+        const r = await request('/api/applicants/register', null, 'POST', body);
         assert.equal(r.status, 201, JSON.stringify(r.data)); ids.push(r.data.user.id);
         const decoded = jwt.decode(r.data.token); assert.equal(decoded.aud, 'nationx-nid-applicant'); assert.equal(decoded.id, undefined); assert.equal(decoded.nid, undefined);
         const [[count]] = await db.query('SELECT COUNT(*) n FROM reg_info WHERE email=?', [email]); assert.equal(count.n,0);
         const login = await request('/api/applicants/login', null,'POST',{email,password:'Synthetic-demo-2026!'}); assert.equal(login.status,200);
         assert.equal((await request('/api/applicants/verify-contact',r.data.token,'POST',{code:r.data.demoVerificationCode})).status,200);
-        if (name === 'Alice') alice = r.data; else bob = r.data;
+        if (name === 'Alice') { alice = r.data; assert.equal(r.data.profileSaved,true); assert.ok(r.data.applicationId); }
+        else bob = r.data;
       }
+      const invalidEmail = `invalid-location-${suffix}@nationx.test`;
+      const invalid = await request('/api/applicants/register', null, 'POST', {
+        username:'Synthetic Invalid',email:invalidEmail,password:'Synthetic-demo-2026!',mobile:'01700000000',
+        profile:{...completeProfile,name_en:'Synthetic Invalid',present_upazila_id:999999999}
+      });
+      assert.equal(invalid.status,400); assert.equal(invalid.data.error,'INVALID_LOCATION');
+      const [[rolledBack]] = await db.query('SELECT COUNT(*) n FROM nid_applicant_accounts WHERE email=?',[invalidEmail]); assert.equal(rolledBack.n,0);
     });
     await t.test('Existing citizen registration still requires NID; existing citizen retains NID API access', async () => {
       const missing = await request('/api/auth/register',null,'POST',{username:'Synthetic no NID',email:`missing-${suffix}@nationx.test`,password:'Synthetic-demo-2026!',mobile:'01700000000',dob:'1990-01-01',gender:'Male'});

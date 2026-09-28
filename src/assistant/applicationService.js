@@ -53,14 +53,23 @@ async function patch(applicantId, id, version, fields) {
     await c.query('UPDATE nid_first_time_applications SET fields_json=? WHERE id=?', [JSON.stringify({ ...row.fields_json, ...values }), id]);
   });
 }
-function ready(row) {
+async function ready(c, row) {
   if (row.missing_fields.length || row.missing_documents.length) throw fail(422, 'INCOMPLETE_APPLICATION', 'Complete every required field and document before reviewing.');
+  for (const prefix of ['present', 'permanent']) {
+    const [[location]] = await c.query(
+      `SELECT u.id FROM upazilas u
+       JOIN districts d ON d.id=u.district_id
+       WHERE u.id=? AND d.id=? AND d.division_id=? LIMIT 1`,
+      [row.fields[`${prefix}_upazila_id`], row.fields[`${prefix}_district_id`], row.fields[`${prefix}_division_id`]]
+    );
+    if (!location) throw fail(422, 'INVALID_LOCATION', `Review the ${prefix} division, district, and upazila.`);
+  }
 }
 async function review(applicantId, id, version) {
   return transaction(async c => {
     const row = await owned(c, applicantId, id, true); checkVersion(row, version);
     if (!editable(row.status)) throw fail(409, 'APPLICATION_NOT_EDITABLE');
-    const application = await view(c, row); ready(application);
+    const application = await view(c, row); await ready(c, application);
     const token = randomBytes(32).toString('hex');
     await c.query('INSERT INTO assistant_confirmations (id,application_id,draft_version,token_hash,expires_at) VALUES (?,?,?,?,DATE_ADD(NOW(),INTERVAL 10 MINUTE))', [randomUUID(), id, version, hash(token)]);
     return { application, confirmation_token: token, notice: 'Review all details. Submission does not issue an NID or unlock citizen services.' };
@@ -77,7 +86,7 @@ async function submit(applicantId, id, version, token) {
     if (!confirmation.valid || !editable(row.status)) throw fail(409, 'CONFIRMATION_EXPIRED_OR_USED');
     const [[account]] = await c.query('SELECT active,contact_verified_at FROM nid_applicant_accounts WHERE id=? FOR UPDATE', [applicantId]);
     if (!account.active || !account.contact_verified_at) throw fail(403, 'CONTACT_CHECK_REQUIRED');
-    const application = await view(c, row); ready(application);
+    const application = await view(c, row); await ready(c, application);
     const tracking = row.tracking_number || `NX-DEMO-${randomUUID().toUpperCase()}`;
     await c.query("UPDATE nid_first_time_applications SET status='SUBMITTED',tracking_number=?,submitted_at=NOW() WHERE id=?", [tracking, id]);
     await c.query('UPDATE assistant_confirmations SET consumed_at=NOW() WHERE id=?', [confirmation.id]);
