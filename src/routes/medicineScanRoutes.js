@@ -11,7 +11,7 @@ const { MAX_IMAGE_BYTES, processImage } = require('../services/medicineIdentifie
 const { CONSENT_TEXT, configuredProvider } = require('../services/medicineIdentifier/provider');
 const catalogue = require('../services/medicineIdentifier/catalogue');
 const { requiredQuantity } = require('../services/medicineIdentifier/savings');
-const { GeminiAlternativeDiscovery, discoverLowerCost } = require('../services/medicineIdentifier/alternativeDiscovery');
+const { GeminiAlternativeDiscovery, discoverLowerCost, reviewedMatchConflicts } = require('../services/medicineIdentifier/alternativeDiscovery');
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: MAX_IMAGE_BYTES, files: 3, fields: 10 } });
 const scanIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -63,6 +63,17 @@ function sendError(error, res) {
     }
     const message = status >= 500 && !error.code ? 'Medicine scan request failed.' : error.message;
     res.status(status).json({ error: message, code: error.code || undefined });
+}
+
+async function requireMatchingCatalogueMedicine(db, medicineId, reviewed) {
+    const medicine = await catalogue.medicineById(medicineId, db);
+    if (!medicine) throw Object.assign(new Error('The confirmed catalogue medicine is no longer available. Review the match again.'), { status: 409, code: 'CONFIRMED_MEDICINE_UNAVAILABLE' });
+    const conflicts = reviewedMatchConflicts(reviewed, medicine.detail);
+    if (conflicts.length) {
+        throw Object.assign(new Error(`Reviewed ${conflicts.join(' and ')} information does not match the confirmed catalogue medicine. Review or change the match before comparing prices.`),
+            { status: 409, code: 'CONFIRMED_MEDICINE_MISMATCH' });
+    }
+    return medicine;
 }
 
 function uploadImages(req, res, next) {
@@ -216,6 +227,7 @@ function createMedicineScanRouter(options = {}) {
             const extracted = json(rows[0].structured_extraction, {});
             const corrections = json(rows[0].user_corrections, {});
             const combined = { ...extracted, ...corrections };
+            await requireMatchingCatalogueMedicine(db, rows[0].medicine_id, combined);
             const quantity = req.query.quantity || requiredQuantity({
                 doseAmount: combined.dose_amount, frequencyPerDay: combined.frequency_per_day,
                 durationDays: combined.duration_days, totalQuantity: combined.total_quantity,
@@ -255,6 +267,7 @@ function createMedicineScanRouter(options = {}) {
                 return res.status(409).json({ error: 'Confirm the catalogue medicine before searching for lower-cost options.' });
             }
             const combined = { ...json(rows[0].structured_extraction, {}), ...json(rows[0].user_corrections, {}) };
+            await requireMatchingCatalogueMedicine(db, rows[0].medicine_id, combined);
             const quantity = requiredQuantity({
                 doseAmount: combined.dose_amount, frequencyPerDay: combined.frequency_per_day,
                 durationDays: combined.duration_days, totalQuantity: combined.total_quantity,

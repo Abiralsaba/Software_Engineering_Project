@@ -158,7 +158,7 @@ describe('Medicine Identifier React workflow', () => {
     expect(screen.getAllByText(/Professional confirmation is required/).length).toBeGreaterThan(0);
   });
 
-  it('labels Gemini fallback names as unverified and never invents prices', async () => {
+  it('presents Gemini fallback names professionally and never invents prices', async () => {
     const confirmed = { ...scan, status: 'CONFIRMED', items: [{ ...scan.items[0], confirmation: { selection_type: 'CATALOGUE', medicine_id: medicine.medicine_id } }] };
     apiRequest.mockImplementation((path, options) => {
       if (path === '/api/medicine-scans' && options?.method === 'POST') return Promise.resolve(confirmed);
@@ -172,11 +172,30 @@ describe('Medicine Identifier React workflow', () => {
     await userEvent.click(screen.getByRole('checkbox'));
     await userEvent.click(screen.getByRole('button', { name: 'Analyze visible text' }));
     await userEvent.click(await screen.findByRole('button', { name: 'Show low-cost options for A-Pak' }));
-    const leads = await screen.findByRole('region', { name: 'Unverified Gemini search leads' });
+    const leads = await screen.findByRole('region', { name: 'AI-assisted medicine search results' });
     expect(within(leads).getByText('Possible brand')).toBeInTheDocument();
-    expect(within(leads).getByText(/Price, availability, registration and interchangeability are unknown/)).toBeInTheDocument();
+    expect(within(leads).getByText(/has not verified their current price, availability, registration or suitability/)).toBeInTheDocument();
     expect(screen.getByText(/No lower-cost product with a comparable recorded specification/)).toBeInTheDocument();
     expect(within(leads).queryByText(/Save ৳/)).not.toBeInTheDocument();
+  });
+
+  it('does not display a raw HTML 404 when the API server has not been restarted', async () => {
+    const confirmed = { ...scan, status: 'CONFIRMED', items: [{ ...scan.items[0], confirmation: { selection_type: 'CATALOGUE', medicine_id: medicine.medicine_id } }] };
+    const html = '<!DOCTYPE html><html><body>Cannot GET /api/medicine-scans/example/low-cost-options</body></html>';
+    apiRequest.mockImplementation((path, options) => {
+      if (path === '/api/medicine-scans' && options?.method === 'POST') return Promise.resolve(confirmed);
+      if (path === `/api/medicines/${medicine.medicine_id}`) return Promise.resolve({ ...medicine, packages: [] });
+      if (path.endsWith('/low-cost-options')) return Promise.reject(Object.assign(new Error(html), { status: 404, data: { error: html } }));
+      return baseResponse(path);
+    });
+    renderPage();
+    await screen.findByRole('heading', { name: 'Medicine Identifier' });
+    await userEvent.upload(screen.getByLabelText('Choose medicine images'), new File(['synthetic'], 'rx.png', { type: 'image/png' }));
+    await userEvent.click(screen.getByRole('checkbox'));
+    await userEvent.click(screen.getByRole('button', { name: 'Analyze visible text' }));
+    await userEvent.click(await screen.findByRole('button', { name: 'Show low-cost options for A-Pak' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent(/Restart the NationX API/);
+    expect(screen.queryByText(/<!DOCTYPE html>/)).not.toBeInTheDocument();
   });
 
   it('supports manual search, none/manual confirmation controls, and keyboard-accessible history deletion', async () => {

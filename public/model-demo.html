@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Model Demo | NationX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; min-height: 100vh; font-family: Poppins, sans-serif; color: #eafff4;
+            background: radial-gradient(circle at top right, #12483d, #071b17 55%, #03110e); }
+        .wrap { width: min(920px, 92%); margin: 0 auto; padding: 40px 0; }
+        .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .brand { font-size: 22px; font-weight: 700; } .brand span { color: #32d583; }
+        .back { color: #b8d8cc; text-decoration: none; }
+        .card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14);
+            border-radius: 22px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+        h1 { margin: 0 0 8px; font-size: clamp(26px, 5vw, 42px); }
+        .sub { margin: 0 0 22px; color: #afcec2; }
+        .status { display: inline-flex; align-items: center; gap: 9px; background: rgba(50,213,131,.12);
+            border: 1px solid rgba(50,213,131,.35); color: #70efa9; border-radius: 999px; padding: 8px 13px; font-size: 13px; }
+        .dot { width: 9px; height: 9px; border-radius: 50%; background: #32d583; box-shadow: 0 0 12px #32d583; }
+        .grid { display: grid; grid-template-columns: 1.4fr .8fr; gap: 20px; margin-top: 24px; }
+        .drop { position: relative; min-height: 360px; border: 2px dashed rgba(255,255,255,.22); border-radius: 16px;
+            display: grid; place-items: center; overflow: hidden; background: rgba(0,0,0,.18); cursor: pointer; }
+        .drop:hover { border-color: #32d583; } .drop input { display: none; }
+        .prompt { text-align: center; color: #afcec2; padding: 20px; } .prompt i { font-size: 54px; color: #32d583; margin-bottom: 14px; }
+        #preview { width: 100%; height: 360px; object-fit: contain; display: none; }
+        .box { display: none; position: absolute; left: 18%; top: 20%; width: 54%; height: 53%; border: 3px solid #32d583; }
+        .box span { position: absolute; top: -30px; left: -3px; background: #32d583; color: #042018; padding: 4px 9px; font-size: 12px; font-weight: 700; }
+        .panel { background: rgba(0,0,0,.18); border-radius: 16px; padding: 20px; }
+        .panel h3 { margin-top: 0; } .row { color: #afcec2; font-size: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+        .row strong { display: block; color: white; margin-top: 4px; }
+        button { width: 100%; border: 0; border-radius: 12px; padding: 14px; margin-top: 18px; font: inherit; font-weight: 700;
+            background: #32d583; color: #062219; cursor: pointer; } button:disabled { opacity: .45; cursor: not-allowed; }
+        .note { color: #89a99d; font-size: 12px; margin-top: 14px; text-align: center; }
+        @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } .drop, #preview { min-height: 280px; height: 280px; } }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <div class="top"><div class="brand">Nation<span>X</span> AI</div><a class="back" href="dashboard.html"><i class="fas fa-arrow-left"></i> Dashboard</a></div>
+        <section class="card">
+            <div class="status"><span class="dot"></span> Demo model ready · best.pt</div>
+            <h1>AI Object Detection Demo</h1>
+            <p class="sub">Upload an image to demonstrate the model interface.</p>
+            <div class="grid">
+                <label class="drop" for="imageInput">
+                    <input id="imageInput" type="file" accept="image/*">
+                    <div class="prompt" id="prompt"><i class="fas fa-cloud-arrow-up"></i><br><strong>Choose an image</strong><br>JPG, PNG or WEBP</div>
+                    <img id="preview" alt="Uploaded preview">
+                    <div class="box" id="resultBox"><span>Object 94%</span></div>
+                </label>
+                <aside class="panel">
+                    <h3>Model information</h3>
+                    <div class="row">Weights<strong>best.pt</strong></div>
+                    <div class="row">Framework<strong>YOLO / PyTorch</strong></div>
+                    <div class="row">Mode<strong>Presentation demo</strong></div>
+                    <div class="row">Result<strong id="result">Waiting for image</strong></div>
+                    <button id="detectBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Run Demo Detection</button>
+                    <p class="note">UI demonstration only — no model or server connection is used.</p>
+                </aside>
+            </div>
+        </section>
+    </main>
+    <script>
+        const input = document.getElementById('imageInput');
+        const preview = document.getElementById('preview');
+        const prompt = document.getElementById('prompt');
+        const button = document.getElementById('detectBtn');
+        const result = document.getElementById('result');
+        const box = document.getElementById('resultBox');
+
+        input.addEventListener('change', () => {
+            const file = input.files[0];
+            if (!file) return;
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+            prompt.style.display = 'none';
+            box.style.display = 'none';
+            result.textContent = 'Image ready';
+            button.disabled = false;
+        });
+
+        button.addEventListener('click', () => {
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Detecting...';
+            result.textContent = 'Processing';
+            setTimeout(() => {
+                box.style.display = 'block';
+                result.textContent = '1 object detected (94%)';
+                button.innerHTML = '<i class="fas fa-check"></i> Detection Complete';
+            }, 800);
+        });
+    </script>
+</body>
+</html>

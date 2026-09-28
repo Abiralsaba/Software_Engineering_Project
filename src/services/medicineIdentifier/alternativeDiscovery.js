@@ -3,6 +3,7 @@
 const Decimal = require('decimal.js');
 const { z } = require('zod');
 const { geminiConfig, createGeminiClient } = require('../geminiClient');
+const { normalizeText, normalizeStrength } = require('./normalization');
 
 const discoverySchema = z.object({
     brands: z.array(z.string().trim().min(2).max(120)).max(5)
@@ -24,6 +25,19 @@ function lowerCostMatches(comparison) {
         return candidate !== undefined && candidate !== null && new Decimal(candidate).lt(originalPrice);
     });
     return { alternatives, basis: quantityKnown ? 'purchase_cost' : 'unit_price' };
+}
+
+function reviewedMatchConflicts(reviewed, medicine) {
+    const conflicts = [];
+    if (reviewed.brand_name_candidate && medicine.brand_name &&
+        normalizeText(reviewed.brand_name_candidate) !== normalizeText(medicine.brand_name)) {
+        conflicts.push('brand');
+    }
+    const strength = value => normalizeStrength(value).replace(/\s+/g, '');
+    if (reviewed.strength_text && medicine.strength && strength(reviewed.strength_text) !== strength(medicine.strength)) {
+        conflicts.push('strength');
+    }
+    return conflicts;
 }
 
 class GeminiAlternativeDiscovery {
@@ -76,12 +90,14 @@ async function discoverLowerCost(medicineId, quantity, { catalogue, db, provider
         alternatives, limitation: comparison.limitation || null, warnings: comparison.warnings,
         gemini: { status: 'not_used', brands: [] }
     };
-    // A model is never asked to work around an unsafe or unsupported medicine.
-    if (alternatives.length || result.limitation || !basis) return result;
-    const original = await catalogue.medicineById(medicineId, db, { alternativesOnly: true });
+    if (alternatives.length) return result;
+    // Gemini may provide names to investigate when the verified catalogue has
+    // no usable comparison. It never supplies a price or asserts equivalence.
+    const original = await catalogue.medicineById(medicineId, db);
     if (!original?.detail?.ingredients?.length) return result;
     result.gemini = await provider.find(original);
+    if (result.gemini.status !== 'not_used') result.source = 'catalogue_then_gemini';
     return result;
 }
 
-module.exports = { GeminiAlternativeDiscovery, discoverLowerCost, lowerCostMatches };
+module.exports = { GeminiAlternativeDiscovery, discoverLowerCost, lowerCostMatches, reviewedMatchConflicts };

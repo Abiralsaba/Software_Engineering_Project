@@ -235,9 +235,9 @@ function unitComparison(packages) {
 async function alternatives(medicineId, quantity, connection = db) {
     const warnings = ['Dataset-derived estimated price', 'Current pharmacy price may differ', 'Professional confirmation is required'];
     const original = await medicineById(medicineId, connection, { alternativesOnly: true });
-    if (!original || !comparisonForm(original.row.dosage_form_normalized)) return { original: original?.detail || null, alternatives: [], limitation: 'This medicine is outside the supported structured comparison set.', warnings };
-    if (/AMBIGUOUS|INCOMPLETE|PARSE_FAILED/i.test(original.row.reason_codes || '')) return { original: original.detail, alternatives: [], limitation: 'Incomplete or ambiguous ingredient mapping is excluded.', warnings };
-    if (original.row.release_type && !/^(standard|immediate)$/i.test(original.row.release_type)) return { original: original.detail, alternatives: [], limitation: 'Modified-release medicines are excluded.', warnings };
+    if (!original || !comparisonForm(original.row.dosage_form_normalized)) return { original: original?.detail || null, alternatives: [], limitation: 'A verified catalogue price comparison is not available for this medicine yet.', warnings };
+    if (/AMBIGUOUS|INCOMPLETE|PARSE_FAILED/i.test(original.row.reason_codes || '')) return { original: original.detail, alternatives: [], limitation: 'The medicine details need professional confirmation before catalogue prices can be compared.', warnings };
+    if (original.row.release_type && !/^(standard|immediate)$/i.test(original.row.release_type)) return { original: original.detail, alternatives: [], limitation: 'A verified catalogue price comparison is not available for this extended-release medicine yet.', warnings };
     const [rows] = await connection.query(`${PUBLIC_SELECT}
         WHERE m.medicine_id<>? AND m.tier='A' AND m.intended_use='human' AND m.structured_comparison_eligible=1
           AND m.medicine_type=? AND m.generic_signature=? AND m.strength_signature=?

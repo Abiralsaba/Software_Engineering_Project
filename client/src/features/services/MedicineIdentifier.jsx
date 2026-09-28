@@ -17,6 +17,14 @@ function price(value) {
   return Number.isFinite(amount) ? `৳${amount.toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : 'Price unavailable';
 }
 
+function lowCostError(error) {
+  const serverMessage = String(error?.data?.error || error?.message || '');
+  if (/<\s*!doctype|<\s*html|cannot get \/api\/medicine-scans\//i.test(serverMessage)) {
+    return 'Low-cost search is not available on the running server yet. Restart the NationX API, then try again.';
+  }
+  return error?.message || 'Low-cost search is temporarily unavailable. Please try again.';
+}
+
 function medicineTitle(item, index) {
   const extracted = item.structured_extraction || {};
   return extracted.brand_name_candidate || item.confirmation?.manual_label || item.raw_visible_text || `Medicine ${index + 1}`;
@@ -130,7 +138,7 @@ function ScanItem({ scan, item, onUpdated, requestSavings, onRequestSavings }) {
     setComparing(true); setError(''); setAlternatives(null);
     apiRequest(`/api/medicine-scans/${scan.scan_id}/items/${item.item_id}/low-cost-options`).then(result => {
       if (active) setAlternatives(result);
-    }).catch(requestError => { if (active) setError(requestError.message); })
+    }).catch(requestError => { if (active) setError(lowCostError(requestError)); })
       .finally(() => { if (active) setComparing(false); });
     return () => { active = false; };
   }, [confirmedId, requestSavings, item.item_id, scan.scan_id]);
@@ -160,7 +168,7 @@ function ScanItem({ scan, item, onUpdated, requestSavings, onRequestSavings }) {
   async function loadAlternatives() {
     setComparing(true); setError('');
     try { setAlternatives(await apiRequest(`/api/medicine-scans/${scan.scan_id}/items/${item.item_id}/low-cost-options`)); }
-    catch (requestError) { setError(requestError.message); }
+    catch (requestError) { setError(lowCostError(requestError)); }
     finally { setComparing(false); }
   }
 
@@ -180,14 +188,14 @@ function ScanItem({ scan, item, onUpdated, requestSavings, onRequestSavings }) {
     {confirmedId ? <section className="medicine-comparison" aria-label="Medicine price comparison">
       <div className="medicine-comparison-heading"><div><span className="medicine-kicker">Confirmed catalogue match</span><h3>{(confirmedDetail || confirmedCandidate)?.brand_name || 'Selected medicine'}</h3><p>{(confirmedDetail || confirmedCandidate)?.generic_name} · {(confirmedDetail || confirmedCandidate)?.strength} · {(confirmedDetail || confirmedCandidate)?.dosage_form}</p></div><span className="medicine-confirmed-mark"><i className="fas fa-check" aria-hidden="true" /> Confirmed by you</span></div>
       {!requestSavings && <button className="btn-secondary react-auto-width" type="button" onClick={onRequestSavings}>Find lower-cost options</button>}
-      {alternatives && <div className="medicine-price-summary">
+      {alternatives && (alternatives.original_purchase_estimate || alternatives.original_package_comparison) && <div className="medicine-price-summary">
         <div><small>Estimated cost for recorded quantity</small><strong>{alternatives?.original_purchase_estimate ? price(alternatives.original_purchase_estimate.estimated_cost) : 'Unavailable'}</strong>{alternatives?.original_purchase_estimate?.required_quantity && <span>For {alternatives.original_purchase_estimate.required_quantity} units</span>}</div>
         <div><small>Lowest recorded unit price</small><strong>{alternatives?.original_package_comparison ? price(alternatives.original_package_comparison.estimated_per_unit) : 'Unavailable'}</strong><span>Dataset estimate per unit</span></div>
       </div>}
       {confirmedDetail?.packages?.length > 0 && <details className="medicine-price-details"><summary>See recorded package prices</summary><MedicineFacts medicine={confirmedDetail} packages={confirmedDetail.packages} /></details>}
       {comparing && <p className="medicine-live-status" role="status"><span className="medicine-spinner" aria-hidden="true" /> Checking catalogue prices first…</p>}
-      {alternatives && <div className="medicine-alternatives"><div className="medicine-alternatives-heading"><div><h3>Lower-cost catalogue options</h3><p>{alternatives.basis === 'purchase_cost' ? 'Compared for the recorded quantity.' : 'Compared by recorded unit price; total cost is not known.'} Same recorded ingredient set, strength, form and release type.</p></div><span>{alternatives.alternatives.length} found</span></div>
-        {alternatives.limitation && <p className="medicine-warning">{alternatives.limitation}</p>}
+      {alternatives && <div className="medicine-alternatives"><div className="medicine-alternatives-heading"><div><h3>{alternatives.alternatives.length ? 'Lower-cost catalogue options' : 'Catalogue price check'}</h3><p>{alternatives.alternatives.length ? `${alternatives.basis === 'purchase_cost' ? 'Compared for the recorded quantity.' : 'Compared by recorded unit price; total cost is not known.'} Same recorded ingredient set, strength, form and release type.` : 'NationX checked the recorded medicine catalogue before using the additional search.'}</p></div><span>{alternatives.alternatives.length ? `${alternatives.alternatives.length} found` : 'Checked'}</span></div>
+        {alternatives.limitation && <p className="medicine-catalogue-notice"><i className="fas fa-circle-info" aria-hidden="true" /><span>{alternatives.limitation} {alternatives.gemini?.brands?.length ? 'Possible brand names from the additional search are listed below for professional verification.' : ''}</span></p>}
         <div className="medicine-alternative-grid">{alternatives.alternatives.map(option => <article key={option.medicine.medicine_id}>
           <div className="medicine-alternative-top"><div><h4>{option.medicine.brand_name}</h4><p>{option.medicine.manufacturer}</p></div>{Number(option.estimated_saving) > 0 && <span className="medicine-saving">Save {price(option.estimated_saving)}</span>}</div>
           <p className="medicine-alternative-spec">{option.medicine.generic_name} · {option.medicine.strength} · {option.medicine.dosage_form}</p>
@@ -196,9 +204,9 @@ function ScanItem({ scan, item, onUpdated, requestSavings, onRequestSavings }) {
         </article>)}</div>
         {!alternatives.alternatives.length && !alternatives.limitation && <p className="react-empty-state">No lower-cost product with a comparable recorded specification and price was found in the catalogue.</p>}
       </div>}
-      {alternatives?.gemini?.brands?.length > 0 && <section className="medicine-gemini-leads" aria-label="Unverified Gemini search leads"><span className="medicine-kicker">Gemini fallback · unverified</span><h3>Names to ask a pharmacist about</h3><p>These names are not verified in our catalogue. Price, availability, registration and interchangeability are unknown; they are not confirmed lower-cost alternatives.</p><ul>{alternatives.gemini.brands.map(name => <li key={name}>{name}</li>)}</ul></section>}
-      {alternatives?.gemini?.status === 'no_leads' && <p className="medicine-savings-guidance">Gemini did not return a reliable name to investigate. No outside alternative has been assumed.</p>}
-      {alternatives?.gemini?.status === 'unavailable' && !alternatives.limitation && <p className="medicine-savings-guidance">Gemini search is unavailable. No outside product or price has been assumed.</p>}
+      {alternatives?.gemini?.brands?.length > 0 && <section className="medicine-gemini-leads" aria-label="AI-assisted medicine search results"><span className="medicine-kicker">Additional search · Gemini</span><h3>Possible brands to verify</h3><p>These names match the recorded medicine description, but NationX has not verified their current price, availability, registration or suitability. Ask a pharmacist before choosing one.</p><ul>{alternatives.gemini.brands.map(name => <li key={name}>{name}</li>)}</ul></section>}
+      {alternatives?.gemini?.status === 'no_leads' && <p className="medicine-savings-guidance">No additional brand names were found for this exact medicine description. A pharmacist may be able to check current local availability.</p>}
+      {alternatives?.gemini?.status === 'unavailable' && <p className="medicine-savings-guidance">The additional medicine search is temporarily unavailable. Please try again later or ask a pharmacist to check equivalent products and current prices.</p>}
       {error && <p className="medicine-error" role="alert">{error}</p>}
       <div className="medicine-actions">{requestSavings && <button className="btn-secondary" type="button" disabled={comparing} onClick={loadAlternatives}>Refresh low-cost search</button>}<button className="medicine-text-button" type="button" onClick={() => setReviewMode(value => !value)}>{reviewMode ? 'Hide review' : 'Review or change match'}</button></div>
     </section> : null}

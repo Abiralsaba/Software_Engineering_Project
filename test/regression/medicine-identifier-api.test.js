@@ -145,6 +145,16 @@ test('Medicine Identifier catalogue and scan API regression', async t => {
             assert.equal(lowerCost.status, 200);
             assert.equal(lowerCost.data.source, 'catalogue');
             assert.ok(lowerCost.data.alternatives.every(row => Number(row.estimated_saving) > 0));
+            const mismatched = await jsonRequest('POST', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/confirm`, aliceToken, {
+                selection_type: 'CATALOGUE', medicine_id: item.candidates[0].medicine.medicine_id,
+                corrections: { brand_name_candidate: 'Different medicine', strength_text: '665 mg' }
+            });
+            assert.equal(mismatched.status, 200);
+            for (const endpoint of ['alternatives', 'low-cost-options']) {
+                const blocked = await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/${endpoint}`, aliceToken);
+                assert.equal(blocked.status, 409);
+                assert.equal(blocked.data.code, 'CONFIRMED_MEDICINE_MISMATCH');
+            }
             assert.equal((await jsonRequest('GET', `/api/medicine-scans/${created.data.scan_id}/items/${item.item_id}/low-cost-options`, bobToken)).status, 403);
             assert.equal((await jsonRequest('DELETE', `/api/medicine-scans/${created.data.scan_id}`, bobToken)).status, 403);
             assert.equal((await jsonRequest('DELETE', `/api/medicine-scans/${created.data.scan_id}`, aliceToken)).status, 200);

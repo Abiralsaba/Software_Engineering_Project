@@ -2,7 +2,14 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { GeminiAlternativeDiscovery, discoverLowerCost, lowerCostMatches } = require('../../src/services/medicineIdentifier/alternativeDiscovery');
+const { GeminiAlternativeDiscovery, discoverLowerCost, lowerCostMatches, reviewedMatchConflicts } = require('../../src/services/medicineIdentifier/alternativeDiscovery');
+
+test('reviewed scan cannot be priced as a different catalogue brand or strength', () => {
+    const medicine = { brand_name: 'Napa Extra', strength: '500 mg+65 mg' };
+    assert.deepEqual(reviewedMatchConflicts({ brand_name_candidate: 'Napa Extend', strength_text: '665mg' }, medicine), ['brand', 'strength']);
+    assert.deepEqual(reviewedMatchConflicts({ brand_name_candidate: 'Napa Extra', strength_text: '500mg + 65mg' }, medicine), []);
+    assert.deepEqual(reviewedMatchConflicts({ brand_name_candidate: null, strength_text: null }, medicine), []);
+});
 
 const original = {
     row: { release_type: 'standard' },
@@ -41,22 +48,23 @@ test('unknown quantity uses unit price; Gemini is consulted only after no verifi
     assert.deepEqual(result.gemini.brands, ['Possible brand']);
 });
 
-test('unsupported or unpriced medicines do not trigger model-based substitution suggestions', async () => {
-    let called = false;
-    const provider = { find: async () => { called = true; return {}; } };
+test('unsupported or unpriced catalogue comparisons use Gemini only for unverified research leads', async () => {
+    let called = 0;
+    const provider = { find: async record => { called += 1; assert.equal(record.detail.brand_name, 'Original'); return { status: 'unverified_leads', brands: ['Research lead'] }; } };
     for (const result of [
         { ...comparison, alternatives: [], limitation: 'Modified-release medicines are excluded.' },
         { ...comparison, alternatives: [], original_package_comparison: null, original_purchase_estimate: null }
     ]) {
-        const output = await discoverLowerCost('original', null, { catalogue: { alternatives: async () => result }, db: {}, provider });
-        assert.equal(output.gemini.status, 'not_used');
+        const output = await discoverLowerCost('original', null, { catalogue: { alternatives: async () => result, medicineById: async () => original }, db: {}, provider });
+        assert.equal(output.source, 'catalogue_then_gemini');
+        assert.deepEqual(output.gemini.brands, ['Research lead']);
     }
     const missingIngredients = await discoverLowerCost('original', null, {
         catalogue: { alternatives: async () => ({ ...comparison, alternatives: [] }), medicineById: async () => ({ ...original, detail: { ...original.detail, ingredients: [] } }) },
         db: {}, provider
     });
     assert.equal(missingIngredients.gemini.status, 'not_used');
-    assert.equal(called, false);
+    assert.equal(called, 2);
 });
 
 test('Gemini discovery sends only catalogue specification, never prices or patient data, and validates output', async () => {
