@@ -11,7 +11,7 @@ const { MAX_IMAGE_BYTES, processImage } = require('../services/medicineIdentifie
 const { CONSENT_TEXT, configuredProvider } = require('../services/medicineIdentifier/provider');
 const catalogue = require('../services/medicineIdentifier/catalogue');
 const { requiredQuantity } = require('../services/medicineIdentifier/savings');
-const { GeminiAlternativeDiscovery, discoverLowerCost, reviewedMatchConflicts } = require('../services/medicineIdentifier/alternativeDiscovery');
+const { configuredAlternativeDiscovery, discoverLowerCost, reviewedMatchConflicts } = require('../services/medicineIdentifier/alternativeDiscovery');
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: MAX_IMAGE_BYTES, files: 3, fields: 10 } });
 const scanIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -89,7 +89,7 @@ function uploadImages(req, res, next) {
 function createMedicineScanRouter(options = {}) {
     const db = options.db || defaultDb;
     const provider = options.provider || configuredProvider();
-    const discoveryProvider = options.discoveryProvider || new GeminiAlternativeDiscovery();
+    const discoveryProvider = options.discoveryProvider || configuredAlternativeDiscovery();
     const router = express.Router();
     router.use(verifyToken);
     const scanLimiter = rateLimit({

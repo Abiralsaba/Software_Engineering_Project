@@ -158,7 +158,7 @@ describe('Medicine Identifier React workflow', () => {
     expect(screen.getAllByText(/Professional confirmation is required/).length).toBeGreaterThan(0);
   });
 
-  it('presents Gemini fallback names professionally and never invents prices', async () => {
+  it('presents AI fallback names professionally and never invents prices', async () => {
     const confirmed = { ...scan, status: 'CONFIRMED', items: [{ ...scan.items[0], confirmation: { selection_type: 'CATALOGUE', medicine_id: medicine.medicine_id } }] };
     apiRequest.mockImplementation((path, options) => {
       if (path === '/api/medicine-scans' && options?.method === 'POST') return Promise.resolve(confirmed);
@@ -173,6 +173,7 @@ describe('Medicine Identifier React workflow', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Analyze visible text' }));
     await userEvent.click(await screen.findByRole('button', { name: 'Show low-cost options for A-Pak' }));
     const leads = await screen.findByRole('region', { name: 'AI-assisted medicine search results' });
+    expect(within(leads).getByText('Additional catalogue research')).toBeInTheDocument();
     expect(within(leads).getByText('Possible brand')).toBeInTheDocument();
     expect(within(leads).getByText(/has not verified their current price, availability, registration or suitability/)).toBeInTheDocument();
     expect(screen.getByText(/No lower-cost product with a comparable recorded specification/)).toBeInTheDocument();

@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { GeminiAlternativeDiscovery, discoverLowerCost, lowerCostMatches, reviewedMatchConflicts } = require('../../src/services/medicineIdentifier/alternativeDiscovery');
+const { GeminiAlternativeDiscovery, GroqAlternativeDiscovery, ResilientAlternativeDiscovery, discoverLowerCost, lowerCostMatches, reviewedMatchConflicts } = require('../../src/services/medicineIdentifier/alternativeDiscovery');
 
 test('reviewed scan cannot be priced as a different catalogue brand or strength', () => {
     const medicine = { brand_name: 'Napa Extra', strength: '500 mg+65 mg' };
@@ -56,7 +56,7 @@ test('unsupported or unpriced catalogue comparisons use Gemini only for unverifi
         { ...comparison, alternatives: [], original_package_comparison: null, original_purchase_estimate: null }
     ]) {
         const output = await discoverLowerCost('original', null, { catalogue: { alternatives: async () => result, medicineById: async () => original }, db: {}, provider });
-        assert.equal(output.source, 'catalogue_then_gemini');
+        assert.equal(output.source, 'catalogue_then_ai');
         assert.deepEqual(output.gemini.brands, ['Research lead']);
     }
     const missingIngredients = await discoverLowerCost('original', null, {
@@ -79,8 +79,67 @@ test('Gemini discovery sends only catalogue specification, never prices or patie
             return { output_text: JSON.stringify({ brands: ['Original', 'Possible brand', 'Possible brand'] }) };
         } } };
         const provider = new GeminiAlternativeDiscovery({ apiKey: 'test-only', client });
-        assert.deepEqual(await provider.find(original), { status: 'unverified_leads', brands: ['Possible brand'] });
+        const output = await provider.find(original);
+        assert.equal(output.status, 'unverified_leads');
+        assert.deepEqual(output.brands, ['Possible brand']);
+        assert.equal(output.provider, 'gemini');
         const bad = new GeminiAlternativeDiscovery({ apiKey: 'test-only', client: { interactions: { create: async () => ({ output_text: '{bad' }) } } });
-        assert.deepEqual(await bad.find(original), { status: 'unavailable', brands: [] });
+        const invalid = await bad.find(original);
+        assert.equal(invalid.status, 'unavailable');
+        assert.equal(invalid.reason, 'invalid_output');
+        assert.equal(invalid.transient, false);
     } finally { if (before === undefined) delete process.env.GEMINI_ENABLED; else process.env.GEMINI_ENABLED = before; }
+});
+
+test('Groq medicine research uses the same constrained, price-free contract', async () => {
+    let request;
+    const provider = new GroqAlternativeDiscovery({ client: {
+        model: 'openai/gpt-oss-120b', isConfigured: () => true,
+        complete: async value => { request = value; return JSON.stringify({ brands: ['Original', 'Research brand'] }); }
+    } });
+    const result = await provider.find(original);
+    assert.equal(result.provider, 'groq');
+    assert.deepEqual(result.brands, ['Research brand']);
+    assert.match(request.user, /Aceclofenac/);
+    assert.doesNotMatch(request.user, /patient|40\.0000/i);
+    assert.equal(request.jsonSchema.additionalProperties, false);
+});
+
+test('medicine research falls back on the third transient failure but not on no-lead results', async () => {
+    let primaryCalls = 0;
+    let fallbackCalls = 0;
+    const primary = {
+        isConfigured: () => true,
+        find: async () => { primaryCalls += 1; return { status: 'unavailable', brands: [], provider: 'gemini', transient: true }; }
+    };
+    const fallback = {
+        isConfigured: () => true,
+        find: async () => { fallbackCalls += 1; return { status: 'unverified_leads', brands: ['Fallback brand'], provider: 'groq' }; }
+    };
+    const provider = new ResilientAlternativeDiscovery({ primary, fallback, circuitOptions: { threshold: 3, cooldownMs: 30000 } });
+    assert.equal((await provider.find(original)).status, 'unavailable');
+    assert.equal((await provider.find(original)).status, 'unavailable');
+    assert.deepEqual((await provider.find(original)).brands, ['Fallback brand']);
+    assert.deepEqual((await provider.find(original)).brands, ['Fallback brand']);
+    assert.equal(primaryCalls, 3);
+    assert.equal(fallbackCalls, 2);
+
+    const noLeadsFallback = { isConfigured: () => true, find: async () => { throw new Error('must not run'); } };
+    const noLeads = new ResilientAlternativeDiscovery({
+        primary: { isConfigured: () => true, find: async () => ({ status: 'no_leads', brands: [], provider: 'gemini' }) },
+        fallback: noLeadsFallback,
+        circuitOptions: { threshold: 3 }
+    });
+    assert.equal((await noLeads.find(original)).status, 'no_leads');
+});
+
+test('medicine research immediately falls back when the primary credentials are rejected', async () => {
+    let fallbackCalls = 0;
+    const provider = new ResilientAlternativeDiscovery({
+        primary: { isConfigured: () => true, find: async () => ({ status: 'unavailable', brands: [], provider: 'gemini', transient: false, fallbackEligible: true }) },
+        fallback: { isConfigured: () => true, find: async () => { fallbackCalls += 1; return { status: 'no_leads', brands: [], provider: 'groq' }; } },
+        circuitOptions: { threshold: 3, cooldownMs: 30000 }
+    });
+    assert.equal((await provider.find(original)).provider, 'groq');
+    assert.equal(fallbackCalls, 1);
 });
