@@ -1,6 +1,4 @@
 import { ministryDesigns, ministryService } from './ministryDesigns.js';
-import { useState } from 'react';
-import VillageIllustration from '../components/VillageIllustration.jsx';
 import './ministry-village.css';
 
 export function NidCardPreview({ profile = {}, nid }) {
@@ -25,13 +23,6 @@ const healthCards = {
 };
 
 export function MinistryBanner({ design, id }) {
-  const [paused, setPaused] = useState(false);
-  const scenes = { nid: ['পরিচয়ের শিকড়', 'The village union office', 'Identity begins at home.'], passport: ['ঘর থেকে বিশ্বে', 'The departure ghat', 'Every journey starts with a place to call home.'], health: ['সুস্থ গ্রাম, সুস্থ দেশ', 'The community clinic', 'Care, closer to your community.'], education: ['আলোর পথে', 'The village school', 'A brighter tomorrow begins here.'] };
-  const scene = scenes[id];
-  if (scene) return <header className="nx-ministry-banner nx-service-village-banner">
-    <div className="nx-service-village-copy"><span className="nx-service-chapter" lang="bn">{scene[0]}</span><h1>{design.title}</h1><p className="bangla-text" lang="bn">{design.bn}</p><p className="subtitle">{scene[2]}</p>{id === 'health' && <a className="nx-emergency-link" href="tel:999">Emergency 999</a>}</div>
-    <div className="nx-service-village-art"><VillageIllustration theme={id} mood={id === 'education' ? 'spring' : 'harvest'} paused={paused} /><div className="nx-service-scene-caption"><span>{scene[1]}</span><button type="button" aria-label={paused ? 'Play village scene' : 'Pause village scene'} aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? '▶' : 'Ⅱ'}</button></div></div>
-  </header>;
   return <header className={`${design.prefix}-banner nx-ministry-banner`}>
     {id === 'nid' && <div className="banner-emblem"><img src="/images/bd_flag.svg" alt="Bangladesh flag" height="40" /></div>}
     <h1><i className={`fas fa-${design.icon}`} aria-hidden="true" /> {design.title}</h1>

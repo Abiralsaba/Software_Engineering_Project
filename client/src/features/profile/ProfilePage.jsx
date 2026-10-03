@@ -79,7 +79,7 @@ export default function ProfilePage() {
       {loading ? <RouteLoading label="Loading profile…" /> : (
         <section className="profile-card react-profile-card">
           <div className="react-profile-summary">
-            <div className="react-profile-photo"><img src={resolveAssetUrl(profile.profile_image) || 'https://ui-avatars.com/api/?name=Citizen'} alt="Citizen profile" /><button type="button" aria-label="Upload profile photo" onClick={() => photoInput.current?.click()}><i className="fas fa-camera" /></button><input ref={photoInput} type="file" accept="image/*" onChange={uploadPhoto} hidden /></div>
+            <div className="react-profile-photo">{profile.profile_image ? <img src={resolveAssetUrl(profile.profile_image)} alt="Citizen profile" /> : <span className="react-profile-placeholder" role="img" aria-label="Citizen profile placeholder"><i className="fas fa-user" aria-hidden="true" /></span>}<button type="button" aria-label="Upload profile photo" onClick={() => photoInput.current?.click()}><i className="fas fa-camera" /></button><input ref={photoInput} type="file" accept="image/*" onChange={uploadPhoto} hidden /></div>
             <div><h2>{profile.name || 'Citizen'}</h2><p>NID: {profile.nid || '—'}</p></div>
           </div>
           {error && <div className="react-dashboard-error" role="alert">{error}</div>}

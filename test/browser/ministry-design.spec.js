@@ -17,14 +17,14 @@ test.beforeEach(async ({ page }) => {
 });
 
 const pages = [
-  ['health', 'Digital Health Card', 'Apply for health card'],
-  ['agriculture', 'Subsidies', ''],
-  ['nid', 'NID Correction', 'Submit correction'],
-  ['passport', 'Apply for e-Passport', 'Passport application'],
-  ['water', 'Water Connection', ''],
-  ['land', 'Land Records', 'Add land record'],
-  ['tax', 'Tax Calculator', ''],
-  ['education', 'Stipends & Grants', '']
+  ['health', 'health-card', 'Apply for health card'],
+  ['agriculture', 'subsidies', ''],
+  ['nid', 'correction', 'Submit correction'],
+  ['passport', 'apply', 'Passport application'],
+  ['water', 'connection', ''],
+  ['land', 'records', 'Add land record'],
+  ['tax', 'calculator', ''],
+  ['education', 'stipend', '']
 ];
 
 for (const width of [1440, 390]) {
@@ -81,7 +81,7 @@ test('demo checkout supports payment methods, success, decline and cancellation 
 });
 
 for (const width of [1440, 390]) {
-  for (const [ministry, service, heading] of pages) {
+  for (const [ministry, section, heading] of pages) {
     test(`${ministry}: original design and React service navigation at ${width}px`, async ({ page }, testInfo) => {
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
@@ -93,7 +93,7 @@ for (const width of [1440, 390]) {
       if (ministry !== 'education') await expect(shell).toHaveCSS('background-image', /url/);
       await page.screenshot({ path: testInfo.outputPath(`${ministry}-${width}.png`), fullPage: true });
       if (width < 900) await page.getByRole('button', { name: 'Toggle navigation' }).click();
-      await page.getByRole('navigation', { name: `${ministry} services`, exact: true }).getByRole('link', { name: service, exact: true }).click();
+      await page.getByRole('navigation', { name: `${ministry} services`, exact: true }).locator(`a[href="?section=${section}"]`).click();
       if (heading) await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
       await expect(page).toHaveURL(/section=/);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -101,7 +101,7 @@ for (const width of [1440, 390]) {
       await expect(page.getByRole('region', { name: 'NationX voice assistant' })).toBeVisible();
       await page.getByRole('button', { name: 'Close assistant', exact: true }).click();
       if (width < 900) await page.getByRole('button', { name: 'Toggle navigation' }).click();
-      await page.getByRole('link', { name: 'Back to Dashboard', exact: true }).click();
+      await page.getByRole('navigation', { name: `${ministry} services`, exact: true }).locator('a[href="/dashboard.html"]').click();
       await expect(page.locator('body')).not.toHaveClass(/nx-ministry-body/);
       expect(errors).toEqual([]);
     });

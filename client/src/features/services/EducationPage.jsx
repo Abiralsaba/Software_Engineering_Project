@@ -206,7 +206,6 @@ export default function EducationPage() {
                 <p>{row.description}</p>
                 <StipendMeta row={row} />
                 <footer>
-                  <small>Deadline {dateText(row.deadline)}</small>
                   <button className="btn-primary react-service-action" type="button" onClick={() => setSelectedGrant(row)}>Apply now</button>
                 </footer>
               </article>)}

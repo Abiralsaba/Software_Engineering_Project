@@ -138,11 +138,15 @@
 .nationx-education-page .react-service-card-grid footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 0.6rem;
   margin-top: auto;
   padding-top: 0.95rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nationx-education-page .react-service-card-grid footer .react-service-action {
+  width: 100%;
 }
 
 /* Apply-form subsections: Student details / Financial info / Bank details. */

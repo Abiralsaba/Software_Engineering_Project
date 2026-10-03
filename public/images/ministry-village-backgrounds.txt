@@ -1,0 +1,10 @@
+NationX ministry backgrounds
+
+AI-generated, photorealistic illustrations of fictional Bangladesh-inspired locations. These do not depict or identify actual government offices.
+
+nid-village-background.webp: rural civic office courtyard, banyan tree and Bangladesh flag.
+passport-village-background.webp: riverside village departure ghat with passenger boats and luggage.
+health-village-background.webp: rural community clinic surrounded by trees and fields.
+education-village-background.webp: village primary school, shaded courtyard and Bangladesh flag.
+
+Generated for NationX on 2026-10-03. Optimized as WebP assets.

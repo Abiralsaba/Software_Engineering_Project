@@ -93,7 +93,7 @@ body.nx-ministry-body #root { width: 100%; min-height: 100vh; }
   .nationx-ministry-page.nationx-ministry-page .nx-ministry-banner { padding: 1.5rem; }
   .nationx-ministry-page .nx-ministry-banner h1 { font-size: 1.4rem; }
   .nationx-ministry-page .react-form-grid { grid-template-columns: 1fr; }
-  .nationx-ministry-page .nx-assistant-launch { right: 12px; bottom: 12px; max-width: calc(100vw - 24px); }
+  .nationx-ministry-page .nx-assistant-launch { right: 14px; bottom: 14px; }
   .nationx-ministry-page .nx-assistant-drawer { right: 12px; width: calc(100vw - 24px); }
 }
 @media (prefers-reduced-motion: reduce) {

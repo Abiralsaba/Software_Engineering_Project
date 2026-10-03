@@ -1,3 +1,4 @@
+import SidebarVillage from '../../components/SidebarVillage.jsx';
 import { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../../components/Modal.jsx';
@@ -112,7 +113,7 @@ export default function DashboardPage() {
             <div className="user-avatar">{user.photo_url ? <img src={resolveAssetUrl(user.photo_url)} alt="Citizen profile" /> : <i className="fas fa-user" />}</div>
             <h3>{user.name || 'Citizen'}</h3><p>NID: {user.nid || '—'}</p>
           </Link>
-          <div className="nx-sidebar-heritage" aria-hidden="true"><span>আমার বাংলাদেশ</span><i /><i /><i /></div>
+          <SidebarVillage />
           <nav className="nav-links">
             <span className="dashboard-nav-label">Citizen workspace · নাগরিক সেবা</span>
             <Link className="active" data-bn="ড্যাশবোর্ড" to="/dashboard.html"><i className="fas fa-home" /> Dashboard</Link>

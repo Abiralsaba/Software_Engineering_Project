@@ -1,3 +1,4 @@
+import SidebarVillage from '../components/SidebarVillage.jsx';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -78,7 +79,16 @@ export default function CitizenShell({ children, pageStyles = [], ministry, sect
 
   return (
     <div className={design ? `nationx-ministry-page nx-ministry-${ministry}` : `nationx-dashboard nationx-citizen-pages${isMinistryPage ? ' nationx-ministry-page' : ''}`} style={design ? { '--ministry-accent': design.accent, '--ministry-light': design.light } : undefined}>
-      <button className="nx-assistant-launch" onClick={() => {setAssistantStarted(true);setAssistantOpen(v => !v);}} aria-expanded={assistantOpen}>{assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}</button>
+      <button
+        className="nx-assistant-launch"
+        onClick={() => { setAssistantStarted(true); setAssistantOpen(value => !value); }}
+        aria-expanded={assistantOpen}
+        aria-label={assistantOpen ? 'Close assistant' : 'Open Voice assistant · কথা বলুন'}
+        title={assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}
+      >
+        <i className={assistantOpen ? 'fas fa-xmark' : 'fas fa-microphone'} aria-hidden="true" />
+        <span className="nx-visually-hidden">{assistantOpen ? 'Close assistant' : 'Voice assistant · কথা বলুন'}</span>
+      </button>
       {assistantStarted && <aside hidden={!assistantOpen} className="nx-assistant-drawer nx-guide-drawer"><CitizenGuide visible={assistantOpen} ministry={ministry} activeSection={activeSection} onSectionChange={onSectionChange} profile={profile} profileReady={profileReady} onClose={() => setAssistantOpen(false)} /></aside>}
       {design && <div className="nx-ministry-decoration" aria-hidden="true"><div className="bg-shape shape-1" /><div className="bg-shape shape-2" /></div>}
       {!design && <div className="dashboard-ambient" aria-hidden="true">
@@ -98,7 +108,7 @@ export default function CitizenShell({ children, pageStyles = [], ministry, sect
               <div className="user-avatar"><i className={`fas fa-${design.icon}`} aria-hidden="true" /></div>
               <h3>{design.bn}</h3><p>{design.title}</p>
             </div>
-            <div className="nx-sidebar-heritage" aria-hidden="true"><span>সোনার বাংলা</span><i /><i /><i /></div>
+            <SidebarVillage />
             <nav className="nav-links" aria-label={`${ministry} services`}>
               <Link to="/dashboard.html" data-bn="নাগরিক ড্যাশবোর্ড"><i className="fas fa-arrow-left" aria-hidden="true" /> Back to Dashboard</Link>
               {sections.map(section => {
@@ -116,7 +126,7 @@ export default function CitizenShell({ children, pageStyles = [], ministry, sect
             <div className="user-avatar">{profile.profile_image ? <img src={resolveAssetUrl(profile.profile_image)} alt="Citizen profile" /> : <i className="fas fa-user" />}</div>
             <h3>{profile.name || 'Citizen'}</h3><p>NID: {profile.nid || '—'}</p>
           </Link>
-          <div className="nx-sidebar-heritage" aria-hidden="true"><span>আমার বাংলাদেশ</span><i /><i /><i /></div>
+          <SidebarVillage />
           <nav className="nav-links">
             <span className="dashboard-nav-label">Citizen workspace · নাগরিক সেবা</span>
             {navigation.map(([path, icon, label, bn]) => (
@@ -126,7 +136,7 @@ export default function CitizenShell({ children, pageStyles = [], ministry, sect
           </nav>
           </>}
         </aside>
-        <main className="main-content react-page-content"><div className={design ? 'nx-ministry-content' : 'dashboard-content-shell citizen-content-shell'}>{design && <MinistryBanner design={design} id={ministry} />}{children}</div></main>
+        <main className="main-content react-page-content"><div className={design ? 'nx-ministry-content' : 'dashboard-content-shell citizen-content-shell'}>{design && <MinistryBanner design={design} id={ministry} />}{children}{['nid','passport','health','education'].includes(ministry) && <small className="nx-village-credit">Bangladesh-inspired scenery · AI-generated</small>}</div></main>
       </div>
     </div>
   );

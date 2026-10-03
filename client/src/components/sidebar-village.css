@@ -1,0 +1,44 @@
+/* Riverbank navigation: an open directory under a small living landscape. */
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar {
+  background:linear-gradient(170deg,#102e2b,#081f23 65%,#061a20)!important;
+  border-right:1px solid #879e7b33;box-shadow:12px 0 40px #00120e33;
+  padding:22px 18px;perspective:900px;
+}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar::before{height:2px;background:linear-gradient(90deg,#749d76 0 78%,#c66f56 78% 88%,#d9c591 88%);animation:none}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar::after{display:none}
+.sidebar.sidebar .dashboard-brand{padding:3px 8px 19px;margin-bottom:0;border-bottom:1px solid #bacaad20;gap:12px}
+.sidebar.sidebar .dashboard-brand-mark{width:32px;height:38px;border-radius:2px 9px 2px 2px;transform:rotateY(-15deg);box-shadow:4px 3px #051a16,inset 1px 0 #72ae8e;animation:none}
+.sidebar.sidebar .dashboard-brand-mark::after{display:none}.sidebar.sidebar .dashboard-brand strong{font-size:20px;letter-spacing:-.5px}.sidebar.sidebar .dashboard-brand small{font-size:8px;letter-spacing:2px;color:#98ac9e}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .user-profile{display:grid;grid-template-columns:48px 1fr;grid-template-rows:auto auto;align-content:center;column-gap:13px;text-align:left;min-height:74px;padding:17px 8px 9px;margin:0;border:0;border-radius:0;background:none;box-shadow:none}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .user-avatar{width:46px;height:46px;grid-row:1/3;margin:0;border:1px solid #a9be9955;box-shadow:0 4px 10px #0003;border-radius:50%;font-size:20px;background:#284a3c}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .user-avatar::after{width:8px;height:8px;bottom:1px;right:1px;border-width:2px}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .user-profile h3{font-size:14px;line-height:1.5;margin:1px 0 0;color:#e4e8d8}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .user-profile p{font-size:10px;margin:0;color:#9db2a5}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nx-ministry-identity{grid-template-columns:40px 1fr;padding-top:8px}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nx-ministry-identity h3{font-size:13px}
+.nx-sidebar-village{position:relative;flex-shrink:0;margin:0 0 12px;height:165px;border-bottom:1px solid #b6c4a626;overflow:hidden}
+.nx-sidebar-landscape{position:absolute;inset:-22px -13px 14px;perspective:600px}
+.nx-sidebar-landscape .nx-village-art{min-height:0;height:100%}
+.nx-sidebar-landscape .nx-village-sun{width:48px;left:69%;top:22%;background:#c18658;box-shadow:none}
+.nx-sidebar-landscape .nx-village-orbit{display:none}
+.nx-sidebar-scene-label{position:absolute;bottom:6px;left:9px;right:5px;display:flex;justify-content:space-between;align-items:center;color:#d0c199;font:12px 'Hind Siliguri',sans-serif}
+.nx-sidebar-scene-label button{display:grid;place-items:center;min-width:28px;height:28px;padding:0;border:0;color:#b6c4a6;background:transparent;cursor:pointer}
+.nx-sidebar-scene-label button:focus-visible{outline:2px solid #d6bf85;outline-offset:1px}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links{position:relative;gap:0;padding:0 0 8px 6px;isolation:isolate}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links::before{content:'';position:absolute;z-index:-1;left:17px;top:42px;bottom:80px;width:13px;border-left:1px solid #567d6955;border-radius:48% 0 0 35%;transform:rotate(1deg)}
+.sidebar.sidebar .dashboard-nav-label{font:500 9px/1.5 Inter,'Hind Siliguri',sans-serif;letter-spacing:1.2px;color:#94a898;margin:0;padding:0 6px 13px}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn],
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .react-nav-button[data-bn]{display:grid;grid-template-columns:24px minmax(0,1fr);grid-template-rows:auto auto;gap:0 14px;align-items:center;position:relative;min-height:47px;padding:8px 8px;margin:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:#c1d0c4;font-size:12px;font-weight:500;line-height:1.25;text-decoration:none;transform:none;transition:color .2s,background .2s,padding-left .2s}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn]::before{display:none}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn]::after,
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .react-nav-button[data-bn]::after{content:attr(data-bn);grid-column:2;color:#93aa9b;font:11px/1.5 'Hind Siliguri',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn]>i,
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .react-nav-button[data-bn]>i{grid-row:1/3;display:grid;place-items:center;align-self:center;width:24px;height:25px;margin:0;color:#98b49c;font-size:15px;border:0;border-radius:0;background:none;box-shadow:none;transform:none;transition:transform .25s,color .25s}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn].active{color:#f1e8ce;background:linear-gradient(90deg,#a6b58a14,transparent);box-shadow:inset 2px 0 #cd9875;border:0}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn].active>i{color:#dfbc81;transform:perspective(80px) rotateY(-15deg);text-shadow:2px 2px #051713}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn]:hover{color:#f1e8ce;background:#bfc9a40a;padding-left:12px}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a[data-bn]:hover>i{transform:translateY(-2px);color:#d3c392}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .nav-links a:focus-visible{outline:2px solid #d6bf85;outline-offset:-2px}
+:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar .react-nav-button.dashboard-logout{border-top:1px solid #aabea322;margin-top:14px;color:#d1a692}
+@media(max-width:900px){:is(.nationx-dashboard,.nationx-ministry-page) .sidebar.sidebar{padding-top:20px}.sidebar.sidebar .dashboard-brand{padding-right:38px}.nx-sidebar-village{height:135px}}
+@media(prefers-reduced-motion:reduce){.sidebar.sidebar .nav-links a,.sidebar.sidebar .nav-links a>i{transition:none!important}}
