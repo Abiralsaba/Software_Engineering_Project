@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import CinematicHero from './CinematicHero.jsx';
+import { VillageStory, EverydayStories, LandingQuestions } from './VillageStory.jsx';
 import './landing.css';
 import './cinematic.css';
 
@@ -79,6 +80,7 @@ export default function LandingPage() {
       <button className="nx-menu-toggle" ref={menuButton} type="button" aria-label={menu ? 'Close navigation' : 'Open navigation'} aria-expanded={menu} aria-controls="nx-nav-links" onClick={() => setMenu(!menu)}>{menu ? 'Close −' : 'Menu +'}</button>
       <nav id="nx-nav-links" className={menu ? 'nx-nav-links nx-menu-open' : 'nx-nav-links'} aria-label="Main navigation">
         <a href="#services" onClick={e => anchor(e, 'services')}>Services</a>
+        <a href="#village" onClick={e => anchor(e, 'village')}>Our Bangladesh</a>
         <a href="#journey" onClick={e => anchor(e, 'journey')}>How it works</a>
         <a href="#medicine" onClick={e => anchor(e, 'medicine')}>Medicine Identifier</a>
         <a href="#about" onClick={e => anchor(e, 'about')}>About</a>
@@ -90,10 +92,14 @@ export default function LandingPage() {
       <CinematicHero anchor={anchor} />
       <div className="nx-hero-baseline"><span>Rivers. Roots. Possibilities.</span><span lang="bn">আমাদের বাংলাদেশ</span><span>A unified civic-services prototype</span></div>
 
+      <VillageStory />
+
       <section id="services" tabIndex={-1} className="nx-services nx-section" aria-labelledby="nx-services-title">
         <div className="nx-section-intro" data-reveal><p className="nx-eyebrow">01 / A more connected everyday</p><h2 id="nx-services-title">Different needs.<br /><em>One starting point.</em></h2><p>Your documents, your wellbeing, your next opportunity. Find the service that matters to you, without losing the bigger picture.</p><span className="nx-thread-art" aria-hidden="true"><i /><i /><i /><i /></span><a className="nx-text-link" href="/history.html">Follow your service history <Arrow diagonal /></a></div>
         <div className="nx-service-list">{services.map(([number, name, desc, href, icon]) => <a className="nx-service-row" href={href} key={number} data-reveal><span className="nx-service-number">{number}</span><i className={`fas fa-${icon}`} aria-hidden="true" /><div><h3>{name}</h3><p>{desc}</p></div><Arrow diagonal /></a>)}</div>
       </section>
+
+      <EverydayStories />
 
       <section id="medicine" tabIndex={-1} className="nx-medicine" aria-labelledby="nx-medicine-title">
         <div className="nx-medicine-inner nx-section">
@@ -114,6 +120,8 @@ export default function LandingPage() {
       ].map(([title, text], index) => <li key={title} data-reveal><span className="nx-step-number">0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol></section>
 
       <section id="about" tabIndex={-1} className="nx-about nx-section" aria-labelledby="nx-about-title"><div className="nx-about-symbol" aria-hidden="true"><span /><span /><span /><span /><span /></div><div data-reveal><p className="nx-eyebrow">Built with purpose</p><h2 id="nx-about-title">A shared idea.<br /><em>A connected Bangladesh.</em></h2><p>NationX is an academic software-engineering project exploring how civic services can work together. It brings citizen applications, documents and administrative workflows into one prototype.</p><p className="nx-about-disclaimer">Created for learning and demonstration. Not an official government service or a publicly deployed national platform.</p></div></section>
+
+      <LandingQuestions />
 
       <section className="nx-closing"><div className="nx-closing-pattern" aria-hidden="true" /><p className="nx-eyebrow" lang="bn">একসাথে, আরও কাছে</p><h2>Your next step.<br /><em>A little more connected.</em></h2><a className="nx-button" href="/index.html#signin">Start with NationX <Arrow /></a></section>
     </main>

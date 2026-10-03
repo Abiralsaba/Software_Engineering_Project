@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import AuthShell, { AuthHeader, FormField } from '../../layouts/AuthShell.jsx';
+import { AuthHeader, FormField } from '../../layouts/AuthShell.jsx';
+import VillageLoginShell from './VillageLoginShell.jsx';
 import { authApi, apiRequest } from '../../services/api.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { alerts } from '../../utils/alerts.js';
+import RiverJourney from '../../components/RiverJourney.jsx';
 
 const emptyAdminRegistration = {
   name: '', nid: '', email: '', mobile: '', password: '', confirmPassword: '',
@@ -23,8 +25,16 @@ export default function LoginPage() {
   const [pendingNotice, setPendingNotice] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [applicantLogin, setApplicantLogin] = useState(false);
   const [adminOptions, setAdminOptions] = useState({ domains: [], divisions: [] });
+  const [arrival, setArrival] = useState(null);
+
+  useEffect(() => {
+    if (!arrival) return;
+    const timer = window.setTimeout(() => navigate(arrival, { replace: true }), 2000);
+    return () => window.clearTimeout(timer);
+  }, [arrival, navigate]);
 
   useEffect(() => {
     setAudience(location.hash === '#admin' ? 'admin' : 'citizen');
@@ -53,8 +63,7 @@ export default function LoginPage() {
     try {
       const data = applicantLogin ? await apiRequest('/api/applicants/login', { method: 'POST', auth: false, body: citizen }) : await authApi.citizenLogin(citizen);
       setCitizenSession(data.token);
-      await alerts.success('Login Successful!', 'Welcome to NationX.');
-      navigate(applicantLogin ? '/nid-applicant.html' : '/dashboard.html', { replace: true });
+      setArrival(applicantLogin ? '/nid-applicant.html' : '/dashboard.html');
     } catch (requestError) {
       setError(requestError.message);
       await alerts.error(requestError.message);
@@ -71,8 +80,7 @@ export default function LoginPage() {
     try {
       const data = await authApi.adminLogin(adminLogin);
       setAdminSession(data.token, data.admin?.name);
-      await alerts.success('Welcome, Admin!', `Logged in as ${data.admin?.name || 'Administrator'}`);
-      window.location.assign('/reports.html');
+      setArrival('/reports.html');
     } catch (requestError) {
       setPendingNotice(requestError.data?.status === 'pending');
       setError(requestError.message);
@@ -124,15 +132,17 @@ export default function LoginPage() {
 
   const selectedAdminDomain = adminOptions.domains.find(domain => domain.code === adminRegistration.requested_domain_code);
 
+  if (arrival) return <div className="nx-login-arrival"><RiverJourney success onContinue={() => navigate(arrival, { replace: true })} /></div>;
+
   return (
-    <AuthShell>
+    <VillageLoginShell admin={audience === 'admin'} registering={audience === 'admin' && adminMode === 'register'}>
       <AuthHeader admin={audience === 'admin'} />
 
       <div className="role-tabs" aria-label="Portal role">
-        <button className={`role-tab ${audience === 'citizen' ? 'active' : ''}`} onClick={() => selectAudience('citizen')} type="button">
+        <button className={`role-tab ${audience === 'citizen' ? 'active' : ''}`} onClick={() => selectAudience('citizen')} type="button" aria-pressed={audience === 'citizen'}>
           <i className="fas fa-users" /><span>Citizen</span>
         </button>
-        <button className={`role-tab ${audience === 'admin' ? 'active' : ''}`} onClick={() => selectAudience('admin')} type="button">
+        <button className={`role-tab ${audience === 'admin' ? 'active' : ''}`} onClick={() => selectAudience('admin')} type="button" aria-pressed={audience === 'admin'}>
           <i className="fas fa-user-shield" /><span>Admin</span>
         </button>
       </div>
@@ -144,12 +154,12 @@ export default function LoginPage() {
           <form className="auth-form" onSubmit={submitCitizen}>
             <label className={`applicant-login-option${applicantLogin ? ' selected' : ''}`}>
               <input type="checkbox" checked={applicantLogin} onChange={event => setApplicantLogin(event.target.checked)} />
-              <span className="applicant-login-icon"><i className="fas fa-file-circle-user" aria-hidden="true" /></span>
+              <span className="applicant-login-icon"><i className="fas fa-id-card" aria-hidden="true" /></span>
               <span className="applicant-login-copy"><strong>Applicant login</strong><small>Use this if you registered without an NID.</small></span>
               <span className="applicant-login-switch" aria-hidden="true"><span /></span>
             </label>
-            <FormField id="citizen-email" type="email" label="Email Address" icon="envelope" placeholder="citizen@bangladesh.gov.bd" value={citizen.email} onChange={event => setCitizen({ ...citizen, email: event.target.value })} required />
-            <FormField id="citizen-password" type="password" label="Password" icon="lock" placeholder="Enter your password" value={citizen.password} onChange={event => setCitizen({ ...citizen, password: event.target.value })} required />
+            <FormField id="citizen-email" type="email" autoComplete="username" label="Email Address" icon="envelope" placeholder="you@example.com" value={citizen.email} onChange={event => setCitizen({ ...citizen, email: event.target.value })} required />
+            <div className="nx-password-field"><FormField id="citizen-password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" label="Password" icon="lock" placeholder="Enter your password" value={citizen.password} onChange={event => setCitizen({ ...citizen, password: event.target.value })} required /><button type="button" className="nx-password-reveal" aria-label={showPassword ? 'Hide password' : 'Show password'} aria-pressed={showPassword} onClick={() => setShowPassword(value => !value)}><i className={`fas fa-${showPassword ? 'eye-slash' : 'eye'}`} aria-hidden="true" /></button></div>
             <button className="btn-submit" disabled={submitting} type="submit">
               <span>{submitting ? 'Authenticating…' : 'Login to Portal'}</span>
               <i className={`fas ${submitting ? 'fa-spinner fa-spin' : 'fa-arrow-right'}`} />
@@ -205,6 +215,6 @@ export default function LoginPage() {
       )}
 
       <div className="security-badge"><i className="fas fa-lock" /><span>Protected Government Portal</span><i className="fas fa-certificate" /></div>
-    </AuthShell>
+    </VillageLoginShell>
   );
 }

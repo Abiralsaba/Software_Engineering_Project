@@ -10,15 +10,15 @@ import { ministryDesigns, ministryService } from './ministryDesigns.js';
 import { MinistryBanner } from './MinistryPresentation.jsx';
 
 const navigation = [
-  ['dashboard.html', 'home', 'Dashboard'],
-  ['documents.html', 'folder', 'My Documents'],
-  ['history.html', 'history', 'History'],
-  ['todo.html', 'tasks', 'To Do'],
-  ['community.html', 'users', 'Community'],
-  ['market.html', 'chart-line', 'Market Info'],
-  ['events.html', 'bullhorn', 'Notices'],
-  ['education.html', 'graduation-cap', 'Education'],
-  ['contact.html', 'envelope', 'Contact']
+  ['dashboard.html', 'home', 'Dashboard', 'ড্যাশবোর্ড'],
+  ['documents.html', 'folder', 'My Documents', 'আমার নথি'],
+  ['history.html', 'history', 'History', 'সেবার ইতিহাস'],
+  ['todo.html', 'tasks', 'To Do', 'করণীয়'],
+  ['community.html', 'users', 'Community', 'কমিউনিটি'],
+  ['market.html', 'chart-line', 'Market Info', 'বাজার তথ্য'],
+  ['events.html', 'bullhorn', 'Notices', 'সরকারি নোটিশ'],
+  ['education.html', 'graduation-cap', 'Education', 'শিক্ষা সেবা'],
+  ['contact.html', 'envelope', 'Contact', 'যোগাযোগ']
 ];
 
 const ministryPaths = new Set([
@@ -98,13 +98,14 @@ export default function CitizenShell({ children, pageStyles = [], ministry, sect
               <div className="user-avatar"><i className={`fas fa-${design.icon}`} aria-hidden="true" /></div>
               <h3>{design.bn}</h3><p>{design.title}</p>
             </div>
+            <div className="nx-sidebar-heritage" aria-hidden="true"><span>সোনার বাংলা</span><i /><i /><i /></div>
             <nav className="nav-links" aria-label={`${ministry} services`}>
-              <Link to="/dashboard.html"><i className="fas fa-arrow-left" aria-hidden="true" /> Back to Dashboard</Link>
+              <Link to="/dashboard.html" data-bn="নাগরিক ড্যাশবোর্ড"><i className="fas fa-arrow-left" aria-hidden="true" /> Back to Dashboard</Link>
               {sections.map(section => {
                 const item = ministryService(section);
-                return <a key={item.id} href={`?section=${item.id}`} className={activeSection === item.id ? 'active' : ''} aria-current={activeSection === item.id ? 'page' : undefined} onClick={event => { event.preventDefault(); onSectionChange(item.id); setSidebarOpen(false); }}><i className={`fas fa-${item.icon}`} aria-hidden="true" />{item.label}</a>;
+                return <a key={item.id} href={`?section=${item.id}`} data-bn={item.bn} className={activeSection === item.id ? 'active' : ''} aria-current={activeSection === item.id ? 'page' : undefined} onClick={event => { event.preventDefault(); onSectionChange(item.id); setSidebarOpen(false); }}><i className={`fas fa-${item.icon}`} aria-hidden="true" />{item.label}</a>;
               })}
-              {ministry === 'education' && <Link to="/admission.html"><i className="fas fa-university" aria-hidden="true" /> University Admission</Link>}
+              {ministry === 'education' && <Link to="/admission.html" data-bn="বিশ্ববিদ্যালয় ভর্তি"><i className="fas fa-university" aria-hidden="true" /> University Admission</Link>}
             </nav>
           </> : <>
           <Link className="dashboard-brand" to="/dashboard.html" aria-label="NationX citizen portal">
@@ -115,12 +116,13 @@ export default function CitizenShell({ children, pageStyles = [], ministry, sect
             <div className="user-avatar">{profile.profile_image ? <img src={resolveAssetUrl(profile.profile_image)} alt="Citizen profile" /> : <i className="fas fa-user" />}</div>
             <h3>{profile.name || 'Citizen'}</h3><p>NID: {profile.nid || '—'}</p>
           </Link>
+          <div className="nx-sidebar-heritage" aria-hidden="true"><span>আমার বাংলাদেশ</span><i /><i /><i /></div>
           <nav className="nav-links">
-            <span className="dashboard-nav-label">Citizen workspace</span>
-            {navigation.map(([path, icon, label]) => (
-              <Link className={location.pathname === `/${path}` ? 'active' : ''} to={`/${path}`} key={path} onClick={() => setSidebarOpen(false)}><i className={`fas fa-${icon}`} /> {label}</Link>
+            <span className="dashboard-nav-label">Citizen workspace · নাগরিক সেবা</span>
+            {navigation.map(([path, icon, label, bn]) => (
+              <Link data-bn={bn} className={location.pathname === `/${path}` ? 'active' : ''} to={`/${path}`} key={path} onClick={() => setSidebarOpen(false)}><i className={`fas fa-${icon}`} /> {label}</Link>
             ))}
-            <button className="react-nav-button dashboard-logout" type="button" onClick={logout}><i className="fas fa-sign-out-alt" /> Logout</button>
+            <button className="react-nav-button dashboard-logout" data-bn="নিরাপদ প্রস্থান" type="button" onClick={logout}><i className="fas fa-sign-out-alt" /> Logout</button>
           </nav>
           </>}
         </aside>

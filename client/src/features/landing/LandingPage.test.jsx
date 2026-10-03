@@ -9,6 +9,21 @@ import { AuthProvider } from '../../context/AuthContext.jsx';
 vi.mock('./Landscape.jsx', () => ({ default: () => <div data-renderer="static-test" /> }));
 
 describe('public landing entry', () => {
+  it('supports keyboard selection of the six seasons and pausing the village', async () => {
+    const user = userEvent.setup(); render(<LandingPage />);
+    const spring = screen.getByRole('tab', { name: /Spring/ });
+    expect(spring).toHaveAttribute('aria-selected', 'true');
+    spring.focus(); await user.keyboard('{ArrowRight}');
+    const summer = screen.getByRole('tab', { name: /Summer/ });
+    expect(summer).toHaveFocus(); expect(summer).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tabpanel')).toHaveAttribute('data-season', 'summer');
+    await user.keyboard('{ArrowRight}');
+    expect(screen.getByRole('tabpanel')).toHaveAttribute('data-season', 'monsoon');
+    expect(screen.getByRole('heading', { name: 'When the rain brings us closer.' })).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Pause village animation' }));
+    expect(screen.getByRole('button', { name: 'Play village animation' })).toHaveAttribute('aria-pressed', 'true');
+  });
+
   it('offers real service destinations and honest medicine/prototype disclosures without API requests', () => {
     const fetch = vi.fn(); vi.stubGlobal('fetch', fetch);
     const { unmount } = render(<LandingPage />);

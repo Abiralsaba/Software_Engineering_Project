@@ -7,16 +7,17 @@ import { useStylesheets } from '../../hooks/useStylesheets.js';
 import { apiRequest } from '../../services/api.js';
 import { alerts } from '../../utils/alerts.js';
 import ServiceRequestModal from './ServiceRequestModal.jsx';
+import BengaliBackdrop from './BengaliBackdrop.jsx';
 
 const navigation = [
-  ['documents.html', 'folder', 'My Documents'],
-  ['history.html', 'history', 'History'],
-  ['todo.html', 'tasks', 'To Do'],
-  ['community.html', 'users', 'Community'],
-  ['market.html', 'chart-line', 'Market Info'],
-  ['events.html', 'bullhorn', 'Notices'],
-  ['education.html', 'graduation-cap', 'Education'],
-  ['contact.html', 'envelope', 'Contact']
+  ['documents.html', 'folder', 'My Documents', 'আমার নথি'],
+  ['history.html', 'history', 'History', 'সেবার ইতিহাস'],
+  ['todo.html', 'tasks', 'To Do', 'করণীয়'],
+  ['community.html', 'users', 'Community', 'কমিউনিটি'],
+  ['market.html', 'chart-line', 'Market Info', 'বাজার তথ্য'],
+  ['events.html', 'bullhorn', 'Notices', 'সরকারি নোটিশ'],
+  ['education.html', 'graduation-cap', 'Education', 'শিক্ষা সেবা'],
+  ['contact.html', 'envelope', 'Contact', 'যোগাযোগ']
 ];
 
 function resolveAssetUrl(value) {
@@ -97,15 +98,8 @@ export default function DashboardPage() {
   const stats = dashboard?.stats || {};
 
   return (
-    <div className="nationx-dashboard">
-      <div className="dashboard-ambient" aria-hidden="true">
-        <span className="dashboard-orb dashboard-orb-green" />
-        <span className="dashboard-orb dashboard-orb-red" />
-        <span className="dashboard-orb dashboard-orb-gold" />
-        <span className="dashboard-grid-pattern" />
-        <span className="dashboard-wave dashboard-wave-one" />
-        <span className="dashboard-wave dashboard-wave-two" />
-      </div>
+    <div className="nationx-dashboard nationx-village-dashboard">
+      <BengaliBackdrop />
       <button className={`react-sidebar-toggle ${sidebarOpen ? 'is-open' : ''}`} type="button" aria-label={sidebarOpen ? 'Close menu' : 'Toggle navigation'} onClick={() => setSidebarOpen(value => !value)}><i className={`fas ${sidebarOpen ? 'fa-xmark' : 'fa-bars'}`} /></button>
       {sidebarOpen && <button className="react-sidebar-overlay" aria-label="Close navigation" onClick={() => setSidebarOpen(false)} />}
       <div className="dashboard-container">
@@ -118,11 +112,12 @@ export default function DashboardPage() {
             <div className="user-avatar">{user.photo_url ? <img src={resolveAssetUrl(user.photo_url)} alt="Citizen profile" /> : <i className="fas fa-user" />}</div>
             <h3>{user.name || 'Citizen'}</h3><p>NID: {user.nid || '—'}</p>
           </Link>
+          <div className="nx-sidebar-heritage" aria-hidden="true"><span>আমার বাংলাদেশ</span><i /><i /><i /></div>
           <nav className="nav-links">
-            <span className="dashboard-nav-label">Citizen workspace</span>
-            <Link className="active" to="/dashboard.html"><i className="fas fa-home" /> Dashboard</Link>
-            {navigation.map(([path, icon, label]) => <Link to={`/${path}`} key={path} onClick={() => setSidebarOpen(false)}><i className={`fas fa-${icon}`} /> {label}</Link>)}
-            <button className="react-nav-button dashboard-logout" type="button" onClick={logout}><i className="fas fa-sign-out-alt" /> Logout</button>
+            <span className="dashboard-nav-label">Citizen workspace · নাগরিক সেবা</span>
+            <Link className="active" data-bn="ড্যাশবোর্ড" to="/dashboard.html"><i className="fas fa-home" /> Dashboard</Link>
+            {navigation.map(([path, icon, label, bn]) => <Link data-bn={bn} to={`/${path}`} key={path} onClick={() => setSidebarOpen(false)}><i className={`fas fa-${icon}`} /> {label}</Link>)}
+            <button className="react-nav-button dashboard-logout" data-bn="নিরাপদ প্রস্থান" type="button" onClick={logout}><i className="fas fa-sign-out-alt" /> Logout</button>
           </nav>
         </aside>
 
@@ -133,8 +128,8 @@ export default function DashboardPage() {
                 <span className="dashboard-eyebrow"><i className="fas fa-shield-halved" /> Secure citizen workspace</span>
                 <h1>Citizen Dashboard</h1>
                 <p>Welcome back, <strong>{user.name || 'Citizen'}</strong>. Your government services are ready.</p>
+                <button className="btn-primary react-request-button" type="button" onClick={() => setServiceModal(true)}><i className="fas fa-plus" /><span>New Request</span></button>
               </div>
-              <button className="btn-primary react-request-button" type="button" onClick={() => setServiceModal(true)}><i className="fas fa-plus" /><span>New Request</span></button>
             </div>
             {error && <div className="react-dashboard-error" role="alert">{error}<button type="button" onClick={loadDashboard}>Retry</button></div>}
 

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { smooth } from './sceneTimeline.js';
+import { addVillageLife } from './villageLife.js';
 
 export const riverX = z => Math.sin(z * .068) * 6 + Math.sin(z * .145) * 1.4;
 const riverWidth = z => 3.5 + Math.sin(z * .037) * .55;
@@ -250,9 +251,11 @@ export function createLandscape(scene, compact) {
   lineBatches.forEach(({material,points})=>{
     const geometry=new THREE.BufferGeometry(); geometry.setAttribute('position',new THREE.Float32BufferAttribute(points,3)); geometries.add(geometry); root.add(new THREE.LineSegments(geometry,material));
   });
+  const villageLife = addVillageLife(scene, groundY, riverX);
   return {
     locations: locations.map(site => new THREE.Vector3(site.x, groundY(site.x, site.z) + 3, site.z)),
     update(progress, time) {
+      villageLife.update(time);
       waterMat.uniforms.time.value = time;
       const z = 9 - smooth(.05, .66, progress) * 45;
       boat.position.set(riverX(z) + .7, .15 + Math.sin(time * .6) * .025, z);
@@ -262,6 +265,6 @@ export function createLandscape(scene, compact) {
       highlights.forEach((m, i) => { m.emissiveIntensity = smooth(.54 + i * .065, .64 + i * .065, progress) * .45; });
       paths.forEach((line, i) => line.geometry.setDrawRange(0, Math.floor(smooth(.55 + i * .055, .77 + i * .055, progress) * 91)));
     },
-    dispose() { leaves.dispose(); trunks.dispose(); geometries.forEach(geo => geo.dispose()); materials.forEach(material => material.dispose()); root.removeFromParent(); }
+    dispose() { villageLife.dispose(); leaves.dispose(); trunks.dispose(); geometries.forEach(geo => geo.dispose()); materials.forEach(material => material.dispose()); root.removeFromParent(); }
   };
 }

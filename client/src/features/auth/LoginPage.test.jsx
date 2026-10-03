@@ -23,6 +23,23 @@ function jsonResponse(data) {
 }
 
 describe('citizen login workflow', () => {
+  it('changes courtyard lighting without losing input and reveals passwords on request', async () => {
+    const user = userEvent.setup();
+    render(<MemoryRouter><AuthProvider><LoginPage /></AuthProvider></MemoryRouter>);
+    await user.type(screen.getByLabelText(/Email Address/i), 'citizen@example.test');
+    const password = screen.getByLabelText(/^Password/i);
+    await user.type(password, 'example-password');
+    await user.click(screen.getByRole('button', { name: 'Dusk', exact: true }));
+    expect(screen.getByRole('button', { name: 'Dusk', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByLabelText(/Email Address/i)).toHaveValue('citizen@example.test');
+    expect(password).toHaveAttribute('type', 'password');
+    await user.click(screen.getByRole('button', { name: 'Show password' }));
+    expect(password).toHaveAttribute('type', 'text');
+    expect(password).toHaveValue('example-password');
+    await user.click(screen.getByRole('button', { name: 'Hide password' }));
+    expect(password).toHaveAttribute('type', 'password');
+  });
+
   it('shows a readable applicant mode and allows it to be selected', async () => {
     const user = userEvent.setup();
     render(<MemoryRouter><AuthProvider><LoginPage /></AuthProvider></MemoryRouter>);
@@ -53,6 +70,7 @@ describe('citizen login workflow', () => {
     await user.type(screen.getByLabelText(/^Password/i), 'NationX-Demo-2026!');
     await user.click(screen.getByRole('button', { name: /Login to Portal/i }));
 
+    await user.click(await screen.findByRole('button', { name: /Continue to your workspace/ }));
     expect(await screen.findByRole('heading', { name: 'React dashboard reached' })).toBeInTheDocument();
     expect(localStorage.getItem('token')).toBe('signed-token');
   });

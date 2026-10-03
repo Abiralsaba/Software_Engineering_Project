@@ -60,8 +60,26 @@ const services = {
   stipend: ['hand-holding-usd', 'Stipends & Grants', 'Apply for educational grants and stipends']
 };
 
+const serviceBangla = {
+  overview: 'সেবার সারসংক্ষেপ', dashboard: 'কর সেবার সারসংক্ষেপ',
+  'health-card': 'ডিজিটাল স্বাস্থ্য কার্ড', vaccination: 'টিকাদান সেবা', hospitals: 'হাসপাতাল খুঁজুন',
+  appointments: 'চিকিৎসা অ্যাপয়েন্টমেন্ট', ambulance: 'অ্যাম্বুলেন্স সেবা', complaints: 'অভিযোগ ও অনুসরণ',
+  'medicine-identifier': 'ওষুধ শনাক্তকরণ', subsidies: 'কৃষি ভর্তুকি', 'crop-reports': 'ফসল প্রতিবেদন',
+  expert: 'বিশেষজ্ঞ পরামর্শ', market: 'কৃষক বাজার', training: 'প্রশিক্ষণ কর্মসূচি',
+  profile: 'আমার এনআইডি', correction: 'এনআইডি সংশোধন', reissue: 'পুনঃইস্যু আবেদন',
+  'smart-card': 'স্মার্ট কার্ড', address: 'ঠিকানা পরিবর্তন', verification: 'পরিচয় যাচাই',
+  family: 'পারিবারিক তথ্য', applications: 'আমার আবেদন', information: 'সেবা তথ্য',
+  apply: 'ই-পাসপোর্ট আবেদন', documents: 'সহায়ক নথি', track: 'আবেদন অনুসরণ',
+  fees: 'ফি হিসাব', offices: 'পাসপোর্ট অফিস', payment: 'পেমেন্ট তথ্য',
+  connection: 'পানি সংযোগ', bill: 'বিল পরিশোধ', quality: 'পানির মান', projects: 'পানি উন্নয়ন প্রকল্প',
+  records: 'ভূমি রেকর্ড', mutation: 'ই-নামজারি', status: 'আবেদনের অবস্থা', tax: 'ভূমি উন্নয়ন কর',
+  tin: 'টিআইএন নিবন্ধন', ereturn: 'ই-রিটার্ন দাখিল', calculator: 'কর হিসাব', payments: 'কর পরিশোধ',
+  challan: 'ট্রেজারি চালান', vat: 'ভ্যাট ও বিআইএন', notices: 'কর নোটিশ', zones: 'কর অঞ্চল',
+  results: 'পরীক্ষার ফলাফল', stipend: 'উপবৃত্তি ও অনুদান'
+};
+
 export function ministryService(section) {
   const id = typeof section === 'string' ? section : section.id;
   const [icon, label, description] = services[id] || ['circle', id, ''];
-  return { id, icon, label, description };
+  return { id, icon, label, description, bn: serviceBangla[id] || description };
 }

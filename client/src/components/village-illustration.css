@@ -1,0 +1,20 @@
+.nx-village-art{position:relative;isolation:isolate;width:100%;height:100%;min-height:300px;overflow:hidden}
+.nx-village-canvas,.nx-village-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.nx-village-canvas{opacity:0;transition:opacity .8s}.nx-village-poster{opacity:.8;transition:opacity .8s;mask-image:radial-gradient(ellipse,#000 35%,transparent 73%)}
+.nx-village-art.is-rendered .nx-village-canvas{opacity:1}.nx-village-art.is-rendered .nx-village-poster{opacity:0}
+.nx-village-sun{position:absolute;width:22%;aspect-ratio:1;border-radius:50%;background:#d98569;top:12%;left:52%;box-shadow:0 0 70px #daa77925;transition:background 1s,transform 1s;animation:nx-village-sunrise 12s ease-in-out infinite alternate}
+.nx-village-orbit{position:absolute;width:54%;aspect-ratio:1;border:1px solid #bdad7830;border-radius:50%;top:6%;left:27%;transform:rotate(-25deg)}
+.nx-village-orbit:after{content:'';position:absolute;inset:15px;border:1px dashed #bdad7825;border-radius:50%}
+.nx-village-weather{position:absolute;inset:0;pointer-events:none}
+.nx-village-weather i{position:absolute;top:25%;width:3px;height:3px;border-radius:50%;background:#e0d6ab;opacity:0;animation:nx-village-motes 9s calc(var(--n) * -.65s) infinite}
+.nx-village-art[data-mood=monsoon] .nx-village-sun{background:#afc4ba60;transform:translateY(-10px)}
+.nx-village-art[data-mood=monsoon] .nx-village-weather i{width:1px;height:25px;border-radius:0;background:#a4c8c6;animation:nx-village-rain 1.3s calc(var(--n) * -.16s) linear infinite}
+.nx-village-art[data-mood=dusk] .nx-village-sun{background:#f3ddba;box-shadow:0 0 70px #ffcc7630;transform:scale(.55)}
+.nx-village-art[data-mood=harvest] .nx-village-sun,.nx-village-art[data-mood=summer] .nx-village-sun{background:#e0a458}
+.nx-village-art[data-mood=winter] .nx-village-sun{background:#d5dfcc99}.nx-village-art[data-mood=winter]:after{content:'';position:absolute;inset:40% 0 10%;background:linear-gradient(transparent,#d6e5d922,transparent);pointer-events:none}
+.nx-village-art[data-mood=spring] .nx-village-weather i{background:#e6a38c;width:6px;height:4px}
+.nx-village-art.is-paused *{animation-play-state:paused!important}.nx-village-art.is-paused .nx-village-canvas{opacity:1;transition:none}
+@keyframes nx-village-sunrise{to{translate:0 -8px}}
+@keyframes nx-village-motes{0%,100%{opacity:0;transform:translate(0,0)}30%,60%{opacity:.6}80%{transform:translate(35px,190px) rotate(70deg);opacity:0}}
+@keyframes nx-village-rain{from{opacity:0;transform:translate(0,-90px)}30%{opacity:.4}to{opacity:0;transform:translate(-65px,380px)}}
+@media(prefers-reduced-motion:reduce){.nx-village-art *{animation:none!important;transition:none!important}}

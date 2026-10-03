@@ -19,7 +19,7 @@ test('landing: desktop 3D, anchors, public back navigation and no public API cal
   await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Bangladesh,');
   await expect(page.locator('.nx-scene-ready')).toBeVisible();
-  await page.locator('canvas').evaluate(canvas => canvas.getContext('webgl2').getExtension('WEBGL_lose_context').loseContext());
+  await page.locator('.nx-landscape-canvas').evaluate(canvas => canvas.getContext('webgl2').getExtension('WEBGL_lose_context').loseContext());
   await expect(page.locator('.nx-landscape-poster')).toHaveCSS('opacity', '1');
   await expect(page.locator('.nx-cinematic')).toHaveAttribute('data-motion', 'false');
   const destinations = await page.locator('.nx-service-row, .nx-section-intro .nx-text-link').evaluateAll(links => links.map(link => link.getAttribute('href')));
@@ -70,11 +70,11 @@ test('landing: five camera compositions, native forward/reverse scroll and non-o
       const section = document.querySelector('.nx-cinematic'), stage = document.querySelector('.nx-stage');
       scrollTo({ top: section.getBoundingClientRect().top + scrollY + progress * (section.offsetHeight - stage.clientHeight), behavior: 'instant' });
     }, progress);
-    await expect.poll(async () => Number(await page.locator('canvas').getAttribute('data-progress'))).toBeCloseTo(progress, 2);
+    await expect.poll(async () => Number(await page.locator('.nx-landscape-canvas').getAttribute('data-progress'))).toBeCloseTo(progress, 2);
   }
   for (const progress of [0, .25, .55, .8, 1]) {
     await seek(progress);
-    cameras.push(await page.locator('canvas').getAttribute('data-camera'));
+    cameras.push(await page.locator('.nx-landscape-canvas').getAttribute('data-camera'));
     await page.screenshot({ path: testInfo.outputPath(`scene-${Math.round(progress * 100)}.png`) });
     expect(await page.locator('.nx-stage').evaluate(el => Math.abs(el.getBoundingClientRect().top))).toBeLessThan(2);
     const bounds = await page.evaluate(() => {
@@ -87,7 +87,7 @@ test('landing: five camera compositions, native forward/reverse scroll and non-o
     expect(bounds.every(bound => bound.inside && !bound.overlaps)).toBe(true);
   }
   expect(new Set(cameras).size).toBe(5);
-  for (const [i, progress] of [1, .8, .55, .25, 0].entries()) { await seek(progress); expect(await page.locator('canvas').getAttribute('data-camera')).toBe(cameras[4 - i]); }
+  for (const [i, progress] of [1, .8, .55, .25, 0].entries()) { await seek(progress); expect(await page.locator('.nx-landscape-canvas').getAttribute('data-camera')).toBe(cameras[4 - i]); }
   await seek(.8);
   for (const [name, href] of [['Identity', '/documents.html'], ['Health', '/health.html'], ['Education', '/education.html']]) {
     await expect(page.locator('.nx-place').filter({ hasText: name })).toBeVisible();
@@ -114,9 +114,9 @@ test('landing: synthetic citizen sign-in and existing Health/Medicine route', as
   await page.locator('#citizen-email').fill('alice.demo@nationx.test');
   await page.locator('#citizen-password').fill('NationX-Demo-2026!');
   await page.getByRole('button', { name: /Login to Portal/ }).click();
-  await expect(page.locator('.swal2-confirm')).toBeVisible();
-  await expect(page.locator('.swal2-title')).toHaveText('Login Successful!');
-  await page.locator('.swal2-confirm').click();
+  await expect(page.locator('.nx-login-arrival')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Welcome home.' })).toBeVisible();
+  await page.getByRole('button', { name: /Continue to your workspace/ }).click();
   await expect(page).toHaveURL(/dashboard\.html/);
   await page.goto('/index.html');
   await page.getByRole('link', { name: 'Explore Medicine Identifier' }).click();
