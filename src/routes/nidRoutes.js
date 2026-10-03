@@ -134,7 +134,7 @@ router.get('/dashboard', async (req, res) => {
     try {
         // Get user's NID profile
         const [profile] = await db.query(
-            'SELECT * FROM nid_profiles WHERE user_id = ?',
+            `SELECT n.*, COALESCE(NULLIF(n.photo_url, ''), r.photo_url) AS photo_url FROM nid_profiles n JOIN reg_info r ON r.id = n.user_id WHERE n.user_id = ?`,
             [req.user.id]
         );
 
@@ -142,7 +142,7 @@ router.get('/dashboard', async (req, res) => {
         let nidData = null;
         if (profile.length === 0) {
             const [regInfo] = await db.query(
-                'SELECT nid, name, mobile, email, dob as date_of_birth FROM reg_info WHERE id = ?',
+                'SELECT nid, name, mobile, email, photo_url, dob as date_of_birth FROM reg_info WHERE id = ?',
                 [req.user.id]
             );
             if (regInfo.length > 0) {
@@ -152,7 +152,8 @@ router.get('/dashboard', async (req, res) => {
                     mobile_primary: regInfo[0].mobile,
                     email: regInfo[0].email,
                     date_of_birth: regInfo[0].date_of_birth,
-                    profile_status: 'Pending',
+                    photo_url: regInfo[0].photo_url,
+                    profile_status: 'Profile incomplete',
                     has_full_profile: false
                 };
             }
@@ -206,7 +207,7 @@ router.get('/dashboard', async (req, res) => {
 router.get('/profile', async (req, res) => {
     try {
         const [profile] = await db.query(
-            'SELECT * FROM nid_profiles WHERE user_id = ?',
+            `SELECT n.*, COALESCE(NULLIF(n.photo_url, ''), r.photo_url) AS photo_url FROM nid_profiles n JOIN reg_info r ON r.id = n.user_id WHERE n.user_id = ?`,
             [req.user.id]
         );
 
@@ -225,7 +226,9 @@ router.get('/profile', async (req, res) => {
                         name_en: regInfo[0].name,
                         mobile_primary: regInfo[0].mobile,
                         email: regInfo[0].email,
-                        date_of_birth: regInfo[0].dob
+                        date_of_birth: regInfo[0].dob,
+                        photo_url: regInfo[0].photo_url,
+                        has_full_profile: false
                     }
                 });
             }

@@ -30,6 +30,8 @@ function normalizeAssignment(row) {
 async function loadAdminAccess(adminId, queryable = db) {
     const [rows] = await queryable.query(
         `SELECT a.id, a.name, a.email, a.status,
+                a.requested_domain_code, a.requested_scope_level,
+                a.requested_division_id, a.access_request_note,
                 r.role_type, r.domain_code, r.division_id,
                 d.name AS domain_name, d.name_bn AS domain_name_bn,
                 d.parent_authority,
@@ -45,7 +47,72 @@ async function loadAdminAccess(adminId, queryable = db) {
     );
 
     if (!rows.length) return null;
-    const admin = rows[0];
+    let admin = rows[0];
+
+    if (admin.status === 'approved' && !admin.role_type) {
+        let role = ROLES.SUPER_ADMIN;
+        let domainCode = null;
+        let divisionId = null;
+
+        const isSuper =
+            (admin.email && admin.email.toLowerCase().startsWith('admin@')) ||
+            (admin.access_request_note && admin.access_request_note.toLowerCase().includes('all')) ||
+            !admin.requested_domain_code;
+
+        if (!isSuper && admin.requested_domain_code && DOMAIN_CODES.includes(admin.requested_domain_code)) {
+            if (admin.requested_scope_level === 'division' && admin.requested_division_id) {
+                role = ROLES.DIVISION_ADMIN;
+                domainCode = admin.requested_domain_code;
+                divisionId = Number(admin.requested_division_id);
+            } else {
+                role = ROLES.DOMAIN_ADMIN;
+                domainCode = admin.requested_domain_code;
+                divisionId = null;
+            }
+        }
+
+        try {
+            await queryable.query(
+                `INSERT INTO admin_role_assignments
+                    (admin_id, role_type, domain_code, division_id, is_active)
+                 VALUES (?, ?, ?, ?, 1)
+                 ON DUPLICATE KEY UPDATE
+                    role_type = VALUES(role_type),
+                    domain_code = VALUES(domain_code),
+                    division_id = VALUES(division_id),
+                    is_active = 1`,
+                [admin.id, role, domainCode, divisionId]
+            );
+
+            const [reloaded] = await queryable.query(
+                `SELECT a.id, a.name, a.email, a.status,
+                        a.requested_domain_code, a.requested_scope_level,
+                        a.requested_division_id, a.access_request_note,
+                        r.role_type, r.domain_code, r.division_id,
+                        d.name AS domain_name, d.name_bn AS domain_name_bn,
+                        d.parent_authority,
+                        v.name AS division_name, v.name_bn AS division_name_bn
+                 FROM admins a
+                 LEFT JOIN admin_role_assignments r
+                   ON r.admin_id = a.id AND r.is_active = 1
+                 LEFT JOIN admin_service_domains d ON d.code = r.domain_code
+                 LEFT JOIN divisions v ON v.id = r.division_id
+                 WHERE a.id = ?
+                 LIMIT 1`,
+                [adminId]
+            );
+            if (reloaded.length) {
+                admin = reloaded[0];
+            }
+        } catch (error) {
+            console.error('Auto-assign admin role assignment failed:', error.message);
+            // In-memory fallback to avoid blocking the approved admin
+            admin.role_type = role;
+            admin.domain_code = domainCode;
+            admin.division_id = divisionId;
+        }
+    }
+
     return {
         id: admin.id,
         name: admin.name,

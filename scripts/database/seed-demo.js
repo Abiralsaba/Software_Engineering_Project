@@ -218,7 +218,11 @@ async function seedShop(connection) {
         ['নাগরিক নোটবুক সেট', 'দুটি হার্ডকভার নোটবুক ও একটি কলমের ডেমো সেট।', 390, '/images/demo/shop/jute-organizer.png', 60],
         ['বাংলাদেশ ভ্রমণ স্মারক বই', 'প্রাকৃতিক ও সাংস্কৃতিক ঐতিহ্যভিত্তিক ছবির ডেমো সংস্করণ।', 550, '/images/demo/shop/civic-handbook.png', 35],
         ['পাটের উপহার প্যাক', 'স্থানীয় কারিগরের তৈরি পুনর্ব্যবহারযোগ্য উপহার সামগ্রী।', 720, '/images/demo/shop/jute-organizer.png', 30],
-        ['ডেস্ক মগ ও নোটবুক কম্বো', 'অফিস ও পড়াশোনার জন্য ব্যবহারিক উপহার কম্বো।', 790, '/images/demo/shop/eco-mug.png', 40]
+        ['ডেস্ক মগ ও নোটবুক কম্বো', 'অফিস ও পড়াশোনার জন্য ব্যবহারিক উপহার কম্বো।', 790, '/images/demo/shop/eco-mug.png', 40],
+        ['নকশিকাঁথা বুকমার্ক সেট', 'বাংলার লোকজ নকশা থেকে অনুপ্রাণিত ছয়টি পুনর্ব্যবহারযোগ্য বুকমার্ক।', 220, '/images/demo/shop/civic-handbook.png', 65],
+        ['পাটের নাগরিক ফাইল ফোল্ডার', 'আবেদনপত্র ও সরকারি নথি গুছিয়ে রাখার জন্য দেশীয় পাটের ফোল্ডার।', 360, '/images/demo/shop/jute-organizer.png', 48],
+        ['মাটির চা কাপ সেট', 'গ্রামীণ কারিগরের নকশায় তৈরি চারটি পুনর্ব্যবহারযোগ্য মাটির কাপ।', 460, '/images/demo/shop/eco-mug.png', 36],
+        ['লাল-সবুজ ক্যানভাস ব্যাগ', 'দৈনন্দিন বাজার ও বই বহনের জন্য মজবুত পুনর্ব্যবহারযোগ্য ব্যাগ।', 520, '/images/demo/shop/nationx-polo.png', 52]
     ];
     for (const [name, description, price, image_url, stock_quantity] of items) {
         await ensureRow(connection, 'shop_items', { name }, { description, price, image_url, stock_quantity }, true);
@@ -238,13 +242,17 @@ async function seedCommunity(connection, alice, bob) {
         ['কৃষক জ্ঞান ও বাজার নেটওয়ার্ক', 'ফসল ব্যবস্থাপনা, ন্যায্যমূল্য ও কৃষি প্রশিক্ষণের তথ্য বিনিময়ের ডেমো কমিউনিটি।', '/images/demo/community/farmers-network.png', alice.id],
         ['সবুজ পাড়া স্বেচ্ছাসেবক দল', 'পরিচ্ছন্নতা, পুনর্ব্যবহার ও স্থানীয় পরিবেশ উদ্যোগের সমন্বয় প্ল্যাটফর্ম।', '/images/demo/community/green-neighbourhood.png', bob.id],
         ['নারী উদ্যোক্তা সহায়তা কেন্দ্র', 'হস্তশিল্প, ডিজিটাল বিপণন ও ক্ষুদ্র ব্যবসা শেখার অন্তর্ভুক্তিমূলক কমিউনিটি।', '/images/demo/community/women-entrepreneurs.png', alice.id],
-        ['ডিজিটাল দক্ষতা শিক্ষার্থী ফোরাম', 'অনলাইন সরকারি সেবা, নিরাপদ ইন্টারনেট ও কর্মদক্ষতা শেখার ডেমো গ্রুপ।', '/images/demo/community/digital-learners.png', bob.id]
+        ['ডিজিটাল দক্ষতা শিক্ষার্থী ফোরাম', 'অনলাইন সরকারি সেবা, নিরাপদ ইন্টারনেট ও কর্মদক্ষতা শেখার ডেমো গ্রুপ।', '/images/demo/community/digital-learners.png', bob.id],
+        ['নদী ও জলাশয় রক্ষা মঞ্চ', 'স্থানীয় নদী, খাল ও পুকুর পরিচ্ছন্ন রাখা এবং পানির মান পর্যবেক্ষণের নাগরিক উদ্যোগ।', '/images/demo/community/green-neighbourhood.png', alice.id],
+        ['গ্রামীণ পাঠাগার ও শিক্ষা চক্র', 'শিশু-কিশোর পাঠাভ্যাস, বই বিনিময় এবং বৃত্তি ও ভর্তি তথ্য ভাগ করার কমিউনিটি।', '/images/demo/community/digital-learners.png', bob.id]
     ];
     const postTexts = [
         ['আগামী শনিবার বোরো ধানের রোগবালাই ব্যবস্থাপনা নিয়ে উন্মুক্ত আলোচনা হবে। অংশগ্রহণের আগে প্রশ্ন লিখে রাখুন।', 'আজকের বাজারদর তালিকায় ধান ও সবজির হালনাগাদ মূল্য যোগ করা হয়েছে। বিক্রির আগে স্থানীয় দর যাচাই করুন।'],
         ['শুক্রবার সকাল ৮টায় পরিচ্ছন্নতা কার্যক্রম শুরু হবে। গ্লাভস ও আলাদা বর্জ্য ব্যাগ প্রস্তুত থাকবে।', 'প্লাস্টিক, কাগজ ও জৈব বর্জ্য আলাদা করার সহজ নির্দেশিকা গ্রুপের নথিতে দেওয়া হয়েছে।'],
         ['পাটজাত পণ্যের মান নির্ধারণ ও ছবি তোলার ছোট কর্মশালা আগামী সপ্তাহে অনুষ্ঠিত হবে।', 'নতুন উদ্যোক্তাদের জন্য মূল্য নির্ধারণ, প্যাকেজিং ও অনলাইন নিরাপত্তা নিয়ে প্রশ্নোত্তর পর্ব রাখা হয়েছে।'],
-        ['আগামী সেশনে অনলাইন আবেদনপত্র পূরণ, শক্তিশালী পাসওয়ার্ড এবং ফিশিং শনাক্তকরণ শেখানো হবে।', 'ল্যাপটপ না থাকলেও মোবাইল নিয়ে অংশ নেওয়া যাবে। অনুশীলনের জন্য ডেমো তথ্য ব্যবহার করুন।']
+        ['আগামী সেশনে অনলাইন আবেদনপত্র পূরণ, শক্তিশালী পাসওয়ার্ড এবং ফিশিং শনাক্তকরণ শেখানো হবে।', 'ল্যাপটপ না থাকলেও মোবাইল নিয়ে অংশ নেওয়া যাবে। অনুশীলনের জন্য ডেমো তথ্য ব্যবহার করুন।'],
+        ['শনিবার সকালে খালের তিনটি স্থানে পানির স্বচ্ছতা ও বর্জ্যের অবস্থা পর্যবেক্ষণ করা হবে।', 'পানি দূষণের ছবি তোলার সময় ব্যক্তিগত তথ্য বা মানুষের মুখ প্রকাশ না করার অনুরোধ করা হলো।'],
+        ['এই মাসের পাঠচক্রে মুক্তিযুদ্ধভিত্তিক শিশুতোষ বই পড়া ও আলোচনা হবে।', 'কলেজ ভর্তি ও বৃত্তি আবেদনের নির্ভরযোগ্য লিংকগুলো গ্রুপের নথি বিভাগে যোগ করা হয়েছে।']
     ];
     for (const [index, [name, description, cover_image, creator]] of groups.entries()) {
         const groupId = await ensureRow(connection, 'community_groups', { name }, { description, cover_image, created_by: creator, status: 'approved' }, true);
@@ -410,7 +418,11 @@ async function seedNoticesAndMarkets(connection) {
         ['Coarse Rice', 'মোটা চাল', 'Rice', 'kg', 55], ['Fine Lentil', 'ভালো মানের মসুর ডাল', 'Grains', 'kg', 145],
         ['Bottle Gourd', 'লাউ', 'Vegetables', 'piece', 65], ['Eggplant', 'বেগুন', 'Vegetables', 'kg', 70],
         ['Papaya', 'পেঁপে', 'Fruits', 'kg', 55], ['Pangas Fish', 'পাঙ্গাশ মাছ', 'Fish', 'kg', 220],
-        ['Liquid Milk', 'তরল দুধ', 'Dairy', 'litre', 95], ['Red Chili Powder', 'মরিচ গুঁড়া', 'Spices', 'kg', 520]
+        ['Liquid Milk', 'তরল দুধ', 'Dairy', 'litre', 95], ['Red Chili Powder', 'মরিচ গুঁড়া', 'Spices', 'kg', 520],
+        ['Medium Rice', 'মাঝারি চাল', 'Rice', 'kg', 68], ['Soybean Oil', 'সয়াবিন তেল', 'Oil', 'litre', 175],
+        ['Potato', 'আলু', 'Vegetables', 'kg', 42], ['Onion', 'পেঁয়াজ', 'Vegetables', 'kg', 75],
+        ['Rohu Fish', 'রুই মাছ', 'Fish', 'kg', 360], ['Broiler Chicken', 'ব্রয়লার মুরগি', 'Meat', 'kg', 195],
+        ['Banana', 'কলা', 'Fruits', 'dozen', 110], ['Turmeric Powder', 'হলুদ গুঁড়া', 'Spices', 'kg', 390]
     ];
     for (const [item_name, item_name_bn, category, unit, price] of markets) {
         await ensureRow(connection, 'market_prices', { item_name, effective_date: '2026-09-25' }, { item_name_bn, category, unit, price });
@@ -419,11 +431,15 @@ async function seedNoticesAndMarkets(connection) {
         ['স্বাস্থ্যসেবা অ্যাপয়েন্টমেন্টের ডেমো সময়সূচি', 'স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়', 'General'],
         ['কৃষি প্রশিক্ষণে নিবন্ধনের বিজ্ঞপ্তি', 'কৃষি মন্ত্রণালয়', 'Circular'],
         ['পানি সংযোগ আবেদন যাচাই নির্দেশনা', 'পানি সম্পদ মন্ত্রণালয়', 'General'],
-        ['অনলাইন কর রিটার্ন সহায়তা সপ্তাহ', 'জাতীয় রাজস্ব বোর্ড', 'Circular']
+        ['অনলাইন কর রিটার্ন সহায়তা সপ্তাহ', 'জাতীয় রাজস্ব বোর্ড', 'Circular'],
+        ['স্মার্ট জাতীয় পরিচয়পত্র তথ্য হালনাগাদ নির্দেশিকা', 'নির্বাচন কমিশন', 'General'],
+        ['ই-পাসপোর্ট আবেদনকারীদের নথি যাচাই ক্যাম্প', 'ইমিগ্রেশন ও পাসপোর্ট অধিদপ্তর', 'Circular'],
+        ['বিশ্ববিদ্যালয় ভর্তি সহায়তা কেন্দ্রের সময়সূচি', 'শিক্ষা মন্ত্রণালয়', 'General'],
+        ['স্থানীয় হস্তশিল্প মেলার অংশগ্রহণ আহ্বান', 'শিল্প মন্ত্রণালয়', 'Tender']
     ];
     for (const [index, [title_bn, department, category]] of notices.entries()) {
         await ensureRow(connection, 'govt_notices', { reference_no: `DEMO-NOTICE-2026-${String(index + 1).padStart(2, '0')}` }, {
-            title: `Demo public notice ${index + 1}`, title_bn, department, category, priority: index === 1 ? 'High' : 'Medium',
+            title: `Demo public notice ${index + 1}`, title_bn, department, category, priority: index === 1 || index === 5 ? 'High' : 'Medium',
             content: 'এটি NationX স্থানীয় প্রদর্শনের জন্য তৈরি নমুনা বিজ্ঞপ্তি। কোনো বাস্তব সরকারি নির্দেশনা নয়।',
             publish_date: '2026-09-20', expiry_date: '2026-12-31', status: 'Published'
         });
@@ -431,7 +447,7 @@ async function seedNoticesAndMarkets(connection) {
 }
 
 async function counts(connection) {
-    const tables = ['divisions', 'districts', 'upazilas', 'jsc_results', 'ssc_results', 'hsc_results', 'shop_items', 'community_groups', 'community_posts'];
+    const tables = ['divisions', 'districts', 'upazilas', 'jsc_results', 'ssc_results', 'hsc_results', 'shop_items', 'community_groups', 'community_posts', 'market_prices', 'govt_notices'];
     const result = {};
     for (const table of tables) {
         const [[row]] = await connection.query(`SELECT COUNT(*) AS count FROM ${qid(table)}`);
@@ -449,7 +465,7 @@ async function main() {
         if (!lock) throw new Error('Another demo seed is already running.');
         const before = await counts(connection);
         if (dryRun) {
-            console.log(JSON.stringify({ target, dry_run: true, current: before, planned: { divisions: 8, districts: 64, upazilas: 495, education_rows: 66, shop_items: 8, community_groups: 4 } }, null, 2));
+            console.log(JSON.stringify({ target, dry_run: true, current: before, planned: { divisions: 8, districts: 64, upazilas: 495, education_rows: 66, shop_items: 12, community_groups: 6, market_prices: 16, govt_notices: 8 } }, null, 2));
             return;
         }
         await ensureLocationColumns(connection);

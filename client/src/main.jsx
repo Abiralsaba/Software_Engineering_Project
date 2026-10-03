@@ -20,6 +20,7 @@ import './styles/service-pages.css';
 import './styles/admin-access.css';
 import 'virtual:legacy-ministry.css';
 import './styles/ministry-bridge.css';
+import './styles/navigation-polish.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

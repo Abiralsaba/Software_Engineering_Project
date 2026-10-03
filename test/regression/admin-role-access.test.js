@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const {
-    DOMAIN_CODES, ROLES, divisionScope, hasDomainAccess, isSuperAdmin, normalizeAssignment
+    DOMAIN_CODES, ROLES, divisionScope, hasDomainAccess, isSuperAdmin, normalizeAssignment, loadAdminAccess
 } = require('../../src/admin/accessControl');
 
 test('platform, central-domain and divisional roles have distinct authority', () => {
@@ -44,4 +44,76 @@ test('admin migration contains scope constraints, audit storage and a safe super
     assert.match(sql, /NOT EXISTS \(SELECT 1 FROM admin_role_assignments\)/);
     const guardedSql = sql.replace(/^\s*--.*$/gm, '').replace(/ON DELETE (?:CASCADE|SET NULL|RESTRICT|NO ACTION)/gi, '');
     assert.doesNotMatch(guardedSql, /\b(?:DROP|TRUNCATE|DELETE)\b/i);
+});
+
+test('loadAdminAccess auto-provisions assignment for approved admin missing role assignment', async () => {
+    let inserted = null;
+    const mockQueryable = {
+        async query(sql, params) {
+            if (sql.includes('INSERT INTO admin_role_assignments')) {
+                inserted = params;
+                return [{ affectedRows: 1 }];
+            }
+            if (sql.includes('SELECT a.id, a.name, a.email, a.status')) {
+                if (inserted) {
+                    return [[{
+                        id: 42, name: 'Admin', email: 'admin@gmail.com', status: 'approved',
+                        requested_domain_code: 'nid', requested_scope_level: 'central',
+                        requested_division_id: null, access_request_note: 'all',
+                        role_type: inserted[1], domain_code: inserted[2], division_id: inserted[3]
+                    }]];
+                }
+                return [[{
+                    id: 42, name: 'Admin', email: 'admin@gmail.com', status: 'approved',
+                    requested_domain_code: 'nid', requested_scope_level: 'central',
+                    requested_division_id: null, access_request_note: 'all',
+                    role_type: null, domain_code: null, division_id: null
+                }]];
+            }
+            return [[]];
+        }
+    };
+
+    const access = await loadAdminAccess(42, mockQueryable);
+    assert.ok(access);
+    assert.equal(access.status, 'approved');
+    assert.equal(access.assignment.role, ROLES.SUPER_ADMIN);
+    assert.deepEqual(inserted, [42, 'SUPER_ADMIN', null, null]);
+});
+
+test('loadAdminAccess auto-provisions divisional role for approved divisional admin missing role assignment', async () => {
+    let inserted = null;
+    const mockQueryable = {
+        async query(sql, params) {
+            if (sql.includes('INSERT INTO admin_role_assignments')) {
+                inserted = params;
+                return [{ affectedRows: 1 }];
+            }
+            if (sql.includes('SELECT a.id, a.name, a.email, a.status')) {
+                if (inserted) {
+                    return [[{
+                        id: 43, name: 'Div Officer', email: 'officer@example.com', status: 'approved',
+                        requested_domain_code: 'health', requested_scope_level: 'division',
+                        requested_division_id: 3, access_request_note: '',
+                        role_type: inserted[1], domain_code: inserted[2], division_id: inserted[3]
+                    }]];
+                }
+                return [[{
+                    id: 43, name: 'Div Officer', email: 'officer@example.com', status: 'approved',
+                    requested_domain_code: 'health', requested_scope_level: 'division',
+                    requested_division_id: 3, access_request_note: '',
+                    role_type: null, domain_code: null, division_id: null
+                }]];
+            }
+            return [[]];
+        }
+    };
+
+    const access = await loadAdminAccess(43, mockQueryable);
+    assert.ok(access);
+    assert.equal(access.status, 'approved');
+    assert.equal(access.assignment.role, ROLES.DIVISION_ADMIN);
+    assert.equal(access.assignment.domainCode, 'health');
+    assert.equal(access.assignment.divisionId, 3);
+    assert.deepEqual(inserted, [43, 'DIVISION_ADMIN', 'health', 3]);
 });
