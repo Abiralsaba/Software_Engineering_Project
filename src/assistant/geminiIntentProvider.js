@@ -1,6 +1,7 @@
 'use strict';
 const { z } = require('zod');
 const { geminiConfig, createGeminiClient } = require('../services/geminiClient');
+const { isTransientProviderError, numericStatus } = require('../services/aiFailover');
 const { fail } = require('./rules');
 const intents = ['OPEN_NID_SERVICE','CREATE_NID_APPLICATION','CONTINUE_NID_APPLICATION','CHECK_NID_STATUS','REPLACE_LOST_NID','CORRECT_EXISTING_NID','APPLY_FOR_SMART_CARD','REPEAT_LAST_MESSAGE','CORRECT_PREVIOUS_ANSWER','GO_BACK','CANCEL','UNKNOWN'];
 const schema = z.object({ schema_version: z.literal('nationx-assistant-intent-v1'), language: z.enum(['bn','en','bn-Latn']), service: z.literal('NID'), intent: z.enum(intents), entities: z.object({}).strict(), clarification_required: z.boolean() }).strict();
@@ -33,8 +34,9 @@ function keywordIntent(text) {
 }
 class GeminiIntentProvider {
   constructor(options = {}) { Object.assign(this, geminiConfig({ ...options, model: options.model || process.env.GEMINI_ASSISTANT_MODEL || process.env.GEMINI_MODEL })); this.client = options.client; }
+  isConfigured() { return process.env.GEMINI_ENABLED === 'true' && Boolean(this.apiKey); }
   async classify(text) {
-    if (process.env.GEMINI_ENABLED !== 'true' || !this.apiKey) throw fail(503, 'GEMINI_UNAVAILABLE', 'Language understanding is unavailable. Use the application buttons or manual form.');
+    if (!this.isConfigured()) throw Object.assign(fail(503, 'GEMINI_UNAVAILABLE', 'Language understanding is unavailable. Use the application buttons or manual form.'), { provider: 'gemini', transient: false });
     try {
       this.client ||= await createGeminiClient(this.apiKey);
       const result = await this.client.interactions.create({ model: this.model, store: false,
@@ -44,7 +46,16 @@ class GeminiIntentProvider {
         generation_config: { thinking_level: 'minimal', max_output_tokens: 500 }
       }, { timeout: this.timeoutMs, maxRetries: 0 });
       return schema.parse(JSON.parse(result.output_text || ''));
-    } catch { throw fail(502, 'GEMINI_UNAVAILABLE', 'Language understanding failed. Please use the application buttons or manual form.'); }
+    } catch (error) {
+      if (error?.name === 'SyntaxError' || error?.name === 'ZodError') {
+        throw Object.assign(fail(502, 'INVALID_PROVIDER_OUTPUT', 'Language understanding could not verify this request. Please choose an option or type it again.'), { provider: 'gemini', transient: false });
+      }
+      const status = numericStatus(error);
+      const configurationFailure = [400, 401, 403, 404].includes(status);
+      throw Object.assign(fail(status === 429 ? 429 : 502, 'GEMINI_UNAVAILABLE', 'Language understanding is temporarily unavailable. Please try again or use the application buttons.'), {
+        provider: 'gemini', transient: status === null ? true : isTransientProviderError(error), fallbackEligible: configurationFailure
+      });
+    }
   }
 }
 async function propose(text, provider) {
@@ -55,4 +66,4 @@ async function propose(text, provider) {
   const proposal = schema.parse(await provider.classify(text));
   return !proposal.clarification_required && proposal.intent === local ? local : 'UNKNOWN';
 }
-module.exports = { GeminiIntentProvider, schema, redact, keywordIntent, propose };
+module.exports = { GeminiIntentProvider, schema, jsonSchema, redact, keywordIntent, propose };

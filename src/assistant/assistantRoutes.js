@@ -8,10 +8,11 @@ const db = require('../config/db');
 const service = require('./applicationService');
 const { requirePrincipal, safeError } = require('./identity');
 const { labels, fail } = require('./rules');
-const { GeminiIntentProvider, propose, keywordIntent } = require('./geminiIntentProvider');
+const { propose, keywordIntent } = require('./geminiIntentProvider');
+const { ResilientIntentProvider } = require('./resilientIntentProvider');
 const whisper = require('./whisperProvider');
 const navigation = Object.freeze({ REPLACE_LOST_NID: '/nid.html?section=reissue', CORRECT_EXISTING_NID: '/nid.html?section=correction', APPLY_FOR_SMART_CARD: '/nid.html?section=smart-card', CHECK_NID_STATUS: '/nid.html?section=applications', OPEN_NID_SERVICE: '/nid.html' });
-function createAssistantRouter({ provider = new GeminiIntentProvider(), transcribe = whisper.transcribe } = {}) {
+function createAssistantRouter({ provider = new ResilientIntentProvider(), transcribe = whisper.transcribe } = {}) {
   const router = express.Router();
   router.use(requirePrincipal, rateLimit({ windowMs: 60000, limit: 40 }));
   router.use((req, res, next) => { res.set('Cache-Control', 'no-store'); if (process.env.VOICE_ASSISTANT_ENABLED === 'false') return next(fail(503, 'ASSISTANT_DISABLED')); next(); });

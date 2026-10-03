@@ -63,7 +63,7 @@ test('Strict intent schema rejects invented fields, actions, malformed JSON and 
     let called=false;
     const client={interactions:{create:async request=>{called=true;assert.equal(request.store,false);assert.ok(!request.input[0].text.includes('01712345678')); return {output_text:JSON.stringify(valid)};}}};
     await new GeminiIntentProvider({apiKey:'synthetic-test-only',client}).classify('New NID 01712345678'); assert.ok(called);
-    await assert.rejects(new GeminiIntentProvider({apiKey:'synthetic-test-only',client:{interactions:{create:async()=>({output_text:'not json'})}}}).classify('New NID'),{code:'GEMINI_UNAVAILABLE'});
+    await assert.rejects(new GeminiIntentProvider({apiKey:'synthetic-test-only',client:{interactions:{create:async()=>({output_text:'not json'})}}}).classify('New NID'),{code:'INVALID_PROVIDER_OUTPUT'});
     await assert.rejects(new GeminiIntentProvider({apiKey:'synthetic-test-only',client:{interactions:{create:async()=>{throw new Error('private provider error');}}}}).classify('New NID'),{code:'GEMINI_UNAVAILABLE'});
   } finally { if(env===undefined)delete process.env.GEMINI_ENABLED;else process.env.GEMINI_ENABLED=env; }
 });

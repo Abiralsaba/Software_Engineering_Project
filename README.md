@@ -146,6 +146,8 @@ cp .env.example .env
 
 Edit `.env` locally with your MySQL connection and a strong local JWT secret. Never place database credentials in the React client or any `VITE_*` variable.
 
+Gemini is the primary model for the voice assistant's constrained intent check and the Medicine Identifier's image transcription. A Groq-hosted `openai/gpt-oss-120b` key can be configured as a text-only fallback for assistant intent and additional medicine-catalogue research. It cannot read medicine images. NationX switches to it after three consecutive transient Gemini failures (configurable from 3–5 with `AI_FAILOVER_THRESHOLD`) and returns to Gemini after the cooldown. Keep both keys only in the backend `.env`; never expose them through `VITE_*` variables or commit them.
+
 ### 3. Initialize the database
 
 Initialize the isolated test database first:
